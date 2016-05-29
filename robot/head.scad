@@ -16,6 +16,10 @@ use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 use <../basic_scad/spacer.scad>
 use <../basic_scad/potentiometers.scad>
+use <../basic_scad/screws_nuts_washers.scad>
+use <../basic_scad/radial_bearing_housing.scad>
+use <../basic_scad/radial_bearings.scad>
+use <../basic_scad/stepper_motors.scad>
 
 
 include <params_robot.scad>
@@ -25,26 +29,6 @@ include <params_robot.scad>
 include <params_head.scad>
 
 //----------------------------------------------------------
-module neck_coupler()
-{
-    h = 20;
-    latura = 22;
-    difference(){
-        union(){
-          translate ([0, 0, 10]) cylinder (h = h, r = latura / 2, $fn = 60);
-          
-          pot_gear(num_teeth = 12, angle = 15, internal_radius = 2.5, height = 10);
-        }
-        // ax motor
-        translate (-display_tolerance_z) cylinder (h = h + 2 * display_tolerance, r = m6_screw_radius + 0.1, $fn = 20);
-        // os
-        translate ([- bone_thick / 2, - bone_thick / 2,  11]) cube([bone_thick,  bone_thick, h  + 1]);
-        // gaura m3 fixare bone
-        translate ([0, -latura / 2, h - m3_nut_radius - 1 + 10] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = latura / 2, r = m3_screw_radius, $fn = 20);
-        translate ([0, -latura / 2 + 3, h - m3_nut_radius - 1 + 10]) rotate([-90, 30, 0]) cylinder (h = m3_nut_height + 1, r = m3_nut_radius, $fn = 6);
-    }
-}
-//---------------------------------------------------------------------------
 module qtr_a1_support(inaltime)
 {
     difference(){
@@ -69,7 +53,7 @@ module qtr_a1_support(inaltime)
     }
 }
 //----------------------------------------------------------
-module eye_support3()
+module qtr_a1_support_with_motor_support()
 {
     inaltime = 7;
     difference(){
@@ -97,26 +81,6 @@ module eye_support3()
            
 }
 //----------------------------------------------------------
-module head_vertical_pulley()
-{
-    difference(){
-      my_pulley(60, 33, 0, 18, 6, 0, 0, 0, angle = 0);
-      translate ([-5.2, -5.2, 0]) cube([10.4, 10.4, 15]);
-        // screw
-        translate ([0, 0, 5.5]) rotate ([0, 90, 0]) cylinder (h = 30, r = m4_screw_radius, $fn = 20); 
-        // nut
-hull(){
-        translate ([10, 0, 5.5]) rotate ([0, 90, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6); 
-        translate ([10, 0, 0]) rotate ([0, 90, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6); 
-} 
-    }
-    difference(){
-        color("red") translate ([0, 0, 11]) cylinder (h = 9, r = 27.2, $fn = 100);
-        translate ([0, 0, 10]) cylinder (h = 11, r = 26, $fn = 100);
-    }
-   
-}
-//---------------------------------------------------------------------------
 module head_pulley()
 {
     my_pulley(60, 33, 0, 18, 8, 0, screw_head_radius = 8, 1, angle = 20);// motor head
@@ -133,14 +97,9 @@ module bearing_housing_on_axis()
     translate([-rbearing_608_housing_size[0] / 2, rbearing_608_housing_size[0] / 2 - 2, 0])rectangular_axis_slider(rbearing_608_housing_size[0], 3);
 }
 //---------------------------------------------------------------------------
-module bearing_housing_on_axis2()
-{
-    rbearing_608_housing_double();
-}
-//---------------------------------------------------------------------------
 module head_base()
 {
-  eye_support3();
+  qtr_a1_support_with_motor_support();
     
   translate ([30, -37 / 2, 7]) rotate ([0, 90, 0]) spacer_with_1_hole(7, 37, 10);
     difference(){
@@ -154,20 +113,48 @@ module head_base()
     }
 }
 //---------------------------------------------------------------------------
+module eye_support()
+{
+    qtr_a1_support_with_motor_support();
+    translate ([0, 60, -52]) nema_11_with_gearbox();
+    translate ([0, 0, 25]) mirror ([0, 0, 1]) head_pulley();
+    
+    mirror ([0, 0, 1]) bearing_housing_on_axis();
+    translate ([0, 0, -7]) 608rs();
+    translate ([0, 0, -14]) 608rs();
+    // ax
+    cylinder (h = 250, r = 4, $fn = 30, center = true);
+    translate ([0, 0, 25]) cube_empty(6, 10, 150);
+    translate ([0, 0, -164]) cube_empty(6, 10, 150);
+    
+    
+}
+//---------------------------------------------------------------------------
 module head()
 {
-head_base();
-
+    mirror ([0, 0, 1]) head_base();
+    translate ([0, 0, -25]) head_pulley();
+    translate ([0, 0, -25]) M8x80_hexa();
+    translate ([0, 0, 16]) mirror([0, 0, 1]) rbearing_608_housing_double();
+    translate ([0, 0, 0]) 608rs();
+    translate ([0, 0, 7]) 608rs();
+    translate ([0, 0, 14]) M8_nut();
+    
+    translate ([0, 0, 36]) M8_nut();
+    translate ([0, 0, 46]) cube_empty(6, 10, 150);
+    
+    translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox();
+    
+    translate ([8, -20, 180]) rotate ([0, 90, 0]) eye_support();
+    
 }
 //---------------------------------------------------------------------------
 
 head();
+//eye_support();
 
 //head_pulley();
 
-//neck_coupler();
-
 //head_base();
 
-//eye_support3();
 //bearing_housing_on_axis();

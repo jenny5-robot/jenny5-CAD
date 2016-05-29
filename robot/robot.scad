@@ -26,6 +26,7 @@ use <../basic_scad/masa.scad>
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/rings.scad>
+use <../basic_scad/spacer.scad>
 
 include <params_robot.scad>
 use <leg.scad>
@@ -33,6 +34,7 @@ include <params_table_robot.scad>
 include <params_leg.scad>
 use <table_robot.scad>
 use <gripper.scad>
+use <head.scad>
 
 
 unghi_trunchi = 90;// -90...90
@@ -573,22 +575,14 @@ module trunchi()
     translate ([chest_length / 2 - dist_edge_to_shaft, -(grosime_tabla_alu + rbearing_608_housing_size[0] / 2), 0]) mirror([1, 0, 0])  brat();
 }    
 //---------------------------------------------------------------------------
-module cap()
-{
-    cylinder (h = 100, r = 3, $fn = 30);
-    
-    translate ([-50, 0, 100]) rotate ([0, 90, 0]) cylinder (h = 100, r = 3, $fn = 30);
-    // camera
-    translate ([-50, 50, 100]) rotate ([90, 0, 0]) cylinder (h = 50, r = 20, $fn = 30);
-    translate ([50, 50, 100]) rotate ([90, 0, 0]) cylinder (h = 50, r = 20, $fn = 30);
-    
-}
-//---------------------------------------------------------------------------
-module trunchi_cu_cap()
+module body_with_head()
 {
     trunchi();
-    // cap
-    translate ([0, -latura_L / 2, chest_height]) mirror ([0, 1, 0]) cap();
+    // head
+    translate ([0, -latura_L / 2 - 1, chest_height + 37]) mirror ([0, 1, 0]) head();
+    // spacers for linking head with body
+    translate ([29, -latura_L, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
+    translate ([-40, -latura_L, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
 }
 //---------------------------------------------------------------------------
 module long_leg_with_rotation_module()
@@ -602,18 +596,18 @@ echo(inaltime_long_leg=inaltime_long_leg);
 
 }
 //---------------------------------------------------------------------------
-module trunchi_cu_cap_si_picioare()
+module head_body_foot()
 {
     inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
     // trunchi
-    translate ([0, lungime_talpa - 40, inaltime_long_leg + inaltime_platforma_mobila])  trunchi_cu_cap();
+    translate ([0, lungime_talpa - 40, inaltime_long_leg + inaltime_platforma_mobila])  body_with_head();
 // legs
     long_leg_with_rotation_module();
  }
 //---------------------------------------------------------------------------
 module robot()
 {
-    trunchi_cu_cap_si_picioare();
+    head_body_foot();
     
     lungime_platforma = 400;
     latime_platorma = 300;
@@ -621,7 +615,7 @@ module robot()
     translate ([-latime_platorma / 2, -lungime_platforma / 2, 0]) cube ([latime_platorma, lungime_platforma, inaltime_platforma_mobila]);
 }
 //---------------------------------------------------------------------------
-module robot_cu_masa()
+module robot_with_kitchen_table()
 {
     robot();
     translate ([0, 1000, 0]) masa_rotunda(750, 400);
@@ -668,6 +662,10 @@ module gear_motor1()
     }
 }
 //---------------------------------------------------------------------------
+//robot_with_kitchen_table();
+//robot();
+body_with_head();
+
 //gear_motor1();
 
 
@@ -676,7 +674,6 @@ module gear_motor1()
 //roata_reductor_motor();
 
 //roata_umar();
-robot();
 
 
 
@@ -705,7 +702,7 @@ robot();
 
 //bone_trunchi();
 
-//robot_cu_masa();
+
 
 //os_clavicula();
 
