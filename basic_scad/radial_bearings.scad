@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 include <params_radial_bearings.scad>
 use <basic_components.scad>
 
@@ -39,6 +45,11 @@ module 6002rs()
 module 608rs()
 {
 	radial_bearing(rb_608_internal_radius, rb_608_external_radius, rb_608_thick);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+module 698rs()
+{
+	radial_bearing(rb_698_internal_radius, rb_698_external_radius, rb_698_thick);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 6002rs();

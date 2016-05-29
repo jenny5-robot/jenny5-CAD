@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 bearing_4_external_radius = 6.5;
 bearing_4_height = 5;
 
@@ -55,6 +61,10 @@ rb_626_thick = 6;
 rb_608_internal_radius = 4;
 rb_608_external_radius = 11;
 rb_608_thick = 7;
+
+rb_698_internal_radius = 4;
+rb_698_external_radius = 9.5;
+rb_698_thick = 6;
 
 rb_6001_internal_radius = 6;
 rb_6001_external_radius = 14;

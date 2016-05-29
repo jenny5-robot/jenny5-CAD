@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 use <basic_components.scad>
 include <params_linear_bearings.scad>
 include <params_basic_components.scad>
@@ -29,6 +35,11 @@ module lm8uu()
 module lm8luu()
 {
 	linear_bearing(smooth_rod_8_radius, lm8luu_external_radius, lm8luu_height);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+module lm10luu()
+{
+	linear_bearing(smooth_rod_10_radius, lm10luu_external_radius, lm10luu_height);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
