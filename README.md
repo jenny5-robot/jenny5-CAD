@@ -1,6 +1,6 @@
 # Jenny5 robot
 
-A human size, multi purpose robot
+A human size, multi purpose (almost humanoid) robot.
 
 ## Software needed
 
@@ -13,9 +13,13 @@ Go to robot folder, open robot.scad with OpenSCAD and press F5 ... and wait for 
 ## Contact
 
 Mihai Oltean
+
 www.jenny5.org
+
 https://github.com/jenny5-robot
+
 https://groups.google.com/forum/#!forum/jenny5
+
 mihai.oltean@gmail.com
 
 
