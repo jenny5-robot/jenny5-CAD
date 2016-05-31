@@ -54,7 +54,7 @@ module hc_sr04_arm()
 module hc_sr04_support()
 {
     rotate ([0, 90, 0]) hc_sr04_arm();
-    hc_sr04_support_plate();
+    translate ([0, - hc_sr04_sizes[1] / 2 + hc_sr04_arm_sizes[1] / 2 - 1, 0]) hc_sr04_support_plate();
 }
 //--------------------------------------------------------------
 hc_sr04_support();
