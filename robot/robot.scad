@@ -31,10 +31,12 @@ use <../basic_scad/spacer.scad>
 include <params_robot.scad>
 use <leg.scad>
 include <params_table_robot.scad>
+include <params_base_platform.scad>
 include <params_leg.scad>
 use <table_robot.scad>
 use <gripper.scad>
 use <head.scad>
+use <base_platform.scad>
 
 
 unghi_trunchi = 90;// -90...90
@@ -68,7 +70,7 @@ echo(placa_trunchi_size = placa_trunchi_size);
    
    echo(coloana_vertebrala_size=coloana_vertebrala_size);
    
-   inaltime_platforma_mobila = 100;
+   inaltime_platforma_mobila = 30;
    
    bone_trunchi_size = [10, 10, chest_height - 2 * grosime_perete_L - 2 * washer_8_thick -  2 * rb_608_thick];
    
@@ -600,7 +602,7 @@ module head_body_foot()
 {
     inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
     // trunchi
-    translate ([0, lungime_talpa - 40, inaltime_long_leg + inaltime_platforma_mobila])  body_with_head();
+    translate ([0, lungime_talpa - 40, inaltime_long_leg + 30])  body_with_head();
 // legs
     long_leg_with_rotation_module();
  }
@@ -609,10 +611,8 @@ module robot()
 {
     head_body_foot();
     
-    lungime_platforma = 400;
-    latime_platorma = 300;
-    // platforma mobila
-    translate ([-latime_platorma / 2, -lungime_platforma / 2, 0]) cube ([latime_platorma, lungime_platforma, inaltime_platforma_mobila]);
+    // mobile platform
+    translate ([-base_platform_size[1] / 2 - 20, 250, 0]) rotate([0, 0, -90]) platform();
 }
 //---------------------------------------------------------------------------
 module robot_with_kitchen_table()
@@ -663,8 +663,8 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
-//robot();
-body_with_head();
+robot();
+//body_with_head();
 
 //gear_motor1();
 
