@@ -4,13 +4,13 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_ultrasound.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-use <../basic_scad/basic_components.scad>
+include <params_ultrasonic.scad>
+include <params_screws_nuts_washers.scad>
+use <basic_components.scad>
 
 
 //--------------------------------------------------------------
-module hc_sr04_support()
+module hc_sr04_support_plate()
 {
   difference(){
     
@@ -51,6 +51,11 @@ module hc_sr04_arm()
     }
 }
 //--------------------------------------------------------------
-
-//hc_sr04_support();
-hc_sr04_arm();
+module hc_sr04_support()
+{
+    rotate ([0, 90, 0]) hc_sr04_arm();
+    hc_sr04_support_plate();
+}
+//--------------------------------------------------------------
+hc_sr04_support();
+//hc_sr04_arm();
