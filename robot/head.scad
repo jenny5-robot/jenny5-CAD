@@ -11,6 +11,8 @@ include <../basic_scad/params_basic_components.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sensor_array.scad>
+include <../basic_scad/params_webcam.scad>
+
 
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearing_housing.scad>
@@ -20,12 +22,11 @@ use <../basic_scad/screws_nuts_washers.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/stepper_motors.scad>
+use <../basic_scad/webcam.scad>
+use <../basic_scad/ultrasonic_support.scad>
 
 
-include <params_robot.scad>
-
-
-
+//include <params_robot.scad>
 include <params_head.scad>
 
 //----------------------------------------------------------
@@ -113,19 +114,30 @@ module head_base()
     }
 }
 //---------------------------------------------------------------------------
+module nema_11_with_gearbox_and_pulley()
+{
+    nema_11_with_gearbox();
+    translate ([0, 0, nema_11_with_gearbox_height + 12]) my_pulley(57, 12, 0, 18, 6, 0, 0, 0);
+}
+//---------------------------------------------------------------------------
 module eye_support()
 {
     qtr_a1_support_with_motor_support();
-    translate ([0, 60, -52]) nema_11_with_gearbox();
+    translate ([0, 60, -52]) nema_11_with_gearbox_and_pulley();
     translate ([0, 0, 25]) mirror ([0, 0, 1]) head_pulley();
     
     mirror ([0, 0, 1]) bearing_housing_on_axis();
-    translate ([0, 0, -7]) 608rs();
-    translate ([0, 0, -14]) 608rs();
-    // ax
-    cylinder (h = 250, r = 4, $fn = 30, center = true);
-    translate ([0, 0, 25]) cube_empty(6, 10, 150);
-    translate ([0, 0, -164]) cube_empty(6, 10, 150);
+    translate ([0, 0, -rb_608_thick]) 608rs();
+    translate ([0, 0, -2 * rb_608_thick]) 608rs();
+    // long screw
+    cylinder (h = 100, r = 4, $fn = 30, center = true);
+    // bones
+    translate ([0, 0, 25]) cube_empty(6, 10, 100);
+    translate ([0, 0, -114]) cube_empty(6, 10, 100);
+    
+    translate ([-5 - c920_height, -5, -40]) rotate ([0, 90, 0]) c920();
+    translate ([-5 - c920_height, -5, 120]) rotate ([0, 90, 0]) c920();
+    
     
     
 }
@@ -137,15 +149,15 @@ module head()
     translate ([0, 0, -25]) M8x80_hexa();
     translate ([0, 0, 16]) mirror([0, 0, 1]) rbearing_608_housing_double();
     translate ([0, 0, 0]) 608rs();
-    translate ([0, 0, 7]) 608rs();
-    translate ([0, 0, 14]) M8_nut();
+    translate ([0, 0, rb_608_thick]) 608rs();
+    translate ([0, 0, 2 * rb_608_thick]) M8_nut();
     
     translate ([0, 0, 36]) M8_nut();
-    translate ([0, 0, 46]) cube_empty(6, 10, 150);
+    translate ([0, 0, 46]) cube_empty(6, 10, 120);
     
-    translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox();
+    translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox_and_pulley();
     
-    translate ([8, -20, 180]) rotate ([0, 90, 0]) eye_support();
+    translate ([8, -20, 150]) rotate ([0, 90, 0]) eye_support();
     
 }
 //---------------------------------------------------------------------------
