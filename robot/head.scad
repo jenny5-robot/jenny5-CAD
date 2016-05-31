@@ -24,6 +24,7 @@ use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/stepper_motors.scad>
 use <../basic_scad/webcam.scad>
 use <../basic_scad/ultrasonic_support.scad>
+use <../basic_scad/ultrasonic.scad>
 
 
 //include <params_robot.scad>
@@ -120,6 +121,12 @@ module nema_11_with_gearbox_and_pulley()
     translate ([0, 0, nema_11_with_gearbox_height + 12]) my_pulley(57, 12, 0, 18, 6, 0, 0, 0);
 }
 //---------------------------------------------------------------------------
+module hc_sr04_with_support()
+{
+    hc_sr04_support();
+    translate ([1, -3, 7]) hc_sr04();
+}
+//---------------------------------------------------------------------------
 module eye_support()
 {
     qtr_a1_support_with_motor_support();
@@ -134,10 +141,11 @@ module eye_support()
     // bones
     translate ([0, 0, 25]) cube_empty(6, 10, 100);
     translate ([0, 0, -114]) cube_empty(6, 10, 100);
-    
+    // cameras
     translate ([-5 - c920_height, -5, -40]) rotate ([0, 90, 0]) c920();
     translate ([-5 - c920_height, -5, 120]) rotate ([0, 90, 0]) c920();
-    
+    // ultrasonic
+    translate ([-7, -32, 36]) rotate ([0, 90, -90]) hc_sr04_with_support();
     
     
 }
@@ -153,14 +161,15 @@ module head()
     translate ([0, 0, 2 * rb_608_thick]) M8_nut();
     
     translate ([0, 0, 36]) M8_nut();
-    translate ([0, 0, 46]) cube_empty(6, 10, 120);
+    translate ([0, 0, 42]) cube_empty(6, 10, 120);
     
     translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox_and_pulley();
     
     translate ([8, -20, 150]) rotate ([0, 90, 0]) eye_support();
-    
 }
 //---------------------------------------------------------------------------
+
+//hc_sr04_with_support();
 
 head();
 //eye_support();
