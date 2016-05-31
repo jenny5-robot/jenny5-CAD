@@ -1,0 +1,1 @@
+base_platform_size = [600, 250, 30];
