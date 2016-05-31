@@ -137,7 +137,7 @@ module cube_empty(latura_interioara, latura_exterioara, inaltime)
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module cylinder_empty(_h, external_radius, internal_radius, fn)
+module cylinder_empty(_h, external_radius, internal_radius, fn = 30)
 {
 	difference(){
 		cylinder ( h = _h, r = external_radius, $fn = fn);
