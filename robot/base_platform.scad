@@ -12,8 +12,11 @@ include <params_base_platform.scad>
 include <params_tracks.scad>
 use <tracks.scad>
 
-nut_radius = 4;
-m4_nut_radius = 4;
+include <../basic_scad/params_laptop.scad>
+use <../basic_scad/laptop.scad>
+
+include <../basic_scad/params_chair_wheel.scad>
+use <../basic_scad/chair_wheel.scad>
 
 //--------------------------------------------------------------------
 module wheel_with_teeths_simple(radius = 84, steps = 24)// radius = 42, steps = 12
@@ -165,7 +168,6 @@ module wheel_traction_pulley()
             translate ([0, 10, 0]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick, r = m3_nut_radius, $fn = 6);
             translate ([0, 10, 9]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick, r = m3_nut_radius, $fn = 6);
         }
-        
     }
 }
 //--------------------------------------------------------------------
@@ -215,13 +217,24 @@ module platform()
 {
     cube(base_platform_size);
     
-    //tracks
-    translate([200 + 50, -track_size[0] / 2 - 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, 200);
-    translate([200 + 50, base_platform_size[1] + track_size[0] / 2 + 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, 200);
+    tracks_offset = 70;
+    distance_between_wheels = 200;
     
-    // axes
-    translate ([50, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
-    translate ([250, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
+    //tracks
+    translate([distance_between_wheels + tracks_offset, -track_size[0] / 2 - 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
+    translate([distance_between_wheels + tracks_offset, base_platform_size[1] + track_size[0] / 2 + 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
+    
+    // shaft
+    translate ([tracks_offset, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
+    translate ([distance_between_wheels + tracks_offset, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
+    
+    // chair wheels
+    
+    translate ([base_platform_size[0] - 30, 30, -(chair_wheel_height - chair_wheel_radius + 5)]) rotate ([0, 0, 90]) chair_wheel();
+    translate ([base_platform_size[0] - 30, base_platform_size[1] - 30, -(chair_wheel_height - chair_wheel_radius + 5)]) rotate ([0, 0, 90]) chair_wheel();
+    
+    // laptop
+    translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
 }
 //--------------------------------------------------------------------
 
