@@ -142,8 +142,8 @@ module eye_support()
     translate ([0, 0, 25]) cube_empty(6, 10, 100);
     translate ([0, 0, -114]) cube_empty(6, 10, 100);
     // cameras
-    translate ([-5 - c920_height, -5, -40]) rotate ([0, 90, 0]) c920();
-    translate ([-5 - c920_height, -5, 120]) rotate ([0, 90, 0]) c920();
+    translate ([-5 - c920_height, -5, -30]) rotate ([0, 90, 0]) c920();
+    translate ([-5 - c920_height, -5, 135]) rotate ([0, 90, 0]) c920();
     // ultrasonic
     translate ([-7, -32, 36]) rotate ([0, 90, -90]) hc_sr04_with_support();
     
@@ -161,11 +161,11 @@ module head()
     translate ([0, 0, 2 * rb_608_thick]) M8_nut();
     
     translate ([0, 0, 36]) M8_nut();
-    translate ([0, 0, 42]) cube_empty(6, 10, 120);
+    translate ([0, 0, 42]) cube_empty(6, 10, 100);
     
     translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox_and_pulley();
     
-    translate ([8, -20, 150]) rotate ([0, 90, 0]) eye_support();
+    translate ([8, -20, 130]) rotate ([0, 90, 0]) eye_support();
 }
 //---------------------------------------------------------------------------
 
