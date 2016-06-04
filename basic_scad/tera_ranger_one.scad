@@ -8,16 +8,17 @@ include <params_tera_ranger_one.scad>
 include <params_basic_components.scad>
 include <params_screws_nuts_washers.scad>
 
+include <../basic_scad/config.scad>
 
 //---------------------------------------------------------------------
 module tera_ranger_one_support()
 {
     difference(){
 union(){
-      cube(tera_ranger_one_sizes);
+      color (plastic_color) cube(tera_ranger_one_sizes);
     // motor shaft holder
     
-      translate ([tera_ranger_one_sizes[0] / 2 - 9, 0, 0]) cube([15, 15, 12]);
+      color (plastic_color) translate ([tera_ranger_one_sizes[0] / 2 - 9, 0, 0]) cube([15, 15, 12]);
 
 }
         // remove for button

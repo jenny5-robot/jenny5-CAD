@@ -9,6 +9,8 @@ include <params_stepper_motors.scad>
 include <params_basic_components.scad>
 include <params_screws_nuts_washers.scad>
 use <basic_components.scad>
+
+include <../basic_scad/config.scad>
 //--------------------------------------------------------
 module button()
 {
@@ -21,13 +23,14 @@ module button_support()
     thick = 3;
     width = 9;
     difference(){
-        my_cube_rounded2([nema_17_width, 9, 3]);
+        color (plastic_color) my_cube_rounded2([nema_17_width, 9, 3]);
         translate([nema_17_width / 2 - nema_17_dist_between_screw_holes / 2, width / 2, 0] - display_tolerance_z)
         cylinder (h = thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
         translate([nema_17_width / 2 + nema_17_dist_between_screw_holes / 2, width / 2, 0] - display_tolerance_z)
         cylinder (h = thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
         
     }
+    color (plastic_color) 
     difference(){
         hull(){
             translate([nema_17_width / 2 - 9, width / 2, 10]) rotate ([0, 90, 0]) cylinder (h = 3, r = 7);

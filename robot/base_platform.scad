@@ -18,6 +18,8 @@ use <../basic_scad/laptop.scad>
 include <../basic_scad/params_chair_wheel.scad>
 use <../basic_scad/chair_wheel.scad>
 
+include <../basic_scad/config.scad>
+
 //--------------------------------------------------------------------
 module wheel_with_teeths_simple(radius = 84, steps = 24)// radius = 42, steps = 12
 {
@@ -28,7 +30,7 @@ module wheel_with_teeths_simple(radius = 84, steps = 24)// radius = 42, steps = 
 	difference(){
       // traction teeth
       union(){
-		cylinder (r = radius, h = thick, $fn = 100, center = true);
+		color (plastic_color) cylinder (r = radius, h = thick, $fn = 100, center = true);
 		for ( i = [0 : 1 : steps] )	
     			rotate([i * angle_step + 16, 90, 0])
                 translate ([0, 0, radius - 1])

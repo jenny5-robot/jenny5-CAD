@@ -13,6 +13,8 @@ include <params_screws_nuts_washers.scad>
 use <stepper_motors.scad>
 use <screws_nuts_washers.scad>
 
+include <config.scad>
+
 airflow_spacer = 0;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module nema_motor_housing(toleranta_x, toleranta_y, motor_deviation_x = 0, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 43, nema_center_hole_radius = nema_17_motor_hole_radius_camiel, gauri_nema = gauri_nema_17, base_thick = 3, belt_tensioner_position = 1, motor_deviation_y = 15)
@@ -223,6 +225,7 @@ module stepper_motor_fixer(motor_height, motor_width, distance_between_motor_hol
     thick = 3;
     
     difference(){
+        color(plastic_color)
         union(){
             cube([2 * washer_4_12_radius, 3, width]);
         
@@ -241,9 +244,13 @@ module stepper_motor_fixer(motor_height, motor_width, distance_between_motor_hol
     }
 }
 //---------------------------------------------------------------------------
+module nema_17_fixer()
+{
+  stepper_motor_fixer(nema_17_height, nema_17_width, nema_17_dist_between_screw_holes, 9);
+}
 
-stepper_motor_fixer(nema_17_height, nema_17_width, nema_17_dist_between_screw_holes, 9);
 
+nema_17_fixer();
 
 //nema_17_motor_housing_with_potentiometer_support(10, 0, 7, 3, false);
 
