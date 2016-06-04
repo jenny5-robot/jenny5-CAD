@@ -4,8 +4,10 @@
 // MIT License
 //--------------------------------------------------------------
 
-
 include <../basic_scad/params_basic_components.scad>
+use <../basic_scad/screws_nuts_washers.scad>
+include <params_tracks.scad>
+include <../basic_scad/config.scad>
 
 //--------------------------------------------------------------------
 module suport_tracks()
@@ -47,9 +49,10 @@ module track(length = 25, width = 60, zh = 8)
 	union(){
 	difference(){
 		union(){
-			cube(size=[length, width, zh], center = false);
+			color (plastic_color){ cube(size=[length, width, zh], center = false);
 			rotate([-90,0,0]) translate([length,-zh/2,0]) cylinder(h=width, r = zh/2, $fn = roundness, center = false);
 			rotate([-90,0,0]) translate([0,-zh/2,0]) cylinder(h=width, r = zh/2, $fn = roundness, center = false);
+            }
 		}
 // holes for screws
 		rotate([-90,0,0]) translate([length,-zh/2,0]) cylinder(h=width+1, r = hole_radius, $fn = roundness, center = false);
@@ -78,21 +81,31 @@ module tracks_on_half_circle(num_tracks, wheel_radius)
 {
     step = 360 / num_tracks;
     
-    for (angle=[0:step:180])
+    for (angle=[0:step:180]){
         translate ([wheel_radius * sin(angle), wheel_radius * cos(angle), 0]) 
             rotate ([0, 0, -angle]) 
                 rotate ([90, 0, 0]) 
                     translate ([-25/2, -60 / 2, -8]) track();
+            
+        translate ([(wheel_radius + track_size[2] / 2) * sin(angle + step / 2), (wheel_radius + track_size[2] / 2) * cos(angle + step / 2), 0]){ 
+            translate ([0, 0, - track_size[0] / 2 + 9]) M4x40_screw();
+            translate ([0, 0, track_size[0] / 2 - 12]) M4_autolock_nut();
+        }
+        }
 }
 //--------------------------------------------------------------------
 module string_of_tracks (num_tracks)
 {
-    for (i=[0:num_tracks])
+    for (i=[0:num_tracks]){
         translate ([i * 25, 0, 0]) track();
+        translate ([i * 25, 9, 4]) rotate([-90, 0, 0]) M4x40_screw();
+        translate ([i * 25, track_size[0] - 12, 4]) rotate([-90, 0, 0]) M4_autolock_nut();
+    }
 }
 //--------------------------------------------------------------------
-tracks_on_half_circle(12, 42);
+//tracks_on_half_circle(12, 42);
 
+string_of_tracks (10);
 
 //suport_tracks();
 //suport_tracks2();
