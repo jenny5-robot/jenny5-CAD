@@ -195,16 +195,12 @@ module wheel_pulley()
     }
 }
 //--------------------------------------------------------------------
-module tracks_on_half_wheel(num_tracks_per_half_circle, wheel_radius)
+module tracks_on_half_wheel(num_tracks_per_half_circle, wheel_radius, start_angle = 0)
 {
-    tracks_on_half_circle(num_tracks_per_half_circle, wheel_radius);
-    rotate ([0, 0, -2])  wheel_with_teeths_simple(wheel_radius, num_tracks_per_half_circle);
-}
-//--------------------------------------------------------------------
-module string_of_tracks (num_tracks)
-{
-    for (i=[0:num_tracks])
-    translate ([i * 25, 0, 0]) track();
+    step = 360 / num_tracks_per_half_circle;
+    
+    tracks_on_half_circle(num_tracks_per_half_circle, wheel_radius, start_angle);
+    rotate ([0, 0, step / 2])  wheel_with_teeths_simple(wheel_radius, num_tracks_per_half_circle);
 }
 //--------------------------------------------------------------------
 module tracks_on_2_wheels(num_tracks_per_half_circle, wheel_radius, distance_between_wheels)
@@ -215,20 +211,72 @@ module tracks_on_2_wheels(num_tracks_per_half_circle, wheel_radius, distance_bet
     translate ([-distance_between_wheels - 12, -track_size[0] / 2, wheel_radius + track_size[2]]) mirror([0, 0, 1]) string_of_tracks(8);
 }
 //--------------------------------------------------------------------
+module first_gear_tracks()
+{
+    wheel_with_teeths_simple(30.3, 9);
+}
+//--------------------------------------------------------------------
 module platform()
 {
     cube(base_platform_size);
     
-    tracks_offset = 70;
+    fist_tracks_offset = -rb_608_external_radius;
+    second_tracks_offset = 70;
     distance_between_wheels = 200;
     
     //tracks
-    translate([distance_between_wheels + tracks_offset, -track_size[0] / 2 - 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
-    translate([distance_between_wheels + tracks_offset, base_platform_size[1] + track_size[0] / 2 + 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
+ //   translate([distance_between_wheels + tracks_offset, -track_size[0] / 2 - 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
+ //   translate([distance_between_wheels + tracks_offset, base_platform_size[1] + track_size[0] / 2 + 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
+   
+    translate([0, -track_size[0] / 2 - 10, 0]){
+    //first gears
+        translate ([fist_tracks_offset, 0, base_platform_size[2] / 2]) rotate([-90, 0, 0]) first_gear_tracks();
     
-    // shaft
-    translate ([tracks_offset, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
-    translate ([distance_between_wheels + tracks_offset, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
+    //second gears
+        translate ([second_tracks_offset, 0, -rb_6001_external_radius]) rotate([-90, 0, 0]) wheel_with_teeths_simple(42.5, 12);
+
+    //third gears
+        translate ([second_tracks_offset + distance_between_wheels, 0, -rb_6001_external_radius]) rotate([-90, 0, 0]) wheel_with_teeths_simple(42.5, 12);
+    
+    //tracks
+// front gear    
+        translate ([fist_tracks_offset, 0, base_platform_size[2] / 2]) rotate([-90, 0, 0])tracks_on_circle(9, 30.3, 180, 4);
+// last gear
+        translate ([second_tracks_offset + distance_between_wheels, 0, -rb_6001_external_radius]) rotate([-90, 0, 0]) tracks_on_circle(12, 42.5, 0, 7);
+
+//top string of tracks
+        translate ([0, -track_size[0] / 2, 45 + track_size[2]]) rotate ([0, 4, 0]) mirror ([0, 0, 1]) string_of_tracks(10);
+// bottom tracks
+        translate ([57, -track_size[0] / 2, -rb_6001_external_radius - track_size[2] - 42.5]) string_of_tracks(8);
+// front tracks
+        translate ([-32, -track_size[0] / 2, -10]) rotate ([0, 27, 0]) mirror ([0, 0, 1]) string_of_tracks(4);
+    }
+// other side
+translate([0, base_platform_size[1] + track_size[0] / 2 + 10, 0]){
+// first gear
+    translate ([fist_tracks_offset, 0, base_platform_size[2] / 2]) rotate([-90, 0, 0]) first_gear_tracks();
+// second gear
+    translate ([second_tracks_offset, 0, -rb_6001_external_radius]) rotate([-90, 0, 0]) wheel_with_teeths_simple(42.5, 12);
+// third gear
+    translate ([second_tracks_offset + distance_between_wheels, 0, -rb_6001_external_radius]) rotate([-90, 0, 0]) wheel_with_teeths_simple(42.5, 12);
+    //tracks
+// front gear    
+        translate ([fist_tracks_offset, 0, base_platform_size[2] / 2]) rotate([-90, 0, 0])tracks_on_circle(9, 30.3, 180, 4);
+// last gear
+        translate ([second_tracks_offset + distance_between_wheels, 0, -rb_6001_external_radius]) rotate([-90, 0, 0]) tracks_on_circle(12, 42.5, 0, 7);
+
+//top string of tracks
+        translate ([0, -track_size[0] / 2, 45 + track_size[2]]) rotate ([0, 4, 0]) mirror ([0, 0, 1]) string_of_tracks(10);
+// bottom tracks
+        translate ([57, -track_size[0] / 2, -rb_6001_external_radius - track_size[2] - 42.5]) string_of_tracks(8);
+// front tracks
+        translate ([-32, -track_size[0] / 2, -10]) rotate ([0, 27, 0]) mirror ([0, 0, 1]) string_of_tracks(4);
+    
+}
+    // shafts
+    translate ([fist_tracks_offset, -track_size[0] - 10, base_platform_size[2] / 2]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
+    translate ([second_tracks_offset, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
+    translate ([distance_between_wheels + second_tracks_offset, -track_size[0] - 10, -rb_6001_external_radius]) rotate([-90, 0, 0]) cylinder (h = 390, r = 6, $fn = 20);
     
     // chair wheels
     
@@ -239,6 +287,9 @@ module platform()
     translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
 }
 //--------------------------------------------------------------------
+//tracks_on_half_wheel(12, 42.5);
+
+//first_gear_tracks();
 
 platform();
 
