@@ -44,7 +44,7 @@ unghi_umar = -0; // -180... 0
 unghi_fore_arm = 90; // - 180 ... 0
 unghi_cot = 180; // -90, 0
 unghi_rotatie_gripper = 0;
-angle_knee = -20;
+angle_knee = -60;
 
 
 
@@ -93,28 +93,6 @@ module bone_trunchi()
 
 module roata_reductor_motor()
 {
-    /*
-    color(plastic_color)
-    render(){
-        difference(){
-            cylinder(h = inaltime_roata_reductor_motor, r = radius_roata_motor_reductor, $fn = 40);
-            // ax motor
-            translate (-display_tolerance_z) cylinder(h = 15 + 2 * display_tolerance, r = 2.5, $fn = 30);
-            // screw hole
-            translate ([0, 0, m3_nut_radius - 1]) rotate([0, 90, 0]) cylinder (h = radius_roata_motor_reductor, r = m3_screw_radius, $fn = 20);
-            // nut hole
-        hull(){
-            translate ([2.5 + 1, 0, m3_nut_radius - 1]) rotate([0, 90, 0]) cylinder (h = m3_nut_thick, r = m3_nut_radius, $fn = 6);
-                translate ([2.5 + 1, 0, 0]) rotate([0, 90, 0]) cylinder (h = m3_nut_thick, r = m3_nut_radius, $fn = 6);
-        }
-            translate([0, 0, 10]){
-                rotate_extrude(convexity = 1, $fn = 50)
-                    translate([9, 0, 0])
-                        circle(r = 4, $fn = 30);
-            }
-        }
-    }
-    */
     my_pulley(18);
 }
 //---------------------------------------------------------------------------
@@ -607,12 +585,19 @@ module head_body_foot()
     long_leg_with_rotation_module();
  }
 //---------------------------------------------------------------------------
-module robot()
+module platform_foot()
 {
-    head_body_foot();
-    
+    long_leg_with_rotation_module();
     // mobile platform
     translate ([-base_platform_size[1] / 2 - 20, 250, 0]) rotate([0, 0, -90]) platform();
+}
+//---------------------------------------------------------------------------
+module robot()
+{
+    inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
+    
+    translate ([0, lungime_talpa - 40, inaltime_long_leg + 10]) body_with_head();
+    platform_foot();
 }
 //---------------------------------------------------------------------------
 module robot_with_kitchen_table()
