@@ -81,8 +81,7 @@ module tracks_on_circle(num_max_tracks, wheel_radius, start_angle = 0, num_track
 {
     step = 360 / num_max_tracks;
     
-    //for (angle=[0:step:180]){
-      for (i=[0:num_tracks - 1]){
+      for (i = [0 : num_tracks - 1]){
         angle = i * step;  
         rotate([0, 0, start_angle])
         translate ([wheel_radius * sin(angle), wheel_radius * cos(angle), 0]) 
@@ -101,7 +100,7 @@ module tracks_on_circle(num_max_tracks, wheel_radius, start_angle = 0, num_track
 //--------------------------------------------------------------------
 module string_of_tracks (num_tracks)
 {
-    for (i=[0:num_tracks]){
+    for (i = [0 : num_tracks - 1]){
         translate ([i * 25, 0, 0]) track();
         translate ([i * 25, 9, 4]) rotate([-90, 0, 0]) M4x40_screw();
         translate ([i * 25, track_size[0] - 12, 4]) rotate([-90, 0, 0]) M4_autolock_nut();
