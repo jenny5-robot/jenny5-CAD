@@ -24,7 +24,7 @@ include <../basic_scad/config.scad>
 module wheel_with_teeths_simple(radius = 84, steps = 24)// radius = 42, steps = 12
 {
     thick = 15;
-    screw_length = radius - 24;
+    screw_length = radius - 29;
     angle_step = 360/steps;
     
 	difference(){
