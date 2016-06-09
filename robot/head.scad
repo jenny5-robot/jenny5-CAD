@@ -121,10 +121,11 @@ module nema_11_with_gearbox_and_pulley()
     translate ([0, 0, nema_11_with_gearbox_height + 12]) my_pulley(57, 12, 0, 18, 6, 0, 0, 0);
 }
 //---------------------------------------------------------------------------
-module hc_sr04_with_support()
+module hc_sr04_and_c920_with_support()
 {
-    hc_sr04_support();
+    hc_sr04_and_c920_support();
     translate ([1, -3, 7]) hc_sr04();
+    translate ([-c920_length / 2 + c920_dist_between_holder_holes / 2 - c920_depth / 2 + 2, -7, c920_depth]) mirror ([0, 0, 1]) rotate ([90, 0, 0]) c920();
 }
 //---------------------------------------------------------------------------
 module eye_support()
@@ -142,11 +143,9 @@ module eye_support()
     translate ([0, 0, 25]) cube_empty(6, 10, 100);
     translate ([0, 0, -114]) cube_empty(6, 10, 100);
     // cameras
-    translate ([-5 - c920_height, -5, -30]) rotate ([0, 90, 0]) c920();
-    translate ([-5 - c920_height, -5, 135]) rotate ([0, 90, 0]) c920();
-    // ultrasonic
-    translate ([-7, -32, 36]) rotate ([0, 90, -90]) hc_sr04_with_support();
     
+    // ultrasonic
+    translate ([-7, -32, 36]) rotate ([0, 90, -90]) hc_sr04_and_c920_with_support();
     
 }
 //---------------------------------------------------------------------------
@@ -165,11 +164,11 @@ module head()
     
     translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox_and_pulley();
     
-    translate ([8, -20, 130]) rotate ([0, 90, 0]) eye_support();
+    translate ([8, -20, 128]) rotate ([0, 90, 0]) eye_support();
 }
 //---------------------------------------------------------------------------
 
-//hc_sr04_with_support();
+//hc_sr04_and_c920_with_support();
 
 head();
 //eye_support();
