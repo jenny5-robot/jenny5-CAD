@@ -42,20 +42,22 @@ module hc_sr04_support_plate()
 module hc_sr04_and_c920_support_plate()
 {
     hc_sr04_support_plate();
+    // c920 plate
     translate ([hc_sr04_sizes[0] / 2 - c920_length / 2, -wall_thick_3, 0]) 
-    difference(){
-        translate ([c920_length / 2 - c920_dist_between_holder_holes / 2, wall_thick_3, c920_depth / 2])
-        rotate([90, 0, 0]) 
-        hull(){
-            cylinder(h = wall_thick_3, r = c920_depth / 2);
-            translate ([c920_dist_between_holder_holes, 0, 0]) cylinder(h = wall_thick_3, r = c920_depth / 2);
-        }
-        //cube([c920_length, wall_thick_3, c920_depth]);
+        difference(){
+            translate ([c920_length / 2 - c920_dist_between_holder_holes / 2, wall_thick_3, c920_depth / 2])
+            rotate([90, 0, 0]) 
+                hull(){
+                    cylinder(h = wall_thick_3, r = c920_depth / 2);
+                    translate ([c920_dist_between_holder_holes, 0, 0]) cylinder(h = wall_thick_3, r = c920_depth / 2);
+                }
+        // remove some parts in order to avoid interference with US sensor
+            translate ([c920_length / 2, 0, 65]) rotate([-90, 0, 0]) cylinder (h = wall_thick_3, r = 50);
 // holder screws
-        translate ([c920_length / 2 - c920_dist_between_holder_holes / 2, 0, c920_depth / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
-        translate ([c920_length / 2 + c920_dist_between_holder_holes / 2, 0, c920_depth / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
+            translate ([c920_length / 2 - c920_dist_between_holder_holes / 2, 0, c920_depth / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
+            translate ([c920_length / 2 + c920_dist_between_holder_holes / 2, 0, c920_depth / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
     }
-        
+    translate ([hc_sr04_sizes[0] / 2 - 5, 0, 0]) cube([10, 5, 6]);
 }
 //--------------------------------------------------------------
 module hc_sr04_arm()
@@ -89,8 +91,8 @@ module hc_sr04_and_c920_support()
     translate ([0, - hc_sr04_sizes[1] / 2 + hc_sr04_arm_sizes[1] / 2 - 1, 0]) hc_sr04_and_c920_support_plate();
 }
 //--------------------------------------------------------------
-hc_sr04_and_c920_support();
+//hc_sr04_and_c920_support();
 //hc_sr04_support();
-//hc_sr04_and_c920_support_plate();
+hc_sr04_and_c920_support_plate();
 //hc_sr04_arm();
 //--------------------------------------------------------------
