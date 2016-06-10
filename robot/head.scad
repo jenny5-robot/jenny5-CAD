@@ -124,7 +124,7 @@ module nema_11_with_gearbox_and_pulley()
 module hc_sr04_and_c920_with_support()
 {
     hc_sr04_and_c920_support();
-    translate ([1, -3, 7]) hc_sr04();
+    translate ([1, -3, 8]) hc_sr04();
     translate ([-c920_length / 2 + c920_dist_between_holder_holes / 2 - c920_depth / 2 + 2, -7, c920_depth]) mirror ([0, 0, 1]) rotate ([90, 0, 0]) c920();
 }
 //---------------------------------------------------------------------------
@@ -168,9 +168,9 @@ module head()
 }
 //---------------------------------------------------------------------------
 
-//hc_sr04_and_c920_with_support();
+hc_sr04_and_c920_with_support();
 
-head();
+//head();
 //eye_support();
 
 //head_pulley();
