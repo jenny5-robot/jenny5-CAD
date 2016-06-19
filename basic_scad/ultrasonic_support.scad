@@ -57,7 +57,7 @@ module hc_sr04_and_c920_support_plate()
             translate ([c920_length / 2 - c920_dist_between_holder_holes / 2, 0, c920_depth / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
             translate ([c920_length / 2 + c920_dist_between_holder_holes / 2, 0, c920_depth / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
     }
-    translate ([hc_sr04_sizes[0] / 2 - 5, 0, 0]) cube([10, 5, 6]);
+    translate ([hc_sr04_sizes[0] / 2 - 10, 0, 0]) cube([20, 4, 6]);
 }
 //--------------------------------------------------------------
 module hc_sr04_arm()
