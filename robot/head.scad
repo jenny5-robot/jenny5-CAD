@@ -85,12 +85,23 @@ module qtr_a1_support_with_motor_support()
 //----------------------------------------------------------
 module head_pulley()
 {
-    my_pulley(60, 33, 0, 18, 8, 0, screw_head_radius = 8, 1, angle = 20);// motor head
+    my_pulley(60, 33, 0, 18, 8, 8, 20, 0, 1);// motor head
+
+}
+//---------------------------------------------------------------------------
+module gradient_support()
+{
+    retainer_ht = 1.5;
+    
     difference(){
-        color("red") translate ([0, 0, 11]) cylinder (h = 9, r = 27.3, $fn = 100);
-        translate ([0, 0, 10]) cylinder (h = 11, r = 26, $fn = 100);
+        union(){
+          cylinder (h = retainer_ht, r2 = 27.3, r1 = 26, $fn = 100);
+          translate ([0, 0, retainer_ht]) cylinder (h = 7.5, r = 27.3, $fn = 100);
+        }
+        translate ([0, 0, retainer_ht]) cylinder (h = 11, r = 26, $fn = 100);
+        // screw hole
+        translate (-display_tolerance_z) cylinder (h = retainer_ht + 2 * display_tolerance, r = 4, $fn = 20);
     }
-    // margine
 }
 //---------------------------------------------------------------------------
 module bearing_housing_on_axis()
@@ -168,10 +179,13 @@ module head()
 }
 //---------------------------------------------------------------------------
 
-hc_sr04_and_c920_with_support();
+qtr_a1_support(7);
+//hc_sr04_and_c920_with_support();
 
 //head();
 //eye_support();
+
+//gradient_support();
 
 //head_pulley();
 
