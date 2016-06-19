@@ -31,7 +31,7 @@ module nema_motor_housing(toleranta_x, toleranta_y, motor_deviation_x = 0, nema_
 		// make the motor house hole
 		translate ([base_thick, perete_lateral_motor_housing, perete_motor_motor_housing]) cube ([nema_width + base_thick + motor_deviation_x + 2 * toleranta_x, nema_width + abs(toleranta_y) + 2 * airflow_spacer + motor_deviation_y, nema_height + perete_baza_motor_housing]);
 
-        translate ([base_thick, 0, base_height] - display_tolerance_y) rotate ([0, atan((base_height) / lungime), 0]) cube ([lungime * sqrt(2), motor_housing_width + abs(toleranta_y) + 2 * airflow_spacer + 2 * display_tolerance + motor_deviation_y, base_height]);
+        translate ([base_thick, 0, base_height] - display_tolerance_y) rotate ([0, atan((base_height) / lungime), 0]) cube ([lungime * sqrt(2), nema_width + abs(toleranta_y) + 2 * airflow_spacer + 2 * display_tolerance + motor_deviation_y + 2 * perete_lateral_motor_housing, base_height]);
         
 // motor support - m3 screws
         
@@ -163,6 +163,11 @@ module nema_17_motor_housing(toleranta_x, toleranta_y, motor_deviation_x, base_t
     nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, motor_deviation_x, nema_17_width, nema_17_height, 43, nema_17_motor_hole_radius_camiel, gauri_nema_17, nema_17_housing_base_holes, 22, base_thick);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+module nema_23_motor_housing(toleranta_x, toleranta_y, motor_deviation_x, base_thick = 3)
+{
+    nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, motor_deviation_x, nema_23_57BYGH603_width, nema_23_57BYGH603_height, 70, nema_23_57BYGH603_hole_radius, gauri_nema_17, nema_17_housing_base_holes, 22, base_thick);
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module nema_17_geared_motor_housing(toleranta_x, toleranta_y, motor_deviation_x, base_thick = 3)
 {
     nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, motor_deviation_x, nema_17_width, nema_17_height, 43, nema_17_gearbox_motor_hole_radius, gearbox_nema_17_holes_position, nema_17_housing_base_holes, 22, base_thick);
@@ -220,37 +225,38 @@ module stepper_motor_support_on_rectangular_axis(length, width, support_height, 
         }
 }
 //---------------------------------------------------------------------------
-module stepper_motor_fixer(motor_height, motor_width, distance_between_motor_holes, width)
+module stepper_motor_fixer(motor_height, motor_width, distance_between_motor_holes, width, wing_length = 2 * washer_4_12_radius)
 {
     thick = 3;
     
     difference(){
         color(plastic_color)
         union(){
-            cube([2 * washer_4_12_radius, 3, width]);
+            cube([wing_length, 3, width]);
         
-            translate([2 * washer_4_12_radius, 0, 0]) cube([thick, motor_height, width]);
-            translate([2 * washer_4_12_radius, motor_height, 0]) cube([2 * thick + motor_width, thick, width]);
-            translate([2 * washer_4_12_radius + thick + motor_width, 0, 0]) cube([thick, motor_height, width]);
-            translate([2 * washer_4_12_radius + 2 * thick + motor_width, 0, 0]) cube([2 * washer_4_12_radius, 3, width]);   
+            translate([wing_length, 0, 0]) cube([thick, motor_height, width]);
+            translate([wing_length, motor_height, 0]) cube([2 * thick + motor_width, thick, width]);
+            translate([wing_length + thick + motor_width, 0, 0]) cube([thick, motor_height, width]);
+            translate([wing_length + 2 * thick + motor_width, 0, 0]) cube([wing_length, 3, width]);   
         }
-        
+        // fixer holes
         translate ([washer_4_12_radius, 0, width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        translate ([3 * washer_4_12_radius + 2 * thick + motor_width, 0, width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-
-        translate ([2 * washer_4_12_radius + thick + motor_width / 2 - distance_between_motor_holes / 2, motor_height, width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
-        translate ([2 * washer_4_12_radius + thick + motor_width / 2 + distance_between_motor_holes / 2, motor_height, width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([2 * wing_length  - washer_4_12_radius + 2 * thick + motor_width, 0, width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+// motor holes
+        translate ([wing_length + thick + motor_width / 2 - distance_between_motor_holes / 2, motor_height, width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([wing_length + thick + motor_width / 2 + distance_between_motor_holes / 2, motor_height, width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
 
     }
 }
 //---------------------------------------------------------------------------
 module nema_17_fixer()
 {
-  stepper_motor_fixer(nema_17_height, nema_17_width, nema_17_dist_between_screw_holes, 9);
+  stepper_motor_fixer(nema_17_height, nema_17_width, nema_17_dist_between_screw_holes, 9, 25);
 }
+//---------------------------------------------------------------------------
+nema_23_motor_housing(10, 0, 0, 5);
 
-
-nema_17_fixer();
+//nema_17_fixer();
 
 //nema_17_motor_housing_with_potentiometer_support(10, 0, 7, 3, false);
 
