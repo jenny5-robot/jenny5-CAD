@@ -75,3 +75,8 @@ washer_8_thick = 1.5;
 washer_5_thick = 1;
 
 washer_10_height = 2;
+
+washer_5_15_external_radius = 7.5;
+washer_5_15_thick = 1;
+washer_5_thick = 1;
+washer_5_15_internal_radius = 2.65;
