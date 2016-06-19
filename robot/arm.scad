@@ -26,6 +26,7 @@ use <../basic_scad/spacer.scad>
 include <../basic_scad/params_sensor_array.scad>
 
 use <gripper.scad>
+use <gradient_support.scad>
 
 
 //---------------------------------------------------------------------------
@@ -47,7 +48,7 @@ module bearing_support1_with_qtr_a1_holes()
         // screw
             translate ([0, -QTR_1A_hole_position[0] - rb_608_external_radius, -6] - display_tolerance_z) cylinder (h = 10 + 2 * display_tolerance, r = 1, $fn = 20);
             // nuts
-            translate ([0, -QTR_1A_hole_position[0] - rb_608_external_radius, -8]) cylinder (h = 2, r = m2_nut_radius + 0.3, $fn = 6);
+            translate ([0, -QTR_1A_hole_position[0] - rb_608_external_radius, -7]) cylinder (h = 3, r = m2_nut_radius + 0.3, $fn = 6);
          // QTR-1A connectors hole
             translate ([- QTR_1A_size[1] / 2 - 0.75, - rb_608_external_radius, -7] + [0, -QTR_1A_size[0], 0] - display_tolerance_z) cube([QTR_1A_size[1] + 1, 3.5, 10] + 2 * display_tolerance_z);
         }
@@ -59,7 +60,6 @@ module roata_reductor_motor()
     my_pulley(18);
 }
 //---------------------------------------------------------------------------
-
 module roata_upper_arm()
 {
   difference(){
@@ -317,89 +317,86 @@ inaltime_rb608 = 15;//19//rb_608_internal_radius + 10;//radial_bearing_housing_g
 
 }
 //---------------------------------------------------------------------------
-module tabla_articulatie_trunchi()
+module plate_body_articulation()
 {
     difference(){
-        echo("DIMENSIUNI PLACA TRUNCHI: ", placa_trunchi_size);
-        translate ([0, 0, 3])
-        mirror([0, 0, 1])
-        L(placa_trunchi_size[1], 50, 50, 3);
-        echo("GAURI PLACA TRUNCHI");
-        // gauri surub 
-        for (i=[0:1]){
-            echo(rbearing_608_enclosed_housing_holes_position[i] + [-rbearing_608_enclosed_housing_size[0] / 2 + 47 / 2 + 3, 0, 0]);
-            translate (rbearing_608_enclosed_housing_holes_position[i] + [-rbearing_608_enclosed_housing_size[0] / 2 + 47 / 2 + 3, 0, 0] - display_tolerance_z) cylinder (h = 4 + 2 * display_tolerance, r = m3_screw_radius, $fn = 40);
-        }
-        // the other side
-        for (i=[0:1]){
-            echo ([0, placa_trunchi_size[1], 0] + mirror_y(rbearing_608_enclosed_housing_holes_position[i] + [-rbearing_608_enclosed_housing_size[0] / 2 + 47 / 2 + 3, 0, 0]));
-            translate ([0, placa_trunchi_size[1], 0]) translate (mirror_y(rbearing_608_enclosed_housing_holes_position[i] + [-rbearing_608_enclosed_housing_size[0] / 2 + 47 / 2 + 3, 0, 0]) - display_tolerance_z) cylinder (h = 4 + 2 * display_tolerance, r = m3_screw_radius, $fn = 40);
-        }
-        echo("GAURI PLACA TRUNCHI - prindere ax");
-        // gauri prindere ax
-        for (i=[0:1]){
-            echo ([placa_trunchi_size[0] /2 + 3, placa_trunchi_size[1]/2, 0] + pozitie_gauri_trunchi[i]);
-            translate ([placa_trunchi_size[0] /2 + 3, placa_trunchi_size[1]/2, 0] + pozitie_gauri_trunchi[i] - display_tolerance_z) cylinder (h = 4 + 2 * display_tolerance, r = m4_screw_radius, $fn = 40);
-        }
+        echo("Body plate size: ", plate_body_size);
+        color (aluminium_color) cube(plate_body_size);
+        // screws holes for body bone connection
+        // rest of arms screws
         
-        // gauri prindere carcasa motor
-        echo("GAURI PLACA TRUNCHI - prindere motor");
-       for (i=[0:3]){
-            echo([nema_17_housing_base_holes[i][0], nema_17_housing_base_holes[i][1], 0] + [3 + 47 / 2, 25, 0]);
-            translate ([0, placa_trunchi_size[1], 0] + [nema_17_housing_base_holes[i][0], -nema_17_housing_base_holes[i][1], 0] + [3 + 47 / 2, -25, 0] - display_tolerance_z) cylinder (h = 4 + 2 * display_tolerance, r = m4_screw_radius, $fn = 40);
-        } 
+        // motor housing screws
+        for (i = [0:3]){
+            translate ([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(nema_17_housing_base_holes[i])  cylinder ( h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            
+        }
+        // 
     }
 }
 //---------------------------------------------------------------------------
-module articulatie_trunchi()
+module body_articulation()
 {
     // tabla
-    tabla_articulatie_trunchi();
+    plate_body_articulation();
     // motor
- //   translate ([rbearing_608_enclosed_housing_size[0] / 2 + 3 + 2, placa_trunchi_size[1] - nema_17_height - perete_baza_motor_housing, -nema_17_width / 2 - 3]) rotate ([90, 0, 0]) mirror ([0,0, 1]) nema_17();
+    translate ([plate_body_size[0] / 2, -nema_17_with_gearbox_height + plate_body_size[1] - 3, -nema_17_width / 2 - 3 - 15]) rotate ([-90, 0, 0]) nema_17_with_gearbox();
 // carcasa motor
-    translate ([3, placa_trunchi_size[1], 0]) 
+    translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 2 , plate_body_size[1], 0]) 
     rotate ([90, 0, 0]) 
     rotate ([0, 0, -90]) 
     
-    nema_motor_housing(motor_housing_tolerance, 0, 0);
+    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes();
 
     // roata reductie motor
     
-    translate ([rbearing_608_enclosed_housing_size[0] / 2 + 3 + 2, nema_17_shaft_length + placa_trunchi_size[1] - 8, -nema_17_width / 2 - 3]) rotate ([90, 0, 0]) roata_reductor_motor();
+    translate ([plate_body_size[0] / 2, plate_body_size[1], -nema_17_width / 2 - 15 - 3]) rotate ([-90, 0, 0]) roata_reductor_motor();
       
+    //support upper arm
+   translate ([-rbearing_608_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, 5 + 10, 3])  rbearing_608_vertical_housing_bounded_half_small();
     
-    //sustinere upper arm
-   translate ([-rbearing_608_enclosed_housing_size[0] / 2 + 47 / 2 + 3, 0, placa_trunchi_size[2]])  radial_bearing_608_enclosed_housing(distanta_umar_trunchi, motor_housing_tolerance);
-    translate ([-rbearing_608_enclosed_housing_size[0] / 2 + 47 / 2 + 3, placa_trunchi_size[1] - rbearing_608_enclosed_housing_size[1], placa_trunchi_size[2]])  radial_bearing_608_enclosed_housing(distanta_umar_trunchi, motor_housing_tolerance);
+   translate ([-rbearing_608_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, 5 + 10, rbearing_608_vertical_housing_size_bounded_half_small[2] + rbearing_608_vertical_housing_size_bounded_half_small_top[2] + 3])  mirror ([0, 0, 1]) rbearing_608_vertical_housing_bounded_half_small_top();
+    
+   translate ([-rbearing_608_vertical_housing_size_bounded_half[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5 - 5, 3])  mirror ([0, 1, 0]) bearing_support1_with_qtr_a1_holes();
+    
+   translate ([-rbearing_608_vertical_housing_size_bounded_half[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5 - 5, rbearing_608_vertical_housing_size_bounded_half[2] + rbearing_608_vertical_housing_size_bounded_half[2] + 3])  mirror ([0, 0, 1]) mirror ([0, 1, 0]) bearing_support1();
+    
+
+    
 
             // axis
-    translate ([3 + 47 / 2, rbearing_608_enclosed_housing_size[1], distanta_umar_trunchi + placa_trunchi_size[2]]) rotate ([-90, 0, 0]) 
+    translate ([35, -90, 30 + 3]) 
+    rotate ([-90, 0, 0]) 
     rotate ([0, 0, unghi_umar]) 
     translate ([- bone_thick / 2, - bone_thick / 2, 0])
-    cube([bone_thick, bone_thick, placa_trunchi_size[1] - 2 * rbearing_608_enclosed_housing_size[1]]);  
-    echo("ax umar length = ", placa_trunchi_size[1] - 2 * rbearing_608_enclosed_housing_size[1]);
-        //roata reductie
-    translate ([rbearing_608_enclosed_housing_size[0] / 2 + 3 + 2, placa_trunchi_size[1] + inaltime_roata_reductor_ax + 1 , distanta_umar_trunchi + placa_trunchi_size[2]]) rotate ([-90, 0, 0]) mirror ([0,0,1]) rotate ([0, 0, unghi_umar]) roata_umar();
+    cube([bone_thick, bone_thick, 100]);  
+    echo("ax umar length = ", plate_body_size[1] - 2 * rbearing_608_enclosed_housing_size[1]);
+        
+        translate ([35, 73, 30 + 3]) 
+    rotate ([90, 0, 0]) 
+    rotate ([0, 0, unghi_umar]) 
+gradient_support_with_screw(100);
 
 // continuare  - upper arm
-    translate ([rbearing_608_enclosed_housing_size[0] / 2 + bone_thick / 2, rbearing_608_enclosed_housing_size[1] + distantor, distanta_umar_trunchi + placa_trunchi_size[2]]) 
+    translate ([rbearing_608_enclosed_housing_size[0] / 2 + bone_thick / 2, -90, 30 + plate_body_size[2]]) 
     rotate ([0, unghi_umar, 0]) 
     translate([bone_thick / 2, 0, + bone_thick / 2]) 
     rotate ([0, 0, 90]) 
     umar();
+    
 }
 //---------------------------------------------------------------------------
 //bearing_support1();
 
-bearing_support1_with_qtr_a1_holes();
+//bearing_support1_with_qtr_a1_holes();
 
 
 //roata_umar();
 
 
 //translate ([-bone_thick / 2 - placa_trunchi_size[2], -placa_trunchi_size[1] / 2, 0]) rotate ([0, 90, 0]) 
-//articulatie_trunchi();
+body_articulation();
+
+//plate_body_articulation();
 
 
 //umar();
@@ -417,5 +414,7 @@ bearing_support1_with_qtr_a1_holes();
 
 //roata_upper_arm();
 //roata_upper_arm_cu_piese();
+
+//plate_body_articulation();
 
 //tabla_umar();

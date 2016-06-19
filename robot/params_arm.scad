@@ -25,7 +25,7 @@ fore_arm_length = 300;
 
    tabla_umar_sizes = [lungime_tabla_umar, latime_tabla_umar, grosime_tabla_alu];
 
-   placa_trunchi_size = ([50, lungime_tabla_umar + 2 * distantor + 2 * rbearing_608_enclosed_housing_size[1], 3]);
+   plate_body_size = ([70, 60, 3]);
 
 pozitie_gauri_trunchi = [[-15.5, 0, 0], [15.5, 0, 0]];
 
