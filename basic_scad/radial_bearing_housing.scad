@@ -120,6 +120,25 @@ module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_hous
     }
 }
 //---------------------------------------------------------------------------
+module radial_bearing_vertical_housing_bounded(housing_size, radial_bearing_external_radius, radial_bearing_thick, distance_between_holes)
+{
+    difference(){
+        hull(){
+            cylinder (h = housing_size[2], r = housing_size[1] / 2);
+            translate ([housing_size[0] - housing_size[1], 0, 0]) cylinder (h = housing_size[2], r = housing_size[1] / 2);
+        }
+        
+        // bearing hole
+        translate ([housing_size[0] / 2 - housing_size[1] / 2, housing_size[1] / 2, housing_size[2]] + display_tolerance_y) rotate ([90, 0, 0]) cylinder (h = housing_size[1] + 2 * display_tolerance, r = radial_bearing_external_radius - 1, $fn = 50);
+        
+        translate ([housing_size[0] / 2 - housing_size[1] / 2, radial_bearing_thick / 2, housing_size[2]]) rotate ([90, 0, 0]) cylinder (h = radial_bearing_thick, r = radial_bearing_external_radius, $fn = 50);
+
+        // screw holes
+        translate (-display_tolerance_z) cylinder (h = housing_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        translate ([housing_size[0] - housing_size[1], 0, 0]) translate (-display_tolerance_z) cylinder (h = housing_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+    }
+}
+//---------------------------------------------------------------------------
 module radial_bearing_u_vertical_housing(rb_external_radius, rb_thick, extra_height)
 {
     echo(baza_sizes=baza_sizes);
@@ -154,6 +173,11 @@ rotate([90, 0, 0])
     }
     
     
+}
+//---------------------------------------------------------------------------
+module rbearing_608_vertical_housing_bounded_half()
+{
+    radial_bearing_vertical_housing_bounded(rbearing_608_vertical_housing_size_bounded_half, rb_608_external_radius,rb_608_thick, 60);
 }
 //---------------------------------------------------------------------------
 module radial_bearing_608_u_vertical_housing()
@@ -234,6 +258,11 @@ module radial_bearing_6001_vertical_housing()
     radial_bearing_vertical_housing(rb_6001_external_radius, rb_6001_thick, rbearing_6001_enclosed_housing_holes_position);
 }
 //---------------------------------------------------------------------------
+module radial_bearing_608_vertical_housing()
+{
+    radial_bearing_vertical_housing(rb_608_external_radius, rb_608_thick, rbearing_608_enclosed_housing_holes_position);
+}
+//---------------------------------------------------------------------------
 module radial_bearing_6201_vertical_housing(screw_holes_tolerance = 0)
 {
     radial_bearing_vertical_housing(rbearing_6201_enclosed_housing_size, rbearing_6201_enclosed_housing_holes_position, screw_holes_tolerance = 0);
@@ -257,14 +286,16 @@ module radial_bearing_608_vertical_housing_slim()
 }
 //---------------------------------------------------------------------------
 
+rbearing_608_vertical_housing_bounded_half();
+
 //rbearing_608_housing_with_potentiometer_support();
 
-//radial_bearing_698_vertical_housing();
+//radial_bearing_608_vertical_housing();
 
 //radial_bearing_608_u_vertical_housing();
 
 
-radial_bearing_6201_vertical_housing(screw_holes_tolerance = 0);
+//radial_bearing_6201_vertical_housing(screw_holes_tolerance = 0);
 //radial_bearing_608_vertical_housing();
 //radial_bearing_608_vertical_housing_slim();
 
