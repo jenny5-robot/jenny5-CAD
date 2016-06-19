@@ -180,6 +180,16 @@ module rbearing_608_vertical_housing_bounded_half()
     radial_bearing_vertical_housing_bounded(rbearing_608_vertical_housing_size_bounded_half, rb_608_external_radius,rb_608_thick, 60);
 }
 //---------------------------------------------------------------------------
+module rbearing_608_vertical_housing_bounded_half_small()
+{
+    radial_bearing_vertical_housing_bounded(rbearing_608_vertical_housing_size_bounded_half_small, rb_608_external_radius,rb_608_thick, 60);
+}
+//---------------------------------------------------------------------------
+module rbearing_608_vertical_housing_bounded_half_small_top()
+{
+    radial_bearing_vertical_housing_bounded(rbearing_608_vertical_housing_size_bounded_half_small_top, rb_608_external_radius,rb_608_thick, 60);
+}
+//---------------------------------------------------------------------------
 module radial_bearing_608_u_vertical_housing()
 {
     radial_bearing_u_vertical_housing(rb_608_external_radius, rb_608_thick, 4);
@@ -286,7 +296,11 @@ module radial_bearing_608_vertical_housing_slim()
 }
 //---------------------------------------------------------------------------
 
-rbearing_608_vertical_housing_bounded_half();
+//rbearing_608_vertical_housing_bounded_half();
+
+//rbearing_608_vertical_housing_bounded_half_small();
+
+rbearing_608_vertical_housing_bounded_half_small_top();
 
 //rbearing_608_housing_with_potentiometer_support();
 
