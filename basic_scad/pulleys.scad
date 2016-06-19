@@ -285,11 +285,6 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 			//hole for motor shaft
         
 		translate([0,0,-1]) cylinder(r=motor_shaft/2,h=pulley_b_ht + pulley_t_ht + 2 * retainer_ht + 2,$fn=motor_shaft*4);
-                //cap surub
-        if (screw_head_radius > 0.01)
-            translate([0,0,0]) cylinder(r = screw_head_radius, h = m8_screw_head_height, $fn = 6);
-
-
     }
 	   
 	}
