@@ -15,15 +15,18 @@ include <params_stepper_motors.scad>
 	//motor_housing_height = perete_motor_motor_housing + 40; //perete_baza_motor_housing + 40;
     motor_housing_length = nema_17_width + 2 * perete_lateral_motor_housing;
 	
-	distanta_gauri_baza_motor_housing_nema_17 = 12;
+	distanta_gauri_baza_motor_housing_nema_17_x = 12;
+    distanta_gauri_baza_motor_housing_nema_17_y = 15;
+    
 	nema_17_housing_base_holes = [
-	[distanta_gauri_baza_motor_housing_nema_17, distanta_gauri_baza_motor_housing_nema_17, 0],
-	[distanta_gauri_baza_motor_housing_nema_17, -distanta_gauri_baza_motor_housing_nema_17, 0],
-	[-distanta_gauri_baza_motor_housing_nema_17, distanta_gauri_baza_motor_housing_nema_17, 0],
-	[-distanta_gauri_baza_motor_housing_nema_17, -distanta_gauri_baza_motor_housing_nema_17, 0]
+	[distanta_gauri_baza_motor_housing_nema_17_x, distanta_gauri_baza_motor_housing_nema_17_y, 0],
+	[distanta_gauri_baza_motor_housing_nema_17_x, -distanta_gauri_baza_motor_housing_nema_17_y, 0],
+	[-distanta_gauri_baza_motor_housing_nema_17_x, distanta_gauri_baza_motor_housing_nema_17_y, 0],
+	[-distanta_gauri_baza_motor_housing_nema_17_x, -distanta_gauri_baza_motor_housing_nema_17_y, 0]
 	];
 	
 	distanta_gauri_baza_motor_housing_nema_11 = 10;
+    
 	nema_11_housing_base_holes = [
 	[distanta_gauri_baza_motor_housing_nema_11, distanta_gauri_baza_motor_housing_nema_11, 0],
 	[distanta_gauri_baza_motor_housing_nema_11, -distanta_gauri_baza_motor_housing_nema_11, 0],
