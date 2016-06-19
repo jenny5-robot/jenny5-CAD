@@ -23,10 +23,37 @@ use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/rings.scad>
 use <../basic_scad/spacer.scad>
+include <../basic_scad/params_sensor_array.scad>
 
 use <gripper.scad>
 
 
+//---------------------------------------------------------------------------
+module bearing_support1()
+{
+    difference(){
+      rbearing_608_vertical_housing_bounded_half();
+      translate ([30, -2, 30]) rotate ([90, 0, 0]) cylinder_empty(5, 28, 25.2, 100);
+    }
+}
+//---------------------------------------------------------------------------
+module bearing_support1_with_qtr_a1_holes()
+{
+    difference(){
+     bearing_support1();
+        
+        translate ([30, -2, 30])
+        rotate([90, 0, 0]){
+        // screw
+            translate ([0, -QTR_1A_hole_position[0] - rb_608_external_radius, -6] - display_tolerance_z) cylinder (h = 10 + 2 * display_tolerance, r = 1, $fn = 20);
+            // nuts
+            translate ([0, -QTR_1A_hole_position[0] - rb_608_external_radius, -8]) cylinder (h = 2, r = m2_nut_radius + 0.3, $fn = 6);
+         // QTR-1A connectors hole
+            translate ([- QTR_1A_size[1] / 2 - 0.75, - rb_608_external_radius, -7] + [0, -QTR_1A_size[0], 0] - display_tolerance_z) cube([QTR_1A_size[1] + 1, 3.5, 10] + 2 * display_tolerance_z);
+        }
+    }
+}
+//---------------------------------------------------------------------------
 module roata_reductor_motor()
 {
     my_pulley(18);
@@ -363,6 +390,9 @@ module articulatie_trunchi()
     umar();
 }
 //---------------------------------------------------------------------------
+//bearing_support1();
+
+bearing_support1_with_qtr_a1_holes();
 
 
 //roata_umar();
@@ -373,7 +403,7 @@ module articulatie_trunchi()
 
 
 //umar();
-upper_arm();
+//upper_arm();
 
 //roata_forearm();
 
