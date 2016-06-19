@@ -107,3 +107,5 @@ rbearing_608_enclosed_housing_slim_size[1] / 2,
 rbearing_608_enclosed_housing_slim_size[1] / 2,
 0]
 ];
+
+rbearing_608_vertical_housing_size_bounded_half=[60 + 10, 10, 30]; // distance between holes + 2 * radius
