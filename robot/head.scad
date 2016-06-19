@@ -25,7 +25,7 @@ use <../basic_scad/stepper_motors.scad>
 use <../basic_scad/webcam.scad>
 use <../basic_scad/ultrasonic_support.scad>
 use <../basic_scad/ultrasonic.scad>
-
+use <gradient_support.scad>
 
 //include <params_robot.scad>
 include <params_head.scad>
@@ -83,27 +83,7 @@ module qtr_a1_support_with_motor_support()
            
 }
 //----------------------------------------------------------
-module head_pulley()
-{
-    my_pulley(60, 33, 0, 18, 8, 8, 20, 0, 1);// motor head
 
-}
-//---------------------------------------------------------------------------
-module gradient_support()
-{
-    retainer_ht = 1.5;
-    
-    difference(){
-        union(){
-          cylinder (h = retainer_ht, r2 = 27.3, r1 = 26, $fn = 100);
-          translate ([0, 0, retainer_ht]) cylinder (h = 7.5, r = 27.3, $fn = 100);
-        }
-        translate ([0, 0, retainer_ht]) cylinder (h = 11, r = 26, $fn = 100);
-        // screw hole
-        translate (-display_tolerance_z) cylinder (h = retainer_ht + 2 * display_tolerance, r = 4, $fn = 20);
-    }
-}
-//---------------------------------------------------------------------------
 module bearing_housing_on_axis()
 {
     rbearing_608_housing_double();
@@ -143,7 +123,7 @@ module eye_support()
 {
     qtr_a1_support_with_motor_support();
     translate ([0, 60, -52]) nema_11_with_gearbox_and_pulley();
-    translate ([0, 0, 25]) mirror ([0, 0, 1]) head_pulley();
+    translate ([0, 0, 25]) mirror ([0, 0, 1]) gradient_support();
     
     mirror ([0, 0, 1]) bearing_housing_on_axis();
     translate ([0, 0, -rb_608_thick]) 608rs();
@@ -163,7 +143,7 @@ module eye_support()
 module head()
 {
     mirror ([0, 0, 1]) head_base();
-    translate ([0, 0, -25]) head_pulley();
+    translate ([0, 0, -25]) gradient_support();
     translate ([0, 0, -25]) M8x80_hexa();
     translate ([0, 0, 16]) mirror([0, 0, 1]) rbearing_608_housing_double();
     translate ([0, 0, 0]) 608rs();
@@ -179,15 +159,13 @@ module head()
 }
 //---------------------------------------------------------------------------
 
-qtr_a1_support(7);
+//qtr_a1_support(7);
 //hc_sr04_and_c920_with_support();
 
 //head();
 //eye_support();
 
 //gradient_support();
-
-//head_pulley();
 
 //head_base();
 
