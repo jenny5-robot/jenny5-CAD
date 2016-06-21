@@ -84,7 +84,8 @@ module roata_upper_arm_cu_piese()
     // belt
    // translate ([-5, 18, 0] - display_tolerance_z) cube([10, 10, 100] + 2 * display_tolerance_z);
     // carcasa motor
-    translate ([-motor_housing_width / 2, 15, 0]) rotate ([0, 90, -90]) nema_17_motor_housing(0, 0, 0);
+    translate ([-motor_housing_width / 2, 15, 0]) rotate ([0, 90, -90]) 
+    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 }
 //---------------------------------------------------------------------------
 module roata_umar()
@@ -174,7 +175,7 @@ module roata_cot_cu_piese()
 //---------------------------------------------------------------------------
 module forearm_bone()
 {
-    cube([bone_thick, bone_thick, fore_arm_length]);
+    color (aluminium_color) cube([bone_thick, bone_thick, fore_arm_length]);
 }
 //---------------------------------------------------------------------------
 module roata_forearm()
@@ -233,7 +234,7 @@ module fore_arm_cu_roata_cot()
 module upper_arm_bone()
 {
     difference(){
-        cube([bone_thick, bone_thick, upper_arm_length]);
+        color (aluminium_color) cube([bone_thick, bone_thick, upper_arm_length]);
     }
 }
 //---------------------------------------------------------------------------
@@ -258,62 +259,62 @@ module upper_arm()
     translate ([0, - upper_arm_length + 3 / 2 * bone_thick, 0])  rotate([0, 0, unghi_cot]) rotate([0, 90, 0]) fore_arm();
 }
 //---------------------------------------------------------------------------
-module tabla_umar()
+module shoulder_plate()
 {
     difference(){
-        echo("TABLA UMAR");
-        echo(tabla_umar_sizes=tabla_umar_sizes);
+        echo("shoulder plate");
+        echo(shoulder_plate_size=shoulder_plate_size);
 
         // tai o gaura
-        cube(tabla_umar_sizes);
+        color (aluminium_color) cube(shoulder_plate_size);
         echo("gauri motor housing:");
         for (i=[0:3]){
-            echo([tabla_umar_sizes[0] / 2, tabla_umar_sizes[1] - 22 - perete_motor_motor_housing, 0] - nema_17_housing_base_holes[i]);
-        translate ([tabla_umar_sizes[0] / 2, tabla_umar_sizes[1] - 22 - perete_motor_motor_housing, 0] - nema_17_housing_base_holes[i] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+            echo([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 22 - perete_motor_motor_housing, 0] - nema_17_housing_base_holes[i]);
+        translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 22 - perete_motor_motor_housing, 0] - nema_17_housing_base_holes[i] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
         }
         echo("gauri prindere carcase rulmenti:");
         for (i=[0:1]){
-            echo(rbearing_608_enclosed_housing_holes_position[i] + [tabla_umar_sizes[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick, 0]);
-            translate (rbearing_608_enclosed_housing_holes_position[i] + [tabla_umar_sizes[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius);
+            echo(rbearing_608_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick, 0]);
+            translate (rbearing_608_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius);
         }
         for (i=[0:1])
-            translate (rbearing_608_enclosed_housing_holes_position[i] + [tabla_umar_sizes[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick + 40, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius);
+            translate (rbearing_608_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick + 40, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius);
     }
 }
 //---------------------------------------------------------------------------
-module umar()
+module shoulder()
 {
     //tabla
-    tabla_umar();
+    shoulder_plate();
     
     // motor
-    translate ([tabla_umar_sizes[0] / 2, latime_tabla_umar - nema_17_height - perete_baza_motor_housing, -(nema_17_width / 2 + 3 + perete_baza_motor_housing )]) 
+    translate ([shoulder_plate_size[0] / 2, latime_tabla_umar - nema_17_with_gearbox_height - perete_baza_motor_housing, -(nema_17_width / 2 + 3 + perete_baza_motor_housing +32)]) 
     rotate ([-90, 0, 0]) 
-    nema_17();
+    nema_17_with_gearbox();
 // roata motor rotatie forearm
-    translate ([tabla_umar_sizes[0] / 2, (latime_tabla_umar + 17), -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 5)]) 
+    translate ([shoulder_plate_size[0] / 2, (latime_tabla_umar + 17), -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 32)]) 
     rotate ([90, 0, 0]) 
     roata_reductor_motor();
     
     // motor housing
-    translate ([tabla_umar_sizes[0] / 2 + motor_housing_width / 2, latime_tabla_umar , 0]) 
+    translate ([shoulder_plate_size[0] / 2 + motor_housing_width / 2, latime_tabla_umar , 0]) 
     mirror([0, 0, 1])
     rotate ([0, -90, 90]) 
-    nema_17_motor_housing(10, 0, 7);
+    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 20);
     
 inaltime_rb608 = 15;//19//rb_608_internal_radius + 10;//radial_bearing_housing_grosime_perete_lateral;
     // bone support
-    translate ([tabla_umar_sizes[0] / 2, latime_tabla_umar - 34, grosime_tabla_alu]) 
+    translate ([shoulder_plate_size[0] / 2, latime_tabla_umar - 34, grosime_tabla_alu]) 
     //rotate([90, 0, 0])
     radial_bearing_608_u_vertical_housing();
     
     
-    translate ([tabla_umar_sizes[0] / 2, latime_tabla_umar - rbearing_608_enclosed_housing_size[1], grosime_tabla_alu]) 
+    translate ([shoulder_plate_size[0] / 2, latime_tabla_umar - rbearing_608_enclosed_housing_size[1], grosime_tabla_alu]) 
     //rotate([90, 0, 0])
         radial_bearing_608_u_vertical_housing();
         
     // continuare cu upper arm
-    translate ([tabla_umar_sizes[0]/ 2, latime_tabla_umar + 7, inaltime_rb608 + grosime_tabla_alu]) rotate ([0, unghi_fore_arm, 0]) upper_arm();    
+    translate ([shoulder_plate_size[0]/ 2, latime_tabla_umar + 7, inaltime_rb608 + grosime_tabla_alu]) rotate ([0, unghi_fore_arm, 0]) upper_arm();    
 
 }
 //---------------------------------------------------------------------------
@@ -343,9 +344,9 @@ module body_articulation()
 // carcasa motor
     translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 2 , plate_body_size[1], 0]) 
     rotate ([90, 0, 0]) 
-    rotate ([0, 0, -90]) 
+    rotate ([0, 0, -90])
     
-    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes();
+    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 
     // roata reductie motor
     
@@ -368,7 +369,7 @@ module body_articulation()
     rotate ([-90, 0, 0]) 
     rotate ([0, 0, unghi_umar]) 
     translate ([- bone_thick / 2, - bone_thick / 2, 0])
-    cube([bone_thick, bone_thick, 100]);  
+    color (aluminium_color) cube([bone_thick, bone_thick, 100]);  
     echo("ax umar length = ", plate_body_size[1] - 2 * rbearing_608_enclosed_housing_size[1]);
         
         translate ([35, 73, 30 + 3]) 
@@ -381,7 +382,7 @@ gradient_support_with_screw(100);
     rotate ([0, unghi_umar, 0]) 
     translate([bone_thick / 2, 0, + bone_thick / 2]) 
     rotate ([0, 0, 90]) 
-    umar();
+    shoulder();
     
 }
 //---------------------------------------------------------------------------
@@ -399,7 +400,7 @@ body_articulation();
 //plate_body_articulation();
 
 
-//umar();
+//shoulder();
 //upper_arm();
 
 //roata_forearm();
@@ -417,4 +418,4 @@ body_articulation();
 
 //plate_body_articulation();
 
-//tabla_umar();
+//shoulder_plate();
