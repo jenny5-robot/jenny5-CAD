@@ -340,7 +340,11 @@ module nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(motor_
   nema_motor_housing_with_belt_tensioner_bearing_based_x_and_base_holes(motor_offset, belt_tensioner_offset, nema_17_width, nema_17_height, base_height = 40, nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes);
 }
 //---------------------------------------------------------------------------
-
+module nema_23_motor_housing()
+{
+nema_motor_housing_x(10, nema_23_57BYGH603_width, nema_23_57BYGH603_height, 70, nema_23_57BYGH603_hole_radius, gearbox_nema_17_holes_position, 3);
+}
+//---------------------------------------------------------------------------
 nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 
 //nema_23_motor_housing(10, 0, 0, 5);
