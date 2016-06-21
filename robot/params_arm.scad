@@ -20,10 +20,10 @@ inaltime_roata_reductor_ax = 16;
 upper_arm_length = 270;
 fore_arm_length = 300;
 
-   lungime_tabla_umar = 90;
-   latime_tabla_umar = 60;
+   lungime_tabla_umar = 60;
+   latime_tabla_umar = 130;
 
-   tabla_umar_sizes = [lungime_tabla_umar, latime_tabla_umar, grosime_tabla_alu];
+   shoulder_plate_size = [lungime_tabla_umar, latime_tabla_umar, grosime_tabla_alu];
 
    plate_body_size = ([70, 60, 3]);
 
@@ -32,7 +32,7 @@ pozitie_gauri_trunchi = [[-15.5, 0, 0], [15.5, 0, 0]];
 
 
    distanta_umar_trunchi = 140;
-      dist_to_rotita_fore_arm = 12;
+   dist_to_rotita_fore_arm = 12;
       
-      perete_rulment_roata = 1.5;
-      inaltime_roata_reductor_cot = bearing_4_height + 2 * perete_rulment_roata;
+   perete_rulment_roata = 1.5;
+   inaltime_roata_reductor_cot = bearing_4_height + 2 * perete_rulment_roata;
