@@ -20,6 +20,11 @@ use <../basic_scad/chair_wheel.scad>
 
 include <../basic_scad/config.scad>
 
+include <../basic_scad/params_stepper_motors.scad>
+
+use <../basic_scad/stepper_motors.scad>
+use <../basic_scad/stepper_motors_housing.scad>
+
 //--------------------------------------------------------------------
 module wheel_with_teeths_simple(radius = 84, steps = 24)// radius = 42, steps = 12
 {
@@ -216,9 +221,22 @@ module first_gear_tracks()
     wheel_with_teeths_simple(30.3, 9);
 }
 //--------------------------------------------------------------------
+module base_motor_with_support()
+{
+    nema_23_motor_housing();
+    translate ([nema_23_57BYGH603_width / 2 + 5 + 10, nema_23_57BYGH603_width / 2 + 3, nema_23_57BYGH603_height + 3]) mirror([0, 0, 1]) nema_23_57BYGH603();
+}
+//--------------------------------------------------------------------
 module platform()
 {
     cube(base_platform_size);
+    
+    translate ([200, 0, 0]) 
+    rotate([0, 90, 90]) base_motor_with_support();
+    
+     translate ([200, base_platform_size[1], 0])
+   mirror([0, 1, 0]) 
+    rotate([0, 90, 90]) base_motor_with_support();
     
     fist_tracks_offset = -rb_608_external_radius;
     second_tracks_offset = 70;
@@ -287,6 +305,8 @@ translate([0, base_platform_size[1] + track_size[0] / 2 + 10, 0]){
     translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
 }
 //--------------------------------------------------------------------
+//base_motor_with_support();
+
 //tracks_on_half_wheel(12, 42.5);
 
 //first_gear_tracks();
