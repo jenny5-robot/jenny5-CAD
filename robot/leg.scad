@@ -56,7 +56,7 @@ module lateral_talpa()
 {
 echo("distanta baza to gaura sustinere", grosime_placa_alu + dist_to_incheietura_talpa_motor);
     difference(){
-        cube(lateral_talpa_sizes);
+        color (aluminium_color) cube(lateral_talpa_sizes);
      // gaura prindere os
         translate ([lateral_talpa_motor_sizes[0] / 2 + base_extension_tail, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
      // gaura prindere os 2
@@ -71,7 +71,7 @@ module lateral_genunchi()
 {
 //echo("distanta baza to gaura sustinere", grosime_placa_alu + dist_to_incheietura_talpa);
     difference(){
-        cube(lateral_genunchi_simple_sizes);
+        color (aluminium_color) cube(lateral_genunchi_simple_sizes);
         translate ([lateral_talpa_os_sizes[0] / 2, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
         translate ([lateral_talpa_os_sizes[0] / 2, 0, lateral_genunchi_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
     }
@@ -86,9 +86,9 @@ module talpa_picior_motor()
     translate ([-base_extension_tail, latime_talpa, 0]) lateral_talpa();
     
     // distantor mijloc
-    translate ([lungime_talpa / 2 - 23, 0, 0]) cube([30, latime_talpa, 30]);
+    color (aluminium_color) translate ([lungime_talpa / 2 - 23, 0, 0]) cube([30, latime_talpa, 30]);
     //distantor fatza
-    translate ([lungime_talpa + base_extension_head - 30, 0, 0]) cube([30, latime_talpa, 30]);
+    color (aluminium_color) translate ([lungime_talpa + base_extension_head - 30, 0, 0]) cube([30, latime_talpa, 30]);
 }
 
 //----------------------------------------------------------------------
@@ -98,7 +98,7 @@ module genunchi()
 
     translate ([0, latime_talpa, 0]) lateral_genunchi();
     
-     translate ([lateral_genunchi_simple_sizes[0] / 2, -0, lateral_genunchi_simple_sizes[2] / 2]) rotate ([-90, 0, 0]) cylinder (h = latime_talpa, r = 15 * sqrt(2), $fn = 4);
+     color (aluminium_color) translate ([lateral_genunchi_simple_sizes[0] / 2, -0, lateral_genunchi_simple_sizes[2] / 2]) rotate ([-90, 0, 0]) cylinder (h = latime_talpa, r = 15 * sqrt(2), $fn = 4);
 }
 //----------------------------------------------------------------------
 module os_picior()
@@ -106,7 +106,7 @@ module os_picior()
     difference(){ 
          //U(inaltime_os_picior, latura_U_mic, latura_U_mic, grosime_perete_L);
         
-        teava_dreptunghiulara(latime_teava, lungime_teava, grosime_perete_teava, inaltime_os_picior);
+        color (aluminium_color) teava_dreptunghiulara(latime_teava, lungime_teava, grosime_perete_teava, inaltime_os_picior);
        
         // gaura ax impins de motor
         pas_gauri = 16;
@@ -223,7 +223,7 @@ module oscior()
     difference(){ 
          //U(inaltime_os_picior, latura_U_mic, latura_U_mic, grosime_perete_L);
         
-        teava_dreptunghiulara(latime_teava, lungime_teava, grosime_perete_teava, inaltime_os_picior);
+        color (aluminium_color) teava_dreptunghiulara(latime_teava, lungime_teava, grosime_perete_teava, inaltime_os_picior);
        dist_to_surub_oscior = 170;
         
         // gaura ax impins de motor

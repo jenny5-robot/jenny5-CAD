@@ -97,7 +97,7 @@ module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_hous
 //echo(housing_size=housing_size);
 //echo(rb_thick=rb_thick);
     difference(){
-        my_cube_rounded3_x(housing_size + [2 * screw_holes_tolerance, 0, 0]);
+       color(plastic_color) my_cube_rounded3_x(housing_size + [2 * screw_holes_tolerance, 0, 0]);
         // rulmentul
         
         hull(){
@@ -123,6 +123,7 @@ module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_hous
 module radial_bearing_vertical_housing_bounded(housing_size, radial_bearing_external_radius, radial_bearing_thick, distance_between_holes)
 {
     difference(){
+        color(plastic_color)
         hull(){
             cylinder (h = housing_size[2], r = housing_size[1] / 2);
             translate ([housing_size[0] - housing_size[1], 0, 0]) cylinder (h = housing_size[2], r = housing_size[1] / 2);
@@ -147,7 +148,7 @@ module radial_bearing_u_vertical_housing(rb_external_radius, rb_thick, extra_hei
     difference(){
 rotate([90, 0, 0])
         difference(){
-
+color(plastic_color)
         hull(){
         translate ([0, rb_external_radius + extra_height, 0]) cylinder (h = h, r = rb_external_radius + radial_bearing_vertical_housing_grosime_perete_baza, $fn = 100);
             translate ([-baza_sizes[0] / 2, 0, 0]) cube(baza_sizes);
@@ -300,7 +301,7 @@ module radial_bearing_608_vertical_housing_slim()
 
 //rbearing_608_vertical_housing_bounded_half_small();
 
-rbearing_608_vertical_housing_bounded_half_small_top();
+//rbearing_608_vertical_housing_bounded_half_small_top();
 
 //rbearing_608_housing_with_potentiometer_support();
 

@@ -85,7 +85,7 @@ module brat()
 // vertical axis
     translate ([0, 0, grosime_perete_L + washer_8_thick + rb_608_thick]) rotate ([0, 0, unghi_trunchi])  
     //cube([bone_thick, bone_thick, chest_height -latura_L + rbearing_6002_housing_size[2] + grosime_perete_L]);
-    bone_trunchi();
+    color (aluminium_color) bone_trunchi();
         
     // roata reductie mare
     translate ([0, 0, 0]) rotate([0, 0, unghi_trunchi]) mirror ([0, 0, 1]) roata_umar();
@@ -98,13 +98,13 @@ module brat()
 module coloana_vertebrala()
 {
     //U(chest_height, latura_L, latura_L, grosime_tabla);
-    cube_empty(coloana_vertebrala_size[0] - 3, coloana_vertebrala_size[0], coloana_vertebrala_size[2]);
+    color (aluminium_color) cube_empty(coloana_vertebrala_size[0] - 3, coloana_vertebrala_size[0], coloana_vertebrala_size[2]);
 }
 //---------------------------------------------------------------------------
 module os_clavicula()
 {
     difference(){
-        L(chest_length, latura_L / 2, latura_L, grosime_perete_L); 
+        color (aluminium_color) L(chest_length, latura_L / 2, latura_L, grosime_perete_L); 
         echo("gauri_os_clavicula left = ");
         for (i = [0:4]){
             echo([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i]);
@@ -132,7 +132,7 @@ module os_clavicula()
 module os_diafragma()
 {
     difference(){
-        L(chest_length, latura_L / 2, latura_L, grosime_perete_L);
+        color (aluminium_color) L(chest_length, latura_L / 2, latura_L, grosime_perete_L);
         // gaura ax stanga
         echo("gauri_os_diafragma left = ");
         for (i = [0:4]){

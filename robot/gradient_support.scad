@@ -6,6 +6,8 @@ include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 
+include <../basic_scad/config.scad>
+
 //---------------------------------------------------------------------------
 module gradient_pulley()
 {
@@ -20,6 +22,7 @@ module gradient_cover()
     retainer_ht = 1.5;
     
     difference(){
+        color(plastic_color)
         union(){
           cylinder (h = retainer_ht, r2 = 27.3, r1 = 26, $fn = 100);
           translate ([0, 0, retainer_ht]) cylinder (h = 7.5, r = 27.3, $fn = 100);
@@ -43,6 +46,8 @@ module gradient_support_with_screw(screw_length)
 }
 //---------------------------------------------------------------------------
 
+gradient_pulley();
+
 //gradient_support();
 
-gradient_support_with_screw(100);
+//gradient_support_with_screw(100);

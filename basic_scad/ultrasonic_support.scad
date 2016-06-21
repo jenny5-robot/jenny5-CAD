@@ -4,6 +4,7 @@
 // MIT License
 //--------------------------------------------------------------
 
+include <config.scad>
 include <params_ultrasonic.scad>
 include <params_screws_nuts_washers.scad>
 use <basic_components.scad>
@@ -15,7 +16,7 @@ include <params_webcam.scad>
 module hc_sr04_support_plate()
 {
   difference(){
-    
+    color(plastic_color) 
     union(){
       my_cube_rounded2([hc_sr04_sizes[0] + 2, hc_sr04_sizes[1] + 2, 3]);
       for (i = [0:3])
@@ -45,6 +46,7 @@ module hc_sr04_and_c920_support_plate()
     // c920 plate
     translate ([hc_sr04_sizes[0] / 2 - c920_length / 2, -wall_thick_3, 0]) 
         difference(){
+            color(plastic_color) 
             translate ([c920_length / 2 - c920_dist_between_holder_holes / 2, wall_thick_3, c920_depth / 2])
             rotate([90, 0, 0]) 
                 hull(){
@@ -64,7 +66,7 @@ module hc_sr04_arm()
 {
     
     difference(){
-      cube(hc_sr04_arm_sizes);
+      color(plastic_color) cube(hc_sr04_arm_sizes);
         // bone's hole
         translate ([hc_sr04_arm_sizes[0] - 11 - 6, (hc_sr04_arm_sizes[1] - 10.5) / 2, -1]) cube([11, 10.5, 9]);
         // other hole

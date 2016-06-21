@@ -5,6 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_basic_components.scad>
+include <config.scad>
 
 //---------------------------------------------------------------
 module spacer_with_2_holes(length, width, height, distance_between_holes)
@@ -19,7 +20,7 @@ module spacer_with_2_holes(length, width, height, distance_between_holes)
 module spacer_with_1_hole(length, width, height)
 {
     difference(){
-        cube([length, width, height]);
+        color(plastic_color) cube([length, width, height]);
         translate ([0, width / 2, height / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = length + 2 * display_tolerance, r = 2, $fn = 30);
     }
 }
