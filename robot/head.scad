@@ -4,7 +4,10 @@
 // MIT License
 //--------------------------------------------------------------
 
+
+
 use <../basic_scad/basic_components.scad>
+include <../basic_scad/config.scad>
 include <../basic_scad/params_stepper_motors.scad>
 include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_basic_components.scad>
@@ -35,7 +38,7 @@ module qtr_a1_support(inaltime)
 {
     difference(){
         union(){
-          cylinder(h = inaltime, r = 30, $fn = 200);
+          color (plastic_color) cylinder(h = inaltime, r = 30, $fn = 200);
         }
  // canal pt blocat lumina
         translate ([0, 0, inaltime - 3]) cylinder_empty(5, 28, 25.2, 100);
@@ -65,7 +68,7 @@ module qtr_a1_support_with_motor_support()
           translate ([35 / 2, 30 - 5.8, inaltime]) mirror ([0, 0, 1]) rotate([0, 0, 90]) 
            
             difference(){
-            potentiometer_support(50, 35, inaltime, 36, 0, 3, 0);
+            color(plastic_color) potentiometer_support(50, 35, inaltime, 36, 0, 3, 0);
                 // gauri motor nema11
         translate ([36, 35 / 2, 0] + gearbox_nema_11_holes_position[0] - display_tolerance_z) cylinder (h = head_base_sizes2[2] + 2 + 2 * display_tolerance, r = nema_11_motor_gearbox_hole_radius, $fn = 50);
         for (i=[1:4])
@@ -94,12 +97,12 @@ module head_base()
 {
   qtr_a1_support_with_motor_support();
     
-  translate ([30, -37 / 2, 7]) rotate ([0, 90, 0]) spacer_with_1_hole(7, 37, 10);
+  color(plastic_color) translate ([30, -37 / 2, 7]) rotate ([0, 90, 0]) spacer_with_1_hole(7, 37, 10);
     difference(){
         translate ([23, -37 / 2, 0]) cube([10, 37, 7]);
         cylinder (h = 7, r = 30);
     }
-  translate ([-30 - 10, -37 / 2, 7]) rotate ([0, 90, 0]) spacer_with_1_hole(7, 37, 10);
+  color(plastic_color) translate ([-30 - 10, -37 / 2, 7]) rotate ([0, 90, 0]) spacer_with_1_hole(7, 37, 10);
     difference(){
   translate ([-30, -37 / 2, 0]) cube([7, 37, 7]);  
         cylinder (h = 7, r = 30);
@@ -131,8 +134,8 @@ module eye_support()
     // long screw
     cylinder (h = 100, r = 4, $fn = 30, center = true);
     // bones
-    translate ([0, 0, 25]) cube_empty(6, 10, 100);
-    translate ([0, 0, -114]) cube_empty(6, 10, 100);
+    color(aluminium_color) translate ([0, 0, 25]) cube_empty(6, 10, 100);
+    color(aluminium_color) translate ([0, 0, -114]) cube_empty(6, 10, 100);
     // cameras
     
     // ultrasonic
@@ -151,7 +154,7 @@ module head()
     translate ([0, 0, 2 * rb_608_thick]) M8_nut();
     
     translate ([0, 0, 36]) M8_nut();
-    translate ([0, 0, 42]) cube_empty(6, 10, 100);
+    color(aluminium_color) translate ([0, 0, 42]) cube_empty(6, 10, 100);
     
     translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox_and_pulley();
     
@@ -162,7 +165,7 @@ module head()
 //qtr_a1_support(7);
 //hc_sr04_and_c920_with_support();
 
-//head();
+head();
 //eye_support();
 
 //gradient_support();
