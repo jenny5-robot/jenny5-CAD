@@ -234,9 +234,17 @@ color ("DarkSlateGray")
    }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+module half_box(size_x, size_y, size_z, wall_thick_x, wall_thick_y, wall_thick_z)
+{
+    difference(){
+      cube([size_x, size_y, size_z]); 
+      translate ([wall_thick_x, 0, wall_thick_z] - display_tolerance_y) cube([size_x - 2 * wall_thick_x, size_y - wall_thick_y, size_z - wall_thick_z] + display_tolerance_yz); 
+        translate([0, 0, wall_thick_z] - display_tolerance_x) rotate([atan((size_z - wall_thick_z) / (size_y - wall_thick_y)), 0, 0]) cube([size_x, 2 *size_y, size_z] + 2 * display_tolerance_x); 
+    }
+}
 ////////////////////////////////////////////////////////tests/////////////////////////////////////////////////////////
-U(400, 40, 40, 3);
+half_box(100, 50, 30, 2, 3, 3);
+//U(400, 40, 40, 3);
 //spring(30, 10, 10);
 
 //pulley(18, 100, 20);
