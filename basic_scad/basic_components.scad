@@ -120,7 +120,18 @@ module my_cube_rounded_opuse(length, width, height, radius)
 		}	
 	}
 }
-//////////////////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------
+module cube_rounded_x_holed_z(cube_size, hole_radius)
+{
+    difference(){
+        hull(){
+            translate ([0, cube_size[2] / 2, cube_size[2] / 2]) rotate([0, 90, 0]) cylinder (h = cube_size[0], r = cube_size[2] / 2, $fn = 30);
+            translate ([0, -cube_size[2] / 2 + cube_size[1], cube_size[2] / 2]) rotate([0, 90, 0]) cylinder (h = cube_size[0], r = cube_size[2] / 2, $fn = 30);
+        }
+        translate ([cube_size[0] / 2, cube_size[1] / 2, 0] - display_tolerance_z) cylinder (h = cube_size[2] + 2 * display_tolerance, r = hole_radius);
+    }
+}
+//----------------------------------------------------------------
 module teava_dreptunghiulara(lungime, latime, grosime_perete, inaltime)
 {
     difference(){
@@ -243,7 +254,9 @@ module half_box(size_x, size_y, size_z, wall_thick_x, wall_thick_y, wall_thick_z
     }
 }
 ////////////////////////////////////////////////////////tests/////////////////////////////////////////////////////////
-half_box(100, 50, 30, 2, 3, 3);
+cube_rounded_x_holed_z([60, 40, 10], 10);
+
+//half_box(100, 50, 30, 2, 3, 3);
 //U(400, 40, 40, 3);
 //spring(30, 10, 10);
 
