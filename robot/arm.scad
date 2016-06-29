@@ -24,9 +24,11 @@ use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/rings.scad>
 use <../basic_scad/spacer.scad>
 include <../basic_scad/params_sensor_array.scad>
+use <../basic_scad/qtr_a1_support.scad>
 
 use <gripper.scad>
 use <gradient_support.scad>
+
 
 
 //---------------------------------------------------------------------------
@@ -55,6 +57,21 @@ module bearing_support1_with_qtr_a1_holes()
     }
 }
 //---------------------------------------------------------------------------
+module qtr_a1_support_with_screw_holes()
+{
+
+    difference (){
+        union(){
+          qtr_a1_support(10);
+          translate([35, -30, 0]) rotate ([0, 0, 90]) 
+            cube_rounded_x_holed_z([60, 70, 10], 30);
+        }
+        translate ([30, 30, 5] + display_tolerance_y) rotate([90, 0, 0]) cylinder (h = 60 + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+        translate ([-30, 30, 5] + display_tolerance_y) rotate([90, 0, 0]) cylinder (h = 60 + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+    }
+}
+//---------------------------------------------------------------------------
+
 module roata_reductor_motor()
 {
     my_pulley(18);
@@ -337,30 +354,30 @@ module plate_body_articulation()
 //---------------------------------------------------------------------------
 module body_articulation()
 {
-    // tabla
+    // plate
     plate_body_articulation();
     // motor
-    translate ([plate_body_size[0] / 2, -nema_17_with_gearbox_height + plate_body_size[1] - 3, -nema_17_width / 2 - 3 - 15]) rotate ([-90, 0, 0]) nema_17_with_gearbox();
-// carcasa motor
+    translate ([plate_body_size[0] / 2, -nema_17_with_gearbox_height + plate_body_size[1] - 3, -nema_17_width / 2 - 3 - 25]) rotate ([-90, 0, 0]) nema_17_with_gearbox();
+// motor housing
     translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 2 , plate_body_size[1], 0]) 
     rotate ([90, 0, 0]) 
     rotate ([0, 0, -90])
-    
-    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
+    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
-    // roata reductie motor
+    // motor gear
     
-    translate ([plate_body_size[0] / 2, plate_body_size[1], -nema_17_width / 2 - 15 - 3]) rotate ([-90, 0, 0]) roata_reductor_motor();
+    translate ([plate_body_size[0] / 2, plate_body_size[1], -nema_17_width / 2 - 25 - 3]) rotate ([-90, 0, 0]) roata_reductor_motor();
       
     //support upper arm
    translate ([-rbearing_608_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, 5 + 10, 3])  rbearing_608_vertical_housing_bounded_half_small();
     
    translate ([-rbearing_608_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, 5 + 10, rbearing_608_vertical_housing_size_bounded_half_small[2] + rbearing_608_vertical_housing_size_bounded_half_small_top[2] + 3])  mirror ([0, 0, 1]) rbearing_608_vertical_housing_bounded_half_small_top();
     
-   translate ([-rbearing_608_vertical_housing_size_bounded_half[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5 - 5, 3])  mirror ([0, 1, 0]) bearing_support1_with_qtr_a1_holes();
+  // translate ([-rbearing_608_vertical_housing_size_bounded_half[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5 - 5, 3])  mirror ([0, 1, 0]) bearing_support1_with_qtr_a1_holes();
     
-   translate ([-rbearing_608_vertical_housing_size_bounded_half[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5 - 5, rbearing_608_vertical_housing_size_bounded_half[2] + rbearing_608_vertical_housing_size_bounded_half[2] + 3])  mirror ([0, 0, 1]) mirror ([0, 1, 0]) bearing_support1();
+   //translate ([-rbearing_608_vertical_housing_size_bounded_half[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5 - 5, rbearing_608_vertical_housing_size_bounded_half[2] + rbearing_608_vertical_housing_size_bounded_half[2] + 3])  mirror ([0, 0, 1]) mirror ([0, 1, 0]) bearing_support1();
     
+    translate ([35, plate_body_size[1] - 10 - 5, 30 + 3]) mirror ([0, 1, 0]) rotate([90, 0, 0]) qtr_a1_support_with_screw_holes();
 
     
 
@@ -378,17 +395,20 @@ module body_articulation()
 gradient_support_with_screw(100);
 
 // continuare  - upper arm
-    translate ([rbearing_608_enclosed_housing_size[0] / 2 + bone_thick / 2, -90, 30 + plate_body_size[2]]) 
+    translate ([35 + 10, -90, 30 + plate_body_size[2]]) 
     rotate ([0, unghi_umar, 0]) 
     translate([bone_thick / 2, 0, + bone_thick / 2]) 
     rotate ([0, 0, 90]) 
-    shoulder();
+    shoulder()
+ ;
     
 }
 //---------------------------------------------------------------------------
 //bearing_support1();
 
 //bearing_support1_with_qtr_a1_holes();
+
+//qtr_a1_support_with_screw_holes();
 
 
 //roata_umar();
