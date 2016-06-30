@@ -1,17 +1,13 @@
 include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 
-unghi_umar = -0; // -180... 0
-unghi_fore_arm = 90; // - 180 ... 0
-unghi_cot = 180; // -90, 0
+angle_shoulder = -0; // -180... 0
+angle_fore_arm = 90; // - 180 ... 0
+angle_elbow = 180; // -90, 0
 unghi_rotatie_gripper = 0;
-
-   motor_housing_tolerance = 10;
-   motor_housing_tolerance_large = 20;
 
 bone_thick = 10;
 
-distantor = 5;
 grosime_tabla_alu = 3;
 
 inaltime_roata_reductor_motor = 16;
@@ -20,15 +16,12 @@ inaltime_roata_reductor_ax = 16;
 upper_arm_length = 270;
 fore_arm_length = 300;
 
-   lungime_tabla_umar = 60;
+   lungime_tabla_umar = 50;
    latime_tabla_umar = 130;
 
    shoulder_plate_size = [lungime_tabla_umar, latime_tabla_umar, grosime_tabla_alu];
 
    plate_body_size = ([70, 60, 3]);
-
-pozitie_gauri_trunchi = [[-15.5, 0, 0], [15.5, 0, 0]];
-
 
 
    distanta_umar_trunchi = 140;

@@ -19,8 +19,8 @@ include <../basic_scad/params_motor_housing.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 include <../basic_scad/config.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
-use <../basic_scad/placa_motor.scad>
-include <../basic_scad/params_placa_motor.scad>
+use <motor_plate.scad>
+include <params_motor_plate.scad>
 use <../basic_scad/functions_3d.scad>
 use <../basic_scad/masa.scad>
 use <../basic_scad/pulleys.scad>
@@ -30,10 +30,10 @@ use <../basic_scad/spacer.scad>
 
 include <params_robot.scad>
 use <leg.scad>
-include <params_table_robot.scad>
+//include <params_table_robot.scad>
 include <params_base_platform.scad>
 include <params_leg.scad>
-use <table_robot.scad>
+//use <table_robot.scad>
 
 use <head.scad>
 use <base_platform.scad>
