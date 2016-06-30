@@ -30,10 +30,9 @@ use <../basic_scad/spacer.scad>
 
 include <params_robot.scad>
 use <leg.scad>
-//include <params_table_robot.scad>
+
 include <params_base_platform.scad>
 include <params_leg.scad>
-//use <table_robot.scad>
 
 use <head.scad>
 use <base_platform.scad>
@@ -41,7 +40,7 @@ use <base_platform.scad>
 include <params_arm.scad>
 use <arm.scad>
 
-unghi_trunchi = 90;// -90...90
+angle_body_arm = 90;// -90...90
 angle_knee = -60;
 
    motor_housing_tolerance = 10;
@@ -80,18 +79,18 @@ module roata_reductor_motor()
     my_pulley(18);
 }
 //---------------------------------------------------------------------------
-module brat()
+module arm()
 {
 // vertical axis
-    translate ([0, 0, grosime_perete_L + washer_8_thick + rb_608_thick]) rotate ([0, 0, unghi_trunchi])  
+    translate ([0, 0, grosime_perete_L + washer_8_thick + rb_608_thick]) rotate ([0, 0, angle_body_arm])  
     //cube([bone_thick, bone_thick, chest_height -latura_L + rbearing_6002_housing_size[2] + grosime_perete_L]);
     color (aluminium_color) bone_trunchi();
         
     // roata reductie mare
-    translate ([0, 0, 0]) rotate([0, 0, unghi_trunchi]) mirror ([0, 0, 1]) roata_umar();
+    translate ([0, 0, 0]) rotate([0, 0, angle_body_arm]) mirror ([0, 0, 1]) roata_umar();
     
     // continuare
-    translate ([0, 0, chest_height / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, unghi_trunchi]) translate ([-bone_thick / 2 - 3, -5, 0]) rotate ([0, 90, 0]) body_articulation();
+    translate ([0, 0, chest_height / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
 
@@ -204,10 +203,10 @@ module trunchi()
 // coloana
     translate ([0, -coloana_vertebrala_size[1]/2 - grosime_perete_L, grosime_perete_L]) coloana_vertebrala();
     
-// brat stang
-    translate ([-(chest_length / 2 -dist_edge_to_shaft), -(grosime_tabla_alu + rbearing_608_housing_size[0] / 2), 0]) mirror([1, 0, 0]) brat();
-    // brat drept
-    translate ([chest_length / 2 - dist_edge_to_shaft, -(grosime_tabla_alu + rbearing_608_housing_size[0] / 2), 0]) brat();
+// left arm
+    translate ([-(chest_length / 2 -dist_edge_to_shaft), -(grosime_tabla_alu + rbearing_608_housing_size[0] / 2), 0]) mirror([1, 0, 0]) arm();
+    // right arm
+    translate ([chest_length / 2 - dist_edge_to_shaft, -(grosime_tabla_alu + rbearing_608_housing_size[0] / 2), 0]) arm();
 }    
 //---------------------------------------------------------------------------
 module body_with_head()
@@ -225,16 +224,14 @@ module long_leg_with_rotation_module()
     inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + 2 * dist_to_incheietura_talpa - dist_to_incheietura + dist_to_incheietura);
 
 echo(inaltime_long_leg=inaltime_long_leg);
-       // picioare
+       // legs
     translate ([latura_U_mare / 2, 0, inaltime_platforma_mobila]) rotate ([0, 0, 90]) long_leg(angle_knee);
-    // motor rotatie trunchi
-
 }
 //---------------------------------------------------------------------------
 module head_body_foot()
 {
     inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
-    // trunchi
+    // body
     translate ([0, lungime_talpa - 40, inaltime_long_leg + 30])  body_with_head();
 // legs
     long_leg_with_rotation_module();
@@ -303,9 +300,9 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
-robot();
+//robot();
 
-//brat();
+arm();
 
 //body_with_head();
 
