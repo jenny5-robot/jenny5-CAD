@@ -24,7 +24,7 @@ fore_arm_length = 300;
    plate_body_size = ([70, 60, 3]);
 
 
-   distanta_umar_trunchi = 140;
+  
    dist_to_rotita_fore_arm = 12;
       
    perete_rulment_roata = 1.5;

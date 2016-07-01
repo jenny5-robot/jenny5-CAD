@@ -61,7 +61,7 @@ angle_knee = -60;
 
 
 //---------------------------------------------------------------------------
-module bone_trunchi()
+module bone_body()
 {
     echo("gauri bone trunchi");
     difference(){
@@ -83,24 +83,22 @@ module arm()
 {
 // vertical axis
     translate ([0, 0, grosime_perete_L + washer_8_thick + rb_608_thick]) rotate ([0, 0, angle_body_arm])  
-    //cube([bone_thick, bone_thick, chest_height -latura_L + rbearing_6002_housing_size[2] + grosime_perete_L]);
-    color (aluminium_color) bone_trunchi();
+    color (aluminium_color) bone_body();
         
-    // roata reductie mare
+    // reduction gear
     translate ([0, 0, 0]) rotate([0, 0, angle_body_arm]) mirror ([0, 0, 1]) roata_umar();
     
-    // continuare
+    // continuation
     translate ([0, 0, chest_height / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
 
-module coloana_vertebrala()
+module vertebral_column()
 {
-    //U(chest_height, latura_L, latura_L, grosime_tabla);
     color (aluminium_color) cube_empty(coloana_vertebrala_size[0] - 3, coloana_vertebrala_size[0], coloana_vertebrala_size[2]);
 }
 //---------------------------------------------------------------------------
-module os_clavicula()
+module clavicle()
 {
     difference(){
         color (aluminium_color) L(chest_length, latura_L / 2, latura_L, grosime_perete_L); 
@@ -165,29 +163,31 @@ echo("gauri_os_diafragma placa motor left = ");
 module os_diafragma_cu_piese()
 {
     os_diafragma();
-                // carcasa rulment
+    
+    // bearing housing
     translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, rbearing_608_housing_size[2] + grosime_tabla_alu]) mirror ([0, 0, 1]) rbearing_608_housing_with_bearing();
     // motor
-    translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, nema_17_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17();
-    // intindere curea
+    translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, nema_17_with_gearbox_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17_with_gearbox();
+    // belt tensioner plate
     translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, grosime_perete_L]) rotate ([0, 0, 90]) motor_plate_belt_tensioner(motor_housing_tolerance);
   
-    // roata reductie motor
+    // motor gear
     translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, -2]) mirror ([0, 0, 1]) roata_reductor_motor();
     
-    // cealalta parte
+    // other side
+    // bearing housing
     translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, rbearing_608_housing_size[2] + grosime_tabla_alu]) mirror ([0, 0, 1]) rbearing_608_housing_with_bearing();
     // motor
-    translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), nema_17_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17();
-    // intindere curea
+    translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), nema_17_with_gearbox_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17_with_gearbox();
+    // belt tensioner plate
     translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), grosime_perete_L]) rotate ([0, 0, 90]) motor_plate_belt_tensioner(motor_housing_tolerance);
   
-    // roata reductie motor
+    // motor gear
     translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), -2]) mirror ([0, 0, 1]) roata_reductor_motor();
     
 }
 //---------------------------------------------------------------------------
-module trunchi()
+module body()
 {
     // left side
     // bottom L
@@ -198,10 +198,10 @@ module trunchi()
     // top L
     translate ([-chest_length / 2, 0, chest_height]) rotate ([0, 0, -90]) 
     mirror([0, 0, 1])
-    os_clavicula();
+    clavicle();
 
-// coloana
-    translate ([0, -coloana_vertebrala_size[1]/2 - grosime_perete_L, grosime_perete_L]) coloana_vertebrala();
+// vertebral column
+    translate ([0, -coloana_vertebrala_size[1]/2 - grosime_perete_L, grosime_perete_L]) vertebral_column();
     
 // left arm
     translate ([-(chest_length / 2 -dist_edge_to_shaft), -(grosime_tabla_alu + rbearing_608_housing_size[0] / 2), 0]) mirror([1, 0, 0]) arm();
@@ -211,7 +211,7 @@ module trunchi()
 //---------------------------------------------------------------------------
 module body_with_head()
 {
-    trunchi();
+    body();
     // head
     translate ([0, -latura_L / 2 - 1, chest_height + 37]) mirror ([0, 1, 0]) head();
     // spacers for linking head with body
@@ -258,39 +258,7 @@ module robot_with_kitchen_table()
     translate ([0, 1000, 0]) masa_rotunda(750, 400);
 }
 //---------------------------------------------------------------------------
-module belt_tensioner_bearing_holder(lungime, latime, grosime_perete)
-{
-    difference(){
-        cube([lungime, latime, grosime_perete]);
-        translate ([6, latime / 2, 0] - display_tolerance_z) cylinder(h = grosime_perete + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-        translate ([lungime - 6, latime / 2, 0] - display_tolerance_z) cylinder(h = grosime_perete + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-    }
-}
-//---------------------------------------------------------------------------
-module belt_tensioner_base()
-{
-    grosime_perete = 3;
 
-    h = 13 - grosime_perete;
-    lungime = h + grosime_perete + bone_thick + 3 + m4_nut_thick;
-    grosime = 12;
-    latime = bone_thick + 2 * grosime_perete;
-    lungime_bearing_holder = 2 * washer_4_12_radius + latime + 2 * rb_624_external_radius;
-    difference(){
-        union(){
-            cube([lungime, latime, grosime]);
-            translate ([lungime -0.1, -lungime_bearing_holder / 2 + latime / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_bearing_holder(lungime_bearing_holder, grosime, grosime_perete);
-        }
-        // gaura os
-        translate([grosime_perete + m4_nut_thick, grosime_perete - 0.2, 0] - display_tolerance_z) cube([bone_thick + 3, bone_thick + 2 * 0.2, grosime] + 2 * display_tolerance_z);
-        // gaura m4 screw
-        translate([0, latime / 2, grosime / 2] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 30);
-        translate([grosime_perete, latime / 2, grosime / 2]) rotate([0, 90, 0]) cylinder (h = 10, r = m4_nut_radius, $fn = 6);
-    }
-    
-   // translate ([0, 30, 0]) belt_tensioner_bearing_holder(lungime_bearing_holder, grosime, grosime_perete);
-}
-//---------------------------------------------------------------------------
 module gear_motor1()
 {
     difference(){
@@ -300,33 +268,25 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
-//robot();
+robot();
 
-arm();
+//platform_foot();
+
+//arm();
 
 //body_with_head();
-
-//gear_motor1();
 
 //belt_tensioner_base();
 
 //roata_reductor_motor();
 
-//trunchi();
+//body();
 
-//housing_rbearing_6002();
+//bone_body();
 
-//placa_motor_trunchi(4);
-
-//tabla_articulatie_trunchi();
-
-//bone_trunchi();
-
-//os_clavicula();
+//clavicle();
 
 //os_diafragma();
 //os_diafragma_cu_piese();
 
-
-//coloana_vertebrala();
-
+//vertebral_column();

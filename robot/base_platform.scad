@@ -231,12 +231,16 @@ module platform()
 {
     cube(base_platform_size);
     
-    translate ([200, 0, 0]) 
-    rotate([0, 90, 90]) base_motor_with_support();
+    translate ([100, 0, base_platform_size[2]]) 
+    rotate([-90, 0, 0])
+    rotate([0, 0, -90]) 
+    base_motor_with_support();
     
-     translate ([200, base_platform_size[1], 0])
+     translate ([100, base_platform_size[1], base_platform_size[2]])
    mirror([0, 1, 0]) 
-    rotate([0, 90, 90]) base_motor_with_support();
+    rotate([-90, 0, 0])
+    rotate([0, 0, -90]) 
+    base_motor_with_support();
     
     fist_tracks_offset = -rb_608_external_radius;
     second_tracks_offset = 70;
