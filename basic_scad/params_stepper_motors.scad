@@ -38,14 +38,19 @@ nema_17_gearbox_shaft_length = 18;
 nema_17_gearbox_shaft_radius = 4;
 nema_17_gearbox_motor_hole_radius  = 11;
 
+nema_17_42BYGHW804_width = 42.3;
+nema_17_42BYGHW804_height = 47;
+nema_17_42BYGHW804_top_radius = 11;
+nema_17_42BYGHW804_top_cylinder_height = 2;
+nema_17_42BYGHW804_dist_between_screw_holes = 31;
+nema_17_42BYGHW804_shaft_length = 22;
+nema_17_42BYGHW804_shaft_radius = 2.5;
 
 nema_23_57BYGH603_width = 56.4;
 nema_23_57BYGH603_height = 78;
 nema_23_57BYGH603_hole_radius  = 19.1;
 nema_23_57BYGH603_dist_between_screw_holes = 47.14;
 nema_23_57BYGH603_shaft_length = 21;
-
-
 
 nema_11_sizes = [nema_11_width, nema_11_width, nema_11_height];
 
