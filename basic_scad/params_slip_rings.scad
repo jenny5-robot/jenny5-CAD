@@ -8,6 +8,7 @@ SRC022A_6_flange_holes_radius = 2.75;
 SRC022A_6_flange_holes_position_radius = 17.5;
 
 SRC022A_6_flange_holes_position = [
+[0, 0, 0],
 [SRC022A_6_flange_holes_position_radius * sin(30), SRC022A_6_flange_holes_position_radius * cos(30), 0],
 [SRC022A_6_flange_holes_position_radius * sin(150), SRC022A_6_flange_holes_position_radius * cos(150), 0],
 [SRC022A_6_flange_holes_position_radius * sin(270), SRC022A_6_flange_holes_position_radius * cos(270), 0]
