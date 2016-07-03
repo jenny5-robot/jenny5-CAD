@@ -12,9 +12,9 @@ module SRC022A_6()
     color("black") 
     translate([0, 0, SRC022A_6_stator_length - SRC022A_6_flange_thickness]) 
     difference(){
-    cylinder (h = SRC022A_6_flange_thickness, r = SRC022A_6_flange_radius, $fn = 100);
-      for (i=[0:2])
-        translate (SRC022A_6_flange_holes_position[i] - display_tolerance_z) cylinder (h = SRC022A_6_flange_thickness + 2 * display_tolerance, r = SRC022A_6_flange_holes_radius, $fn = 20); 
+        cylinder (h = SRC022A_6_flange_thickness, r = SRC022A_6_flange_radius, $fn = 100);
+        for (i=[1:3])
+            translate (SRC022A_6_flange_holes_position[i] - display_tolerance_z) cylinder (h = SRC022A_6_flange_thickness + 2 * display_tolerance, r = SRC022A_6_flange_holes_radius, $fn = 20); 
     }
     // rotor
     color("black") 
