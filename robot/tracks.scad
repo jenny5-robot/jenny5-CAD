@@ -55,7 +55,7 @@ module track(length = 25, width = 60, zh = 8)
 
 
 //circular holes		
-    translate([length/2, width/2, 0] - display_tolerance_z) cylinder(h = zh + 2 * display_tolerance, r1 = 2, r2= 6,$fn= roundness,center = false);
+    translate([length/2, width/2, 0]) cylinder(h = zh, r1 = 2, r2 = 6,$fn= roundness,center = false);
 	}
   }
 }
