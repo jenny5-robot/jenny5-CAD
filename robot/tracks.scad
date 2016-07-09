@@ -23,7 +23,7 @@ module track(length = 25, width = 60, zh = 8)
     big_interior_hole_size = 10;
     small_interior_hole_size = big_interior_hole_size - zh;
 
-	union(){
+  union(){
 	difference(){
 		union(){
 			color (plastic_color){ 
@@ -54,8 +54,9 @@ module track(length = 25, width = 60, zh = 8)
 		translate([-zh/2, width/2 + togue_width/2 ,0] - display_tolerance_z) cube([zh + togue_tolerance, (width - togue_width)/2 + display_tolerance, zh + 2 * display_tolerance], center = false);
 
 
-//circular holes		
-    translate([length/2, width/2, 0]) cylinder(h = zh, r1 = 2, r2 = 6,$fn= roundness,center = false);
+// circular middle holes for tracking
+        translate([length / 2, width / 2, 0]) cylinder(h = zh, r1 = 2, r2 = 6, $fn= roundness);
+        translate([length / 2, width / 2, 0] - display_tolerance_z) cylinder(h = 2 * display_tolerance, r = 2, $fn= roundness);
 	}
   }
 }
@@ -72,12 +73,13 @@ module tracks_on_circle(num_max_tracks, wheel_radius, start_angle = 0, num_track
         rotate ([0, 0, -angle]) 
                 rotate ([90, 0, 0]) 
                     translate ([-25/2, -60 / 2, -8]) track();
-            
+     /*       
         rotate([0, 0, start_angle])
           translate ([(wheel_radius + track_size[2] / 2) * sin(angle + step / 2), (wheel_radius + track_size[2] / 2) * cos(angle + step / 2), 0]){ 
             translate ([0, 0, - track_size[0] / 2 + 9]) M4x40_screw();
             translate ([0, 0, track_size[0] / 2 - 12]) M4_autolock_nut();
           }
+        */
     }
 }
 //--------------------------------------------------------------------
@@ -92,7 +94,7 @@ module string_of_tracks (num_tracks)
 //--------------------------------------------------------------------
 track();
 
-//tracks_on_circle(12, 42, 90, 10);
+//tracks_on_circle(12, 42.5, 90, 10);
 
 //string_of_tracks (10);
 
