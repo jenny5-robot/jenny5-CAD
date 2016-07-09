@@ -13,16 +13,22 @@ include <../basic_scad/config.scad>
 //---------------------------------------------------------------------
 module tera_ranger_one_support()
 {
+    base_cube_width = 12;
+    
     difference(){
-union(){
+    union(){
       color (plastic_color) cube(tera_ranger_one_sizes);
+            
     // motor shaft holder
     
-      color (plastic_color) translate ([tera_ranger_one_sizes[0] / 2 - 9, 0, 0]) cube([15, 15, 12]);
+      color (plastic_color) translate ([tera_ranger_one_sizes[0] / 2 - base_cube_width / 2, 0, 0]) cube([base_cube_width, 20, base_cube_width]);
 
 }
         // remove for button
-        cube([16, 16, 4])
+        translate (-display_tolerance_z) cube([tera_ranger_one_sizes[0] / 2 - base_cube_width / 2, 12, 4] + 2 * display_tolerance_z);
+        translate ([tera_ranger_one_sizes[0] / 2 + base_cube_width / 2, 0, 0] -display_tolerance_z) 
+cube([tera_ranger_one_sizes[0] / 2 - 5, 12, 4] + 2 * display_tolerance_z)
+
       translate ([5, 5, 0])
         for (i=[0:2])
           translate (tera_ranger_one_holes_position[i] - display_tolerance_z)
@@ -43,16 +49,10 @@ union(){
             cylinder (h = tera_ranger_one_sizes[2] + 2 * display_tolerance, r = 1.25, $fn = 20);
         }
       
-    
         // motor shaft hole
-      translate ([tera_ranger_one_sizes[0] / 2, 0, 5.5]) rotate ([-90, 0, 0]) cylinder (h = 15, r = 2.5, $fn = 20);
+      translate ([tera_ranger_one_sizes[0] / 2, 0, base_cube_width / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = 21.1, r = 4, $fn = 20);
         // screw
-      translate ([tera_ranger_one_sizes[0] / 2 - 9, 7.5, 5.5]) rotate ([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 20);
-// nuts
-        hull(){
-      translate ([tera_ranger_one_sizes[0] / 2 - 7, 7.5, 5.5]) rotate ([0, 90, 0]) cylinder (h = m4_nut_thick + 0.5, r = m4_nut_radius + 0.2, $fn = 6);
-      translate ([tera_ranger_one_sizes[0] / 2 - 7, 7.5, 15]) rotate ([0, 90, 0]) cylinder (h = m4_nut_thick + 0.5, r = m4_nut_radius + 0.2, $fn = 6);
-        }
+      translate ([tera_ranger_one_sizes[0] / 2 - 9, 5, base_cube_width / 2]) rotate ([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 20);
     }
 }
 //---------------------------------------------------------------------
