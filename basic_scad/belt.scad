@@ -1,7 +1,7 @@
 include <params_basic_components.scad>
 
 //------------------------------------------------------------------------
-module belt_arc(_r, start_angle, end_angle, belt_width, belt_thick = 2)
+module belt_arc(_r, start_angle, end_angle, belt_width = 6, belt_thick = 2)
 {
     difference(){
         color("green")cylinder(r = _r + belt_thick, h = belt_width);
@@ -9,7 +9,7 @@ module belt_arc(_r, start_angle, end_angle, belt_width, belt_thick = 2)
     }
 }
 //------------------------------------------------------------------------
-module belt_on_2_pulleys(r1, r2, distance_between_pulleys, belt_width, belt_thick = 2)
+module belt_on_2_pulleys(r1, r2, distance_between_pulleys, belt_width = 6, belt_thick = 2)
 {
     // r1 >= r2
     //cylinder ( h = belt_width, r = r1);
