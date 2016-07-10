@@ -3,6 +3,9 @@ include <params_basic_components.scad>
 include <params_radial_bearings.scad>
 include <config.scad>
 
+use <screws_nuts_washers.scad>
+use <radial_bearings.scad>
+
 
 //---------------------------------------------------------------------------
 module belt_tensioner_bearing_holder(lungime, latime, grosime_perete)
@@ -37,5 +40,46 @@ module belt_tensioner_base()
     }
 }
 //---------------------------------------------------------------------------
+module belt_tensioner_housing(h)
+{
+    difference(){
+        color (plastic_color) cube([2 * wall_thick_3 + 2 * washer_5_15_external_radius, wall_thick_3 + 4 * washer_4_12_radius, h]);
+        // remove middle
+        translate ([wall_thick_3, wall_thick_3, wall_thick_3]) cube([2 * washer_5_15_external_radius, 4 * washer_4_12_radius, h] + display_tolerance_y);
+        // remove half
+        translate ([0, wall_thick_3 + 4 * washer_4_12_radius, wall_thick_3] - display_tolerance_x) rotate([atan((wall_thick_3 + 4 * washer_4_12_radius)/ h), 0, 0]) cube([2 * wall_thick_3 + 2 * washer_5_15_external_radius, wall_thick_3 + 4 * washer_4_12_radius, sqrt(h*h + (wall_thick_3 + 4 * washer_4_12_radius) * (wall_thick_3 + 4 * washer_4_12_radius))] + 2 * display_tolerance_x);
+        // base screw holes
+        translate ([wall_thick_3 + washer_5_15_external_radius, wall_thick_3 + washer_4_12_radius, 0] - display_tolerance_z) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 10); 
 
-belt_tensioner_base();
+        translate ([wall_thick_3 + washer_5_15_external_radius, wall_thick_3 + 3 * washer_4_12_radius, 0] - display_tolerance_z) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 10); 
+        
+        //bearing screw hole
+hull(){
+        translate ([wall_thick_3 + washer_5_15_external_radius, 0, wall_thick_3 + washer_5_15_external_radius] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
+        translate ([wall_thick_3 + washer_5_15_external_radius, 0, h - washer_5_15_external_radius] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
+}
+    }
+}
+//---------------------------------------------------------------------------
+module belt_tensioner(h, dist_to_bearings)
+{
+    belt_tensioner_housing(h);
+
+// screw
+    translate ([wall_thick_3 + washer_5_15_external_radius, -(m4_nut_thick + 3 + 2 * rb_624_thick), wall_thick_3 + washer_5_15_external_radius + dist_to_bearings]) rotate ([-90, 0, 0]) {
+    M4x25_hexa();
+        translate ([0, 0, m4_nut_thick]) M4x9_washer();
+        translate ([0, 0, m4_nut_thick + 1]) 624rs();
+        translate ([0, 0, m4_nut_thick + 1 + rb_624_thick]) 624rs();
+        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick]) M4x9_washer();
+        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 1]) washer_4_15();
+        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 2 + wall_thick_3]) washer_4_15();
+        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 2 + wall_thick_3 + 1]) M4_autolock_nut();
+    }
+    //
+
+}
+//---------------------------------------------------------------------------
+belt_tensioner(30, 10);
+
+//belt_tensioner_base();
