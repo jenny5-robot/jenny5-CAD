@@ -42,9 +42,11 @@ m10_screw_radius = 5;
 m10_nut_thick = 8;
 m10_nut_radius = 9.8;
 
-m12_screw_radius = 6;
-m12_nut_thick = 8;
-m12_nut_radius = 11;
+M12_screw_radius = 6;
+M12_nut_thick = 8;
+M12_nut_radius = 11;
+M12_long_nut_thick = 36;
+M12_autolock_nut_thick = 14;
 
 m10_long_nut_radius = 9.71;
 m10_long_nut_height = 29.8;
@@ -75,6 +77,9 @@ washer_8_thick = 1.5;
 washer_5_thick = 1;
 
 washer_10_height = 2;
+washer_10_thick = 2;
+
+washer_12_thick = 2;
 
 washer_5_15_external_radius = 7.5;
 washer_5_15_thick = 1;
