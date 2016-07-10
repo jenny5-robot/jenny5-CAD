@@ -11,6 +11,8 @@ include <params_slip_rings.scad>
 include <params_infrared_sensors.scad>
 include <params_screws_nuts_washers.scad>
 
+include <config.scad>
+
 use <basic_components.scad>
 use <tera_ranger_one.scad>
 use <stepper_motors.scad>
@@ -38,7 +40,7 @@ module tera_ranger_one_on_motor()
 module slip_ring_support()
 {
     difference(){
-        half_box(nema_17_width + 2 * wall_thick_2, 2 * SRC022A_6_flange_radius + wall_thick_2 + 10, 12, wall_thick_2, wall_thick_2, wall_thick_2);
+        color (plastic_color) half_box(nema_17_width + 2 * wall_thick_2, 2 * SRC022A_6_flange_radius + wall_thick_2 + 10, 12, wall_thick_2, wall_thick_2, wall_thick_2);
         //screw holes
         for (i=[1:3])
             hull(){
@@ -71,7 +73,7 @@ module slip_ring_with_motor_support()
     translate([0, 2 * SRC022A_6_flange_radius + wall_thick_2 + 10 + 20, 0]) 
         mirror([0, 1, 0]) 
             difference(){
-                half_box(nema_17_width + 2 * wall_thick_2, 20 + wall_thick_2, 12, wall_thick_2, wall_thick_2, wall_thick_2);
+                color (plastic_color) half_box(nema_17_width + 2 * wall_thick_2, 20 + wall_thick_2, 12, wall_thick_2, wall_thick_2, wall_thick_2);
                 translate([nema_17_width / 2 + wall_thick_2, - nema_17_width / 2 + 20, 0] - display_tolerance_z){
                     for (i=[1:4])
                         translate(gauri_nema_17[i])
