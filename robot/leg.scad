@@ -29,7 +29,7 @@ use <../basic_scad/parametric_involute_gear_v5.0.scad>
 include <params_leg.scad>
 
 
-angle_knee = -10;
+angle_knee = -60;
 
 piesa_prindere_motor_pe_ax_sizes = [nema_17_width, nema_17_width, 10];
 
@@ -47,8 +47,8 @@ lateral_talpa_simple_sizes = [30, grosime_placa_alu, grosime_placa_alu + dist_to
 lateral_genunchi_simple_sizes = [lungime_talpa, grosime_placa_alu, 60];
 
 base_extension_tail = 70;
-base_extension_head = 50;
-lateral_talpa_sizes = [lungime_talpa + base_extension_tail + base_extension_head, grosime_placa_alu, 40];
+
+lateral_talpa_sizes = [lungime_talpa + base_extension_tail, grosime_placa_alu, 40];
 
 //-------------------------------------------------------
 module lateral_talpa()
@@ -59,7 +59,7 @@ echo("distanta baza to gaura sustinere", grosime_placa_alu + dist_to_incheietura
      // gaura prindere os
         translate ([lateral_talpa_motor_sizes[0] / 2 + base_extension_tail, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
      // gaura prindere os 2
-        translate ([lateral_talpa_sizes[0] - (lateral_talpa_motor_sizes[0] / 2 + base_extension_head), 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
+        translate ([lateral_talpa_sizes[0] - (lateral_talpa_motor_sizes[0] / 2), 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
         // gaura prindere distantor 1
         translate ([base_extension_tail + lungime_talpa / 2 - 23 + 15, 0, 15] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
     }
@@ -87,7 +87,7 @@ module talpa_picior_motor()
     // distantor mijloc
     color (aluminium_color) translate ([lungime_talpa / 2 - 23, 0, 0]) cube([30, latime_talpa, 30]);
     //distantor fatza
-    color (aluminium_color) translate ([lungime_talpa + base_extension_head - 30, 0, 0]) cube([30, latime_talpa, 30]);
+    color (aluminium_color) translate ([- 45, 0, 0]) cube([30, latime_talpa, 30]);
 }
 
 //----------------------------------------------------------------------
@@ -261,6 +261,28 @@ module oscior()
 module oscior_cu_rulmenti()
 {
     oscior();
+
+ translate ([latime_teava / 2, 0, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+// suruburi prindere rulment baza    
+            for (i=[1:4]){            
+            translate ([latime_teava / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4x12_hexa();
+        }
+
+// the other side    
+    translate ([latime_teava / 2, latime_teava, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+            for (i=[1:4]){            
+            translate ([latime_teava / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4x12_hexa();
+        }
+        
+        
+         translate ([latime_teava / 2, 0, inaltime_os_picior - rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+// suruburi prindere rulment baza    
+            for (i=[1:4]){            
+            translate ([latime_teava / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, inaltime_os_picior - dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4x12_hexa();
+        }
+
+    
+    translate ([latime_teava / 2, latime_teava, inaltime_os_picior - rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
 /*
     translate ([grosime_L_mic + rbearing_608_housing_size[2], dist_to_incheietura, dist_to_incheietura + grosime_L_mic]) rotate ([0, -90, 0]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
 
@@ -278,7 +300,7 @@ module oscior_cu_rulmenti()
           translate ([2 + rbearing_608_housing_size[2] + washer_4_thick, inaltime_os_picior - dist_to_incheietura, dist_to_incheietura + grosime_L_mic]) rotate ([0, 90, 0]) translate (rbearing_608_housing_holes_position[i]) M4_autolock_nut(); 
     
         }
-    */
+  */  
 }
 //----------------------------------------------------------------------
 module motor_cu_balama()
@@ -299,16 +321,14 @@ module leg(unghi)
     // placa jos
     talpa_picior_motor();
     // os
-    translate ([lungime_talpa - latime_teava / 2, (latime_talpa - latime_teava) / 2, dist_to_incheietura_talpa_os]) 
-    
-    rotate ([0, unghi, 0]) 
+    translate ([lungime_talpa - latime_teava / 2, (latime_talpa - latime_teava) / 2, dist_to_incheietura_talpa_os])
+    rotate ([0, unghi, 0])
     translate ([-latime_teava / 2, 0, -dist_to_incheietura])
-    
-    oscior();
+    oscior_cu_rulmenti();
     
        // oscior
-    translate ([latime_teava / 2, (latime_talpa - latime_teava) / 2, dist_to_incheietura_talpa])     
-    rotate ([0, unghi, 0]) 
+    translate ([latime_teava / 2, (latime_talpa - latime_teava) / 2, dist_to_incheietura_talpa])
+    rotate ([0, unghi, 0])
     translate ([-latime_teava / 2, 0, -dist_to_incheietura]) 
     os_picior_cu_bearings();
     
@@ -391,13 +411,13 @@ module long_leg(unghi)
 //talpa_picior_jos_with_bearings();
 //os_picior();
 //os_picior_cu_bearings();
-//leg(angle_knee);
+leg(angle_knee);
 
 //motor_cu_balama();
 
 //oscior_cu_rulmenti();
 
-long_leg(angle_knee);
+//long_leg(angle_knee);
 
 //piesa_prindere_motor_de_ax();
 
