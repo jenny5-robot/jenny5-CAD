@@ -146,7 +146,7 @@ module os_diafragma()
 
 echo("gauri_os_diafragma placa motor left = ");
         for (i = [0:4])
-            echo([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, 0] + rotate_z(90, pozitie_gauri_placa_motor[i]));
+            echo([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, 0] + rotate_z(90, pozitie_gauri_s[i]));
         
       translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, 0]) rotate ([0, 0, 90]) motor_plate_holes(placa_motor_trunchi_size[0], placa_motor_trunchi_size[1], placa_motor_trunchi_size[2], 2, 2, 0, 0);
      
@@ -241,7 +241,7 @@ module platform_foot()
 {
     long_leg_with_rotation_module();
     // mobile platform
-    translate ([-base_platform_size[1] / 2 - 20, 250, 0]) rotate([0, 0, -90]) platform();
+    translate ([-base_platform_size[1] / 2 - 10, 250, 0]) rotate([0, 0, -90]) platform();
 }
 //---------------------------------------------------------------------------
 module robot()
@@ -268,9 +268,9 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
-robot();
+//robot();
 
-//platform_foot();
+platform_foot();
 
 //arm();
 

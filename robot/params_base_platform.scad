@@ -1,1 +1,1 @@
-base_platform_size = [600, 300, 30];
+base_platform_size = [600, 250, 18];
