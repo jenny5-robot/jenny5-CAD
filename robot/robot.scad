@@ -53,8 +53,6 @@ angle_knee = -60;
    coloana_vertebrala_size = [30, 30, chest_height - 2 * grosime_perete_L];
    
    
-   inaltime_platforma_mobila = 30;
-   
    bone_trunchi_size = [10, 10, chest_height - 2 * grosime_perete_L - 2 * washer_8_thick -  2 * rb_608_thick];
    
    echo(bone_trunchi_size=bone_trunchi_size);
@@ -146,7 +144,7 @@ module os_diafragma()
 
 echo("gauri_os_diafragma placa motor left = ");
         for (i = [0:4])
-            echo([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, 0] + rotate_z(90, pozitie_gauri_s[i]));
+            echo([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, 0] + rotate_z(90, pozitie_gauri_placa_motor[i]));
         
       translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, 0]) rotate ([0, 0, 90]) motor_plate_holes(placa_motor_trunchi_size[0], placa_motor_trunchi_size[1], placa_motor_trunchi_size[2], 2, 2, 0, 0);
      
@@ -225,7 +223,7 @@ module long_leg_with_rotation_module()
 
 echo(inaltime_long_leg=inaltime_long_leg);
        // legs
-    translate ([latura_U_mare / 2, 0, inaltime_platforma_mobila]) rotate ([0, 0, 90]) long_leg(angle_knee);
+    translate ([latura_U_mare / 2, 0, base_platform_size[2]]) rotate ([0, 0, 90]) long_leg(angle_knee);
 }
 //---------------------------------------------------------------------------
 module head_body_foot()
@@ -268,9 +266,9 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
-//robot();
+robot();
 
-platform_foot();
+//platform_foot();
 
 //arm();
 
