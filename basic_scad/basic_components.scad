@@ -198,7 +198,7 @@ module half_cylinder(_h, _r, _fn)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//--------------------------------------------------------------
 module half_box(size_x, size_y, size_z, wall_thick_x, wall_thick_y, wall_thick_z)
 {
     difference(){
@@ -207,8 +207,19 @@ module half_box(size_x, size_y, size_z, wall_thick_x, wall_thick_y, wall_thick_z
         translate([0, 0, wall_thick_z] - display_tolerance_x) rotate([atan((size_z - wall_thick_z) / (size_y - wall_thick_y)), 0, 0]) cube([size_x, 2 *size_y, size_z] + 2 * display_tolerance_x); 
     }
 }
-////////////////////////////////////////////////////////tests/////////////////////////////////////////////////////////
-cube_rounded_x_holed_z([60, 40, 10], 10);
+//--------------------------------------------------------------
+module corner(length, width, height, wall_thick)
+{
+    difference(){
+        cube([length, width, height]);
+        translate ([wall_thick, wall_thick, wall_thick]) cube([length - wall_thick, width - wall_thick, height - wall_thick] + display_tolerance_xyz);
+    }
+}
+//--------------------------------------------------------------
+
+corner(40, 20, 30, 3);
+
+//cube_rounded_x_holed_z([60, 40, 10], 10);
 
 //half_box(100, 50, 30, 2, 3, 3);
 //U(400, 40, 40, 3);

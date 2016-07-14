@@ -65,3 +65,5 @@ display_tolerance_y = [0, display_tolerance, 0];
 display_tolerance_xz = [display_tolerance, 0, display_tolerance];
 display_tolerance_xy = [display_tolerance, display_tolerance, 0];
 display_tolerance_yz = [0, display_tolerance, display_tolerance];
+
+display_tolerance_xyz = [display_tolerance, display_tolerance, display_tolerance];
