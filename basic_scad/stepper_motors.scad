@@ -59,16 +59,16 @@ module nema_motor_with_gearbox(motor_width, motor_height, gearbox_length, gearbo
 	nema_motor(motor_width, motor_height);
     // gearbox base
     if (gearbox_base_height > 0)
-        translate ([-motor_width / 2, -motor_width / 2, motor_height]) cube([motor_width, motor_width, gearbox_base_height]);
+        color ("gray") translate ([-motor_width / 2, -motor_width / 2, motor_height]) cube([motor_width, motor_width, gearbox_base_height]);
 // gearbox
 	difference(){
-        translate ([0, 0, motor_height + gearbox_base_height]) cylinder ( h =  gearbox_length, r = gearbox_radius, $fn = 50);
+        color ("gray") translate ([0, 0, motor_height + gearbox_base_height]) cylinder ( h =  gearbox_length, r = gearbox_radius, $fn = 50);
 // gaurile gearbox
         for (i=[0:4])
     translate ([0, 0, motor_height + gearbox_length + gearbox_base_height - 3] + gearbox_screw_holes_position[i]) cylinder (h = 4, r = m3_screw_radius, $fn = 20);
 	}
 // ax gearbox
-	translate ([0, 0, motor_height + gearbox_length + gearbox_base_height]) cylinder ( h =  gearbox_shaft_length, r = gearbox_shaft_radius, $fn = 30);
+	color("black") translate ([0, 0, motor_height + gearbox_length + gearbox_base_height]) cylinder ( h =  gearbox_shaft_length, r = gearbox_shaft_radius, $fn = 30);
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,14 +111,16 @@ module nema_17_with_gearbox_and_screw(gearbox_shaft_length = 100)
 {
     
     nema_17_with_gearbox();
-    //conector prelungire
-        translate ([0, 0, nema_17_height + nema_17_gearbox_base_height + nema_17_gearbox_length]) cylinder (h = 25, r = 6);
-    translate ([0, 0, nema_17_height + nema_17_gearbox_base_height + nema_17_gearbox_length + nema_17_gearbox_shaft_length]) cylinder (h = gearbox_shaft_length, r = 4);
+    //conector 
+        color ("gray") translate ([0, 0, nema_17_height + nema_17_gearbox_base_height + nema_17_gearbox_length]) cylinder (h = 25, r = 6);
+    // screw
+    color ("gray") translate ([0, 0, nema_17_height + nema_17_gearbox_base_height + nema_17_gearbox_length + nema_17_gearbox_shaft_length]) cylinder (h = gearbox_shaft_length, r = 4);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//nema_17();
 
-nema_17_42BYGHW804();
+//nema_17_42BYGHW804();
 
 //nema_11_with_gearbox();
 
-//nema_17_with_gearbox_and_screw();
+nema_17_with_gearbox_and_screw();
