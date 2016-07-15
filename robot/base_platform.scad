@@ -63,7 +63,6 @@ module wheel_with_teeths(radius = 84, steps = 24)// radius = 42, steps = 12
             }
         }
 
-
 // 4 holes for fixing the part to the next ones	
 		for ( i = [0 : 1 : 4] ){
 			translate([(radius - 5) * sin(i * 90), (radius - 5) * cos(i * 90), 0] - display_tolerance_z) cylinder(h = thick + 2 * display_tolerance, r = 2, $fn = 30, center = true);
@@ -224,10 +223,6 @@ module platform()
     fist_tracks_offset = -rb_608_external_radius;
     second_tracks_offset = 40;
     distance_between_wheels = 200;
-    
-    //tracks
- //   translate([distance_between_wheels + tracks_offset, -track_size[0] / 2 - 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
- //   translate([distance_between_wheels + tracks_offset, base_platform_size[1] + track_size[0] / 2 + 10, -rb_6001_external_radius]) tracks_on_2_wheels(12, 42.5, distance_between_wheels);
    
     translate([0, -track_size[0] / 2 - 15, 0]){
     
@@ -237,9 +232,8 @@ module platform()
     //third gears
         translate ([second_tracks_offset + distance_between_wheels, 0, -rb_6001_external_radius]) rotate([-90, 0, 0]) wheel_with_teeths(42.5, 12);
     
-    //tracks
-    translate ([200 + second_tracks_offset, 0, -rb_6201_external_radius]) tracks_on_2_wheels(12, 42.5, 200);
-        
+        //tracks
+        translate ([200 + second_tracks_offset, 0, -rb_6201_external_radius]) tracks_on_2_wheels(12, 42.5, 200);
     }
     
     translate ([second_tracks_offset, -5, -rb_6201_external_radius]) rotate ([0, -61, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(35, 10, sqrt(2025 + 4900));
