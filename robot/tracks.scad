@@ -92,9 +92,11 @@ module string_of_tracks (num_tracks)
     }
 }
 //--------------------------------------------------------------------
-track();
+//track();
 
 //tracks_on_circle(12, 42.5, 90, 10);
+
+tracks_on_circle(6, 17.7, 90, 6);
 
 //string_of_tracks (10);
 

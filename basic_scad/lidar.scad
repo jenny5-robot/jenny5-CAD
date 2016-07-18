@@ -89,19 +89,19 @@ module tera_ranger_one_lidar()
 {
   nema_17();
 
-    translate ([nema_17_width / 2 + wall_thick_2, 2 * SRC022A_6_flange_radius + wall_thick_2 + 10 + 30 + 1, nema_17_height + wall_thick_2]) rotate ([0, 0, 180]) mirror([0, 0, 1]) slip_ring_with_motor_support();
+    translate ([nema_17_width / 2 + wall_thick_2, 2 * SRC022A_6_flange_radius + wall_thick_2 + 30 + 1, nema_17_height + wall_thick_2]) rotate ([0, 0, 180]) mirror([0, 0, 1]) slip_ring_with_motor_support();
     
-    translate ([0, SRC022A_6_flange_radius + wall_thick_2 + 10 + 20, nema_17_height + wall_thick_2 - SRC022A_6_stator_length + SRC022A_6_flange_thickness]) rotate([0, 0, -30]) SRC022A_6();
+    translate ([0, SRC022A_6_flange_radius + wall_thick_2 + 20, nema_17_height + wall_thick_2 - SRC022A_6_stator_length + SRC022A_6_flange_thickness]) rotate([0, 0, -30]) SRC022A_6();
     
     rotate ([0, 0, 90]) 
-        translate ([-tera_ranger_one_sizes[0] / 2 + SRC022A_6_flange_radius + wall_thick_2 + 10 + 20, 5.5, nema_17_height + 7]) 
+        translate ([-tera_ranger_one_sizes[0] / 2 + SRC022A_6_flange_radius + wall_thick_2 + 20, 5.5, nema_17_height + 7]) 
             rotate ([90, 0, 0]){ 
                 translate ([10, 50, -3]) rotate ([-90, 0, 0]) import("TR1_spider.stl");
                 translate ([0, -2, 0]) tera_ranger_one_support();
             }
     
     // pulley
-    translate ([0, SRC022A_6_flange_radius + wall_thick_2 + 10 + 20, nema_17_height + 7]) 
+    translate ([0, SRC022A_6_flange_radius + wall_thick_2 + 20, nema_17_height + 7]) 
         tera_ranger_support_pulley();
             
             // motor pulley
@@ -141,6 +141,17 @@ module lidar_motor_pulley()
     }
 }
 //---------------------------------------------------------------------
+module IR_obstacle()
+{
+    difference(){
+        cube([15, 10, 5]);
+        translate (-display_tolerance_z) translate ([0, 3.5, 0]) cube([10, 3, 5] + 2 * display_tolerance_z);
+        translate ([5, 0, 2.5]) rotate ([-90, 0, 0]) cylinder (h = 10, r = 1.25, $fn = 10);
+    }
+}
+//---------------------------------------------------------------------
+
+IR_obstacle();
 
 //tera_ranger_one_lidar();
 
@@ -150,6 +161,6 @@ module lidar_motor_pulley()
 
 //slip_ring_support();
 
-slip_ring_with_motor_support();
+//slip_ring_with_motor_support();
 
 //tera_ranger_one_on_motor();
