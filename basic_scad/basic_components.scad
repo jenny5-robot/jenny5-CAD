@@ -165,13 +165,13 @@ module U(length, base, height, grosime_perete)
     //}
 }
 //--------------------------------------------------------------
-module L(length, latura_mare_L, latura_mica_L, grosime_perete_L)
+module L(length, edge_1_width = 20, edge_2_width = 20, wall_thick = 3)
 {
    
-        difference(){
-            cube ([latura_mica_L, length, latura_mare_L]);
-            translate ([grosime_perete_L, -display_tolerance, grosime_perete_L]) cube ([latura_mica_L - grosime_perete_L + display_tolerance, length + 2 * display_tolerance, latura_mare_L - grosime_perete_L + display_tolerance]);
-        }
+  difference(){
+    cube ([edge_2_width, length, edge_1_width]);
+    translate ([wall_thick, 0, wall_thick] - display_tolerance_y) cube ([edge_2_width - wall_thick, length, edge_1_width - wall_thick] + display_tolerance_xyz + display_tolerance_y);
+  }
     
 }
 //--------------------------------------------------------------
@@ -217,7 +217,7 @@ module corner(length, width, height, wall_thick)
 }
 //--------------------------------------------------------------
 
-corner(40, 20, 30, 3);
+//corner(40, 20, 30, 3);
 
 //cube_rounded_x_holed_z([60, 40, 10], 10);
 
