@@ -176,6 +176,54 @@ color(plastic_color)
     
 }
 //---------------------------------------------------------------------------
+module bearing_housing_with_flaps(radius = 42.5, bearing_external_radius, bearing_thick, distance_between_flaps = 18)
+{
+    thick = 12;
+            flaps_length = 45;
+            flaps_thick = 7;
+    
+    dist_to_first_flap_hole = 10;
+    dist_to_second_flap_hole = 30;
+    
+	difference(){
+		color (plastic_color) 
+        union(){
+            cylinder (r = radius, h = thick, $fn = 100);	
+        //flaps
+            translate([distance_between_flaps / 2, 0, 0]) cube([flaps_thick, radius + flaps_length, thick]); 
+            translate([-distance_between_flaps / 2 - flaps_thick, 0, 0]) cube([flaps_thick, radius + flaps_length, thick]); 
+        }
+       
+		for ( i = [0 : 1 : 4] ){
+            // fixing the bearing
+			translate([(bearing_external_radius + 3) * sin(i * 90 + 45), (bearing_external_radius + 3) * cos(i * 90 + 45), 0]) cylinder(h = thick + 2 * display_tolerance, r = 2, $fn = 20);
+		}
+        // center hole
+        translate(-display_tolerance_z) cylinder (r = bearing_external_radius - 2, h = thick, $fn = 100);
+        // bearing hole
+        translate ([0, 0, thick - bearing_thick]) cylinder (r = bearing_external_radius, h = thick, $fn = 100);
+        // flap first hole
+        hull(){
+            translate([- distance_between_flaps / 2 - flaps_thick, radius + dist_to_first_flap_hole, thick / 2] - display_tolerance_x) rotate([0, 90, 0])
+cylinder (h = distance_between_flaps + 2 * flaps_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            translate([- distance_between_flaps / 2 - flaps_thick, radius + dist_to_first_flap_hole + 10, thick / 2] - display_tolerance_x) rotate([0, 90, 0])
+cylinder (h = distance_between_flaps + 2 * flaps_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        }
+        
+                // flap first hole
+        hull(){
+            translate([- distance_between_flaps / 2 - flaps_thick, radius + dist_to_second_flap_hole, thick / 2] - display_tolerance_x) rotate([0, 90, 0])
+cylinder (h = distance_between_flaps + 2 * flaps_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            translate([- distance_between_flaps / 2 - flaps_thick, radius + dist_to_second_flap_hole + 10, thick / 2] - display_tolerance_x) rotate([0, 90, 0])
+cylinder (h = distance_between_flaps + 2 * flaps_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        }
+	}
+    
+    
+    
+    
+}
+//--------------------------------------------------------------------
 module rbearing_608_vertical_housing_bounded_half()
 {
     radial_bearing_vertical_housing_bounded(rbearing_608_vertical_housing_size_bounded_half, rb_608_external_radius,rb_608_thick, 60);
@@ -272,12 +320,13 @@ module radial_bearing_6001_vertical_housing()
 module radial_bearing_608_vertical_housing()
 {
     radial_bearing_vertical_housing(rb_608_external_radius, rb_608_thick, rbearing_608_enclosed_housing_holes_position);
+    echo(rbearing_608_enclosed_housing_holes_position = rbearing_608_enclosed_housing_holes_position);
 }
 //---------------------------------------------------------------------------
 module radial_bearing_6201_vertical_housing(screw_holes_tolerance = 0)
 {
     radial_bearing_vertical_housing(rbearing_6201_enclosed_housing_size, rbearing_6201_enclosed_housing_holes_position, screw_holes_tolerance = 0);
-    echo(rbearing_6201_enclosed_housing_holes_position);
+    echo(rbearing_6201_enclosed_housing_holes_position = rbearing_6201_enclosed_housing_holes_position);
 }
 //---------------------------------------------------------------------------
 module radial_bearing_608_vertical_housing()
@@ -296,6 +345,8 @@ module radial_bearing_608_vertical_housing_slim()
    radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime, radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime);
 }
 //---------------------------------------------------------------------------
+
+bearing_housing_with_flaps(18, rb_608_external_radius, rb_608_thick);
 
 //rbearing_608_vertical_housing_bounded_half();
 
