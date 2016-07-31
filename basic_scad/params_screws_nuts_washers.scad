@@ -8,7 +8,7 @@ m3_screw_radius = 1.5;
 m3_nut_radius = 3.1;
 m3_nut_height = 2.3;
 m3_nut_thick = m3_nut_height;
-m3_autolock_nut_thick = m3_nut_thick + 1;
+m3_autolock_nut_thick = 4.2;
 
 m4_screw_radius = 2;
 m4_nut_radius = 4;
