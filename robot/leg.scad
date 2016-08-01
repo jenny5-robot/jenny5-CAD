@@ -28,8 +28,8 @@ use <../basic_scad/parametric_involute_gear_v5.0.scad>
 
 include <params_leg.scad>
 
+use <../basic_scad/linear_motors.scad>
 
-angle_knee = -60;
 
 piesa_prindere_motor_pe_ax_sizes = [nema_17_width, nema_17_width, 10];
 
@@ -37,67 +37,67 @@ dist_to_oscior = dist_to_incheietura + 60;
 
 grosime_L_mic = 3;
 
-dist_to_piulitza_tractiune = 26;
-
 piesa_impingere_sizes = [30, 30, 24];
 lateral_talpa_motor_sizes = [30, grosime_placa_alu, grosime_placa_alu + dist_to_incheietura_talpa_motor + 10];
 lateral_talpa_os_sizes = [30, grosime_placa_alu, grosime_placa_alu + dist_to_incheietura_talpa_os + 10];
 lateral_talpa_simple_sizes = [30, grosime_placa_alu, grosime_placa_alu + dist_to_incheietura_talpa + 10];
 
-lateral_genunchi_simple_sizes = [lungime_talpa, grosime_placa_alu, 60];
+knee_side_simple_sizes = [120, grosime_placa_alu, 60];
 
-base_extension_tail = 70;
 
-lateral_talpa_sizes = [lungime_talpa + base_extension_tail, grosime_placa_alu, 40];
+
+lateral_talpa_sizes = [lungime_talpa, grosime_placa_alu, 40];
 
 //-------------------------------------------------------
-module lateral_talpa()
+module sole_side()
 {
-echo("distanta baza to gaura sustinere", grosime_placa_alu + dist_to_incheietura_talpa_motor);
+//echo("distanta baza to gaura sustinere", grosime_placa_alu + dist_to_incheietura_talpa_motor);
     difference(){
         color (aluminium_color) cube(lateral_talpa_sizes);
-     // gaura prindere os
-        translate ([lateral_talpa_motor_sizes[0] / 2 + base_extension_tail, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
-     // gaura prindere os 2
-        translate ([lateral_talpa_sizes[0] - (lateral_talpa_motor_sizes[0] / 2), 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
-        // gaura prindere distantor 1
-        translate ([base_extension_tail + lungime_talpa / 2 - 23 + 15, 0, 15] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
+     // hole first bone
+        translate ([dist_to_first_bone, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+     // hole second bone
+        translate ([dist_to_second_bone, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        // hole spacer 1
+        translate ([dist_to_first_spacer, 0, latime_teava / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        // hole spacer 2
+        translate ([dist_to_second_spacer, 0, latime_teava / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
     }
 }
 
 //-------------------------------------------------------
-module lateral_genunchi()
+module knee_side()
 {
 //echo("distanta baza to gaura sustinere", grosime_placa_alu + dist_to_incheietura_talpa);
     difference(){
-        color (aluminium_color) cube(lateral_genunchi_simple_sizes);
+        color (aluminium_color) cube(knee_side_simple_sizes);
         translate ([lateral_talpa_os_sizes[0] / 2, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
-        translate ([lateral_talpa_os_sizes[0] / 2, 0, lateral_genunchi_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
+        translate ([lateral_talpa_os_sizes[0] / 2, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
     }
 }
 
 //-------------------------------------------------------
-module talpa_picior_motor()
+module sole()
 {
-    translate ([-base_extension_tail, - grosime_placa_alu, 0]) lateral_talpa();
-    translate ([-base_extension_tail - rb_608_external_radius, latime_talpa + rb_608_thick, 40 - rb_608_external_radius - 6]) rotate ([90, 0, 0]) 608rs();
+    translate ([0, - grosime_placa_alu -crotch_width / 2, 0]) sole_side();
+    //translate ([-base_extension_tail - rb_608_external_radius, crotch_width / 2 + rb_608_thick, 40 - rb_608_external_radius - 6]) rotate ([90, 0, 0]) 608rs();
 
-    translate ([-base_extension_tail, latime_talpa, 0]) lateral_talpa();
+    translate ([0, crotch_width / 2, 0]) sole_side();
     
-    // distantor mijloc
-    color (aluminium_color) translate ([lungime_talpa / 2 - 23, 0, 0]) cube([30, latime_talpa, 30]);
-    //distantor fatza
-    color (aluminium_color) translate ([- 45, 0, 0]) cube([30, latime_talpa, 30]);
+    // first spacer
+    color (aluminium_color) translate ([dist_to_first_spacer - latime_teava / 2, - crotch_width / 2, 0]) cube([latime_teava, crotch_width, latime_teava]);
+    // second sapcer
+    color (aluminium_color) translate ([dist_to_second_spacer - latime_teava / 2, - crotch_width / 2, 0]) cube([latime_teava, crotch_width, latime_teava]);
 }
 
 //----------------------------------------------------------------------
-module genunchi()
+module knee()
 {
-    translate ([0, - grosime_placa_alu, 0]) lateral_genunchi();
+    translate ([0, - grosime_placa_alu, 0]) knee_side();
 
-    translate ([0, latime_talpa, 0]) lateral_genunchi();
+    translate ([0, crotch_width, 0]) knee_side();
     
-     color (aluminium_color) translate ([lateral_genunchi_simple_sizes[0] / 2, -0, lateral_genunchi_simple_sizes[2] / 2]) rotate ([-90, 0, 0]) cylinder (h = latime_talpa, r = 15 * sqrt(2), $fn = 4);
+     color (aluminium_color) translate ([knee_side_simple_sizes[0] / 2, -0, knee_side_simple_sizes[2] / 2]) rotate ([-90, 0, 0]) cylinder (h = crotch_width, r = 15 * sqrt(2), $fn = 4);
 }
 //----------------------------------------------------------------------
 module os_picior()
@@ -109,9 +109,9 @@ module os_picior()
        
         // gaura ax impins de motor
         pas_gauri = 16;
-        for (i=[-1:1]){
-          translate ([0, latime_teava / 2, dist_to_surub + dist_to_incheietura - pas_gauri * i] - display_tolerance_x) rotate ([0, 90, 0])cylinder (h = latime_teava + 2 * display_tolerance, r = 10, $fn = 50);
-          echo("gaura impins ax motor", [dist_to_surub + dist_to_incheietura - pas_gauri * i, latime_teava / 2, 0]);
+        for (i = [-1:1]){
+          translate ([0, latime_teava / 2, dist_to_piulitza_tractiune - pas_gauri * i] - display_tolerance_x) rotate ([0, 90, 0])cylinder (h = latime_teava + 2 * display_tolerance, r = 10, $fn = 50);
+          echo("gaura impins ax motor", [dist_to_piulitza_tractiune - pas_gauri * i, latime_teava / 2, 0]);
         }
 // gaura mijloc rulment jos
         
@@ -140,16 +140,16 @@ module os_picior()
 
     // gaura rulment impingere
         
-        echo ("gaura mijloc rulment impingere", [latime_teava / 2, dist_to_surub + dist_to_incheietura, 0] + rbearing_608_housing_holes_position[0], "raza = 6");
+        echo ("gaura mijloc rulment impingere", [latime_teava / 2, dist_to_piulitza_tractiune, 0] + rbearing_608_housing_holes_position[0], "raza = 6");
         
-        translate ([latime_teava / 2, 0, dist_to_surub + dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) 
+        translate ([latime_teava / 2, 0, dist_to_piulitza_tractiune] - display_tolerance_y) rotate ([-90, 0, 0]) 
         translate (rbearing_608_housing_holes_position[0]) cylinder (h = latura_U_mare + 2 * display_tolerance, r = 10, $fn = 30); 
 
 
         for (i=[1:4]){
-        echo ("suruburi rulment impingere", [latime_teava / 2, dist_to_surub + dist_to_incheietura, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
+        echo ("suruburi rulment impingere", [latime_teava / 2, dist_to_piulitza_tractiune, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
             
-            translate ([latime_teava / 2, 0, dist_to_surub + dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = lungime_teava + 2 * display_tolerance, r = 1.6, $fn = 30); 
+            translate ([latime_teava / 2, 0, dist_to_piulitza_tractiune] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = lungime_teava + 2 * display_tolerance, r = 1.6, $fn = 30); 
         }
 
         }
@@ -160,9 +160,9 @@ module os_picior_cu_bearings()
     os_picior();
 
 // tractiune    
-    translate ([latime_teava / 2, 0, dist_to_surub + dist_to_incheietura]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+    translate ([latime_teava / 2, 0, dist_to_piulitza_tractiune]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
     
-    translate ([latime_teava / 2, latime_teava + rbearing_608_housing_size[2], dist_to_surub + dist_to_incheietura]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+    translate ([latime_teava / 2, latime_teava + rbearing_608_housing_size[2], dist_to_piulitza_tractiune]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
     
 //rulment baza
 
@@ -185,7 +185,7 @@ translate ([latime_teava / 2, -25, inaltime_os_picior - 14]) rotate ([-90, 0, 0]
         color(shaft_color) cylinder (h = 80, r = raza_ax, $fn = 30); 
 /*
 // piesa prindere ax motor
-translate ([dist_to_surub + dist_to_incheietura, 4, dist_to_piulitza_tractiune]) 
+translate ([dist_to_piulitza_tractiune, 4, dist_to_piulitza_tractiune]) 
         translate (rbearing_608_housing_holes_position[0]) 
     piesa_impingere();
 */
@@ -260,9 +260,9 @@ module oscior()
 //----------------------------------------------------------------------
 module oscior_cu_rulmenti()
 {
-    oscior();
+  oscior();
 
- translate ([latime_teava / 2, 0, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+  translate ([latime_teava / 2, 0, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
 // suruburi prindere rulment baza    
             for (i=[1:4]){            
             translate ([latime_teava / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4x12_hexa();
@@ -311,27 +311,37 @@ module motor_cu_balama()
   
   translate ([-tabla_motor_sizes[0] / 2, -tabla_motor_sizes[1] / 2, nema_17_height + nema_17_gearbox_base_height + nema_17_gearbox_length]) cube(tabla_motor_sizes);
     // ax balama
-    //translate ([tabla_motor_sizes[0] / 2 - 10, -tabla_motor_sizes[1] / 2, nema_17_height + nema_17_gearbox_base_height + nema_17_gearbox_length + tabla_motor_sizes[2]]) cube([10, tabla_motor_sizes[1], 10]);
-    
-    
+    //translate ([tabla_motor_sizes[0] / 2 - 10, -tabla_motor_sizes[1] / 2, nema_17_height + nema_17_gearbox_base_height + nema_17_gearbox_length + tabla_motor_sizes[2]]) cube([10, tabla_motor_sizes[1], 10]);   
 }
 //----------------------------------------------------------------------
-module leg(unghi)
+module half_leg(unghi)
 {
     // placa jos
-    talpa_picior_motor();
-    // os
-    translate ([lungime_talpa - latime_teava / 2, (latime_talpa - latime_teava) / 2, dist_to_incheietura_talpa_os])
+    sole();
+    // bone 1
+    translate ([dist_to_second_bone, crotch_width / 2 - latime_teava - rbearing_608_housing_size[2] - 5, dist_to_incheietura_talpa_os])
     rotate ([0, unghi, 0])
     translate ([-latime_teava / 2, 0, -dist_to_incheietura])
     oscior_cu_rulmenti();
     
-       // oscior
-    translate ([latime_teava / 2, (latime_talpa - latime_teava) / 2, dist_to_incheietura_talpa])
+    // bone 2
+    translate ([dist_to_second_bone, - crotch_width / 2 + rbearing_608_housing_size[2] + 5, dist_to_incheietura_talpa_os])
+    rotate ([0, unghi, 0])
+    translate ([-latime_teava / 2, 0, -dist_to_incheietura])
+    oscior_cu_rulmenti();
+
+       // oscior 1
+    translate ([dist_to_first_bone, crotch_width / 2 - latime_teava - rbearing_608_housing_size[2] - 5, dist_to_incheietura_talpa_os])
     rotate ([0, unghi, 0])
     translate ([-latime_teava / 2, 0, -dist_to_incheietura]) 
     os_picior_cu_bearings();
     
+       // oscior 1
+    translate ([dist_to_first_bone, - crotch_width / 2 + rbearing_608_housing_size[2] + 5, dist_to_incheietura_talpa_os])
+    rotate ([0, unghi, 0])
+    translate ([-latime_teava / 2, 0, -dist_to_incheietura]) 
+    os_picior_cu_bearings();
+
     /*
     // ax jos
     translate([dist_to_incheietura, -20, dist_to_incheietura_talpa]) rotate ([-90, 0, 0]) cylinder (h = 90, r = raza_ax, $fn = 30);
@@ -341,23 +351,23 @@ module leg(unghi)
 */
 
     // motor
-    h1 = sin(90-unghi) * dist_to_surub;
-    h2 = h1 + (dist_to_incheietura_talpa_motor - (40 - rb_608_external_radius - 6));
-    echo(h2=h2);
-    d1a = cos(90-unghi) * dist_to_surub;
-    echo(d1a=d1a);
-    d1b = (rb_608_external_radius + base_extension_tail + 15) - d1a;
-    echo(d1b=d1b);
-    beta = 90-atan(h2 / d1b);
+    
+    
+    h = sin(90 - unghi) * (dist_to_piulitza_tractiune - dist_to_incheietura);
+    echo(h = h);
+    d1 = cos(90 - unghi) * (dist_to_piulitza_tractiune - dist_to_incheietura);
+    echo(d1 = d1);
+    d2 = lungime_talpa - dist_to_first_bone - d1;
+    echo(d2=d2);
+    beta = atan(h / d2);
     
     //beta = atan(cos(-unghi) * dist_to_surub / ((lungime_talpa - 2 * dist_to_incheietura_talpa_motor) - sin (-unghi) * dist_to_surub) );
     echo(beta=beta);
-    //beta = -unghi;
+    echo(dist_to_incheietura_talpa_motor = dist_to_incheietura_talpa_motor);
     
-  translate([-base_extension_tail - rb_608_external_radius, 0, 40 - rb_608_external_radius - 6])
-    rotate ([0, 90 - beta, 0])
-  translate([0, latime_talpa / 2, -nema_17_with_gearbox_height + 10 + 3])
-    motor_cu_balama();
+  translate([lungime_talpa, 0, dist_to_incheietura_talpa_motor])
+    rotate ([0, -(90 - beta), 0])
+    linear_stepper_motor();
     
     // piesa prindere motor
  //   translate([dist_to_motor, -piesa_prindere_motor_pe_ax_sizes[1] / 2 + latime_talpa / 2, dist_to_incheietura_talpa_motor + grosime_placa_alu])
@@ -382,18 +392,18 @@ module leg(unghi)
 //----------------------------------------------------------------------
 module long_leg(unghi)
 {
-    leg(unghi);
+    half_leg(unghi);
     //translate ([(inaltime_os_picior - 2 * dist_to_incheietura) * sin(unghi), 0, (inaltime_os_picior - 2 * dist_to_incheietura) * cos(unghi) + 2 * dist_to_incheietura_talpa - dist_to_incheietura + dist_to_incheietura]) 
     translate ([0, 0, 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(unghi) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os)) - 20]) 
-    mirror ([0, 0, 1]) leg(unghi);
+    mirror ([0, 0, 1]) half_leg(unghi);
     
         // placa sus
     
     translate ([(inaltime_os_picior - 2 * dist_to_incheietura) * sin(unghi), 
-    0, 
+    - crotch_width / 2, 
     (inaltime_os_picior - 2 * dist_to_incheietura) * cos(unghi) 
     + dist_to_incheietura_talpa - 8])
-    genunchi();
+    knee();
     
 }
 //----------------------------------------------------------------------
@@ -406,18 +416,18 @@ module long_leg(unghi)
 
 //    echo (placa_talpa_sizes = placa_talpa_sizes);
 
-//talpa_picior_motor();
+//sole();
 
 //talpa_picior_jos_with_bearings();
 //os_picior();
 //os_picior_cu_bearings();
-leg(angle_knee);
+//half_leg(angle_knee);
 
 //motor_cu_balama();
 
 //oscior_cu_rulmenti();
 
-//long_leg(angle_knee);
+long_leg(angle_knee);
 
 //piesa_prindere_motor_de_ax();
 
