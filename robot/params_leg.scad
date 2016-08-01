@@ -15,8 +15,8 @@ lungime_teava = 30;
 latime_teava = 30;
 grosime_perete_teava = 3;
 
-lungime_talpa = 120;
-latime_talpa = 58;
+lungime_talpa = 220;
+//latime_talpa = 58;
 inaltime_os_picior = 450;
 dist_to_incheietura = rb_608_external_radius + 3;
 dist_to_incheietura_talpa = 32;
@@ -31,4 +31,14 @@ grosime_placa_alu = 10;
 
 max_torque_leg_angle = 60;
 
-dist_to_surub = (lungime_talpa - 30) * sin (max_torque_leg_angle);//100;
+dist_to_piulitza_tractiune = 162; //(lungime_talpa - 30) * sin (max_torque_leg_angle);//100;
+
+crotch_width = 60 + 2 * latime_teava + 5 + 5 + 2 * rb_608_thick;
+
+dist_to_first_spacer = 70;
+dist_to_second_spacer = 165;
+
+dist_to_first_bone = 22;
+dist_to_second_bone = 110;
+
+angle_knee = 20;

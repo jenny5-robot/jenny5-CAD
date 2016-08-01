@@ -41,7 +41,7 @@ include <params_arm.scad>
 use <arm.scad>
 
 angle_body_arm = 90;// -90...90
-angle_knee = -60;
+
 
    motor_housing_tolerance = 10;
    motor_housing_tolerance_large = 20;
@@ -217,15 +217,6 @@ module body_with_head()
     translate ([-40, -latura_L, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
 }
 //---------------------------------------------------------------------------
-module long_leg_with_rotation_module()
-{
-    inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + 2 * dist_to_incheietura_talpa - dist_to_incheietura + dist_to_incheietura);
-
-echo(inaltime_long_leg=inaltime_long_leg);
-       // legs
-    translate ([latura_U_mare / 2, 0, base_platform_size[2]]) rotate ([0, 0, 90]) long_leg(angle_knee);
-}
-//---------------------------------------------------------------------------
 module head_body_foot()
 {
     inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
@@ -237,16 +228,16 @@ module head_body_foot()
 //---------------------------------------------------------------------------
 module platform_foot()
 {
-    long_leg_with_rotation_module();
+    translate ([latura_U_mare / 2, 0, base_platform_size[2]]) long_leg(angle_knee);
     // mobile platform
-    translate ([-base_platform_size[1] / 2 - 10, 250, 0]) rotate([0, 0, -90]) platform();
+    translate ([-120, -base_platform_size[1] / 2, 0]) platform();
 }
 //---------------------------------------------------------------------------
 module robot()
 {
     inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
     
-    translate ([0, lungime_talpa - 40, inaltime_long_leg + 10]) body_with_head();
+    translate ([90, 0, inaltime_long_leg + 10]) rotate ([0, 0, 90]) body_with_head();
     platform_foot();
 }
 //---------------------------------------------------------------------------
