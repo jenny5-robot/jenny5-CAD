@@ -42,3 +42,25 @@ dist_to_first_bone = 22;
 dist_to_second_bone = 110;
 
 angle_knee = 20;
+
+piesa_prindere_motor_pe_ax_sizes = [nema_17_width, nema_17_width, 10];
+
+dist_to_oscior = dist_to_incheietura + 60;
+
+grosime_L_mic = 3;
+
+piesa_impingere_sizes = [30, 30, 24];
+lateral_talpa_motor_sizes = [30, grosime_placa_alu, grosime_placa_alu + dist_to_incheietura_talpa_motor + 10];
+lateral_talpa_os_sizes = [30, grosime_placa_alu, grosime_placa_alu + dist_to_incheietura_talpa_os + 10];
+lateral_talpa_simple_sizes = [30, grosime_placa_alu, grosime_placa_alu + dist_to_incheietura_talpa + 10];
+
+knee_side_simple_sizes = [120, grosime_placa_alu, 60];
+
+lateral_talpa_sizes = [lungime_talpa, grosime_placa_alu, 40];
+
+foot_spacer_holes = 
+[[dist_to_first_spacer, -50, 0],
+[dist_to_first_spacer, 50, 0],
+[dist_to_second_spacer, -50, 0],
+[dist_to_second_spacer, 50, 0]
+];
