@@ -228,9 +228,9 @@ module head_body_foot()
 //---------------------------------------------------------------------------
 module platform_foot()
 {
-    translate ([latura_U_mare / 2, 0, base_platform_size[2]]) long_leg(angle_knee);
+    translate ([0, 0, base_platform_size[2]]) long_leg(angle_knee);
     // mobile platform
-    translate ([-120, -base_platform_size[1] / 2, 0]) platform();
+    translate ([-130, -base_platform_size[1] / 2, 0]) platform();
 }
 //---------------------------------------------------------------------------
 module robot()
@@ -257,9 +257,9 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
-robot();
+//robot();
 
-//platform_foot();
+platform_foot();
 
 //arm();
 
