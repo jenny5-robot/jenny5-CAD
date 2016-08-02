@@ -69,6 +69,23 @@ module bearing_housing_on_axis()
     translate([-rbearing_608_housing_size[0] / 2, rbearing_608_housing_size[0] / 2 - 2, 0])rectangular_axis_slider(rbearing_608_housing_size[0], 3);
 }
 //---------------------------------------------------------------------------
+module bearing_housing_with_breadboard_support()
+{
+    length = 45;
+    dist_between_screws = 36;
+    
+  rbearing_608_housing_double();
+    translate ([rbearing_608_housing_size[0] / 2 + 1, -length / 2, 0]) 
+    rotate ([0, -90, 0])
+  difference(){      
+      my_cube_rounded(rbearing_608_housing_size[2] + rb_608_thick, length, 3);
+      // holes for screws
+      translate ([4, (length - dist_between_screws) / 2, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
+
+      translate ([4 , length - (length - dist_between_screws) / 2, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
+  }
+}
+//---------------------------------------------------------------------------
 module head_base()
 {
   qtr_a1_support_with_motor_support();
@@ -141,7 +158,7 @@ module head()
 //qtr_a1_support(7);
 //hc_sr04_and_c920_with_support();
 
-head();
+//head();
 //eye_support();
 
 //gradient_support();
@@ -149,3 +166,5 @@ head();
 //head_base();
 
 //bearing_housing_on_axis();
+
+bearing_housing_with_breadboard_support();
