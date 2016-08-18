@@ -32,12 +32,12 @@ module track(length = 25, width = 60, zh = 8)
                 rotate([-90,0,0]) translate([0,-zh/2,0]) cylinder(h=width, r = zh/2, $fn = roundness, center = false);
             }
 		}
-        // holes for future use
-        translate ([length / 2, 10, 0] - display_tolerance_z) cylinder (h = zh + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
-        translate ([length / 2, 10, zh - m3_autolock_nut_thick]) cylinder (h = zh + display_tolerance, r = m3_nut_radius, $fn = 6);
+        // holes for rubber band
+        translate ([length / 2, 8, 0] - display_tolerance_z) cylinder (h = zh + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([length / 2, 8, zh - m3_autolock_nut_thick]) cylinder (h = zh + display_tolerance, r = m3_nut_radius, $fn = 6);
 // other side
-        translate ([length / 2, width - 10, 0] - display_tolerance_z) cylinder (h = zh + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
-        translate ([length / 2, width - 10, zh - m3_autolock_nut_thick]) cylinder (h = zh + display_tolerance, r = m3_nut_radius, $fn = 6);
+        translate ([length / 2, width - 8, 0] - display_tolerance_z) cylinder (h = zh + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([length / 2, width - 8, zh - m3_autolock_nut_thick]) cylinder (h = zh + display_tolerance, r = m3_nut_radius, $fn = 6);
         
 // holes for screws
 		rotate([-90,0,0]) translate([length,-zh/2,0]) cylinder(h = width + 1, r = hole_radius, $fn = roundness, center = false);
