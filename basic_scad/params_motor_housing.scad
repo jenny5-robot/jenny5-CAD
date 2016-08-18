@@ -17,6 +17,7 @@ include <params_stepper_motors.scad>
 	
 	distanta_gauri_baza_motor_housing_nema_17_x = 12;
     distanta_gauri_baza_motor_housing_nema_17_y = 15;
+	distanta_gauri_large_baza_motor_housing_nema_17_y = 30;
     
 	nema_17_housing_base_holes = [
 	[distanta_gauri_baza_motor_housing_nema_17_x, distanta_gauri_baza_motor_housing_nema_17_y, 0],
@@ -25,6 +26,13 @@ include <params_stepper_motors.scad>
 	[-distanta_gauri_baza_motor_housing_nema_17_x, -distanta_gauri_baza_motor_housing_nema_17_y, 0]
 	];
 	
+	nema_17_housing_large_base_holes = [
+	[distanta_gauri_baza_motor_housing_nema_17_x, distanta_gauri_large_baza_motor_housing_nema_17_y, 0],
+	[distanta_gauri_baza_motor_housing_nema_17_x, -distanta_gauri_large_baza_motor_housing_nema_17_y, 0],
+	[-distanta_gauri_baza_motor_housing_nema_17_x, distanta_gauri_large_baza_motor_housing_nema_17_y, 0],
+	[-distanta_gauri_baza_motor_housing_nema_17_x, -distanta_gauri_large_baza_motor_housing_nema_17_y, 0]
+	];
+
 	distanta_gauri_baza_motor_housing_nema_11 = 10;
     
 	nema_11_housing_base_holes = [
