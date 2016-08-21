@@ -144,7 +144,7 @@ module nema_motor_housing_with_belt_tensioner_bearing_based_y(motor_offset, belt
     latime = nema_width + 2 * perete_lateral_motor_housing + 2 * airflow_spacer + 2 * motor_offset;
     
     difference(){
-        nema_motor_housing_with_base_holes(0, motor_offset, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, dist_to_first_hole_z, nema_housing_base_holes);
+        nema_motor_housing_with_base_holes(2, motor_offset, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, dist_to_first_hole_z, nema_housing_base_holes);
     
      // belt tensioner hole
 //            echo(_left=_left);
