@@ -147,7 +147,7 @@ additional_tooth_width = 0.2; //mm
 additional_tooth_depth = 0; //mm
 
 
-pulley_t_ht = 7;	// length of toothed part of pulley, standard = 12
+pulley_t_ht = 7;	// length of toothed part of pulley
 ;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 ;	// pulley base diameter, standard = 20
 
@@ -157,7 +157,7 @@ retainer_ht = 1.5;	// height of retainer flange over pulley, standard = 1.5
 //idler = 1;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 
-	echo (str("Belt type = ",belt_type,"; Number of teeth = ",num_teeth,"; Pulley Outside Diameter = ",pulley_OD,"mm "));
+	//echo (str("Belt type = ",belt_type,"; Number of teeth = ",num_teeth,"; Pulley Outside Diameter = ",pulley_OD,"mm "));
 	tooth_distance_from_centre = sqrt( pow(pulley_OD/2,2) - pow((tooth_width+additional_tooth_width)/2,2));
 	tooth_width_scale = (tooth_width + additional_tooth_width ) / tooth_width;
 	tooth_depth_scale = ((tooth_depth + additional_tooth_depth ) / tooth_depth) ;
@@ -175,7 +175,8 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 		{
 			//base
 	
-			if ( pulley_b_ht < 2 ) { echo ("CAN'T DRAW PULLEY BASE, HEIGHT LESS THAN 2!!!"); } else {
+			if ( pulley_b_ht < 2 ) { //echo ("CAN'T DRAW PULLEY BASE, HEIGHT LESS THAN 2!!!"); 
+                } else {
 				rotate_extrude($fn=pulley_b_dia*2)
 				{
 						square([pulley_b_dia/2-1,pulley_b_ht]);
