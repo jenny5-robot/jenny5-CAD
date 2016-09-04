@@ -262,10 +262,10 @@ module second_gear()
     M12_washer();
 }
 //--------------------------------------------------------------------
-module base_motor_with_support()
+module base_motor_with_housing(left = 0)
 {
-    nema_23_motor_housing();
-    translate ([nema_23_57BYGH603_width / 2 + 5 + 10, nema_23_57BYGH603_width / 2 + 3, nema_23_57BYGH603_height + 3]) mirror([0, 0, 1]) nema_23_57BYGH603();
+    nema_17_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, left);
+    translate ([nema_17_width / 2 + 3 + 2, nema_17_width / 2 + 3 + 15, nema_17_height + 3]) mirror([0, 0, 1]) nema_17();
 }
 //--------------------------------------------------------------------
 module platform_sheet()
@@ -313,21 +313,17 @@ module platform()
   platform_sheet();
 
     // motor left
-    translate ([70, 0, base_platform_size[2]]) 
+    translate ([390, 0, 0]) 
     rotate([-90, 0, 0])
-    rotate([0, 0, -90]) 
-    base_motor_with_support();
-    
-// belt tensioner left
-    translate ([130, 0, base_platform_size[2]]) 
-    belt_tensioner(30, 0);
+    rotate([0, 0, 90]) 
+    base_motor_with_housing(0);
     
     // motor right
-    translate ([70, base_platform_size[1], base_platform_size[2]])
-    mirror([0, 1, 0]) 
+    translate ([390 - 80, base_platform_size[1], 0])
+    rotate([0, 0, 180])
     rotate([-90, 0, 0])
-    rotate([0, 0, -90]) 
-    base_motor_with_support();
+    rotate([0, 0, 90]) 
+    base_motor_with_housing(1);
     
 
 // second shaft    
@@ -361,7 +357,9 @@ module platform()
     }
 
 // belt    
-    translate ([second_tracks_offset + distance_between_wheels, -5, -rb_6201_external_radius]) rotate ([0, -154, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(35, 10, sqrt(31000));
+    translate ([second_tracks_offset + distance_between_wheels, -5, -rb_6201_external_radius]) rotate ([0, 7, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(35, 10, sqrt(90*90 + (rb_6201_external_radius - nema_17_width / 2) * (rb_6201_external_radius - nema_17_width / 2 ) ));
+    
+    echo("distance between pulleys", sqrt(80*80 + (rb_6201_external_radius + base_platform_size[2] + 39) * (rb_6201_external_radius + base_platform_size[2] + 39) ));
 
 // other side
   translate([0, base_platform_size[1] + track_size[0] / 2 + 15, 0]){
@@ -374,6 +372,8 @@ module platform()
 
     //tracks
     //translate ([200 + second_tracks_offset, 0, -rb_6201_external_radius]) tracks_on_2_wheels(12, 42.5, 200);
+      // belt    
+    translate ([second_tracks_offset + distance_between_wheels, -5, -rb_6201_external_radius]) rotate ([0, 7, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(35, 10, sqrt(90*90 + (rb_6201_external_radius - nema_17_width / 2) * (rb_6201_external_radius - nema_17_width / 2 ) ));
     
 }
 translate([-rb_608_external_radius - 7, 12 + 4, 9])
@@ -400,7 +400,7 @@ rotate([90, 0, 0])
     translate([50, base_platform_size[1] / 2, base_platform_size[2]]) rotate([0, 0, 90]) tera_ranger_one_lidar();
 
 // battery
-    translate([160, multistar_4s_20000_size[2], base_platform_size[2]]) rotate ([90, 0, 0]) multistar_4s_20000();
+  //  translate([160, multistar_4s_20000_size[2], base_platform_size[2]]) rotate ([90, 0, 0]) multistar_4s_20000();
 }
 //--------------------------------------------------------------------
 module laptop_fixer_corner_left()
@@ -425,13 +425,45 @@ module laptop_fixer_corner_right()
   }
 }
 //--------------------------------------------------------------------
+module motor_housing_with_components()
+{
+    nema_17_housing_with_belt_tensioner_bearing_based_y_left_and_base_holes(15, 0);
+    translate ([nema_17_width / 2 + 3, 2 + nema_17_width / 2 + 15, 85]) mirror([0, 0, 1]) nema_17_with_gearbox();
+}
+//--------------------------------------------------------------------
+module base_motor_pulley()
+{
+    
+    pulley_t_ht = 7;	// length of toothed part of pulley
+    pulley_base_height = 1.5;
+    difference(){
+        
+   rotate ([0, 0, 12]) my_pulley(62, 15, 0, 0, 8);
+        
+        // M3 screws
+        
+        translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = 1.5, $fn = 20);
+        
+        // M3 nut
+        hull(){
+            translate ([0, 5.5, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
+            translate ([0, 5.5, 9 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
+        }
 
+    }
+
+}
+//--------------------------------------------------------------------
 
 platform();
 
 //platform_sheet();
 
-//base_motor_with_support();
+//base_motor_pulley();
+
+//motor_housing_with_components();
+
+//base_motor_with_housing();
 
 //tracks_on_half_wheel(12, 42.5);
 
