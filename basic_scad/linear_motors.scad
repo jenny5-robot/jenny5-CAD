@@ -19,4 +19,14 @@ module linear_stepper_motor()
     translate([40, 0, 0]) my_pulley(24, 30, 0, 0, 0);
 }
 //------------------------------------------------------
-linear_stepper_motor();
+module linear_dc_motor(stroke, current_pos)
+{
+    base_length = 105 + stroke;
+    color("grey") cylinder (h = base_length, r = 20);
+    color("grey")translate([0, 0, base_length]) cylinder (h = current_pos, r = 10);
+}
+//------------------------------------------------------
+
+//linear_stepper_motor();
+
+linear_dc_motor(250, 10);
