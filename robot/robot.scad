@@ -230,12 +230,14 @@ module platform_foot()
 {
     translate ([0, 0, base_platform_size[2]]) long_leg(angle_knee);
     // mobile platform
-    translate ([-130, -base_platform_size[1] / 2, 0]) platform();
+    translate ([-70, -base_platform_size[1] / 2, 0]) platform();
 }
 //---------------------------------------------------------------------------
 module robot()
 {
     inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
+    
+    echo(inaltime_long_leg = inaltime_long_leg);
     
     translate ([90, 0, inaltime_long_leg + 10]) rotate ([0, 0, 90]) body_with_head();
     platform_foot();
@@ -257,9 +259,9 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
-//robot();
+robot();
 
-platform_foot();
+//platform_foot();
 
 //arm();
 
