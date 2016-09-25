@@ -4,14 +4,19 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <params_dc_motor.scad>
+include <params_dc_motors.scad>
 
 //--------------------------------------------------------------
-module dc_motor()
+module dc_motor(motor_length, motor_radius, motor_distance_between_screws, motor_shaft_radius, motor_shaft_length, motor_shaft_cilinder_radius)
 {
+    color("silver")
 	union(){
-	translate ([-motor_length / 2, -motor_width / 2, 0]) cube([motor_length, motor_width, motor_height]);
-	translate ([0, 0, motor_height]) cylinder (h = motor_shaft_length, r = 1.5, $fn = 10);
+        // motor
+         cylinder(h = motor_length, r = motor_radius, $fn = 50);
+        // shaft base
+        translate ([0, 0, motor_length]) cylinder (h = 1, r = motor_shaft_cilinder_radius, $fn = 30);
+        // shaft
+        translate ([0, 0, motor_length]) cylinder (h = motor_shaft_length, r = motor_shaft_radius, $fn = 20);
 	}
 }
 //--------------------------------------------------------------
@@ -21,5 +26,11 @@ module motor_zga17()
     translate ([0, 0, motor_zga17_length]) cylinder(h = 10, r = 1.5, $fn = 50);
 }
 //--------------------------------------------------------------
+module motor_gr_ep_45()
+{
+    dc_motor(motor_gr_ep_45_length, motor_gr_ep_45_radius, motor_gr_ep_45_distance_between_screws, motor_gr_ep_45_shaft_radius, motor_gr_ep_45_shaft_length, motor_gr_ep_45_shaft_cilinder_radius);
+}
+//--------------------------------------------------------------
 
-motor_zga17();
+motor_gr_ep_45();
+//motor_zga17();
