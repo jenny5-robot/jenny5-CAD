@@ -65,16 +65,25 @@ module qtr_a1_support_with_motor_support()
 //----------------------------------------------------------
 module bearing_housing_on_axis()
 {
+    // bearing housing
     rbearing_608_housing_double();
+    // axis support
     translate([-rbearing_608_housing_size[0] / 2, rbearing_608_housing_size[0] / 2 - 2, 0])rectangular_axis_slider(rbearing_608_housing_size[0], 3);
+    // potentiometer support
+    translate ([rbearing_608_housing_size[0] / 2 - 2, -14, 0]) 
+    //rotate ([0, 0, 180]) 
+    potentiometer_support(27, 28, 5, 10, 5, 3, 0);
 }
 //---------------------------------------------------------------------------
 module bearing_housing_with_breadboard_support()
 {
     length = 45;
     dist_between_screws = 36;
-    
+  
+  // bearing housing  
   rbearing_608_housing_double();
+    
+    // electronics support
     translate ([rbearing_608_housing_size[0] / 2 + 1, -length / 2, 0]) 
     rotate ([0, -90, 0])
   difference(){      
@@ -84,6 +93,9 @@ module bearing_housing_with_breadboard_support()
 
       translate ([4 , length - (length - dist_between_screws) / 2, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
   }
+  
+  // potentiometer support
+  translate ([-rbearing_608_housing_size[0] / 2 + 2, 14, 0]) rotate ([0, 0, 180]) potentiometer_support(27, 28, 5, 10, 5, 3, 0);
 }
 //---------------------------------------------------------------------------
 module head_base()
@@ -165,6 +177,6 @@ module head()
 
 //head_base();
 
-//bearing_housing_on_axis();
+bearing_housing_on_axis();
 
-bearing_housing_with_breadboard_support();
+//bearing_housing_with_breadboard_support();
