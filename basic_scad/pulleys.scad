@@ -21,7 +21,7 @@
  */
 
 include <config.scad>
-
+include <params_basic_components.scad>
 
 include <params_pulleys.scad>
 include <params_screws_nuts_washers.scad>
@@ -51,6 +51,8 @@ T5_pulley_dia_18 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 12);
 T5_pulley_dia_20 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 13);
 T5_pulley_dia_21 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 14);
 T5_pulley_dia_23 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 15);
+T5_pulley_dia_28 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 18);
+
 T5_pulley_dia_70 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 44);
 T5_pulley_dia_78 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 50);
 T5_pulley_dia_82 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 52);
@@ -116,6 +118,7 @@ if ( profile == 59 ) { pulley ( "T5" , T5_pulley_dia_40 , 1.19 , 3.264, profile,
 if ( profile == 60 ) { pulley ( "T5" , T5_pulley_dia_51 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, motor_shaft, screw_head_radius, angle, retainer, idler); }
 if ( profile == 61 ) { pulley ( "T5" , T5_pulley_dia_15 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, motor_shaft, screw_head_radius, angle, retainer, idler); }
 if ( profile == 62 ) { pulley ( "T5" , T5_pulley_dia_23 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, motor_shaft, screw_head_radius, angle, retainer, idler); }
+if ( profile == 63 ) { pulley ( "T5" , T5_pulley_dia_28 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, motor_shaft, screw_head_radius, angle, retainer, idler); }
 
 }
 
@@ -238,6 +241,7 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
                 if ( profile == 60 ) { T5(pulley_t_ht);}
                 if ( profile == 61 ) { T5(pulley_t_ht);}
                 if ( profile == 62 ) { T5(pulley_t_ht);}
+                if ( profile == 63 ) { T5(pulley_t_ht);}
 			}
 
 			}
@@ -257,44 +261,10 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 
 	
 	}
-/*
-    screw_from_shaft = 5;
-    screw_angle = angle;
-                // screw in the 
-            translate ([0, 0, pulley_t_ht / 2 + retainer_ht]) rotate ([0, 0, screw_angle])rotate ([0, 90, 0]) cylinder (h = pulley_OD, r = m4_screw_radius, $fn = 20);
-                // nut hole
-                hull(){
-                translate ([0, 0, pulley_t_ht / 2 + retainer_ht]) rotate ([0, 0, screw_angle]) rotate ([0, 90, 0]) translate ([0, 0, motor_shaft / 2 + screw_from_shaft]) cylinder (h = m4_nut_height, r = m4_nut_radius, $fn = 6);
-                translate ([0, 0, 0]) rotate ([0, 0, screw_angle]) rotate ([0, 90, 0]) translate ([0, 0, motor_shaft / 2 + screw_from_shaft]) cylinder (h = m4_nut_height, r = m4_nut_radius, $fn = 6);
-                }
-*/
-/*	  
-    screw_from_shaft = -2;
-    screw_angle = angle;
-                // screw in the 
-            translate ([0, 0, pulley_t_ht / 2 + retainer_ht]) rotate ([0, 0, screw_angle])rotate ([0, 90, 0]) cylinder (h = pulley_b_dia, r = m3_screw_radius, $fn = 20);
-                // nut hole
-    
-                hull(){
-                translate ([0, 0, pulley_t_ht / 2 + retainer_ht]) rotate ([0, 0, screw_angle]) rotate ([0, 90, 0]) translate ([0, 0, motor_shaft / 2 + screw_from_shaft]) cylinder (h = m3_nut_height + 2, r = m3_nut_radius + 0.5, $fn = 6);
-          //      translate ([0, motor_shaft / 2 + screw_from_shaft, 0]) rotate ([0, 0, screw_angle]) rotate ([0, 90, 0]) cylinder (h = m3_nut_height, r = m3_nut_radius, $fn = 6);
-                }
-*/
-		/*
-			if (block_screw){
-                // screw in the base
-            translate ([0, 0, m3_nut_radius]) rotate ([0, 90, 0]) cylinder (h = pulley_b_dia, r = m3_screw_radius, $fn = 20);
-                // nut hole
-                hull(){
-                translate ([motor_shaft / 2 + 1.5, 0, m3_nut_radius]) rotate ([0, 90, 0]) cylinder (h = m3_nut_height, r = m3_nut_radius, $fn = 6);
-                translate ([motor_shaft / 2 + 1.5, 0, 0]) rotate ([0, 90, 0]) cylinder (h = m3_nut_height, r = m3_nut_radius, $fn = 6);
-                }
-             } 
 
-	*/
 			//hole for motor shaft
         
-		translate([0,0,-1]) cylinder(r=motor_shaft/2,h=pulley_b_ht + pulley_t_ht + 2 * retainer_ht + 2,$fn=motor_shaft*4);
+		translate(-display_tolerance_z) cylinder(r = motor_shaft / 2, h = pulley_b_ht + pulley_t_ht + 2 * retainer_ht + 2 * display_tolerance, $fn=motor_shaft*4);
     }
 	   
 	}
@@ -386,7 +356,7 @@ module GT2_5mm(pulley_t_ht)
     
     //echo(T2_5_pulley_dia_84);
     
-    echo(T5_pulley_dia_23);
+    echo(T5_pulley_dia_28);
     
     //my_pulley(16, 49, 0, 0, 8);
     
@@ -404,4 +374,4 @@ module GT2_5mm(pulley_t_ht)
     //my_pulley(59, 25, 0, 18, 2 * m8_screw_radius, 0, 0, angle = 0);
     
     
-    my_pulley(62, 15, 0, 0, 8);
+    my_pulley(63, 18, 0, 0, 8);
