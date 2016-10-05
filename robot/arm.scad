@@ -8,7 +8,7 @@ use <../basic_scad/stepper_motors.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 include <../basic_scad/params_radial_bearings.scad>
-include <../basic_scad/params_dc_motor.scad>
+include <../basic_scad/params_dc_motors.scad>
 use <../basic_scad/dc_motors.scad>
 use <../basic_scad/stepper_motors_housing.scad>
 include <../basic_scad/params_motor_housing.scad>

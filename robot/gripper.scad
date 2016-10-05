@@ -7,7 +7,7 @@
 include <../basic_scad/params_basic_components.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 include <params_robot.scad>
-include <../basic_scad/params_dc_motor.scad>
+include <../basic_scad/params_dc_motors.scad>
 include <../basic_scad/config.scad>
 use <../basic_scad/basic_components.scad>
 use <../basic_scad/dc_motors.scad>
