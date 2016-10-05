@@ -72,12 +72,12 @@ module hc_sr04_arm()
           translate([-thick_sheet, 0, -thick_sheet]) cube([hc_sr04_arm_sizes[0] + thick_sheet, hc_sr04_arm_sizes[1], thick_sheet]);
         }
         // bone's hole
-        translate ([hc_sr04_arm_sizes[0] - 11 - 6, (hc_sr04_arm_sizes[1] - 10.5) / 2, 0] - display_tolerance_z) cube([11, 10.5, hc_sr04_arm_sizes[2]] + 2 * display_tolerance_z);
+        translate ([hc_sr04_arm_sizes[0] - 11 - 6, (hc_sr04_arm_sizes[1] - 10.5) / 2, 0] - [0, 0, thick_sheet] - display_tolerance_z) cube([11, 10.5, hc_sr04_arm_sizes[2]] + [0, 0, thick_sheet] + 2 * display_tolerance_z);
         // other hole
-        translate ([3, 3, 0] - display_tolerance_z) cube([22, hc_sr04_arm_sizes[1] - 6, hc_sr04_arm_sizes[1]] + 2 * display_tolerance_z);
+        translate ([4, 5, 0] - [0, 0, thick_sheet] - display_tolerance_z) cube([20, hc_sr04_arm_sizes[1] - 10, hc_sr04_arm_sizes[1]] + [0, 0, thick_sheet] + 2 * display_tolerance_z);
         
         // m3 screw hole
-        translate([0, hc_sr04_arm_sizes[1] / 2, hc_sr04_arm_sizes[2] / 2] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate([0, hc_sr04_arm_sizes[1] / 2, hc_sr04_arm_sizes[2] / 2 - 1] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 4 + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
         // m4 screw hole
         translate([34, hc_sr04_arm_sizes[1] / 2, hc_sr04_arm_sizes[2] / 2]) rotate([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 20);
         // nut hole
