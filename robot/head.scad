@@ -15,7 +15,7 @@ include <../basic_scad/params_screws_nuts_washers.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sensor_array.scad>
 include <../basic_scad/params_webcam.scad>
-
+include <../basic_scad/params_potentiometers.scad>
 
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearing_housing.scad>
@@ -31,6 +31,7 @@ use <../basic_scad/ultrasonic.scad>
 use <../basic_scad/qtr_a1_support.scad>
 use <gradient_support.scad>
 use <potentiometer_gears.scad>
+use <../basic_scad/potentiometers.scad>
 
 include <params_head.scad>
 
@@ -100,7 +101,12 @@ module bearing_housing_with_breadboard_support()
 //---------------------------------------------------------------------------
 module bearing_housing_with_breadboard_support_and_potentiometer()
 {
+    // plastic part
     bearing_housing_with_breadboard_support();
+    // potentiometer
+    translate ([-rbearing_608_housing_size[1] / 2 - pot_92R1A_J22_L15L_base_length / 2, 0, pot_92R1A_J22_L15L_base_height + 2]) mirror([0, 0, 1]) potentiometer_92R1A_J22_L15L();
+    // gear for potentiometer
+    translate ([-rbearing_608_housing_size[1] / 2 - pot_92R1A_J22_L15L_base_length / 2, 0, -pot_92R1A_J22_L15L_base_height - 2]) pot_gear(num_teeth = 12, screw_angle = 10, height = 8);
 }
 //---------------------------------------------------------------------------
 
@@ -169,7 +175,7 @@ module head()
     translate ([0, 0, rb_608_thick]) 608rs();
     translate ([0, 0, 2 * rb_608_thick]) M8_autolock_nut();
     
-    translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) pot_gear(num_teeth = 12, screw_angle = 10, height = 8);// 2x cot, inainte de cot
+    translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) pot_gear(num_teeth = 12, screw_angle = 10, height = 10);// 2x cot, inainte de cot
 
     // vertical bone
     color(aluminium_color) translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) cube_empty(6, 10, 120);
@@ -180,13 +186,13 @@ module head()
 }
 //---------------------------------------------------------------------------
 
-head();
+//head();
 
 //qtr_a1_support(7);
 //hc_sr04_and_c920_with_support();
 
 
-//bearing_housing_with_breadboard_support_and_potentiometer();
+bearing_housing_with_breadboard_support_and_potentiometer();
 
 //eye_support();
 
