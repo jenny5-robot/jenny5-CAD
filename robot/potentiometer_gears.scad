@@ -1,6 +1,8 @@
 use <../basic_scad/parametric_involute_gear_v5.0.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
+include <../basic_scad/params_basic_components.scad>
 
+include <../basic_scad/config.scad>
 //--------------------------------------------------------------------
 module gear_bone()
 {
@@ -39,7 +41,7 @@ module pot_gear(num_teeth, screw_angle, internal_radius = 3.3, height = 8)
     
     difference(){
         rotate ([0, 0, screw_angle])
-		gear ( 
+		color (plastic_color)gear ( 
 			number_of_teeth=num_teeth,
 			circular_pitch=400,
 			//pressure_angle=20,
@@ -56,16 +58,15 @@ module pot_gear(num_teeth, screw_angle, internal_radius = 3.3, height = 8)
 			involute_facets=0,
 			flat=false
         );
-        cylinder (h = height + 1, r = internal_radius, $fn = 30);
+        translate (-display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = internal_radius, $fn = 30);
         
           // m3 screw hole
-    translate ([0, 0, height / 2]) rotate([0, 90, 0]) cylinder (h = 22, r = 1.4, $fn = 30);  
-    // m3 nut hole
-    hull(){
-      translate ([internal_radius + 2, 0, 0]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
-      translate ([internal_radius + 2, 0, height]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
-    }
-
+        translate ([0, 0, height / 2]) rotate([0, 90, 0]) cylinder (h = 22, r = 1.4, $fn = 30);  
+        // m3 nut hole
+        hull(){
+            translate ([internal_radius + 2, 0, 0]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
+            translate ([internal_radius + 2, 0, height]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
+        }
     }
 }
 //--------------------------------------------------------------------
