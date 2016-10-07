@@ -20,7 +20,7 @@ include <../basic_scad/params_webcam.scad>
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 use <../basic_scad/spacer.scad>
-use <../basic_scad/potentiometers.scad>
+use <../basic_scad/potentiometer_support.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 use <../basic_scad/radial_bearings.scad>
@@ -30,8 +30,8 @@ use <../basic_scad/ultrasonic_support.scad>
 use <../basic_scad/ultrasonic.scad>
 use <../basic_scad/qtr_a1_support.scad>
 use <gradient_support.scad>
+use <potentiometer_gears.scad>
 
-//include <params_robot.scad>
 include <params_head.scad>
 
 //----------------------------------------------------------
@@ -98,6 +98,12 @@ module bearing_housing_with_breadboard_support()
   translate ([-rbearing_608_housing_size[0] / 2 + 2, 14, 0]) rotate ([0, 0, 180]) potentiometer_support(27, 28, 5, 10, 5, 3, 0);
 }
 //---------------------------------------------------------------------------
+module bearing_housing_with_breadboard_support_and_potentiometer()
+{
+    bearing_housing_with_breadboard_support();
+}
+//---------------------------------------------------------------------------
+
 module head_base()
 {
   qtr_a1_support_with_motor_support();
@@ -122,8 +128,11 @@ module nema_11_with_gearbox_and_pulley()
 //---------------------------------------------------------------------------
 module hc_sr04_and_c920_with_support()
 {
+    // plastic support
     hc_sr04_and_c920_support();
+    // ultrasonic sensor
     translate ([1, -3, 8]) hc_sr04();
+    // c920 camera
     translate ([c920_length - c920_length / 2 + c920_dist_between_holder_holes / 2 - c920_depth / 2 + 2, -c920_height - 7, c920_depth]) mirror ([1, 0, 0]) rotate ([-90, 0, 0]) c920();
 }
 //---------------------------------------------------------------------------
@@ -153,30 +162,38 @@ module head()
     mirror ([0, 0, 1]) head_base();
     translate ([0, 0, -25]) gradient_support();
     translate ([0, 0, -25]) M8x80_hexa();
-    translate ([0, 0, 16]) mirror([0, 0, 1]) rbearing_608_housing_double();
+    
+    translate ([0, 0, 16]) rotate([0, 0, 90]) mirror([0, 0, 1]) bearing_housing_with_breadboard_support_and_potentiometer();
+    
     translate ([0, 0, 0]) 608rs();
     translate ([0, 0, rb_608_thick]) 608rs();
-    translate ([0, 0, 2 * rb_608_thick]) M8_nut();
+    translate ([0, 0, 2 * rb_608_thick]) M8_autolock_nut();
     
-    translate ([0, 0, 36]) M8_nut();
-    color(aluminium_color) translate ([0, 0, 42]) cube_empty(6, 10, 100);
-    
+    translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) pot_gear(num_teeth = 12, screw_angle = 10, height = 8);// 2x cot, inainte de cot
+
+    // vertical bone
+    color(aluminium_color) translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) cube_empty(6, 10, 120);
+    // motor
     translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox_and_pulley();
-    
+    // eye support
     translate ([8, -20, 128]) rotate ([0, 90, 0]) eye_support();
 }
 //---------------------------------------------------------------------------
 
+head();
+
 //qtr_a1_support(7);
 //hc_sr04_and_c920_with_support();
 
-//head();
+
+//bearing_housing_with_breadboard_support_and_potentiometer();
+
 //eye_support();
 
 //gradient_support();
 
 //head_base();
 
-bearing_housing_on_axis();
+//bearing_housing_on_axis();
 
 //bearing_housing_with_breadboard_support();
