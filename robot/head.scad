@@ -175,7 +175,7 @@ module head()
     translate ([0, 0, rb_608_thick]) 608rs();
     translate ([0, 0, 2 * rb_608_thick]) M8_autolock_nut();
     
-    translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) pot_gear(num_teeth = 12, screw_angle = 10, height = 10);// 2x cot, inainte de cot
+    translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) bone_gear(num_teeth = 12, screw_angle = 10, height = 10);// 2x cot, inainte de cot
 
     // vertical bone
     color(aluminium_color) translate ([0, 0, 2 * rb_608_thick + m8_autolock_nut_thick]) cube_empty(6, 10, 120);
@@ -186,13 +186,15 @@ module head()
 }
 //---------------------------------------------------------------------------
 
-//head();
+head();
+
+//pot_gear(num_teeth = 12, screw_angle = 14, height = 8);
 
 //qtr_a1_support(7);
 //hc_sr04_and_c920_with_support();
 
 
-bearing_housing_with_breadboard_support_and_potentiometer();
+//bearing_housing_with_breadboard_support_and_potentiometer();
 
 //eye_support();
 

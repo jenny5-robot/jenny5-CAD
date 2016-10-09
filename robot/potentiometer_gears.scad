@@ -4,7 +4,7 @@ include <../basic_scad/params_basic_components.scad>
 
 include <../basic_scad/config.scad>
 //--------------------------------------------------------------------
-module gear_bone()
+module bone_gear()
 {
     height = 10;
     difference(){
@@ -71,7 +71,7 @@ module pot_gear(num_teeth, screw_angle, internal_radius = 3.3, height = 8)
 }
 //--------------------------------------------------------------------
 
-pot_gear(num_teeth = 12, screw_angle = 10, height = 8);// 2x cot, inainte de cot
+//pot_gear(num_teeth = 12, screw_angle = 15, height = 8);// 2x cot, inainte de cot
 
 //pot_gear(11, 13, 6.6, 10); // rulment
 
@@ -83,4 +83,4 @@ pot_gear(num_teeth = 12, screw_angle = 10, height = 8);// 2x cot, inainte de cot
 
 //pot_gear(12, 15, 4, 10);
 
-//gear_bone();
+//bone_gear();
