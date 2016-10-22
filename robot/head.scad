@@ -29,7 +29,7 @@ use <../basic_scad/webcam.scad>
 use <../basic_scad/ultrasonic_support.scad>
 use <../basic_scad/ultrasonic.scad>
 use <../basic_scad/qtr_a1_support.scad>
-use <gradient_support.scad>
+
 use <potentiometer_gears.scad>
 use <../basic_scad/potentiometers.scad>
 
@@ -129,7 +129,7 @@ module head_base()
 module nema_11_with_gearbox_and_pulley()
 {
     nema_11_with_gearbox();
-    translate ([0, 0, nema_11_with_gearbox_height + 12]) my_pulley(57, 12, 0, 18, 6, 0, 0, 0);
+    translate ([0, 0, nema_11_with_gearbox_height + 12]) pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
 }
 //---------------------------------------------------------------------------
 module hc_sr04_and_c920_with_support()
@@ -146,7 +146,7 @@ module eye_support()
 {
     qtr_a1_support_with_motor_support();
     translate ([0, 60, -52]) nema_11_with_gearbox_and_pulley();
-    translate ([0, 0, 25]) mirror ([0, 0, 1]) gradient_support();
+    translate ([0, 0, 25]) mirror ([0, 0, 1]) pulley_with_shaft(60, 33, 0, 0, 8, 4, m8_nut_radius, m8_nut_height);
     
     mirror ([0, 0, 1]) bearing_housing_on_axis();
     translate ([0, 0, -rb_608_thick]) 608rs();
@@ -166,7 +166,7 @@ module eye_support()
 module head()
 {
     mirror ([0, 0, 1]) head_base();
-    translate ([0, 0, -25]) gradient_support();
+    translate ([0, 0, -25]) pulley_with_shaft(60, 33, 0, 0, 8, 4, m8_nut_radius, m8_nut_height);
     translate ([0, 0, -25]) M8x80_hexa();
     
     translate ([0, 0, 16]) rotate([0, 0, 90]) mirror([0, 0, 1]) bearing_housing_with_breadboard_support_and_potentiometer();

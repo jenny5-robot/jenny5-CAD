@@ -30,4 +30,4 @@ fore_arm_length = 300;
    perete_rulment_roata = 1.5;
    inaltime_roata_reductor_cot = bearing_4_height + 2 * perete_rulment_roata;
    
-   upper_arm_motor_housing_shift = 15;
+   upper_arm_motor_housing_shift = 16;

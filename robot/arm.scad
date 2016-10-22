@@ -27,7 +27,6 @@ include <../basic_scad/params_sensor_array.scad>
 use <../basic_scad/qtr_a1_support.scad>
 
 use <gripper.scad>
-use <gradient_support.scad>
 use <../basic_scad/belt.scad>
 
 
@@ -74,13 +73,13 @@ module qtr_a1_support_with_screw_holes()
 //---------------------------------------------------------------------------
 module motor_pulley()
 {
-    my_pulley(18);
+    pulley(61, 10);
 }
 //---------------------------------------------------------------------------
 module upper_arm_pulley()
 {
   difference(){
-    my_pulley(64, 29, 0, 0, 8, 0);
+    pulley_with_shaft(64, 29, 0, 0, 4, m8_nut_radius, m8_nut_thick);
       // screw hole
       cylinder (h = 6, r = m8_nut_radius, $fn = 6);
       // motor housing fixer holes
@@ -95,7 +94,7 @@ module upper_arm_pulley()
 //---------------------------------------------------------------------------
 module upper_arm_motor_housing()
 {
-    nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
+    nema_motor_housing_with_base_holes(0, 0, nema_17_width, nema_17_height, 40, nema_17_gearbox_motor_hole_radius, gearbox_nema_17_holes_position, 3, 13, nema_17_housing_small_base_holes_position);    
 }
 //---------------------------------------------------------------------------
 module upper_arm_pulley_with_components()
@@ -129,7 +128,7 @@ module shoulder_pulley()
         }
     }
     */
-    my_pulley(21, 130, 7, 25, 8, 0);
+  //  pulley(21, 130, 0, 0, 8, );
 }
 //---------------------------------------------------------------------------
 module elbow_pulley()
@@ -137,7 +136,7 @@ module elbow_pulley()
 
     difference(){
         union(){
-            my_pulley(65, 66, 0, 0, 0, 0);
+            pulley(65, 66, 0, 0, 0, 0);
         //    translate ([0, 0, 9]) ring_with_flanges(rb_624_external_radius + 2, rb_624_external_radius + 0.1, 10);
         }
         translate ([0, 0, 0]) cylinder( h = rb_624_thick + 0.5, r = rb_624_external_radius, $fn = 50);
@@ -184,7 +183,7 @@ module forearm_pulley()
 {
     difference(){
         pulley_base_height = 2;
-    my_pulley(16, 49, pulley_base_height, 15, 8);
+    pulley(16, 49, pulley_base_height, 15, 4, 0, 0);
          // gaura fi 12
         //cylinder (h = 10, r = 6, $fn = 50);
         // surub M3
@@ -339,6 +338,11 @@ module plate_body_articulation()
     }
 }
 //---------------------------------------------------------------------------
+module traction_pulley()
+{
+    pulley_with_shaft(60, 33, 0, 0, 8, 4, m8_nut_radius, m8_nut_height);
+}
+//---------------------------------------------------------------------------
 module body_articulation()
 {
     // plate
@@ -351,7 +355,7 @@ module body_articulation()
         rotate ([0, 0, -90])
           nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
-    // motor gear
+    // motor pulley
     
     translate ([plate_body_size[0] / 2, plate_body_size[1], -nema_17_width / 2 - 25 - 3]) rotate ([-90, 0, 0]) motor_pulley();
       
@@ -364,7 +368,7 @@ module body_articulation()
     
     translate ([35, plate_body_size[1] - 10 - 5, 30 + 3]) mirror ([0, 1, 0]) rotate([90, 0, 0]) qtr_a1_support_with_screw_holes();
 
-            // axis
+            // shaft
     translate ([35, -10, 30 + 3]) 
     rotate ([90, 0, 0]) 
     rotate ([0, 0, angle_shoulder]) 
@@ -372,13 +376,13 @@ module body_articulation()
     color (aluminium_color) 
     cube([bone_thick, bone_thick, 80])
     ;  
-        
+       // pulley 
     translate ([35, 73, 30 + 3]) 
       rotate ([90, 0, 0]) 
         rotate ([0, 0, angle_shoulder]) 
-          gradient_support_with_screw(100);
+          traction_pulley();
 
-// continuare  - upper arm
+// upper arm
     translate ([35 + 10, -90, 30 + plate_body_size[2]]) 
       rotate ([0, angle_shoulder, 0]) 
         translate([bone_thick / 2, 0, + bone_thick / 2]) 
@@ -388,6 +392,9 @@ module body_articulation()
     
 }
 //---------------------------------------------------------------------------
+//translate ([-bone_thick / 2 - placa_trunchi_size[2], -placa_trunchi_size[1] / 2, 0]) rotate ([0, 90, 0]) 
+body_articulation();
+
 //nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
 //bearing_support1();
@@ -398,10 +405,6 @@ module body_articulation()
 
 
 //shoulder_pulley();
-
-
-//translate ([-bone_thick / 2 - placa_trunchi_size[2], -placa_trunchi_size[1] / 2, 0]) rotate ([0, 90, 0]) 
-body_articulation();
 
 //plate_body_articulation();
 

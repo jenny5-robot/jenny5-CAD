@@ -247,7 +247,7 @@ module robot_with_kitchen_table()
 module gear_motor1()
 {
     difference(){
-      my_pulley(54, 32, 0, 18, 8, 0, angle = 20);// motor #1
+      pulley(54, 32, 0, 0, 8, 4, 0, 0);// motor #1
         cylinder( h = 5, r = m8_nut_radius, $fn = 6);
     }
 }

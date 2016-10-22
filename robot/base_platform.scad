@@ -155,7 +155,7 @@ module wheel_traction_pulley()
   difference(){
       color (plastic_color)
      union(){
-       my_pulley(56, 44, 0, 18, 8, 0);
+       pulley_with_shaft(56, 44, 0, 0, 18, 6, 0, 0);
           cylinder (h = 20, r = 18);
      }
      //  fi 12 hole
@@ -459,7 +459,7 @@ module base_motor_pulley()
     pulley_base_height = 1.5;
     difference(){
         
-   rotate ([0, 0, 10.8]) my_pulley(62, 15, 0, 0, 10);
+   rotate ([0, 0, 10.8]) pulley_with_shaft(62, 15, 0, 0, 8, 5, 0, 0);
         
         // M3 screws
         
