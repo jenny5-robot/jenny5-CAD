@@ -3,7 +3,7 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 
 angle_shoulder = -0; // -180... 0
 angle_fore_arm = 90; // - 180 ... 0
-angle_elbow = 180; // -90, 0
+angle_elbow = 270; // -90, 0
 unghi_rotatie_gripper = 0;
 
 bone_thick = 10;
@@ -29,3 +29,5 @@ fore_arm_length = 300;
       
    perete_rulment_roata = 1.5;
    inaltime_roata_reductor_cot = bearing_4_height + 2 * perete_rulment_roata;
+   
+   upper_arm_motor_housing_shift = 15;
