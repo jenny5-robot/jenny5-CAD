@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 include <params_screws_nuts_washers.scad>
 include <params_basic_components.scad>
 
@@ -13,6 +19,28 @@ module potentiometer_support(length, width, height, dist_to_hole = 10, hole_tole
     translate ([2, 0, height] - display_tolerance_y)  rotate ([0, atan((height - 2) / (length - wall_thick)), 0]) cube([length + sqrt(length), width + 2 * display_tolerance, height + 1]);
     
       // potentiometer hole
+    hull(){
+       translate ([2 + dist_to_hole, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 4.9, $fn = 40);
+       translate ([2 + dist_to_hole + hole_tolerance, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 4.9, $fn = 40);
+    }
+  }
+}
+//---------------------------------------------------------------------------
+module potentiometer_support_squared(length, width, height, dist_to_hole = 10, hole_tolerance = 5, wall_thick = 2, pot_width = 15)
+{
+    difference(){
+  union(){
+    difference(){
+      cube([length, width, height]);
+      translate ([2, wall_thick, 2])  cube([length, width - 2 * wall_thick, height + 1]);
+      //translate ([wall_thick, wall_thick, -1])  cube([length, width - 2 * wall_thick, bottom_wall + 1]);
+      translate ([2, 0, height] - display_tolerance_y)  rotate ([0, atan((height - 2) / (length - wall_thick)), 0]) cube([length + sqrt(length), width + 2 * display_tolerance, height + 1]);
+    }
+      translate ([0, width / 2 - pot_width / 2 - 2, 0]) cube([length, pot_width + 4, height]);
+    }
+    // potentiometer screw hole
+    translate ([2, width / 2 - pot_width / 2, 2]) cube([length, pot_width, height]);
+      // potentiometer screw hole
     hull(){
        translate ([2 + dist_to_hole, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 4.9, $fn = 40);
        translate ([2 + dist_to_hole + hole_tolerance, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 4.9, $fn = 40);
@@ -70,4 +98,6 @@ module potentiometer_support_on_rectangular_axis(length, width, potentiometer_he
 
 //rectangular_axis_slider(20);
 
-potentiometer_support(27, 28, 5, 10, 5, 3, 0);
+//potentiometer_support(27, 28, 5, 10, 5, 3, 0);
+
+potentiometer_support_squared(27, 28, 5, 10, 15, 3, 15);
