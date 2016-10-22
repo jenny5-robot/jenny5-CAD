@@ -45,6 +45,11 @@ use <../basic_scad/basic_components.scad>
 
 include <params_leg.scad>
 
+use <../basic_scad/dc_motors.scad>
+use <../basic_scad/dc_motors_housing.scad>
+
+include <../basic_scad/params_dc_motors.scad>
+
 
 //--------------------------------------------------------------------
 module wheel_with_teeths(radius = 84, steps = 24)// radius = 42, steps = 12
@@ -262,10 +267,26 @@ module second_gear()
     M12_washer();
 }
 //--------------------------------------------------------------------
-module base_motor_with_housing(left = 0)
+module base_motor_housing_left()
 {
-    nema_17_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, left);
-    translate ([nema_17_width / 2 + 3 + 2, nema_17_width / 2 + 3 + 15, nema_17_height + 3]) mirror([0, 0, 1]) nema_17();
+    motor_gr_ep_45_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, 0);
+}
+//--------------------------------------------------------------------
+module base_motor_housing_right()
+{
+    motor_gr_ep_45_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, 1);
+}
+//--------------------------------------------------------------------
+module base_motor_with_housing_left()
+{
+    motor_gr_ep_45_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, 0);
+    translate ([nema_17_width / 2 + 3 + 2, nema_17_width / 2 + 3 + 15, motor_gr_ep_45_length + 3]) mirror([0, 0, 1]) motor_gr_ep_45();
+}
+//--------------------------------------------------------------------
+module base_motor_with_housing_right()
+{
+    motor_gr_ep_45_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, 1);
+    translate ([nema_17_width / 2 + 3 + 2, nema_17_width / 2 + 3 + 15, motor_gr_ep_45_length + 3]) mirror([0, 0, 1]) motor_gr_ep_45();
 }
 //--------------------------------------------------------------------
 module platform_sheet()
@@ -316,14 +337,14 @@ module platform()
     translate ([390, 0, 0]) 
     rotate([-90, 0, 0])
     rotate([0, 0, 90]) 
-    base_motor_with_housing(0);
+    base_motor_with_housing_left();
     
     // motor right
     translate ([390 - 80, base_platform_size[1], 0])
     rotate([0, 0, 180])
     rotate([-90, 0, 0])
     rotate([0, 0, 90]) 
-    base_motor_with_housing(1);
+    base_motor_with_housing_right();
     
 
 // second shaft    
@@ -438,16 +459,16 @@ module base_motor_pulley()
     pulley_base_height = 1.5;
     difference(){
         
-   rotate ([0, 0, 12]) my_pulley(62, 15, 0, 0, 8);
+   rotate ([0, 0, 10.8]) my_pulley(62, 15, 0, 0, 10);
         
         // M3 screws
         
-        translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = 1.5, $fn = 20);
+        translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = 2, $fn = 25);
         
         // M3 nut
         hull(){
-            translate ([0, 5.5, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
-            translate ([0, 5.5, 9 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
+            translate ([0, 3.6, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick + 0.2 + 1.4, r = m4_nut_radius + 0.1, $fn = 6);
+      //     translate ([0, 3.6, 9 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick + 0.2 + 1.4, r = m4_nut_radius + 0.1, $fn = 6);
         }
 
     }
@@ -456,6 +477,9 @@ module base_motor_pulley()
 //--------------------------------------------------------------------
 
 platform();
+
+//base_motor_housing_left();
+//base_motor_housing_right();
 
 //platform_sheet();
 
