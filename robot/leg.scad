@@ -13,7 +13,6 @@ include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 include <../basic_scad/params_radial_bearings.scad>
 use <../basic_scad/radial_bearings.scad>
-include <../basic_scad/params_dc_motor.scad>
 use <../basic_scad/stepper_motors_housing.scad>
 include <../basic_scad/params_motor_housing.scad>
 use <../basic_scad/radial_bearing_housing.scad>
@@ -304,7 +303,7 @@ module sheet_push_motor()
 module leg_push_motor()
 {
     // motor
-    translate ([0, 0, 3 + rb_608_external_radius]) nema_17_with_gearbox_and_screw(190);
+    translate ([0, 0, 3 + rb_608_external_radius]) nema_17_with_13_1_gearbox_and_screw(200);
     // sheet
     translate ([0, 0, rb_608_external_radius]) sheet_push_motor();
     // radial bearing housing

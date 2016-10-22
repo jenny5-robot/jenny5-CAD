@@ -71,12 +71,6 @@ module bone_body()
     }
 }
 //---------------------------------------------------------------------------
-
-module roata_reductor_motor()
-{
-    my_pulley(18);
-}
-//---------------------------------------------------------------------------
 module arm()
 {
 // vertical axis
@@ -84,7 +78,7 @@ module arm()
     color (aluminium_color) bone_body();
         
     // reduction gear
-    translate ([0, 0, 0]) rotate([0, 0, angle_body_arm]) mirror ([0, 0, 1]) roata_umar();
+    translate ([0, 0, 0]) rotate([0, 0, angle_body_arm]) mirror ([0, 0, 1]) shoulder_pulley();
     
     // continuation
     translate ([0, 0, chest_height / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
@@ -165,23 +159,23 @@ module os_diafragma_cu_piese()
     // bearing housing
     translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, rbearing_608_housing_size[2] + grosime_tabla_alu]) mirror ([0, 0, 1]) rbearing_608_housing_with_bearing();
     // motor
-    translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, nema_17_with_gearbox_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17_with_gearbox();
+    translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, nema_17_with_13_1_gearbox_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17_with_13_1_gearbox();
     // belt tensioner plate
     translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, grosime_perete_L]) rotate ([0, 0, 90]) motor_plate_belt_tensioner(motor_housing_tolerance);
   
     // motor gear
-    translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, -2]) mirror ([0, 0, 1]) roata_reductor_motor();
+    translate ([grosime_tabla_alu + nema_17_width / 2, dist_edge_to_shaft + dist_between_motor_and_axis, -2]) mirror ([0, 0, 1]) motor_pulley();
     
     // other side
     // bearing housing
     translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, rbearing_608_housing_size[2] + grosime_tabla_alu]) mirror ([0, 0, 1]) rbearing_608_housing_with_bearing();
     // motor
-    translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), nema_17_with_gearbox_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17_with_gearbox();
+    translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), nema_17_with_13_1_gearbox_height + grosime_perete_L + placa_motor_trunchi_size[2]]) mirror ([0, 0, 1]) nema_17_with_13_1_gearbox();
     // belt tensioner plate
     translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), grosime_perete_L]) rotate ([0, 0, 90]) motor_plate_belt_tensioner(motor_housing_tolerance);
   
     // motor gear
-    translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), -2]) mirror ([0, 0, 1]) roata_reductor_motor();
+    translate ([grosime_tabla_alu + nema_17_width / 2, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), -2]) mirror ([0, 0, 1]) motor_pulley();
     
 }
 //---------------------------------------------------------------------------
@@ -269,7 +263,7 @@ robot();
 
 //belt_tensioner_base();
 
-//roata_reductor_motor();
+//motor_pulley();
 
 //body();
 
