@@ -61,25 +61,33 @@ hull(){
     }
 }
 //---------------------------------------------------------------------------
+module belt_tensioner_slider()
+{
+    M4x25_hexa();
+    translate ([0, 0, m4_nut_thick]) M4x9_washer();
+    translate ([0, 0, m4_nut_thick + 1]) washer_4_15();
+    translate ([0, 0, m4_nut_thick + 1 + 1 + wall_thick_3]) washer_4_15();
+    translate ([0, 0, m4_nut_thick + 1 + 1 + 1 + wall_thick_3]) washer_4_9();
+
+    translate ([0, 0, m4_nut_thick + 1 + wall_thick_3 + 1 + 2]) 624rs();
+    translate ([0, 0, m4_nut_thick + 1 + 4 + rb_624_thick + 2]) 624rs();
+    translate ([0, 0, m4_nut_thick + 1 + 3 + 2 * rb_624_thick + wall_thick_3]) washer_4_9();
+    translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 4 + wall_thick_3]) M4_autolock_nut();
+}
+//---------------------------------------------------------------------------
 module belt_tensioner(h, dist_to_bearings)
 {
+    
     belt_tensioner_housing(h);
 
 // screw
-    translate ([wall_thick_3 + washer_5_15_external_radius, -(m4_nut_thick + 3 + 2 * rb_624_thick), wall_thick_3 + washer_5_15_external_radius + dist_to_bearings]) rotate ([-90, 0, 0]) {
-    M4x25_hexa();
-        translate ([0, 0, m4_nut_thick]) M4x9_washer();
-        translate ([0, 0, m4_nut_thick + 1]) 624rs();
-        translate ([0, 0, m4_nut_thick + 1 + rb_624_thick]) 624rs();
-        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick]) M4x9_washer();
-        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 1]) washer_4_15();
-        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 2 + wall_thick_3]) washer_4_15();
-        translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 2 + wall_thick_3 + 1]) M4_autolock_nut();
+    translate ([wall_thick_3 + washer_5_15_external_radius, m4_nut_thick + 2 + 3, wall_thick_3 + washer_5_15_external_radius + dist_to_bearings]) rotate ([90, 0, 0]) {
+        belt_tensioner_slider();
     }
-    //
-
 }
 //---------------------------------------------------------------------------
 belt_tensioner(30, 10);
 
 //belt_tensioner_base();
+
+//belt_tensioner_slider();
