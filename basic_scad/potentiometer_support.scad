@@ -48,12 +48,12 @@ module potentiometer_support_squared(length, width, height, dist_to_hole = 10, h
   }
 }
 //---------------------------------------------------------------------------
-module potentiometer_support_with_screw_holes(length, width, height, dist_between_holes)
+module potentiometer_support_with_screw_holes(length, width, height, dist_between_support_holes, dist_to_support_holes = 5)
 {
     difference(){
       potentiometer_support(length, width, height);
-        translate ([0, width / 2 - dist_between_holes / 2, 2 + (height - 2) / 2] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 2 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        translate ([0, width / 2 + dist_between_holes / 2, 2 + (height - 2) / 2] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 2 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        translate ([0, width / 2 - dist_between_support_holes / 2, 2 + dist_to_support_holes] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 2 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        translate ([0, width / 2 + dist_between_support_holes / 2, 2 + dist_to_support_holes] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 2 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
     }
 }
 //---------------------------------------------------------------------------
