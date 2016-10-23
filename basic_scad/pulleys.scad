@@ -77,48 +77,48 @@ module pulley_with_shaft(profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17,
 module pulley(profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8)
 {
 
-  if ( profile == 1 ) { _pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 2 ) { _pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 3 ) { _pulley ( "XL" , XL_pulley_dia , 1.27, 3.051, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 4 ) { _pulley ( "H" , H_pulley_dia ,1.905 , 5.359, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 5 ) { _pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 6 ) { _pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 7 ) { _pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 8 ) { _pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 9 ) { _pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 10 ) { _pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 11 ) { _pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 12 ) { _pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 , profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 13 ) { _pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 14 ) { _pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 15 ) { _pulley ( "T2.5" , T2_5_pulley_dia_18 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 16 ) { _pulley ( "T2.5" , T2_5_pulley_dia_30 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 17 ) { _pulley ( "T2.5" , T2_5_pulley_dia_100 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 18 ) { _pulley ( "T2.5" , T2_5_pulley_dia_14 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 19 ) { _pulley ( "T2.5" , T2_5_pulley_dia_110 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 20 ) { _pulley ( "T2.5" , T2_5_pulley_dia_80 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 21 ) { _pulley ( "T2.5" , T2_5_pulley_dia_103 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 22 ) { _pulley ( "T2.5" , T2_5_pulley_dia_83 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 23 ) { _pulley ( "T2.5" , T2_5_pulley_dia_40 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 24 ) { _pulley ( "T2.5" , T2_5_pulley_dia_23 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
+  if ( profile == 1 ) { _pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 2 ) { _pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 3 ) { _pulley ( "XL" , XL_pulley_dia , 1.27, 3.051, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 4 ) { _pulley ( "H" , H_pulley_dia ,1.905 , 5.359, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 5 ) { _pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 6 ) { _pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 7 ) { _pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 8 ) { _pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 9 ) { _pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 10 ) { _pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 11 ) { _pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 12 ) { _pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 , profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 13 ) { _pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 14 ) { _pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 15 ) { _pulley ( "T2.5" , T2_5_pulley_dia_18 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 16 ) { _pulley ( "T2.5" , T2_5_pulley_dia_30 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 17 ) { _pulley ( "T2.5" , T2_5_pulley_dia_100 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 18 ) { _pulley ( "T2.5" , T2_5_pulley_dia_14 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 19 ) { _pulley ( "T2.5" , T2_5_pulley_dia_110 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 20 ) { _pulley ( "T2.5" , T2_5_pulley_dia_80 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 21 ) { _pulley ( "T2.5" , T2_5_pulley_dia_103 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 22 ) { _pulley ( "T2.5" , T2_5_pulley_dia_83 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 23 ) { _pulley ( "T2.5" , T2_5_pulley_dia_40 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 24 ) { _pulley ( "T2.5" , T2_5_pulley_dia_23 , 0.7 , 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
 
-  if ( profile == 50) { _pulley ( "T5" , T5_pulley_dia_12 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 51) { _pulley ( "T5" , T5_pulley_dia_20 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 52 ) { _pulley ( "T5" , T5_pulley_dia_21 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 53 ) { _pulley ( "T5" , T5_pulley_dia_78 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 54 ) { _pulley ( "T5" , T5_pulley_dia_50 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 55 ) { _pulley ( "T5" , T5_pulley_dia_82 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 56 ) { _pulley ( "T5" , T5_pulley_dia_70 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 57 ) { _pulley ( "T5" , T5_pulley_dia_18 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
+  if ( profile == 50) { _pulley ( "T5" , T5_pulley_dia_12 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 51) { _pulley ( "T5" , T5_pulley_dia_20 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 52 ) { _pulley ( "T5" , T5_pulley_dia_21 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 53 ) { _pulley ( "T5" , T5_pulley_dia_78 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 54 ) { _pulley ( "T5" , T5_pulley_dia_50 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 55 ) { _pulley ( "T5" , T5_pulley_dia_82 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 56 ) { _pulley ( "T5" , T5_pulley_dia_70 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 57 ) { _pulley ( "T5" , T5_pulley_dia_18 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
 
-  if ( profile == 58 ) { _pulley ( "T5" , T5_pulley_dia_60 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 59 ) { _pulley ( "T5" , T5_pulley_dia_40 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 60 ) { _pulley ( "T5" , T5_pulley_dia_51 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 61 ) { _pulley ( "T5" , T5_pulley_dia_15 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 62 ) { _pulley ( "T5" , T5_pulley_dia_23 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 63 ) { _pulley ( "T5" , T5_pulley_dia_28 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 64 ) { _pulley ( "T5" , T5_pulley_dia_45 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
-  if ( profile == 65 ) { _pulley ( "T5" , T5_pulley_dia_103 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia); }
+  if ( profile == 58 ) { _pulley ( "T5" , T5_pulley_dia_60 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 59 ) { _pulley ( "T5" , T5_pulley_dia_40 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 60 ) { _pulley ( "T5" , T5_pulley_dia_51 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 61 ) { _pulley ( "T5" , T5_pulley_dia_15 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 62 ) { _pulley ( "T5" , T5_pulley_dia_23 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 63 ) { _pulley ( "T5" , T5_pulley_dia_28 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 64 ) { _pulley ( "T5" , T5_pulley_dia_45 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 65 ) { _pulley ( "T5" , T5_pulley_dia_103 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
 }
 
 
