@@ -128,8 +128,8 @@ module head_base()
 //---------------------------------------------------------------------------
 module nema_11_with_gearbox_and_pulley()
 {
-    nema_11_with_gearbox();
-    translate ([0, 0, nema_11_with_gearbox_height + 12]) pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
+    nema_11_with_13_1_gearbox();
+    translate ([0, 0, nema_11_with_13_1_gearbox_height + 12]) pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
 }
 //---------------------------------------------------------------------------
 module hc_sr04_and_c920_with_support()
