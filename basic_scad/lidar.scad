@@ -111,10 +111,9 @@ module tera_ranger_one_lidar()
 //---------------------------------------------------------------------
 module tera_ranger_support_pulley()
 {
-    difference()
-    {
-        my_pulley(24, 30, 0, 0, 0);
-        // hole
+    difference(){
+        pulley(24, 30, 0, 0, 6);
+        // hole for LIDAR support
         translate ([-6, -6, 0] - display_tolerance_z) cube([12, 12, 12]);
 // screw
         translate([0, 0, 4.5]) rotate([0, 90, 0]) cylinder (h = 15, r = 2, $fn = 20);
@@ -126,17 +125,15 @@ module tera_ranger_support_pulley()
 //---------------------------------------------------------------------
 module lidar_motor_pulley()
 {
-    difference()
-    {
-        my_pulley(24, 30, 0, 0, 0);
-        // hole
-        cylinder (h = 15, r = 2.5, $fn = 30);
-// screw
+    difference(){
+        pulley_with_shaft(24, 30, 0, 0, 6, 2.5);
+        
+// screw hole
         translate([0, 0, 4.5]) rotate([0, 90, 0]) cylinder (h = 15, r = 2, $fn = 20);
-        // nut
+        // nut hole
         hull(){
-        translate([6, 0, 4.5]) rotate([0, 90, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius + 0.2, $fn = 6);
-            translate([6, 0, 0]) rotate([0, 90, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius + 0.2, $fn = 6);
+          translate([6, 0, 4.5]) rotate([0, 90, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius + 0.2, $fn = 6);
+          translate([6, 0, 0]) rotate([0, 90, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius + 0.2, $fn = 6);
         }
     }
 }
@@ -151,9 +148,10 @@ module IR_obstacle()
 }
 //---------------------------------------------------------------------
 
-IR_obstacle();
 
-//tera_ranger_one_lidar();
+tera_ranger_one_lidar();
+
+//IR_obstacle();
 
 //tera_ranger_support_pulley();
 
