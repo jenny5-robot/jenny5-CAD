@@ -90,7 +90,7 @@ module nema_motor_housing(motor_offset_x, motor_offset_y, nema_width, nema_heigh
 	difference(){
 		color(plastic_color) cube ([lungime, latime, base_height]);
 		// make the motor house hole
-		translate ([base_thick, perete_lateral_motor_housing, perete_motor_motor_housing]) cube ([nema_width + base_thick + motor_offset_x, nema_width + 2 * airflow_spacer + 2 * motor_offset_y, nema_height + perete_baza_motor_housing]);
+		translate ([base_thick, perete_lateral_motor_housing, perete_motor_motor_housing]) cube ([nema_width + base_thick + motor_offset_x, nema_width + 2 * airflow_spacer + 2 * motor_offset_y, base_height]);
 
         translate ([base_thick, 0, base_height] - display_tolerance_y) rotate ([0, atan((base_height) / lungime), 0]) cube ([lungime * sqrt(2), nema_width + 2 * airflow_spacer + 2 * display_tolerance + 2 * perete_lateral_motor_housing + 2 * motor_offset_y, base_height]);
         
