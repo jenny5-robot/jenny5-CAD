@@ -13,6 +13,8 @@ include <params_screws_nuts_washers.scad>
 use <stepper_motors.scad>
 use <screws_nuts_washers.scad>
 
+use <potentiometer_support.scad>
+
 include <config.scad>
 
 airflow_spacer = 0;
@@ -118,7 +120,7 @@ module nema_motor_housing_with_base_holes(motor_offset_x, motor_offset_y, nema_w
           rotate([0, 90, 0])
             for (i = [0:3]){
             translate (nema_housing_base_holes[i]) cylinder ( h = base_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-          //  translate (nema_housing_base_holes[i] + [0, 0, base_thick - 0.99]) cylinder ( h = 2, r1 = m4_screw_radius, r2 = m4_nut_radius, $fn = 20);
+            translate (nema_housing_base_holes[i] + [0, 0, base_thick - 0.99]) cylinder ( h = 2, r1 = m4_screw_radius, r2 = m4_nut_radius, $fn = 20);
             }
     }
 }
@@ -367,6 +369,11 @@ module nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(motor_
   nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset, belt_tensioner_offset, nema_17_width, nema_17_height, base_height = 40, nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 12, nema_housing_base_holes = nema_17_housing_small_base_holes_position);
 }
 //---------------------------------------------------------------------------
+module nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(motor_offset, belt_tensioner_offset)
+{
+  nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset, belt_tensioner_offset, nema_11_width, nema_11_height, base_height = 40, nema_center_hole_radius = nema_11_motor_gearbox_hole_radius, nema_holes_position = gearbox_nema_11_holes_position, base_thick = 3, dist_to_first_hole_z = 20, nema_housing_base_holes = nema_11_housing_base_holes);
+}
+//---------------------------------------------------------------------------
 module nema_17_housing_with_belt_tensioner_bearing_based_y_and_base_holes(motor_offset, belt_tensioner_offset, left = 1)
 {
   nema_motor_housing_with_belt_tensioner_bearing_based_y(motor_offset, belt_tensioner_offset, nema_17_width, nema_17_height, base_height = 40, nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_large_base_holes, _left = left);
@@ -381,7 +388,7 @@ nema_motor_housing_x(10, nema_23_57BYGH603_width, nema_23_57BYGH603_height, 70, 
 
 //nema_17_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, 0);
 
-nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
+//nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 
 //nema_23_motor_housing(10, 0, 0, 5);
 
@@ -403,11 +410,11 @@ nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 
 //nema_11_geared_motor_housing(0, 0, 0); // platform motor #4
 
-//nema_11_motor_housing(4, 0);
+//nema_11_motor_housing_with_holled_base(4, 0);
 
 //nema_motor_housing(0, 10, 0);
 
-//nema_11_motor_housing_with_holled_base(0, 0);
+nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 
 //nema_17_geared_motor_housing(toleranta_x = 0, toleranta_y = 0, motor_deviation_x = 0); // platform motor 2x
 
