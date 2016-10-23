@@ -189,7 +189,7 @@ module M8x40_inbus()
 	inbus_screw(m8_screw_radius, 40, m8_nut_radius, m8_nut_thick);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module M8_hexa(length)
+module M8_hexa_screw(length)
 {
 	hexa_screw(m8_screw_radius, length, m8_nut_radius, m8_nut_thick);
 }
