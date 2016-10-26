@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 include <params_arm.scad>
 
 include <../basic_scad/params_stepper_motors.scad>
@@ -79,8 +85,8 @@ module elbow_pulley()
     difference(){
             pulley(65, 66, 0, 0, 8, 0);
      
-// bearing     
-        translate ([0, 0, 0]) cylinder( h = rb_626_thick + 0.5, r = rb_626_external_radius, $fn = 50);
+        // bearing hole    
+        translate ([0, 0, 0] - display_tolerance_z) cylinder( h = rb_626_thick + display_tolerance + 0.5, r = rb_626_external_radius, $fn = 50);
         // bearing border
         translate ([0, 0, 0]) cylinder( h = rb_626_thick + 90, r = rb_626_external_radius - 1, $fn = 50);
         // cut hole for belt
@@ -95,8 +101,8 @@ module elbow_pulley()
         }
         // holes for fixing the motor housing
         for (i= [0:3]){
-            translate (nema_11_housing_base_holes[i])  cylinder (h = 30, r = m3_screw_radius, $fn = 20);      
-            translate (nema_11_housing_base_holes[i] + [0, 0, 5])  cylinder (h = 40, r = m3_nut_radius, $fn = 6);      
+            translate (nema_11_housing_base_holes[i] - display_tolerance_z)  cylinder (h = 30, r = m4_screw_radius, $fn = 20);      
+            translate (nema_11_housing_base_holes[i] + [0, 0, 5])  cylinder (h = 40, r = m4_nut_radius, $fn = 6);      
         }
     }
     
@@ -104,7 +110,10 @@ module elbow_pulley()
 //---------------------------------------------------------------------------
 module forearm_motor_housing()
 {
-    nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
+    difference(){
+      nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
+        translate ([0, nema_11_width / 2 + 2, 23] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = 5, r = 8);
+    }
 }
 //---------------------------------------------------------------------------
 module forearm_motor_housing_with_components()
@@ -128,8 +137,8 @@ module elbow_pulley_with_components()
     forearm_motor_housing_with_components();
     
     // stepper motor
-  translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
-    nema_11_with_27_1_gearbox();
+ // translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
+   // nema_11_with_27_1_gearbox();
     
     // motor pulley
   translate ([20 + 3 + 3, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
@@ -366,7 +375,38 @@ module body_articulation()
     
 }
 //---------------------------------------------------------------------------
-body_articulation();
+module body_arm_bone(bone_length)
+{
+    echo("body bone holes");
+    difference(){
+        cube_empty(6, 10, bone_length);
+        for (i=[0:1]){
+            //echo(chest_height / 2 + rotate_y (90, pozitie_gauri_trunchi[i])[2]);
+            
+            translate ([-bone_thick / 2, 0, bone_length / 2 + pozitie_gauri_trunchi[i][0]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = bone_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+module arm(bone_length)
+{
+// vertical axis
+    translate ([0, 0, wall_thick_3 + washer_8_thick + rb_608_thick]) rotate ([0, 0, angle_body_arm])  
+    color (aluminium_color) body_arm_bone(bone_length);
+        
+    // reduction gear
+    translate ([0, 0, 0]) rotate([0, 0, angle_body_arm]) mirror ([0, 0, 1]) shoulder_pulley();
+    
+    // continuation
+    translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
+}
+//---------------------------------------------------------------------------
+arm(200);
+
+//body_arm_bone(300);
+
+
+//body_articulation();
 
 //nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
