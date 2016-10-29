@@ -28,7 +28,7 @@ use <../basic_scad/stepper_motors.scad>
 use <../basic_scad/webcam.scad>
 use <../basic_scad/ultrasonic_support.scad>
 use <../basic_scad/ultrasonic.scad>
-use <../basic_scad/qtr_a1_support.scad>
+
 
 use <potentiometer_gears.scad>
 use <../basic_scad/potentiometers.scad>
@@ -36,19 +36,20 @@ use <../basic_scad/potentiometers.scad>
 include <params_head.scad>
 
 //----------------------------------------------------------
-module qtr_a1_support_with_motor_support()
+module motor_support()
 {
     inaltime = 7;
     difference(){
         union(){
-     rotate ([0, 0, 180]) qtr_a1_support(inaltime);
+     rotate ([0, 0, 180]) cylinder (h = 7, r = 30);
  // motor support
           translate ([35 / 2, 30 - 5.8, inaltime]) mirror ([0, 0, 1]) rotate([0, 0, 90]) 
            
             difference(){
             color(plastic_color) potentiometer_support(50, 35, inaltime, 36, 0, 3, 0);
-                // gauri motor nema11
+                // nema 11 middle hole
         translate ([36, 35 / 2, 0] + gearbox_nema_11_holes_position[0] - display_tolerance_z) cylinder (h = head_base_sizes2[2] + 2 + 2 * display_tolerance, r = nema_11_motor_gearbox_hole_radius, $fn = 50);
+                // nema 11 screw hole
         for (i=[1:4])
          translate ([36, 35 / 2, 0] - display_tolerance_z) rotate ([0, 0, 0]) translate (gearbox_nema_11_holes_position[i]) cylinder (h = head_base_sizes2[2] + 2 + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
 
@@ -59,7 +60,6 @@ module qtr_a1_support_with_motor_support()
         }
         }
     }
-         translate ([0, 0, inaltime - 3]) cylinder_empty(4, 28, 25.2, 100);
     }
            
 }
@@ -109,10 +109,9 @@ module bearing_housing_with_breadboard_support_and_potentiometer()
     translate ([-rbearing_608_housing_size[1] / 2 - pot_92R1A_J22_L15L_base_length / 2, 0, -pot_92R1A_J22_L15L_base_height - 2]) pot_gear(num_teeth = 12, screw_angle = 10, height = 8);
 }
 //---------------------------------------------------------------------------
-
 module head_base()
 {
-  qtr_a1_support_with_motor_support();
+  motor_support();
     
   color(plastic_color) translate ([30, -37 / 2, 7]) rotate ([0, 90, 0]) spacer_with_1_hole(7, 37, 10);
     difference(){
@@ -144,7 +143,7 @@ module hc_sr04_and_c920_with_support()
 //---------------------------------------------------------------------------
 module eye_support()
 {
-    qtr_a1_support_with_motor_support();
+    motor_support();
     translate ([0, 60, -52]) nema_11_with_gearbox_and_pulley();
     translate ([0, 0, 25]) mirror ([0, 0, 1]) pulley_with_shaft(60, 33, 0, 0, 8, 4, m8_nut_radius, m8_nut_height);
     
