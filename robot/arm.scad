@@ -30,7 +30,6 @@ use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/rings.scad>
 use <../basic_scad/spacer.scad>
 include <../basic_scad/params_sensor_array.scad>
-use <../basic_scad/qtr_a1_support.scad>
 
 use <gripper.scad>
 use <../basic_scad/belt.scad>
@@ -40,10 +39,27 @@ use <../basic_scad/potentiometer_support.scad>
 use <../basic_scad/potentiometers.scad>
 use <../basic_scad/params_potentiometers.scad>
 
+use <potentiometer_gears.scad>
+
 //---------------------------------------------------------------------------
 module motor_pulley()
 {
-    pulley_with_shaft(61, 10, 0, 0, 8, 3, 0, 0);
+  pulley_t_ht = 8;	// length of toothed part of pulley
+  pulley_base_height = 1.5;
+  difference(){      
+    //rotate ([0, 0, 10.8]) pulley_with_shaft(52, 14, 0, 0, 8, 4, 0, 0);
+    pulley_with_shaft(52, 14, 0, 0, 8, 4, 0, 0);
+        
+    // M3 screws
+    translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = m3_screw_radius, $fn = 25);
+        
+    // M3 nut
+    hull(){
+            translate ([0, 5, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
+           translate ([0, 5, 9 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
+    }
+
+  }
 }
 //---------------------------------------------------------------------------
 module upper_arm_pulley()
@@ -82,8 +98,8 @@ module shoulder_pulley()
 //---------------------------------------------------------------------------
 module elbow_pulley()
 {
-    difference(){
-            pulley(65, 66, 0, 0, 8, 0);
+  difference(){
+        pulley(65, 66, 0, 0, 8, 0);
      
         // bearing hole    
         translate ([0, 0, 0] - display_tolerance_z) cylinder( h = rb_626_thick + display_tolerance + 0.5, r = rb_626_external_radius, $fn = 50);
@@ -104,7 +120,7 @@ module elbow_pulley()
             translate (nema_11_housing_base_holes[i] - display_tolerance_z)  cylinder (h = 30, r = m4_screw_radius, $fn = 20);      
             translate (nema_11_housing_base_holes[i] + [0, 0, 5])  cylinder (h = 40, r = m4_nut_radius, $fn = 6);      
         }
-    }
+  }
     
 }
 //---------------------------------------------------------------------------
@@ -127,14 +143,29 @@ module forearm_potentiometer_support()
     potentiometer_support_with_screw_holes(25, 48, 13, 29, 8);
 }
 //---------------------------------------------------------------------------
+module elbow_gear()
+{// partial gear
+    pot_gear(13, 13, rb_626_external_radius, 10); 
+}
+//---------------------------------------------------------------------------
 module elbow_pulley_with_components()
 {
-    // big pulley 
-  elbow_pulley();
+    // pulley 
+    elbow_pulley();
+    
+    // M6 screw
+    translate([0, 0, -m6_nut_thick]) M6x50_hexa_screw();
+    
+    626rs();
+    
+    translate([0, 0, 11]) 626rs();
+    translate([0, 0, 11 + rb_626_thick]) M6_nut();
+    
+    translate([0, 0, 12]) elbow_gear();
     
     // motor housing
-  translate ([20 + 3, -nema_11_width / 2 - 2, 0]) rotate ([0, 90, 0]) mirror ([0, 0, 1]) 
-    forearm_motor_housing_with_components();
+ // translate ([20 + 3, -nema_11_width / 2 - 2, 0]) rotate ([0, 90, 0]) mirror ([0, 0, 1]) 
+   // forearm_motor_housing_with_components();
     
     // stepper motor
  // translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
@@ -165,16 +196,15 @@ module forearm_pulley()
 {
     difference(){
         pulley_base_height = 1.5;
-        pulley_with_shaft(16, 49, 0, 0, 8, 4, 0, 0);
-
+        pulley_with_shaft(66, 20, 0, 0, 8, 4, 0, 0);
         // M3 screw hole
         
-        translate ([0, 0, 5 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = 2, $fn = 20);
+        translate ([0, 0, 4 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = 2, $fn = 20);
         
         //  M3 nut hole
         hull(){
-            translate ([0, 10, 0]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            translate ([0, 10, 9 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([0, 8, 0]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([0, 8, 4 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
         }
     }
 }
@@ -403,8 +433,9 @@ module arm(bone_length)
 //---------------------------------------------------------------------------
 arm(200);
 
-//body_arm_bone(300);
+//motor_pulley();
 
+//body_arm_bone(300);
 
 //body_articulation();
 
@@ -442,3 +473,5 @@ arm(200);
 //shoulder_plate();
 
 //forearm_potentiometer_support();
+
+//elbow_gear();
