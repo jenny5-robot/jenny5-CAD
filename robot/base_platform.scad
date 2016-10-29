@@ -453,26 +453,19 @@ module motor_housing_with_components()
 }
 //--------------------------------------------------------------------
 module base_motor_pulley()
-{
-    
-    pulley_t_ht = 7;	// length of toothed part of pulley
-    pulley_base_height = 1.5;
-    difference(){
+{  
+  pulley_t_ht = 8;	// length of toothed part of pulley
+  pulley_base_height = 1.5;
+  difference(){    
+    rotate ([0, 0, 10.8]) pulley_with_shaft(62, 15, 0, 0, 8, 5, 0, 0);
         
-   rotate ([0, 0, 10.8]) pulley_with_shaft(62, 15, 0, 0, 8, 5, 0, 0);
+        // M4 screws
         
-        // M3 screws
+    translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = m4_screw_radius, $fn = 25);
         
-        translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = 2, $fn = 25);
-        
-        // M3 nut
-        hull(){
-            translate ([0, 3.6, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick + 0.2 + 1.4, r = m4_nut_radius + 0.1, $fn = 6);
-      //     translate ([0, 3.6, 9 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick + 0.2 + 1.4, r = m4_nut_radius + 0.1, $fn = 6);
-        }
-
-    }
-
+        // M4 nut
+    translate ([0, 3.6, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick + 0.2 + 1.4, r = m4_nut_radius + 0.1, $fn = 6);
+  }
 }
 //--------------------------------------------------------------------
 
