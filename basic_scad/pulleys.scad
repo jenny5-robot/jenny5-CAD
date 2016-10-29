@@ -46,6 +46,7 @@ T5_pulley_dia_20 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 13);
 T5_pulley_dia_21 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 14);
 T5_pulley_dia_23 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 15);
 T5_pulley_dia_28 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 18);
+T5_pulley_dia_31 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 20);
 T5_pulley_dia_40 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 25);
 T5_pulley_dia_45 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 29);
 T5_pulley_dia_50 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 32);
@@ -119,6 +120,9 @@ module pulley(profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_h
   if ( profile == 63 ) { _pulley ( "T5" , T5_pulley_dia_28 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 64 ) { _pulley ( "T5" , T5_pulley_dia_45 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 65 ) { _pulley ( "T5" , T5_pulley_dia_103 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 66 ) { _pulley ( "T5" , T5_pulley_dia_31 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  
+  
 }
 
 
@@ -242,6 +246,7 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
                 if ( profile == 63 ) { T5(pulley_t_ht);}
                 if ( profile == 64 ) { T5(pulley_t_ht);}
                 if ( profile == 65 ) { T5(pulley_t_ht);}
+                if ( profile == 66 ) { T5(pulley_t_ht);}
 			}
 
 			}
@@ -351,7 +356,7 @@ module GT2_5mm(pulley_t_ht)
     
     //echo(T2_5_pulley_dia_84);
     
-    //echo(T5_pulley_dia_103 = T5_pulley_dia_103);
+    //echo(T5_pulley_dia_31 = T5_pulley_dia_31);
     
     //my_pulley(16, 49, 0, 0, 8);
     
@@ -371,4 +376,5 @@ module GT2_5mm(pulley_t_ht)
     
     //pulley(63, 18, 0, 0, 8);
     
-    pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
+    //pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
+    pulley_with_shaft(66, 20, 0, 0, 8, 4, 0, 0);
