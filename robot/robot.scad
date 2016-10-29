@@ -4,28 +4,16 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_stepper_motors.scad>
-
 include <../basic_scad/params_basic_components.scad>
 use <../basic_scad/basic_components.scad>
-//use <../basic_scad/stepper_motors.scad>
+
 include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
-include <../basic_scad/params_radial_bearings.scad>
-include <../basic_scad/params_dc_motors.scad>
-use <../basic_scad/dc_motors.scad>
-//use <../basic_scad/stepper_motors_housing.scad>
-include <../basic_scad/params_motor_housing.scad>
-use <../basic_scad/radial_bearing_housing.scad>
+
 include <../basic_scad/config.scad>
-include <../basic_scad/params_radial_bearings_housing.scad>
 
 
-use <../basic_scad/functions_3d.scad>
 use <../basic_scad/masa.scad>
-use <../basic_scad/pulleys.scad>
-use <../basic_scad/radial_bearings.scad>
-use <../basic_scad/rings.scad>
 use <../basic_scad/spacer.scad>
 
 include <params_robot.scad>
