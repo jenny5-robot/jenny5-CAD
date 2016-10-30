@@ -1,9 +1,3 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
-// MIT License
-//--------------------------------------------------------------
-
 include <params_screws_nuts_washers.scad>
 include <params_basic_components.scad>
 include <params_radial_bearings.scad>
@@ -14,35 +8,38 @@ use <radial_bearings.scad>
 
 
 //---------------------------------------------------------------------------
-module belt_tensioner_bearing_holder(lungime, latime, grosime_perete)
+module belt_tensioner_cover(length, width)
 {
+    wall_thick = 3;
     difference(){
-        color(plastic_color) cube([lungime, latime, grosime_perete]);
-        translate ([6, latime / 2, 0] - display_tolerance_z) cylinder(h = grosime_perete + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-        translate ([lungime - 6, latime / 2, 0] - display_tolerance_z) cylinder(h = grosime_perete + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+        color(plastic_color) cube([length, width, wall_thick]);
+        translate ([washer_4_12_radius, width / 2, 0] - display_tolerance_z) cylinder(h = wall_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+        translate ([length - washer_4_12_radius, width / 2, 0] - display_tolerance_z) cylinder(h = wall_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
     }
 }
 //---------------------------------------------------------------------------
-module belt_tensioner_base()
+module belt_tensioner_base(length)
 {
-    grosime_perete = 3;
+    wall_thick = 3;
     bone_thick = 10;
 
-    h = 13 - grosime_perete;
-    lungime = h + grosime_perete + bone_thick + 3 + m4_nut_thick;
-    grosime = 12;
-    latime = bone_thick + 2 * grosime_perete;
-    lungime_bearing_holder = 2 * washer_4_12_radius + latime + 2 * rb_624_external_radius;
+    h = 13 - wall_thick;
+    
+    thick = 12;
+    width = bone_thick + 2 * wall_thick;
+    bearing_cover_length = 4 * washer_4_12_radius + width;
+    
     difference(){
         union(){
-            color(plastic_color) cube([lungime, latime, grosime]);
-            translate ([lungime -0.1, -lungime_bearing_holder / 2 + latime / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_bearing_holder(lungime_bearing_holder, grosime, grosime_perete);
+            color(plastic_color) cube([length, width, thick]);
+            translate ([length, -bearing_cover_length / 2 + width / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_cover(bearing_cover_length, thick, wall_thick);
         }
-        // gaura os
-        translate([grosime_perete + m4_nut_thick, grosime_perete - 0.2, 0] - display_tolerance_z) cube([bone_thick + 3, bone_thick + 2 * 0.2, grosime] + 2 * display_tolerance_z);
-        // gaura m4 screw
-        translate([0, latime / 2, grosime / 2] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 30);
-        translate([grosime_perete, latime / 2, grosime / 2]) rotate([0, 90, 0]) cylinder (h = 10, r = m4_nut_radius, $fn = 6);
+        // bone hole
+        translate([wall_thick + m4_nut_thick, wall_thick - 0.2, 0] - display_tolerance_z) cube([bone_thick + 2, bone_thick + 2 * 0.2, thick] + 2 * display_tolerance_z);
+        // m4 screw hole
+        translate([0, width / 2, thick / 2] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 30);
+        // m4 nut hole
+        translate([wall_thick, width / 2, thick / 2]) rotate([0, 90, 0]) cylinder (h = 10, r = m4_nut_radius, $fn = 6);
     }
 }
 //---------------------------------------------------------------------------
@@ -81,7 +78,7 @@ module belt_tensioner_slider()
     translate ([0, 0, m4_nut_thick + 1 + 2 * rb_624_thick + 4 + wall_thick_3]) M4_autolock_nut();
 }
 //---------------------------------------------------------------------------
-module belt_tensioner(h, dist_to_bearings)
+module belt_tensioner_prism(h, dist_to_bearings)
 {
     
     belt_tensioner_housing(h);
@@ -92,8 +89,43 @@ module belt_tensioner(h, dist_to_bearings)
     }
 }
 //---------------------------------------------------------------------------
-belt_tensioner(30, 10);
+{
+    belt_tensioner_base(h);
 
-//belt_tensioner_base();
+    // right side bearings
+    translate ([h - 3, -washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) M4x25_hexa();
+    translate ([h + 3, -washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) washer_4_9();
+    translate ([h + 3 + 1, -washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) 624rs();
+    translate ([h + 3 + 1 + rb_624_thick, -washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) 624rs();
+    translate ([h + 3 + 1 + 2 * rb_624_thick, -washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) washer_4_9();
+    translate ([h + 3 + 1 + 2 * rb_624_thick + 1 + wall_thick_3, -washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) washer_4_9();
+    translate ([h + 3 + 1 + 2 * rb_624_thick + 1 + wall_thick_3 + 1, -washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) M4_autolock_nut();
+
+    thick = 12;
+    bone_thick = 10;
+    width = bone_thick + 2 * wall_thick_3;
+
+    // left side bearings
+    translate ([h - 3, width + washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) M4x25_hexa();
+    translate ([h + 3, width + washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) washer_4_9();
+    translate ([h + 3 + 1, width + washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) 624rs();
+    translate ([h + 3 + 1 + rb_624_thick, width + washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) 624rs();
+    translate ([h + 3 + 1 + 2 * rb_624_thick, width + washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) washer_4_9();
+    translate ([h + 3 + 1 + 2 * rb_624_thick + 1 + wall_thick_3, width + washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) washer_4_9();
+    translate ([h + 3 + 1 + 2 * rb_624_thick + 1 + wall_thick_3 + 1, width + washer_4_12_radius, washer_4_12_radius]) rotate ([0, 90, 0]) M4_autolock_nut();
+
+// cover
+    bearing_cover_length = 4 * washer_4_12_radius + width;
+    translate ([h + 3 + 1 + 2 * rb_624_thick + 1, -bearing_cover_length / 2 + width / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_cover(bearing_cover_length, thick, wall_thick_3);
+
+    
+}
+//---------------------------------------------------------------------------
+
+//belt_tensioner_housing(20);
+
+//belt_tensioner_prism(30, 10);
+
+//belt_tensioner_base(25);
 
 //belt_tensioner_slider();
