@@ -1,4 +1,4 @@
-# Jenny5 robot
+# Jenny5 robot - CAD files
 
 A human size, multi purpose (almost humanoid) robot.
 
