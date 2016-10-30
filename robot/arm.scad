@@ -41,6 +41,7 @@ use <../basic_scad/params_potentiometers.scad>
 
 use <potentiometer_gears.scad>
 
+
 //---------------------------------------------------------------------------
 module motor_pulley()
 {
@@ -107,7 +108,7 @@ module elbow_pulley()
         translate ([0, 0, 0]) cylinder( h = rb_626_thick + 90, r = rb_626_external_radius - 1, $fn = 50);
 
         // top bearing hole    
-        translate ([0, 0, 10]) cylinder( h = rb_626_thick + display_tolerance + 0.5, r = rb_626_external_radius, $fn = 50);
+        translate ([0, 0, 9]) cylinder( h = rb_626_thick + display_tolerance + 0.5, r = rb_626_external_radius, $fn = 50);
 
         // cut hole for belt
         translate ([dist_to_rotita_fore_arm + 5, -23, 0] - display_tolerance_z) cube([13, 46, 20]);
@@ -200,16 +201,7 @@ module forearm_pulley()
 {
     difference(){
         pulley_base_height = 1.5;
-        pulley_with_shaft(66, 20, 0, 0, 8, 4, 0, 0);
-        // M3 screw hole
-        
-        translate ([0, 0, 4 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = 2, $fn = 20);
-        
-        //  M3 nut hole
-        hull(){
-            translate ([0, 8, 0]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            translate ([0, 8, 4 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-        }
+        pulley_with_shaft(66, 20, 0, 0, 8, 4, m8_nut_radius, m8_nut_height);
     }
 }
 //---------------------------------------------------------------------------
@@ -248,10 +240,18 @@ module upper_arm_bone()
     }
 }
 //---------------------------------------------------------------------------
+module belt_tensioner_elbow_pulley()
+{
+  belt_tensioner_with_branch(31);
+}
+//---------------------------------------------------------------------------
 module upper_arm()
 {
     // bone
    translate ([- bone_thick / 2, -150, -bone_thick / 2]) rotate ([90, 0, 0]) upper_arm_bone();
+    
+    // belt tensioner
+    translate ([-wall_thick_3 - bone_thick / 2, -200, - bone_thick / 2- wall_thick_3 - m4_nut_height - 2]) rotate ([-90, 0, 0]) rotate ([0, 0, -90]) belt_tensioner_elbow_pulley();
     
     // M8 screw
    translate ([0, 9, 0]) rotate ([90, 0, 0]) M8_hexa_screw(150);
@@ -440,7 +440,7 @@ module arm(bone_length)
     translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
-//arm(200);
+arm(200);
 
 //motor_pulley();
 
@@ -471,7 +471,7 @@ module arm(bone_length)
 //forearm_motor_housing_with_components();
 
 
-elbow_pulley();
+//elbow_pulley();
 
 //elbow_pulley_with_components();
 
@@ -486,3 +486,5 @@ elbow_pulley();
 //forearm_potentiometer_support();
 
 //elbow_gear();
+
+//radial_bearing_608_vertical_housing_slim_double();
