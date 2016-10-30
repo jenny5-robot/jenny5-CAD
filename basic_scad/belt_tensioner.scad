@@ -89,6 +89,7 @@ module belt_tensioner_prism(h, dist_to_bearings)
     }
 }
 //---------------------------------------------------------------------------
+module belt_tensioner_with_branch(h)
 {
     belt_tensioner_base(h);
 
@@ -121,6 +122,7 @@ module belt_tensioner_prism(h, dist_to_bearings)
     
 }
 //---------------------------------------------------------------------------
+belt_tensioner_with_branch(25);
 
 //belt_tensioner_housing(20);
 
