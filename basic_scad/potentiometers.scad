@@ -34,4 +34,6 @@ module potentiometer_BOURNS_3852A_282_103AL()
 }
 
 //--------------------------------------------------------------
-potentiometer_92R1A_J22_L15L();
+//potentiometer_92R1A_J22_L15L();
+
+potentiometer_BOURNS_3852A_282_103AL();
