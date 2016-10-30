@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 QTR_1A_size =[13, 8, 1];
 
 QTR_3A_size =[32, 8, 1];

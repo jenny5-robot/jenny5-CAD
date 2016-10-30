@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 include <params_ultrasonic.scad>
 include <params_screws_nuts_washers.scad>
 use <basic_components.scad>

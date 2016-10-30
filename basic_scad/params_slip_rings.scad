@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 SRC022A_6_stator_length = 19;
 SRC022A_6_stator_radius = 11;
 SRC022A_6_flange_radius = 22;

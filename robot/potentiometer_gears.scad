@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 use <../basic_scad/parametric_involute_gear_v5.0.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 include <../basic_scad/params_basic_components.scad>
@@ -59,7 +65,7 @@ module pot_gear(num_teeth, screw_angle, internal_radius = 3.3, height = 8)
 			flat=false
         );
         translate (-display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = internal_radius, $fn = 30);
-        
+    /*    
           // m3 screw hole
         translate ([0, 0, height / 2]) rotate([0, 90, 0]) cylinder (h = 22, r = 1.4, $fn = 30);  
         // m3 nut hole
@@ -67,13 +73,14 @@ module pot_gear(num_teeth, screw_angle, internal_radius = 3.3, height = 8)
             translate ([internal_radius + 2, 0, 0]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
             translate ([internal_radius + 2, 0, height]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
         }
+        */
     }
 }
 //--------------------------------------------------------------------
 
 //pot_gear(num_teeth = 12, screw_angle = 15, height = 8);// 2x cot, inainte de cot
 
-//pot_gear(11, 13, 6.6, 10); // rulment
+pot_gear(11, 13, 6.6, 10); 
 
 //pot_gear(13, 13);
 

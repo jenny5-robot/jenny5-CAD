@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 
 m2_screw_radius = 1;
 m2_nut_radius = 2.2;

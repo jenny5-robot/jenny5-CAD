@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 pot_92R1A_J22_L15L_base_length = 17.5;
 pot_92R1A_J22_L15L_base_width = 16;
 pot_92R1A_J22_L15L_base_height = 12.6;
