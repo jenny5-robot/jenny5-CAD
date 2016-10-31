@@ -159,18 +159,20 @@ module elbow_pulley_with_components()
     elbow_pulley();
     
     // M6 screw
-    translate([0, 0, -m6_nut_thick]) M6x50_hexa_screw();
+    translate([0, 0, -m6_nut_thick]) M6_hexa_screw(45);
     
     626rs();
     
     translate([0, 0, 11]) 626rs();
     translate([0, 0, 11 + rb_626_thick]) M6_nut();
+    for (i=[0:2]) // 3 washers
+      translate([0, 0, 11 + rb_626_thick + m6_nut_thick + i * washer_6_thick]) washer_6_12();
     
     translate([0, 0, 12]) elbow_gear();
     
     // motor housing
- translate ([14 + 3, -nema_11_width / 2 - 2, 0]) rotate ([0, 90, 0]) mirror ([0, 0, 1]) 
-    forearm_motor_housing_with_components();
+    translate ([14 + 3, -nema_11_width / 2 - 2, 0]) rotate ([0, 90, 0]) mirror ([0, 0, 1]) 
+      forearm_motor_housing_with_components();
     
     // stepper motor
  // translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
@@ -228,9 +230,11 @@ module fore_arm()
 //---------------------------------------------------------------------------
 module fore_arm_with_elbow_pulley()
 {
-  fore_arm();
+  translate ([18, 0, 22]) 
+    rotate ([0, 90,0]) rotate([0, 0, 180]) 
+    fore_arm();
 // elbow pulley
-  translate ([-rb_608_external_radius - 11, 0, -18]) rotate ([0, 90,0]) rotate([0, 0, 180]) elbow_pulley_with_components();
+    elbow_pulley_with_components();
 }
 //---------------------------------------------------------------------------
 module upper_arm_bone()
@@ -263,10 +267,14 @@ module upper_arm()
     translate ([0, nema_17_width / 2 + 9 + 3, -nema_17_with_5_1_gearbox_height + upper_arm_motor_housing_shift - 3]) nema_17_with_5_1_gearbox();
     
     // motor pulley
-    // translate ([0, nema_17_width / 2 + 9 + 3, 33]) mirror([0, 0, 1])motor_pulley();
+    translate ([0, nema_17_width / 2 + 9 + 3, 33]) mirror([0, 0, 1])motor_pulley();
     
     // forearm
-    translate ([0, -160 - upper_arm_length + 3 / 2 * bone_thick -10, -bone_thick / 2 + 15])  rotate([0, 0, angle_elbow]) rotate([0, 90, 0]) fore_arm_with_elbow_pulley();
+    translate ([0, -160 - upper_arm_length + 3 / 2 * bone_thick, -bone_thick / 2 + 37])  
+    rotate([0, 0, angle_elbow]) 
+    //rotate([0, 90, 0]) 
+    mirror([0, 0, 1])
+    fore_arm_with_elbow_pulley();
     
     // belt
     translate ([0, 9 + 3 + nema_17_width / 2, upper_arm_motor_housing_shift + nema_17_gearbox_shaft_length - 10]) rotate([0, 0, -90]) belt_on_2_pulleys(10, 52, upper_arm_length + 177, 5);
@@ -440,7 +448,7 @@ module arm(bone_length)
     translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
-arm(200);
+//arm(200);
 
 //motor_pulley();
 
@@ -458,7 +466,7 @@ arm(200);
 
 
 //shoulder();
-//upper_arm();
+upper_arm();
 
 //forearm_pulley();
 

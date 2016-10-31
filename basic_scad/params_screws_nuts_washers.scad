@@ -78,7 +78,7 @@ washer_4_9_external_radius = 4.5;
 washer_4_9_internal_radius = 2.15;
 washer_4_9_thick = 1;
 
-washer_6_thick = 1.5;
+washer_6_thick = 1.7;
 washer_8_thick = 1.5;
 washer_5_thick = 1;
 
