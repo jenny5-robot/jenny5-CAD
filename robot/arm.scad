@@ -31,7 +31,8 @@ use <../basic_scad/rings.scad>
 use <../basic_scad/spacer.scad>
 include <../basic_scad/params_sensor_array.scad>
 
-use <gripper.scad>
+include <params_gripper.scad>
+use <angular_gripper.scad>
 use <../basic_scad/belt.scad>
 use <../basic_scad/belt_tensioner.scad>
 
@@ -42,14 +43,35 @@ use <../basic_scad/params_potentiometers.scad>
 use <potentiometer_gears.scad>
 
 
+
 //---------------------------------------------------------------------------
 module motor_pulley()
 {
   pulley_t_ht = 8;	// length of toothed part of pulley
   pulley_base_height = 1.5;
   difference(){      
+      rotate ([0, 0, 12]) 
+    pulley_with_shaft(62, 15, 0, 0, 8, 4, 0, 0);
+        
+    // M3 screws
+    translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = m3_screw_radius, $fn = 25);
+        
+    // M3 nut
+    hull(){
+            translate ([0, 5.5, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
+           translate ([0, 5.5, 9 + pulley_base_height]) rotate ([-90, 30, 0]) cylinder (h = m3_nut_thick + 0.2, r = m3_nut_radius + 0.1, $fn = 6);
+    }
+
+  }
+}
+//---------------------------------------------------------------------------
+module forearm_motor_pulley()
+{
+  pulley_t_ht = 8;	// length of toothed part of pulley
+  pulley_base_height = 1.5;
+  difference(){      
     //rotate ([0, 0, 10.8]) pulley_with_shaft(52, 14, 0, 0, 8, 4, 0, 0);
-    pulley_with_shaft(52, 14, 0, 0, 8, 4, 0, 0);
+    pulley_with_shaft(52, 14, 0, 0, 8, 3, 0, 0);
         
     // M3 screws
     translate ([0, 0, pulley_t_ht / 2 + pulley_base_height]) rotate ([-90, 0, 0]) cylinder (h = 40, r = m3_screw_radius, $fn = 25);
@@ -104,6 +126,7 @@ module elbow_pulley()
      
         // bearing hole    
         translate ([0, 0, 0] - display_tolerance_z) cylinder( h = rb_626_thick + display_tolerance + 0.5, r = rb_626_external_radius, $fn = 50);
+
         // bearing border
         translate ([0, 0, 0]) cylinder( h = rb_626_thick + 90, r = rb_626_external_radius - 1, $fn = 50);
 
@@ -111,7 +134,7 @@ module elbow_pulley()
         translate ([0, 0, 9]) cylinder( h = rb_626_thick + display_tolerance + 0.5, r = rb_626_external_radius, $fn = 50);
 
         // cut hole for belt
-        translate ([dist_to_rotita_fore_arm + 5, -23, 0] - display_tolerance_z) cube([13, 46, 20]);
+        translate ([dist_to_rotita_fore_arm + 4, -25, 0] - display_tolerance_z) cube([15, 50, 20]);
         // holes for fixing the forearm
         // first bearing holes
         for (i= [0:1]){
@@ -132,8 +155,9 @@ module elbow_pulley()
 module forearm_motor_housing()
 {
     difference(){
-      nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
-        translate ([0, nema_11_width / 2 + 2, 17] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = 5, r = 8);
+        nema_motor_housing_with_belt_tensioner_bearing_based_x(15, 0, nema_11_width, nema_11_height, base_height = 40, nema_center_hole_radius = nema_11_motor_gearbox_hole_radius, nema_holes_position = gearbox_nema_11_holes_position, base_thick = 3, dist_to_first_hole_z = 14, nema_housing_base_holes = nema_11_housing_base_holes, motor_screw_holes_rotation_angle = 45);
+        
+      translate ([0, nema_11_width / 2 + 2, 17] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = 5, r = 8);
     }
 }
 //---------------------------------------------------------------------------
@@ -175,12 +199,12 @@ module elbow_pulley_with_components()
       forearm_motor_housing_with_components();
     
     // stepper motor
- // translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
-   // nema_11_with_27_1_gearbox();
+  translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
+    nema_11_with_27_1_gearbox();
     
     // motor pulley
   translate ([20 + 3 + 3, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
-    motor_pulley();
+    forearm_motor_pulley();
     
     // belt
   translate ([20 + 3 + 3, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, -90, 0]) 
@@ -225,7 +249,7 @@ module fore_arm()
     translate ([rbearing_608_enclosed_housing_slim_size[2] - rb_608_external_radius, rbearing_608_enclosed_housing_slim_size[0] / 2, forearm_pulley_thick + 2 * washer_8_thick - 1]) rotate ([90, 0, 0])rotate ([0, -90, 0]) radial_bearing_608_vertical_housing_slim_double();
 
     // gripper
-    translate ([0, 0, fore_arm_length + bone_thick + inaltime_roata_reductor_cot + 3]) gripper();
+    translate ([-gripper_base_length / 2, bone_thick / 2, fore_arm_length + bone_thick + inaltime_roata_reductor_cot + 3]) gripper();
 }
 //---------------------------------------------------------------------------
 module fore_arm_with_elbow_pulley()
@@ -246,13 +270,13 @@ module upper_arm_bone()
 //---------------------------------------------------------------------------
 module belt_tensioner_elbow_pulley()
 {
-  belt_tensioner_with_branch(31);
+  belt_tensioner_with_branch(32);
 }
 //---------------------------------------------------------------------------
 module upper_arm()
 {
     // bone
-   translate ([- bone_thick / 2, -150, -bone_thick / 2]) rotate ([90, 0, 0]) upper_arm_bone();
+   translate ([- bone_thick / 2, -105, -bone_thick / 2]) rotate ([90, 0, 0]) upper_arm_bone();
     
     // belt tensioner
     translate ([-wall_thick_3 - bone_thick / 2, -200, - bone_thick / 2- wall_thick_3 - m4_nut_height - 2]) rotate ([-90, 0, 0]) rotate ([0, 0, -90]) belt_tensioner_elbow_pulley();
@@ -270,14 +294,13 @@ module upper_arm()
     translate ([0, nema_17_width / 2 + 9 + 3, 33]) mirror([0, 0, 1])motor_pulley();
     
     // forearm
-    translate ([0, -160 - upper_arm_length + 3 / 2 * bone_thick, -bone_thick / 2 + 37])  
+    translate ([0, -80 - upper_arm_length + 3 / 2 * bone_thick, -bone_thick / 2 + 37])  
     rotate([0, 0, angle_elbow]) 
-    //rotate([0, 90, 0]) 
     mirror([0, 0, 1])
     fore_arm_with_elbow_pulley();
     
     // belt
-    translate ([0, 9 + 3 + nema_17_width / 2, upper_arm_motor_housing_shift + nema_17_gearbox_shaft_length - 10]) rotate([0, 0, -90]) belt_on_2_pulleys(10, 52, upper_arm_length + 177, 5);
+    translate ([0, 9 + 3 + nema_17_width / 2, upper_arm_motor_housing_shift + nema_17_gearbox_shaft_length - 10]) rotate([0, 0, -90]) belt_on_2_pulleys(10, 52, upper_arm_length + 100, 5);
     
 }
 //---------------------------------------------------------------------------
@@ -324,7 +347,7 @@ module shoulder()
     nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 20);
     
     // bone support 1
-    translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, 0, grosime_tabla_alu + 25]) 
+    translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, 30, grosime_tabla_alu + 25]) 
     mirror([0, 0, 1])
     radial_bearing_608_vertical_housing();
     
@@ -450,7 +473,7 @@ module arm(bone_length)
 //---------------------------------------------------------------------------
 //arm(200);
 
-//motor_pulley();
+motor_pulley();
 
 //body_arm_bone(300);
 
@@ -466,9 +489,10 @@ module arm(bone_length)
 
 
 //shoulder();
-upper_arm();
+//upper_arm();
 
 //forearm_pulley();
+//forearm_motor_pulley();
 
 //fore_arm();
 
