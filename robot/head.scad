@@ -28,6 +28,7 @@ use <../basic_scad/stepper_motors.scad>
 use <../basic_scad/webcam.scad>
 use <../basic_scad/ultrasonic_support.scad>
 use <../basic_scad/ultrasonic.scad>
+use <../basic_scad/basic_components.scad>
 
 
 use <potentiometer_gears.scad>

@@ -6,8 +6,6 @@
 
 use <basic_components.scad>
 
-use <stepper_motors_utils.scad>
-
 include <params_screws_nuts_washers.scad>
 include <params_stepper_motors.scad>
 

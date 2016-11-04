@@ -18,7 +18,6 @@ include <../basic_scad/params_motor_housing.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 include <../basic_scad/config.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
-use <../basic_scad/stepper_motors_utils.scad>
 
 use <../basic_scad/functions_3d.scad>
 
