@@ -7,7 +7,9 @@
 include <params_basic_components.scad>
 include <params_stepper_motors.scad>
 
-	perete_lateral_motor_housing = wall_thick_2;
+airflow_spacer = 0;
+
+perete_lateral_motor_housing = wall_thick_2;
 	perete_baza_motor_housing = wall_thick_3;
 	perete_motor_motor_housing = wall_thick_3;
 
