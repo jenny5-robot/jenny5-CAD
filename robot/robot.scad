@@ -40,15 +40,6 @@ module body_with_head()
     translate ([-40, -latura_L, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
 }
 //---------------------------------------------------------------------------
-module head_body_foot()
-{
-    inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
-    // body
-    translate ([0, lungime_talpa - 40, inaltime_long_leg + 30])  body_with_head();
-// legs
-    long_leg_with_rotation_module();
- }
-//---------------------------------------------------------------------------
 module platform_foot()
 {
     translate ([0, 0, base_platform_size[2]]) long_leg(angle_knee);
@@ -58,11 +49,11 @@ module platform_foot()
 //---------------------------------------------------------------------------
 module robot()
 {
-    inaltime_long_leg = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
+    long_leg_height = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
     
-    echo(inaltime_long_leg = inaltime_long_leg);
+    echo(long_leg_height = long_leg_height);
     
-    translate ([90, 0, inaltime_long_leg + 10]) rotate ([0, 0, 90]) body_with_head();
+    translate ([50, 0, long_leg_height + 10]) rotate ([0, 0, 90]) body_with_head();
     platform_foot();
 }
 //---------------------------------------------------------------------------

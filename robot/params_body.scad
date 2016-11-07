@@ -15,7 +15,7 @@ latura_U = 40;
 
 dist_edge_to_shaft = 14; //radius_roata_reductor;
 
-chest_height = 250;
+chest_height = 350;
 chest_length = 430;
 
 latime_coloana_vertebrala = 50;

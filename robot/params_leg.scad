@@ -9,7 +9,7 @@ include <../basic_scad/params_basic_components.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 
 
-angle_knee = 55;
+angle_knee = 50;
 
 
 latura_U_mare = latura_U_40x40;
@@ -21,7 +21,7 @@ grosime_perete_teava = 3;
 
 lungime_talpa = 260;
 
-inaltime_os_picior = 497;
+inaltime_os_picior = 400;
 dist_to_incheietura = rb_608_external_radius + 3;
 dist_to_incheietura_talpa = 32;
 dist_to_incheietura_talpa_motor = dist_to_incheietura_talpa;
