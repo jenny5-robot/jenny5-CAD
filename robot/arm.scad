@@ -381,6 +381,11 @@ module traction_pulley()
     pulley_with_shaft(60, 33, 0, 0, 8, 4, m8_nut_radius, m8_nut_height);
 }
 //---------------------------------------------------------------------------
+module potentiometer_support_shoulder_vertical()
+{
+    potentiometer_support_with_screw_holes(length = 25, width = 48, height = 14, dist_between_support_holes = 30, dist_to_support_holes = 6);
+}
+//---------------------------------------------------------------------------
 module body_articulation()
 {
     // plate
@@ -411,6 +416,11 @@ module body_articulation()
    translate ([-rbearing_608_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 9, rbearing_608_vertical_housing_size_bounded_half_small[2] + rbearing_608_vertical_housing_size_bounded_half_small_top[2] + 3])  
    mirror ([0, 0, 1]) 
     rbearing_608_vertical_housing_bounded_half_small_top();
+    
+    // potentiometer support
+   translate ([-48 / 2 + plate_body_size[0] / 2, plate_body_size[1] - 9 - 6 - 2, rbearing_608_vertical_housing_size_bounded_half_small[2] + wall_thick_3 + rbearing_608_vertical_housing_size_bounded_half_small_top[2]])  
+    rotate ([-90, 0, 0]) 
+    rotate ([0, 0, -90]) potentiometer_support_shoulder_vertical();
     
     // screw for upper arm
     translate ([40, 73, 33 + 5]) 
@@ -471,13 +481,17 @@ module arm(bone_length)
     translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
-//arm(200);
+
+
+arm(200);
+
+//potentiometer_support_shoulder_vertical();
 
 //motor_pulley();
 
 //body_arm_bone(300);
 
-body_articulation();
+//body_articulation();
 
 //nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
