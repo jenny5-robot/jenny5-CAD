@@ -34,6 +34,12 @@ module vertebral_column()
     color (aluminium_color) cube_empty(coloana_vertebrala_size[0] - 3, coloana_vertebrala_size[0], coloana_vertebrala_size[2]);
 }
 //---------------------------------------------------------------------------
+module bearing_housing_top_body()
+{
+  radial_bearing_housing_with_potentiometer_support(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, rb_608_thick, rbearing_608_housing_size[2] + 4, m4_screw_radius, 25);
+
+}
+//---------------------------------------------------------------------------
 module clavicle()
 {
     difference(){
@@ -56,7 +62,7 @@ module clavicle()
     }
     
     // carcasa sus - left
-    translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, grosime_tabla_alu + rbearing_608_housing_size[2]]) mirror ([0,0,1])rbearing_608_housing_with_bearing();
+    translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, grosime_tabla_alu + rbearing_608_housing_size[2] + 4]) rotate ([0, 0, -90])mirror ([0,0,1]) bearing_housing_top_body();
     
         // carcasa sus - right
     translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, grosime_tabla_alu + rbearing_608_housing_size[2]]) mirror ([0,0,1])rbearing_608_housing_with_bearing();
@@ -66,19 +72,19 @@ module os_diafragma()
 {
     difference(){
         color (aluminium_color) L(chest_length, latura_L / 2, latura_L, grosime_perete_L);
-        // gaura ax stanga
+        // left axis hole
         echo("gauri_os_diafragma left = ");
         for (i = [0:4]){
             echo([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i]);
             translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i] - display_tolerance_z) cylinder(h = grosime_perete_L + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
         }
-        // gaura ax dreapta
+        // right axis hole
         echo("gauri_os_diafragma right = ");
         for (i = [0:4]){
             echo([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i]);
             translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i] - display_tolerance_z) cylinder(h = grosime_perete_L + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
         }
-// gauri placa motor
+// motor sheet holes
 
 echo("gauri_os_diafragma placa motor left = ");
         for (i = [0:4])
@@ -146,5 +152,7 @@ module body()
 }    
 //---------------------------------------------------------------------------
 
-
 body();
+
+//bearing_housing_top_body();
+
