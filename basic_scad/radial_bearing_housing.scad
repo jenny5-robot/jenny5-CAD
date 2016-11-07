@@ -11,33 +11,34 @@ include <config.scad>
 include <params_radial_bearings_housing.scad>
 include <params_stepper_motors.scad>
 use <radial_bearings.scad>
-use <stepper_motors_utils.scad>
 use <functions_3d.scad>
+use <basic_components.scad>
+use <potentiometer_support.scad>
           
 //---------------------------------------------------------------------------
-module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, inaltime, screw_radius = m4_screw_radius, extension = 0, hole_base = 2)
+module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, housing_height, screw_radius = m4_screw_radius, extension = 0)
 {
    
+    echo(housing_height=housing_height);
+    
    color(plastic_color)
-       render(){
         difference(){
-            translate ([-rbearing_housing_size[0] / 2, -rbearing_housing_size[1] / 2, 0]) my_cube_rounded2([rbearing_housing_size[0], rbearing_housing_size[1], inaltime]);
-            // rulment
-            translate ([0, 0, radial_bearing_housing_grosime_perete_baza]) cylinder (h = rb_thick + display_tolerance, r = rb_external_radius, $fn = 70);
-            // gaura centru
-          translate (rbearing_housing_holes_position[0]-display_tolerance_z) cylinder (h = rb_thick + radial_bearing_housing_grosime_perete_baza + 2 * display_tolerance, r = rb_external_radius - hole_base, $fn = 70);
-            // gaura surub
+            translate ([-rbearing_housing_size[0] / 2, -rbearing_housing_size[1] / 2, 0]) my_cube_rounded2([rbearing_housing_size[0], rbearing_housing_size[1], housing_height]);
+            // bearing
+            translate ([0, 0, housing_height - rb_thick]) cylinder (h = rb_thick + display_tolerance, r = rb_external_radius, $fn = 70);
+            // bearing support hole
+          translate (rbearing_housing_holes_position[0]-display_tolerance_z) cylinder (h = rb_thick + radial_bearing_housing_grosime_perete_baza + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
+            // screws holes
     for (i=[1:4])
-        translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = rb_thick + radial_bearing_housing_grosime_perete_baza + 2 * display_tolerance, r = screw_radius, $fn = 20);  
+        translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = housing_height + 2 * display_tolerance, r = screw_radius, $fn = 20);  
     
         }
-    }
 }
 //---------------------------------------------------------------------------
-module radial_bearing_housing_with_potentiometer_support(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, inaltime, screw_radius = m4_screw_radius, extension_length = 25)
+module radial_bearing_housing_with_potentiometer_support(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, housing_height, screw_radius = m4_screw_radius, extension_length = 25)
 {
     color(plastic_color){
-      radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, inaltime, screw_radius);
+      radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, housing_height, screw_radius);
         translate ([rbearing_housing_size[0] / 2 - 2, -rbearing_housing_size[1] / 2, 0]) potentiometer_support(extension_length, rbearing_housing_size[1], 4);
     }
 }
@@ -363,7 +364,7 @@ translate([0, rbearing_608_enclosed_housing_slim_size[1], 0])
 
 //rbearing_608_vertical_housing_bounded_half_small_top();
 
-//rbearing_608_housing_with_potentiometer_support();
+rbearing_608_housing_with_potentiometer_support();
 
 //radial_bearing_608_vertical_housing();
 
@@ -374,7 +375,7 @@ translate([0, rbearing_608_enclosed_housing_slim_size[1], 0])
 //radial_bearing_608_vertical_housing();
 //radial_bearing_608_vertical_housing_slim();
 
-radial_bearing_608_vertical_housing_slim_double();
+//radial_bearing_608_vertical_housing_slim_double();
 
 //rbearing_6002_housing_with_bearing();
 
