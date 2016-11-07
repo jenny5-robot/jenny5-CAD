@@ -406,9 +406,9 @@ module body_articulation()
     rbearing_608_vertical_housing_bounded_half_small_top();
     
 // second bearing housing
-   translate ([-rbearing_608_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5, 3])  rbearing_608_vertical_housing_bounded_half_small();
+   translate ([-rbearing_608_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 9, 3])  rbearing_608_vertical_housing_bounded_half_small();
     
-   translate ([-rbearing_608_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 5, rbearing_608_vertical_housing_size_bounded_half_small[2] + rbearing_608_vertical_housing_size_bounded_half_small_top[2] + 3])  
+   translate ([-rbearing_608_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 9, rbearing_608_vertical_housing_size_bounded_half_small[2] + rbearing_608_vertical_housing_size_bounded_half_small_top[2] + 3])  
    mirror ([0, 0, 1]) 
     rbearing_608_vertical_housing_bounded_half_small_top();
     
@@ -471,13 +471,13 @@ module arm(bone_length)
     translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
-arm(200);
+//arm(200);
 
 //motor_pulley();
 
 //body_arm_bone(300);
 
-//body_articulation();
+body_articulation();
 
 //nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
@@ -520,3 +520,6 @@ arm(200);
 //elbow_gear();
 
 //radial_bearing_608_vertical_housing_slim_double();
+
+//rbearing_608_vertical_housing_bounded_half_small();
+//rbearing_608_vertical_housing_bounded_half_small_top();
