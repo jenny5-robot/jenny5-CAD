@@ -116,7 +116,7 @@ module upper_arm_pulley_with_components()
 //---------------------------------------------------------------------------
 module shoulder_pulley()
 {
-    pulley_with_shaft(64, 29, 0, 0, 4, m8_nut_radius, m8_nut_thick);
+    pulley_with_shaft(64, 29, 0, 0, 8, 4, m8_nut_radius, m8_nut_thick);
 }
 //---------------------------------------------------------------------------
 module elbow_pulley()
@@ -148,6 +148,10 @@ module elbow_pulley()
             translate (nema_11_housing_base_holes[i] - display_tolerance_z)  cylinder (h = 30, r = m4_screw_radius, $fn = 20);      
             translate (nema_11_housing_base_holes[i] + [0, 0, 5])  cylinder (h = 40, r = m4_nut_radius, $fn = 6);      
         }
+        
+        translate ([38, 25, 0] - display_tolerance_z) cylinder( h = 11 + 2 * display_tolerance, r = 3, $fn = 50);
+        translate ([38, -25, 0] - display_tolerance_z) cylinder( h = 11 + 2 * display_tolerance, r = 3, $fn = 50);
+
   }
     
 }
@@ -386,6 +390,11 @@ module potentiometer_support_shoulder_vertical()
     potentiometer_support_with_screw_holes(length = 25, width = 48, height = 14, dist_between_support_holes = 30, dist_to_support_holes = 6);
 }
 //---------------------------------------------------------------------------
+module body_stepper_motor_housing()
+{
+      nema_motor_housing_with_belt_tensioner_bearing_based_x(20, 5, nema_17_width, nema_17_height, base_height = 40, nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 0);
+}
+//---------------------------------------------------------------------------
 module body_articulation()
 {
     // plate
@@ -396,7 +405,7 @@ module body_articulation()
     translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 2 , plate_body_size[1], 0]) 
       rotate ([90, 0, 0]) 
         rotate ([0, 0, -90])
-          nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
+          body_stepper_motor_housing()
 
     // motor pulley
     
@@ -483,7 +492,7 @@ module arm(bone_length)
 //---------------------------------------------------------------------------
 
 
-arm(200);
+//arm(200);
 
 //potentiometer_support_shoulder_vertical();
 
@@ -497,7 +506,7 @@ arm(200);
 
 //nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 
-//shoulder_pulley();
+//sholder_pulley();
 
 //plate_body_articulation();
 
@@ -537,3 +546,5 @@ arm(200);
 
 //rbearing_608_vertical_housing_bounded_half_small();
 //rbearing_608_vertical_housing_bounded_half_small_top();
+
+//body_stepper_motor_housing();
