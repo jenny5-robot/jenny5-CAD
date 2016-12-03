@@ -178,7 +178,7 @@ module forearm_potentiometer_support()
 //---------------------------------------------------------------------------
 module elbow_gear()
 {// partial gear
-    pot_gear(13, 13, rb_626_external_radius, 10); 
+    pot_gear(13, rb_626_external_radius, 10); 
 }
 //---------------------------------------------------------------------------
 module elbow_pulley_with_components()
@@ -395,6 +395,26 @@ module body_stepper_motor_housing()
       nema_motor_housing_with_belt_tensioner_bearing_based_x(20, 5, nema_17_width, nema_17_height, base_height = 40, nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 0);
 }
 //---------------------------------------------------------------------------
+module pot_gear_with_screw_hole_14t()
+{
+    _height = 8;
+    
+    _internal_radius = 3.3;
+    
+    difference(){
+        rotate([0, 0, 13])
+    pot_gear(num_teeth = 14, internal_radius = _internal_radius, height = _height); 
+            
+          // m3 screw hole
+        translate ([0, 0, _height / 2]) rotate([0, 90, 0]) cylinder (h = 22, r = 1.4, $fn = 30);  
+        // m3 nut hole
+        hull(){
+            translate ([_internal_radius + 2, 0, 0]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
+            translate ([_internal_radius + 2, 0, _height]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
+        }
+    }
+}
+//---------------------------------------------------------------------------
 module body_articulation()
 {
     // plate
@@ -548,3 +568,5 @@ module arm(bone_length)
 //rbearing_608_vertical_housing_bounded_half_small_top();
 
 //body_stepper_motor_housing();
+
+pot_gear_with_screw_hole_14t();
