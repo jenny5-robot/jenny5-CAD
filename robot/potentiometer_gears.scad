@@ -42,11 +42,10 @@ module bone_gear()
     }
 }
 //--------------------------------------------------------------------
-module pot_gear(num_teeth, screw_angle, internal_radius = 3.3, height = 8)
+module pot_gear(num_teeth, internal_radius = 3.3, height = 8)
 {
     
     difference(){
-        rotate ([0, 0, screw_angle])
 		color (plastic_color)gear ( 
 			number_of_teeth=num_teeth,
 			circular_pitch=400,
@@ -80,7 +79,9 @@ module pot_gear(num_teeth, screw_angle, internal_radius = 3.3, height = 8)
 
 //pot_gear(num_teeth = 12, screw_angle = 15, height = 8);// 2x cot, inainte de cot
 
-pot_gear(11, 13, 6.6, 10); 
+//pot_gear(num_teeth = 11, screw_angle = 13, internal_radius = 6.6, height = 10); 
+
+pot_gear(num_teeth = 15, internal_radius = 3.3, height = 8); 
 
 //pot_gear(13, 13);
 
