@@ -39,7 +39,8 @@ module radial_bearing_housing_with_potentiometer_support(rbearing_housing_size, 
 {
     color(plastic_color){
       radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, housing_height, screw_radius);
-        translate ([rbearing_housing_size[0] / 2 - 2, -rbearing_housing_size[1] / 2, 0]) potentiometer_support(extension_length, rbearing_housing_size[1], 4);
+        
+        translate ([rbearing_housing_size[0] / 2 - 2, -rbearing_housing_size[1] / 2, 0]) potentiometer_support_squared(length = 27, width = 28, height = 5, dist_to_hole = 10, hole_tolerance = 15, wall_thick = 3, pot_width = 16);
     }
 }
 //---------------------------------------------------------------------------
@@ -267,7 +268,7 @@ module rbearing_608_housing_double()
 //---------------------------------------------------------------------------
 module rbearing_608_housing_with_potentiometer_support()
 {
-    radial_bearing_housing_with_potentiometer_support(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, rb_608_thick, rbearing_608_housing_size[2], m4_screw_radius, 25);
+    radial_bearing_housing_with_potentiometer_support(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, rb_608_thick, rbearing_608_housing_size[2] + 7, m4_screw_radius, 25);
 }
 //---------------------------------------------------------------------------
 module rbearing_6002_housing_with_bearing()
@@ -394,6 +395,4 @@ rbearing_608_housing_with_potentiometer_support();
 //radial_bearing_6002_enclosed_housing_with_nema_holes(120, 3); // 1x
 
 //rbearing_626_housing();
-
-//potentiometer_support_with_screw_holes(25, 47, 13, 31);
 
