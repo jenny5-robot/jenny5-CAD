@@ -28,22 +28,22 @@ module potentiometer_support(length, width, height, dist_to_hole = 10, hole_tole
 //---------------------------------------------------------------------------
 module potentiometer_support_squared(length, width, height, dist_to_hole = 10, hole_tolerance = 5, wall_thick = 2, pot_width = 15)
 {
-    difference(){
-  union(){
-    difference(){
-      cube([length, width, height]);
-      translate ([2, wall_thick, 2])  cube([length, width - 2 * wall_thick, height + 1]);
-      //translate ([wall_thick, wall_thick, -1])  cube([length, width - 2 * wall_thick, bottom_wall + 1]);
-      translate ([2, 0, height] - display_tolerance_y)  rotate ([0, atan((height - 2) / (length - wall_thick)), 0]) cube([length + sqrt(length), width + 2 * display_tolerance, height + 1]);
-    }
-      translate ([0, width / 2 - pot_width / 2 - 2, 0]) cube([length, pot_width + 4, height]);
+  difference(){
+    union(){
+      difference(){
+        cube([length, width, height]);
+        translate ([2, wall_thick, 2])  cube([length, width - 2 * wall_thick, height + 1]);
+        translate ([2, 0, height] - display_tolerance_y)  rotate ([0, atan((height - 2) / (length - wall_thick)), 0]) cube([length + sqrt(length), width + 2 * display_tolerance, height + 1]);
+      }
+        // stopper for potentiometer
+      translate ([0, width / 2 - pot_width / 2 - 2, 0]) cube([length, pot_width + 4, 4]);
     }
     // potentiometer screw hole
     translate ([2, width / 2 - pot_width / 2, 2]) cube([length, pot_width, height]);
       // potentiometer screw hole
     hull(){
-       translate ([2 + dist_to_hole, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 4.9, $fn = 40);
-       translate ([2 + dist_to_hole + hole_tolerance, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 4.9, $fn = 40);
+       translate ([2 + dist_to_hole, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 5, $fn = 40);
+       translate ([2 + dist_to_hole + hole_tolerance, width / 2, 0] - display_tolerance_z) cylinder (h = 5, r = 5, $fn = 40);
     }
   }
 }
@@ -66,8 +66,9 @@ module rectangular_axis_slider(height, wall_thick = 3, hole_depth = 10.5, hole_w
               translate([0, wall_thick, 3.5] - display_tolerance_x) cube([height + 2 * display_tolerance, hole_width, hole_depth]); 
               translate([height / 2 - 4, wall_thick, 3.5]) cube([8, hole_width, hole_depth + wall_thick] + display_tolerance_z); 
                 
-             // gaura surub   
+             // screw hole   
               translate([height / 2, width, wall_thick + hole_depth / 2]) rotate ([90, 0, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 20);
+                // nut hole
                 translate([height / 2, width - 3, wall_thick + hole_depth / 2]) rotate ([90, 30, 0]) cylinder (h = 10, r = m4_nut_radius, $fn = 6);
             }
 }
@@ -84,8 +85,9 @@ module potentiometer_support_on_rectangular_axis(length, width, potentiometer_he
               translate([6, 0, 2] - display_tolerance_y) cube([hole_depth, width + 2 * display_tolerance, hole_width]); 
              translate([6, 5, 2]) cube([hole_depth, width -10, 20]); 
                 
-             // gaura surub   
+             // screw hole
               translate([0, width / 2, 9] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 20);
+                // nut hole
                 translate([6 - m4_nut_thick, width / 2, 9] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = 5, r = m4_nut_radius, $fn = 6);
             }
         }
@@ -100,4 +102,4 @@ module potentiometer_support_on_rectangular_axis(length, width, potentiometer_he
 
 //potentiometer_support(27, 28, 5, 10, 5, 3, 0);
 
-potentiometer_support_squared(27, 28, 5, 10, 15, 3, 15);
+potentiometer_support_squared(length = 27, width = 28, height = 5, dist_to_hole = 10, hole_tolerance = 15, wall_thick = 3, pot_width = 16);
