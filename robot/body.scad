@@ -20,6 +20,9 @@ include <../basic_scad/params_stepper_motors.scad>
 include <params_motor_plate.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 
+include <../basic_scad/params_potentiometers.scad>
+use <../basic_scad/potentiometers.scad>
+
 use <motor_plate.scad>
 
 include <params_arm.scad>
@@ -49,7 +52,7 @@ module clavicle()
             echo([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i]);
             translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i] - display_tolerance_z) cylinder(h = grosime_perete_L + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
         }
-// gaura mare mijloc
+// shaft hole
             translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[0] - display_tolerance_z) cylinder(h = grosime_perete_L + 2 * display_tolerance, r = 11, $fn = 30);
 
         echo("gauri_os_clavicula right = ");
@@ -57,18 +60,24 @@ module clavicle()
             echo([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i]);
         translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i] - display_tolerance_z) cylinder(h = grosime_perete_L + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
         }
-// gaura mare mijloc
+// shaft hole
         translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[0] - display_tolerance_z) cylinder(h = grosime_perete_L + 2 * display_tolerance, r = 11, $fn = 30);
     }
     
-    // carcasa sus - left
-    translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, grosime_tabla_alu + rbearing_608_housing_size[2] + 4]) rotate ([0, 0, -90])mirror ([0,0,1]) bearing_housing_top_body();
+    // bearing housing top - left
+    translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, chest_length - dist_edge_to_shaft, grosime_tabla_alu + rbearing_608_housing_size[2] + 7]) rotate ([0, 0, -90])mirror ([0,0,1]) rbearing_608_housing_with_potentiometer_support();
     
-        // carcasa sus - right
-    translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, grosime_tabla_alu + rbearing_608_housing_size[2]]) mirror ([0,0,1])rbearing_608_housing_with_bearing();
+        // bearing housing top - right
+    translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, grosime_tabla_alu + rbearing_608_housing_size[2] + 7]) rotate([0, 0, 90]) mirror ([0,0,1]) rbearing_608_housing_with_potentiometer_support();
+    
+    
+    
+    // top potentiometer
+    translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft + 20, grosime_tabla_alu + rbearing_608_housing_size[2] + 7 - pot_92R1A_J22_L15L_base_height - 2]) rotate([0, 0, 90]) 
+    potentiometer_92R1A_J22_L15L();
 }
 //---------------------------------------------------------------------------
-module os_diafragma()
+module diafragma_bone()
 {
     difference(){
         color (aluminium_color) L(chest_length, latura_L / 2, latura_L, grosime_perete_L);
@@ -102,9 +111,9 @@ echo("gauri_os_diafragma placa motor left = ");
     }
 }
 //---------------------------------------------------------------------------
-module os_diafragma_cu_piese()
+module diafragma_bone_with_pieces()
 {
-    os_diafragma();
+    diafragma_bone();
     
     // bearing housing
     translate ([grosime_tabla_alu + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, rbearing_608_housing_size[2] + grosime_tabla_alu]) mirror ([0, 0, 1]) rbearing_608_housing_with_bearing();
@@ -136,7 +145,7 @@ module body()
     translate ([-chest_length / 2, 0, 0]) 
     rotate ([0, 0, -90]) 
     //mirror([0, 0, 1])
-        os_diafragma_cu_piese();
+        diafragma_bone_with_pieces();
     // top L
     translate ([-chest_length / 2, 0, chest_height]) rotate ([0, 0, -90]) 
     mirror([0, 0, 1])
@@ -154,5 +163,6 @@ module body()
 
 body();
 
-//bearing_housing_top_body();
 
+
+//rbearing_608_housing_with_potentiometer_support();
