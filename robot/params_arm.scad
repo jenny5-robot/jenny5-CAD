@@ -9,9 +9,9 @@ include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 
 angle_body_arm = 90;// -90...90
-angle_shoulder = -0; // -180... 0
+angle_shoulder = -90; // -180... 0
 angle_fore_arm = 90; // - 180 ... 0
-angle_elbow = 270; // -90, 0
+angle_elbow = -160; // -90, 0
 unghi_rotatie_gripper = 0;
 
 
@@ -30,7 +30,7 @@ fore_arm_length = 300;
 
    shoulder_plate_size = [lungime_tabla_umar, latime_tabla_umar, grosime_tabla_alu];
 
-   plate_body_size = ([70, 60, 3]);
+   plate_body_size = ([60, 60, 3]);
 
 
   
