@@ -32,7 +32,7 @@ module belt_tensioner_base(length)
     difference(){
         union(){
             color(plastic_color) cube([length, width, thick]);
-            translate ([length, -bearing_cover_length / 2 + width / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_cover(bearing_cover_length, thick, wall_thick);
+            translate ([length - 0.01, -bearing_cover_length / 2 + width / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_cover(bearing_cover_length, thick, wall_thick);
         }
         // bone hole
         translate([wall_thick + m4_nut_thick, wall_thick - 0.2, 0] - display_tolerance_z) cube([bone_thick + 2, bone_thick + 2 * 0.2, thick] + 2 * display_tolerance_z);
@@ -117,17 +117,19 @@ module belt_tensioner_with_branch(h)
 
 // cover
     bearing_cover_length = 4 * washer_4_12_radius + width;
-    translate ([h + 3 + 1 + 2 * rb_624_thick + 1, -bearing_cover_length / 2 + width / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_cover(bearing_cover_length, thick, wall_thick_3);
+    translate ([h + 3 + 1 + 2 * rb_624_thick + 1, -bearing_cover_length / 2 + width / 2, 0]) rotate ([90, 0, 90]) belt_tensioner_cover(bearing_cover_length, thick);
 
     
 }
 //---------------------------------------------------------------------------
-belt_tensioner_with_branch(25);
+//belt_tensioner_with_branch(31);
 
 //belt_tensioner_housing(20);
 
 //belt_tensioner_prism(30, 10);
 
-//belt_tensioner_base(25);
+//belt_tensioner_base(31);
+
+belt_tensioner_cover(40, 12);
 
 //belt_tensioner_slider();
