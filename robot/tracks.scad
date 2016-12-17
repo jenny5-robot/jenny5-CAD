@@ -11,52 +11,50 @@ include <params_tracks.scad>
 include <../basic_scad/config.scad>
 
 //--------------------------------------------------------------------
-module track(length = 25, width = 60, zh = 8)
+module track(length = 25, width = 60, height = 8)
 {
-    roundness = 100;
-
-    togue_width = 12;
+    togue_width = width / 5;
     
-    hole_radius = 2;
+    hole_radius = 1.25;
     togue_tolerance = 1.2;
+    togue_width_tolerance = 0.5;
 
     big_interior_hole_size = 10;
-    small_interior_hole_size = big_interior_hole_size - zh;
+    small_interior_hole_size = big_interior_hole_size - height;
 
   union(){
 	difference(){
 		union(){
 			color (plastic_color){ 
-                cube(size=[length, width, zh], center = false);
-                rotate([-90,0,0]) translate([length,-zh/2,0]) cylinder(h=width, r = zh/2, $fn = roundness, center = false);
-                rotate([-90,0,0]) translate([0,-zh/2,0]) cylinder(h=width, r = zh/2, $fn = roundness, center = false);
+                cube(size=[length, width, height], center = false);
+                rotate([-90,0,0]) translate([length, -height / 2, 0]) cylinder(h = width, r = height / 2, $fn = 40, center = false);
+                rotate([-90,0,0]) translate([0,-height / 2, 0]) cylinder(h=width, r = height / 2, $fn = 40, center = false);
             }
 		}
         // holes for rubber band
-        translate ([length / 2, 8, 0] - display_tolerance_z) cylinder (h = zh + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
-        translate ([length / 2, 8, zh - m3_autolock_nut_thick]) cylinder (h = zh + display_tolerance, r = m3_nut_radius, $fn = 6);
+        translate ([length / 2, 8, 0] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([length / 2, 8, height - m3_autolock_nut_thick]) cylinder (h = height + display_tolerance, r = m3_nut_radius, $fn = 6);
 // other side
-        translate ([length / 2, width - 8, 0] - display_tolerance_z) cylinder (h = zh + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
-        translate ([length / 2, width - 8, zh - m3_autolock_nut_thick]) cylinder (h = zh + display_tolerance, r = m3_nut_radius, $fn = 6);
+        translate ([length / 2, width - 8, 0] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([length / 2, width - 8, height - m3_autolock_nut_thick]) cylinder (h = height + display_tolerance, r = m3_nut_radius, $fn = 6);
         
-// holes for screws
-		rotate([-90,0,0]) translate([length,-zh/2,0]) cylinder(h = width + 1, r = hole_radius, $fn = roundness, center = false);
-		rotate([-90,0,0]) translate([0,-zh/2,0]) cylinder(h = width + 1, r = hole_radius+0.1, $fn = roundness, center = false);
+// holes for screws for connecting to the other track
+		rotate([-90, 0, 0]) translate([length, -height / 2, 0] - display_tolerance_z) cylinder(h = width + 2 * display_tolerance, r = hole_radius, $fn = 20, center = false);
+		rotate([-90, 0, 0]) translate([0, -height / 2, 0] - display_tolerance_z) cylinder(h = width + 2 * display_tolerance, r = hole_radius, $fn = 20, center = false);
 // front
 // center
-		translate([length - zh / 2 - togue_tolerance / 2, (width-togue_width) / 2-togue_tolerance, 0] - display_tolerance_z) cube([zh + togue_tolerance, togue_width+2*togue_tolerance , zh + 2 * display_tolerance], center = false);
+		translate([length - height / 2 - togue_tolerance / 2, (width - togue_width) / 2 - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance , height + 2 * display_tolerance], center = false);
 // margins
-		translate([length - zh/2 - togue_tolerance/2, -0.001,0] - display_tolerance_z) cube([zh + togue_tolerance, (width -3*togue_width)/2+0.5 , zh + 2 * display_tolerance], center = false);
-		translate([length - zh/2 - togue_tolerance / 2, width / 2 + 3*togue_width/2 - 0.5, 0] - display_tolerance_z) cube([zh + togue_tolerance, (width -3*togue_width)/2+1 , zh + 2 * display_tolerance], center = false);
+		translate([length - height / 2 - togue_tolerance / 2, 0, 0] - display_tolerance_yz) cube([height + togue_tolerance, togue_width + togue_width_tolerance, height] + 2 * display_tolerance_z + display_tolerance_y, center = false);
+		translate([length - height / 2 - togue_tolerance / 2, width - togue_width - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + togue_width_tolerance, height] + 2 * display_tolerance_z + display_tolerance_y, center = false);
 	
-// back
-		translate([-zh / 2, -1,0] - display_tolerance_z) cube([zh + togue_tolerance, (width - togue_width)/2 + 1, zh + 2 * display_tolerance], center = false);
-		translate([-zh / 2, width / 2 + togue_width / 2 ,0] - display_tolerance_z) cube([zh + togue_tolerance, (width - togue_width)/2 + display_tolerance, zh + 2 * display_tolerance], center = false);
+// the other side
+		translate([-height / 2, togue_width - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance, height] + 2 * display_tolerance_z, center = false);
+		translate([-height / 2, width / 2 + togue_width / 2 - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance, height] + 2 * display_tolerance_z, center = false);
 
-
-// circular middle holes for tracking
-        translate([length / 2, width / 2, 0]) cylinder(h = zh, r1 = 2, r2 = 6, $fn= roundness);
-        translate([length / 2, width / 2, 0] - display_tolerance_z) cylinder(h = 2 * display_tolerance, r = 2, $fn= roundness);
+// circular middle holes for wheel bumps
+        translate([length / 2, width / 2, 0]) cylinder(h = height + 0.001, r1 = 2, r2 = 6, $fn = 40);
+        translate([length / 2, width / 2, 0] - display_tolerance_z) cylinder(h = 2 * display_tolerance, r = 2, $fn = 40);
 	}
   }
 }
