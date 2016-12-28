@@ -15,7 +15,7 @@ module track(length = 25, width = 60, height = 8)
 {
     togue_width = width / 5;
     
-    hole_radius = 1.25;
+    hole_radius = 1.2;
     togue_tolerance = 1.2;
     togue_width_tolerance = 0.5;
 
@@ -41,6 +41,10 @@ module track(length = 25, width = 60, height = 8)
 // holes for screws for connecting to the other track
 		rotate([-90, 0, 0]) translate([length, -height / 2, 0] - display_tolerance_z) cylinder(h = width + 2 * display_tolerance, r = hole_radius, $fn = 20, center = false);
 		rotate([-90, 0, 0]) translate([0, -height / 2, 0] - display_tolerance_z) cylinder(h = width + 2 * display_tolerance, r = hole_radius, $fn = 20, center = false);
+        
+        // wire stopper
+        translate ([0, 0, height / 2]) rotate ([0, 90, 0]) cylinder (h = 15, r = hole_radius, $fn = 20);
+        translate ([0, width, height / 2]) rotate ([0, 90, 0]) cylinder (h = 15, r = hole_radius, $fn = 20);
 // front
 // center
 		translate([length - height / 2 - togue_tolerance / 2, (width - togue_width) / 2 - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance , height + 2 * display_tolerance], center = false);
