@@ -77,6 +77,11 @@ module nema_17()
 	nema_motor(nema_17_42BYGHW804_width, nema_17_42BYGHW804_height, nema_17_42BYGHW804_shaft_length, nema_17_42BYGHW804_shaft_radius, nema_17_42BYGHW804_top_radius, nema_17_42BYGHW804_top_cylinder_height, gauri_nema_17);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+module nema_14_39BYGL215A()
+{
+	nema_motor(nema_14_39BYGL215A_width, nema_14_39BYGL215A_height, nema_14_39BYGL215A_shaft_length, nema_14_39BYGL215A_shaft_radius, nema_14_39BYGL215A_top_radius, nema_14_39BYGL215A_top_cylinder_height, nema_14_39BYGL215A_screw_hole_position);
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module nema_17_42BYGHW804()
 {
 	nema_motor(nema_17_42BYGHW804_width, nema_17_42BYGHW804_height, nema_17_42BYGHW804_shaft_length, nema_17_42BYGHW804_shaft_radius, nema_17_42BYGHW804_top_radius, nema_17_42BYGHW804_top_cylinder_height, gauri_nema_17);

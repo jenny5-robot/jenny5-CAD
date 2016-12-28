@@ -63,6 +63,15 @@ nema_23_57BYGH603_hole_radius  = 19.1;
 nema_23_57BYGH603_dist_between_screw_holes = 47.14;
 nema_23_57BYGH603_shaft_length = 21;
 
+nema_14_39BYGL215A_width = 39;
+nema_14_39BYGL215A_height = 34;
+nema_14_39BYGL215A_top_radius = 11;
+nema_14_39BYGL215A_dist_between_screw_holes = 31;
+nema_14_39BYGL215A_shaft_length = 50;
+nema_14_39BYGL215A_shaft_radius = 2.5;
+nema_14_39BYGL215A_top_cylinder_height = 2;
+
+
 nema_11_sizes = [nema_11_width, nema_11_width, nema_11_height];
 
 gauri_nema_17 = [
@@ -72,6 +81,15 @@ gauri_nema_17 = [
 [nema_17_dist_between_screw_holes / 2, -nema_17_dist_between_screw_holes / 2, 0], 
 [nema_17_dist_between_screw_holes / 2, nema_17_dist_between_screw_holes / 2, 0]
 ];
+
+nema_14_39BYGL215A_screw_hole_position = [
+[0, 0, 0], 
+[-nema_14_39BYGL215A_dist_between_screw_holes / 2, -nema_14_39BYGL215A_dist_between_screw_holes / 2, 0], 
+[-nema_14_39BYGL215A_dist_between_screw_holes / 2, nema_14_39BYGL215A_dist_between_screw_holes / 2, 0], 
+[nema_14_39BYGL215A_dist_between_screw_holes / 2, -nema_14_39BYGL215A_dist_between_screw_holes / 2, 0], 
+[nema_14_39BYGL215A_dist_between_screw_holes / 2, nema_14_39BYGL215A_dist_between_screw_holes / 2, 0]
+];
+
 
 gauri_nema_11 = [
 [0, 0, 0], 
