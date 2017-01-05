@@ -32,7 +32,7 @@ use <../basic_scad/spacer.scad>
 include <../basic_scad/params_sensor_array.scad>
 
 include <params_gripper.scad>
-use <angular_gripper.scad>
+use <gripper.scad>
 use <../basic_scad/belt.scad>
 use <../basic_scad/belt_tensioner.scad>
 
@@ -41,8 +41,9 @@ use <../basic_scad/potentiometers.scad>
 use <../basic_scad/params_potentiometers.scad>
 
 use <potentiometer_gears.scad>
+include <../basic_scad/params_webcam.scad>
 
-
+use <../basic_scad/webcam.scad>
 
 //---------------------------------------------------------------------------
 module motor_pulley()
@@ -242,6 +243,12 @@ module forearm_pulley()
     }
 }
 //---------------------------------------------------------------------------
+module gripper_c920_support_with_camera()
+{
+    gripper_c920_support();
+    translate ([0, 0, c920_depth]) rotate ([90, 0, 0]) mirror ([0, 1, 0]) c920();
+}
+//---------------------------------------------------------------------------
 module fore_arm()
 {
 // shaft
@@ -260,7 +267,9 @@ module fore_arm()
     translate ([rbearing_608_enclosed_housing_slim_size[2] - rb_608_external_radius, rbearing_608_enclosed_housing_slim_size[0] / 2, forearm_pulley_thick + 2 * washer_8_thick - 1]) rotate ([90, 0, 0])rotate ([0, -90, 0]) radial_bearing_608_vertical_housing_slim_double();
 
     // gripper
-    translate ([-gripper_base_length / 2, bone_thick / 2, fore_arm_length + bone_thick + inaltime_roata_reductor_cot + 3]) gripper();
+    translate ([-0 / 2 + bone_thick / 2, -gripper_motor_support_size [1] / 2, fore_arm_length + bone_thick + inaltime_roata_reductor_cot + 3 + 60]) rotate([0, 90, 0]) gripper();
+// camera support
+    translate ([- bone_thick / 2 - 3, c920_depth / 2 + c920_dist_between_holder_holes / 2, fore_arm_length + bone_thick + inaltime_roata_reductor_cot + 3]) rotate([0, 0, -90])  gripper_c920_support_with_camera();
 }
 //---------------------------------------------------------------------------
 module fore_arm_with_elbow_pulley()
@@ -537,7 +546,7 @@ module arm(bone_length)
 //---------------------------------------------------------------------------
 
 
-//arm(200);
+arm(200);
 
 //potentiometer_support_shoulder_vertical();
 
@@ -555,7 +564,7 @@ module arm(bone_length)
 
 //plate_body_articulation();
 
-shoulder_motor_housing();
+//shoulder_motor_housing();
 
 //shoulder();
 //upper_arm();
@@ -599,3 +608,5 @@ shoulder_motor_housing();
 //traction_pulley();
 
 //elbow_potentiometer_support();
+
+//gripper_c920_support_with_camera();
