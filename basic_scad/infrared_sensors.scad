@@ -18,5 +18,27 @@ module GP2Y0D805Z0F()
     translate([3, -GP2Y0D805_size[1] / 2 + GP2Y0D805Z0F_size[1] / 2, 2]) color("black") cube(GP2Y0D805_size);
 }
 //------------------------------------------------------
+module GP2Y0A41SK0F()
+{
+    translate (-[GP2Y0A41SK0F_size[0] / 2, GP2Y0A41SK0F_size[1] / 2, 0]) cube(GP2Y0A41SK0F_size);
+    // ears
+    difference(){
+        hull(){
+            translate (-[GP2Y0A41SK0F_size[0] / 2, 0, 0] - [GP2Y0A41SK0F_ear_radius, 0, 0]) cylinder (h = 2, r = GP2Y0A41SK0F_ear_radius, $fn = 30);
+            translate (-[GP2Y0A41SK0F_size[0] / 2, 0, 0]) cylinder (h = 2, r = GP2Y0A41SK0F_ear_radius);
+        }
+        translate (-[GP2Y0A41SK0F_size[0] / 2, 0, 0] - [GP2Y0A41SK0F_ear_radius, 0, 0] - display_tolerance_z) cylinder (h = 2 + 2 * display_tolerance, r = GP2Y0A41SK0F_ear_hole_radius, $fn = 30);
+    }
+    difference(){
+        hull(){
+          translate ([GP2Y0A41SK0F_size[0] / 2, 0, 0] + [GP2Y0A41SK0F_ear_radius, 0, 0]) cylinder (h = 2, r = GP2Y0A41SK0F_ear_radius, $fn = 30);
+          translate ([GP2Y0A41SK0F_size[0] / 2, 0, 0]) cylinder (h = 2, r = GP2Y0A41SK0F_ear_radius);
+        }
+          translate ([GP2Y0A41SK0F_size[0] / 2, 0, 0] + [GP2Y0A41SK0F_ear_radius, 0, 0] - display_tolerance_z) cylinder (h = 2 + 2 * display_tolerance, r = GP2Y0A41SK0F_ear_hole_radius, $fn = 30);        
+    }
+}
+//------------------------------------------------------
 
-GP2Y0D805Z0F();
+GP2Y0A41SK0F ();
+
+//GP2Y0D805Z0F();
