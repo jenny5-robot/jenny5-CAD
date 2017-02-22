@@ -43,6 +43,24 @@ module gripper_lateral_support()
 	}
 }
 //-----------------------------------------------------------------------------------
+module gripper_lateral_support_with_ir_support()
+{
+    gripper_lateral_support();
+    
+    support_thick = 3;
+    translate ([-3, -37 / 2 + gripper_lateral_sheet_size[1] / 2 - 3.75, 0]) 
+    difference(){ 
+        hull(){
+          cube([3, 37 + 2 * 3.75, 13 + 3]);
+            //rotate ([0, 90, 0]) cylinder(h = support_thick, r = 4);
+            //translate([0, 37, 0]) rotate ([0, 90, 0]) cylinder(h = support_thick, r = 4);
+        }
+        // screw holes
+        translate([0, 3.75, 3 + 6.5] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = support_thick + 2 * display_tolerance, r = 1.5, $fn = 20); 
+        translate([0, 37 + 3.75, 3 + 6.5] - display_tolerance_x) rotate([0, 90, 0]) cylinder (h = support_thick + 2 * display_tolerance, r = 1.5, $fn = 20); 
+    }
+}
+//-----------------------------------------------------------------------------------
 module finger ()
 {
     // base finger; or the first segment
@@ -95,7 +113,7 @@ module finger_with_button_support ()
 	}
     // finger, second segment
     difference(){
-	translate([finger_first_segment_length, 0, 0]) rotate([0, 0, finger_angle]) 
+	translate([finger_first_segment_length, 0, 0]) rotate([0, 0, finger_angle - 15]) 
         difference(){
             union(){
                 hull(){
@@ -104,9 +122,9 @@ module finger_with_button_support ()
                 }
                 translate([finger_second_second_length - 20, -finger_width / 2, 0 ]) 
                 difference(){
-                    cube([20, finger_width, 12]);
-                    translate([10, 0, 6] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = finger_width + 2 * display_tolerance, r = 3.4, $fn = 30);
-                    translate([10, 0, 6] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = 5 + display_tolerance, r = 5, $fn = 30);
+                    cube([20, finger_width, 14]);
+                    translate([10, 0, 7] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = finger_width + 2 * display_tolerance, r = 3.4, $fn = 30);
+                    translate([10, 0, 7] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = 7 + display_tolerance, r = 5.5, $fn = 30);
                 }
             }
 //            translate([finger_second_second_length / 2, 38, 0]) cylinder (r = 32, h = finger_thick, $fn = 100);
@@ -164,7 +182,6 @@ module U_pusher()
         translate([0, U_pusher_base_size[1] / 2, U_pusher_height] - display_tolerance_x) rotate ([0, 90, 0]) cylinder ( h = U_pusher_base_size[0] + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
 
     }
-    
 }
 //-----------------------------------------------------------------------------------
 module gripper_motor_support()
@@ -197,7 +214,7 @@ module gripper(gripper_angle = 5)
 // bottom
     gripper_lateral_support();
     // top
-    translate([0, 0, gripper_motor_support_size[0] + gripper_lateral_sheet_size[2]]) gripper_lateral_support();
+    translate([0, 0, gripper_motor_support_size[0] + gripper_lateral_sheet_size[2]]) gripper_lateral_support_with_ir_support();
     
     
     // pusher
@@ -207,9 +224,15 @@ module gripper(gripper_angle = 5)
     translate ([pusher_offset + sin(gripper_angle) * finger_first_segment_length, gripper_lateral_sheet_size[1] / 2, -5]) cylinder (h = 55, r = m4_screw_radius, $fn = 20);
     
     // lateral screw
-    translate ([5, -5, -5]) cylinder (h = 55, r = m4_screw_radius, $fn = 20);
+    translate ([5, -5, -m4_nut_thick]) M4_hexa (50);
     // lateral screw
-    translate ([5, gripper_lateral_sheet_size[1] + 5, -5]) cylinder (h = 55, r = m4_screw_radius, $fn = 20);
+    translate ([5, gripper_lateral_sheet_size[1] + 5, -m4_nut_thick]) M4_hexa (50);
+    
+    // lateral nut
+    translate ([5, -5, 45]) M4_autolock_nut();
+    // lateral nut
+    translate ([5, gripper_lateral_sheet_size[1] + 5, 45]) M4_autolock_nut();
+    
     
     // motor support
     translate([gripper_lateral_sheet_size[0], 0, 4]) rotate([0, -90, 0]) gripper_motor_support();
@@ -267,12 +290,14 @@ module gripper_c920_support()
 }
 //-----------------------------------------------------------------------------------
 
-//gripper(-10);
+gripper(-10);
 
 
 //fore_fingers();  // 1x
 
-//gripper_lateral_support(); // 2x
+//gripper_lateral_support(); // 1x
+
+//gripper_lateral_support_with_ir_support(); // 1x
 
 //U_pusher(); // 1x
 
@@ -282,4 +307,4 @@ module gripper_c920_support()
 
 //gripper_motor_support();//1x
 
-gripper_c920_support();
+//gripper_c920_support();
