@@ -28,11 +28,16 @@ module linear_stepper_motor()
 module linear_dc_motor(stroke, current_pos)
 {
     base_length = 105 + stroke;
+    // tube
     color("grey") cylinder (h = base_length, r = 20);
-    color("grey")translate([0, 0, base_length]) cylinder (h = current_pos, r = 10);
+    // pusher
+    color("grey") translate([0, 0, base_length]) cylinder (h = current_pos, r = 10);
+    
+    // motor
+    color("grey") translate ([40, 0, 0]) cylinder(h = 100, r = 20);
 }
 //------------------------------------------------------
 
 //linear_stepper_motor();
 
-linear_dc_motor(250, 10);
+linear_dc_motor(100, 10);

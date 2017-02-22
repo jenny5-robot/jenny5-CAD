@@ -365,7 +365,7 @@ module half_leg(unghi)
     if (d2 >= 0){
   translate([dist_to_push_motor_hole, 0, dist_to_incheietura_talpa_motor])
     rotate ([0, -(90 - beta), 0])
-    leg_push_motor();
+    linear_dc_motor(100, 10);
     }
     else
   translate([dist_to_push_motor_hole, 0, dist_to_incheietura_talpa_motor])
