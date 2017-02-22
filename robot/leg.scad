@@ -41,20 +41,16 @@ module base_side()
      // hole second bone
         translate ([dist_to_second_bone, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
         // hole spacer 1
-        translate ([dist_to_first_spacer, 0, latime_teava / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        translate ([dist_to_first_spacer, 0, rectangular_tube_30x30x3_size[1] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
         // hole spacer 2
-        translate ([dist_to_second_spacer, 0, latime_teava / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        translate ([dist_to_second_spacer, 0, rectangular_tube_30x30x3_size[1] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
      // hole second bone
         translate ([dist_to_push_motor_hole, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
-        
-        
     }
 }
-
 //-------------------------------------------------------
 module knee_side()
 {
-
     difference(){
         // sheet
         color (aluminium_color) cube(knee_side_simple_sizes);
@@ -68,7 +64,6 @@ module knee_side()
         translate ([dist_to_second_bone, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
     }
 }
-
 //-------------------------------------------------------
 module base()
 {
@@ -79,17 +74,15 @@ module base()
     difference(){
         union(){
         // first spacer
-            color (aluminium_color) translate ([dist_to_first_spacer - latime_teava / 2, - crotch_width / 2, 0]) cube([latime_teava, crotch_width, latime_teava]);
+            color (aluminium_color) translate ([dist_to_first_spacer - rectangular_tube_30x30x3_size[1] / 2, - crotch_width / 2, 0]) cube([rectangular_tube_30x30x3_size[1], crotch_width, rectangular_tube_30x30x3_size[1]]);
     // second sapcer
-            color (aluminium_color) translate ([dist_to_second_spacer - latime_teava / 2, - crotch_width / 2, 0]) cube([latime_teava, crotch_width, latime_teava]);
+            color (aluminium_color) translate ([dist_to_second_spacer - rectangular_tube_30x30x3_size[1] / 2, - crotch_width / 2, 0]) cube([rectangular_tube_30x30x3_size[1], crotch_width, rectangular_tube_30x30x3_size[1]]);
         }
-        // holes for fixing the bone to the platform
-    
+        // holes for fixing the bone to the platform   
         for (i=[0:3])
-            translate (foot_spacer_holes[i] - display_tolerance_z) cylinder (h = latime_teava + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+            translate (foot_spacer_holes[i] - display_tolerance_z) cylinder (h = rectangular_tube_30x30x3_size[1] + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
     }
 }
-
 //----------------------------------------------------------------------
 module knee()
 {
@@ -103,36 +96,33 @@ module knee()
 //----------------------------------------------------------------------
 module leg_bone()
 {
-    difference(){ 
-         //U(leg_bone_length, latura_U_mic, latura_U_mic, grosime_perete_L);
+    difference(){
         
-        color (aluminium_color) teava_dreptunghiulara(latime_teava, lungime_teava, grosime_perete_teava, leg_bone_length);
-       dist_to_surub_oscior = 170;
-        
+        color (aluminium_color) teava_dreptunghiulara(rectangular_tube_30x30x3_size[1], rectangular_tube_30x30x3_size[0], rectangular_tube_30x30x3_wall_thick, leg_bone_length);
         
 // midle hole bottom bearing
         
-        echo ("gaura mijloc rulment jos", [latime_teava / 2, 0, dist_to_incheietura] + rbearing_608_housing_holes_position[0], "raza = 6");
+        echo ("middle hole bottom bearing", [rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_incheietura] + rbearing_608_housing_holes_position[0], "raza = 6");
         
-        translate ([latime_teava / 2, 0, dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) 
-        translate (rbearing_608_housing_holes_position[0]) cylinder (h = latura_U_mare + 2 * display_tolerance, r = 4, $fn = 30); 
+        translate ([rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) 
+        translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 30); 
 
 // holes for fixing the bottom bearing
         for (i=[1:4]){
-        echo ("gauri suruburi rulment jos", [latime_teava / 2, dist_to_incheietura, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
+            echo ("holes for screws holes bottom bearing support", [rectangular_tube_30x30x3_size[1] / 2, dist_to_incheietura, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
             
-            translate ([latime_teava / 2, 0, dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = lungime_teava + 2 * display_tolerance, r = 1.6, $fn = 30); 
+            translate ([rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 1.6, $fn = 30); 
         }
         
 // top bearing hole
-        translate ([latime_teava / 2, 0, leg_bone_length - dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) 
-        translate (rbearing_608_housing_holes_position[0]) cylinder (h = latura_U_mare + 2 * display_tolerance, r = 4, $fn = 30); 
+        translate ([rectangular_tube_30x30x3_size[1] / 2, 0, leg_bone_length - dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) 
+        translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 30); 
 
 // holes for fixing the top bearing
         for (i=[1:4]){
-        echo ("suruburi rulment sus", [latime_teava / 2, dist_to_incheietura, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
+            echo ("holes for screws holes top bearing support", [rectangular_tube_30x30x3_size[1] / 2, dist_to_incheietura, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
             
-            translate ([latime_teava / 2, 0, leg_bone_length - dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = lungime_teava + 2 * display_tolerance, r = 1.6, $fn = 30); 
+            translate ([rectangular_tube_30x30x3_size[1] / 2, 0, leg_bone_length - dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 1.6, $fn = 30); 
         }
     }
 }
@@ -141,28 +131,26 @@ module leg_bone_with_bearings()
 {
   leg_bone();
 
-  translate ([latime_teava / 2, 0, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+  translate ([rectangular_tube_30x30x3_size[1] / 2, 0, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
 // screws for bottom bearing    
-            for (i=[1:4]){            
-            translate ([latime_teava / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4x12_hexa();
-        }
+    for (i=[1:4]){            
+        translate ([rectangular_tube_30x30x3_size[1] / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_incheietura]) rotate ([-90, 0, 0])    translate (rbearing_608_housing_holes_position[i]) M4x12_hexa();
+    }
 
 // the other side    
-    translate ([latime_teava / 2, latime_teava, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
-            for (i=[1:4]){            
-            translate ([latime_teava / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4_hexa(55);
-        }
+    translate ([rectangular_tube_30x30x3_size[1] / 2, rectangular_tube_30x30x3_size[1], rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+    for (i=[1:4]){            
+      translate ([rectangular_tube_30x30x3_size[1] / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4_hexa(55);
+    }
         
         
-         translate ([latime_teava / 2, 0, leg_bone_length - rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
+    translate ([rectangular_tube_30x30x3_size[1] / 2, 0, leg_bone_length - rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
 // screws for bottom bearing    
-            for (i=[1:4]){            
-            translate ([latime_teava / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, leg_bone_length - dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4_hexa(55);
-        }
+    for (i=[1:4]){            
+      translate ([rectangular_tube_30x30x3_size[1] / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, leg_bone_length - dist_to_incheietura]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) M4_hexa(55);
+    }
 
-    
-    translate ([latime_teava / 2, latime_teava, leg_bone_length - rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
- 
+    translate ([rectangular_tube_30x30x3_size[1] / 2, rectangular_tube_30x30x3_size[1], leg_bone_length - rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing(); 
 }
 //----------------------------------------------------------------------
 module sheet_push_motor()
@@ -180,28 +168,27 @@ module half_leg(unghi)
     // bottom sheet
     base();
     // bone 1
-    translate ([dist_to_second_bone, crotch_width / 2 - latime_teava - rbearing_608_housing_size[2] - 5, dist_to_incheietura_talpa_os])
+    translate ([dist_to_second_bone, crotch_width / 2 - rectangular_tube_30x30x3_size[1] - rbearing_608_housing_size[2] - 5, dist_to_incheietura_talpa_os])
     rotate ([0, unghi, 0])
-    translate ([-latime_teava / 2, 0, -dist_to_incheietura])
+    translate ([-rectangular_tube_30x30x3_size[1] / 2, 0, -dist_to_incheietura])
     leg_bone_with_bearings();
     
     // bone 2
     translate ([dist_to_second_bone, - crotch_width / 2 + rbearing_608_housing_size[2] + 5, dist_to_incheietura_talpa_os])
     rotate ([0, unghi, 0])
-    translate ([-latime_teava / 2, 0, -dist_to_incheietura])
+    translate ([-rectangular_tube_30x30x3_size[1] / 2, 0, -dist_to_incheietura])
     leg_bone_with_bearings();
     
-
        // oscior 1
-    translate ([dist_to_first_bone, crotch_width / 2 - latime_teava - rbearing_608_housing_size[2] - 5, dist_to_incheietura_talpa_os])
+    translate ([dist_to_first_bone, crotch_width / 2 - rectangular_tube_30x30x3_size[1] - rbearing_608_housing_size[2] - 5, dist_to_incheietura_talpa_os])
     rotate ([0, unghi, 0])
-    translate ([-latime_teava / 2, 0, -dist_to_incheietura]) 
+    translate ([-rectangular_tube_30x30x3_size[1] / 2, 0, -dist_to_incheietura]) 
     leg_bone_with_bearings();
     
        // oscior 1
     translate ([dist_to_first_bone, - crotch_width / 2 + rbearing_608_housing_size[2] + 5, dist_to_incheietura_talpa_os])
     rotate ([0, unghi, 0])
-    translate ([-latime_teava / 2, 0, -dist_to_incheietura]) 
+    translate ([-rectangular_tube_30x30x3_size[1] / 2, 0, -dist_to_incheietura]) 
     leg_bone_with_bearings();
 
     // bottom shaft
