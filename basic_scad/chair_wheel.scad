@@ -9,8 +9,15 @@ use <basic_components.scad>
 
 module chair_wheel()
 {
-  color ("black") rotate([0, 90, 0]) cylinder(h = chair_wheel_thick, r = chair_wheel_radius, $fn = 50);
-  translate ([25, -10, chair_wheel_height - chair_wheel_radius + 5]) mirror ([0, 0, 1]) rotate ([0, 0, 90]) U(20, 30, chair_wheel_height - chair_wheel_radius + 10, 3);
+// wheel
+  color ("black") translate ([-chair_wheel_thick / 2, 0, 0]) rotate([0, 90, 0]) cylinder(h = chair_wheel_thick, r = chair_wheel_radius, $fn = 50);
+// U
+    color ("gray")
+  translate ([chair_wheel_thick - chair_wheel_thick / 2 + 5, -10, chair_wheel_height - chair_wheel_radius + 5]) mirror ([0, 0, 1]) rotate ([0, 0, 90]) U(20, chair_wheel_thick + 10, chair_wheel_height - chair_wheel_radius + 10, 3);
+    
+ // platform
+    color ("gray")
+    translate([-chair_wheel_sheet_size[0] / 2, -chair_wheel_sheet_size[1] / 2, chair_wheel_height - chair_wheel_radius + 2]) cube(chair_wheel_sheet_size);
 }
 
 

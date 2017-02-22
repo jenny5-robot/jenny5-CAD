@@ -4,6 +4,8 @@
 // MIT License
 //--------------------------------------------------------------
 
-chair_wheel_radius = 20;
-chair_wheel_height = 60;
-chair_wheel_thick = 20;
+chair_wheel_radius = 50;
+chair_wheel_height = 125;
+chair_wheel_thick = 30;
+
+chair_wheel_sheet_size = [80, 80, 3];
