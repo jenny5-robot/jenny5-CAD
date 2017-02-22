@@ -49,7 +49,7 @@ module platform_foot()
 //---------------------------------------------------------------------------
 module robot()
 {
-    long_leg_height = 2 * ((inaltime_os_picior - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
+    long_leg_height = 2 * ((leg_bone_length - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
     
     echo(long_leg_height = long_leg_height);
     
@@ -60,7 +60,7 @@ module robot()
 module robot_with_kitchen_table()
 {
     robot();
-    translate ([0, 1000, 0]) masa_rotunda(750, 400);
+    translate ([-800, 0, 0]) masa_rotunda(750, 400);
 }
 //---------------------------------------------------------------------------
 
@@ -83,15 +83,5 @@ robot();
 
 //belt_tensioner_base();
 
-//motor_pulley();
 
 //body();
-
-//bone_body();
-
-//clavicle();
-
-//os_diafragma();
-//os_diafragma_cu_piese();
-
-//vertebral_column();
