@@ -33,4 +33,9 @@ module belt_on_2_pulleys(r1, r2, distance_between_pulleys, belt_width = 6, belt_
     translate ([distance_between_pulleys, 0, 0]) belt_arc(r2, 360 - angle, angle, belt_width, belt_thick);
 }
 //------------------------------------------------------------------------
-belt_on_2_pulleys(50, 20, 100, 5);
+function length_belt_on_2_pulleys(r1, r2, distance_between_pulleys) = PI * r1 + PI * r2 + 2 * sqrt(distance_between_pulleys * distance_between_pulleys + abs(r1-r2));
+//------------------------------------------------------------------------
+
+//belt_on_2_pulleys(50, 20, 100, 5);
+
+echo (length_belt_on_2_pulleys(50, 20, 100));
