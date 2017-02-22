@@ -134,31 +134,12 @@ module leg_bone()
             translate ([latime_teava / 2, 0, inaltime_os_picior - dist_to_incheietura] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = lungime_teava + 2 * display_tolerance, r = 1.6, $fn = 30); 
         }
 
-    // gaura rulment impingere
-        
-        echo ("push bearing middle hole", [latime_teava / 2, distance_to_push_nut, 0] + rbearing_608_housing_holes_position[0], "raza = 6");
-        
-        translate ([latime_teava / 2, 0, distance_to_push_nut] - display_tolerance_y) rotate ([-90, 0, 0]) 
-        translate (rbearing_608_housing_holes_position[0]) cylinder (h = latura_U_mare + 2 * display_tolerance, r = 10, $fn = 30); 
-
-
-        for (i=[1:4]){
-        echo ("push bearing nuts", [latime_teava / 2, distance_to_push_nut, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
-            
-            translate ([latime_teava / 2, 0, distance_to_push_nut] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = lungime_teava + 2 * display_tolerance, r = 1.6, $fn = 30); 
-        }
-
-        }
+  }
 }
 //----------------------------------------------------------------------
 module leg_bone_with_bearings()
 {
     leg_bone();
-
-// push bearing    
-    translate ([latime_teava / 2, 0, distance_to_push_nut]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
-    
-    translate ([latime_teava / 2, latime_teava + rbearing_608_housing_size[2], distance_to_push_nut]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
     
 //base bearing
 
@@ -365,12 +346,12 @@ module half_leg(unghi)
     if (d2 >= 0){
   translate([dist_to_push_motor_hole, 0, dist_to_incheietura_talpa_motor])
     rotate ([0, -(90 - beta), 0])
-    linear_dc_motor(100, 10);
+    linear_dc_motor(100, 50);
     }
     else
   translate([dist_to_push_motor_hole, 0, dist_to_incheietura_talpa_motor])
     rotate ([0, 90 + beta, 0])
-    leg_push_motor();
+    linear_dc_motor(100, 50);
         
     // piesa prindere motor
  //   translate([dist_to_motor, -piesa_prindere_motor_pe_ax_sizes[1] / 2 + latime_talpa / 2, dist_to_incheietura_talpa_motor + grosime_placa_alu])
