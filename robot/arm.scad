@@ -136,14 +136,14 @@ module elbow_pulley()
         translate ([0, 0, 9]) cylinder( h = rb_626_thick + display_tolerance + 0.5, r = rb_626_external_radius, $fn = 50);
 
         // cut hole for belt
-        translate ([dist_to_rotita_fore_arm + 4, -25, 0] - display_tolerance_z) cube([15, 50, 20]);
+        translate ([distance_to_fore_arm_gear + 4, -25, 0] - display_tolerance_z) cube([15, 50, 20]);
         // holes for fixing the forearm
         // first bearing holes
         for (i= [0:1]){
-            translate ([dist_to_rotita_fore_arm + 37 - 7 - 2, (rbearing_608_enclosed_housing_slim_holes_position[0][0] - rbearing_608_enclosed_housing_slim_holes_position[1][0]) / 2 - rbearing_608_enclosed_housing_slim_holes_position[0][0], 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(rbearing_608_enclosed_housing_slim_holes_position[i]) cylinder (h = 30, r = 2, $fn = 30);
+            translate ([distance_to_fore_arm_gear + 37 - 7 - 2, (rbearing_608_enclosed_housing_slim_holes_position[0][0] - rbearing_608_enclosed_housing_slim_holes_position[1][0]) / 2 - rbearing_608_enclosed_housing_slim_holes_position[0][0], 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(rbearing_608_enclosed_housing_slim_holes_position[i]) cylinder (h = 30, r = 2, $fn = 30);
         // holes for fixing the forearm
         // second bearing holes
-            translate ([dist_to_rotita_fore_arm + 37, (rbearing_608_enclosed_housing_slim_holes_position[0][0] - rbearing_608_enclosed_housing_slim_holes_position[1][0]) / 2 - rbearing_608_enclosed_housing_slim_holes_position[0][0], 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(rbearing_608_enclosed_housing_slim_holes_position[i]) cylinder (h = 30, r = 2, $fn = 20);
+            translate ([distance_to_fore_arm_gear + 37, (rbearing_608_enclosed_housing_slim_holes_position[0][0] - rbearing_608_enclosed_housing_slim_holes_position[1][0]) / 2 - rbearing_608_enclosed_housing_slim_holes_position[0][0], 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(rbearing_608_enclosed_housing_slim_holes_position[i]) cylinder (h = 30, r = 2, $fn = 20);
         }
         // holes for fixing the motor housing
         for (i= [0:3]){
@@ -267,9 +267,9 @@ module fore_arm()
     translate ([rbearing_608_enclosed_housing_slim_size[2] - rb_608_external_radius, rbearing_608_enclosed_housing_slim_size[0] / 2, forearm_pulley_thick + 2 * washer_8_thick - 1]) rotate ([90, 0, 0])rotate ([0, -90, 0]) radial_bearing_608_vertical_housing_slim_double();
 
     // gripper
-    translate ([-0 / 2 + bone_thick / 2, -gripper_motor_support_size [1] / 2, fore_arm_length + bone_thick + inaltime_roata_reductor_cot + 3 + 60]) rotate([0, 90, 0]) gripper();
+    translate ([bone_thick / 2, -gripper_motor_support_size [1] / 2, fore_arm_length + bone_thick + elbow_gear_thick + 3 + 60]) rotate([0, 90, 0]) gripper();
 // camera support
-    translate ([- bone_thick / 2 - 3, c920_depth / 2 + c920_dist_between_holder_holes / 2, fore_arm_length + bone_thick + inaltime_roata_reductor_cot + 3]) rotate([0, 0, -90])  gripper_c920_support_with_camera();
+    translate ([- bone_thick / 2 - 3, c920_depth / 2 + c920_dist_between_holder_holes / 2, fore_arm_length + bone_thick + elbow_gear_thick + 3]) rotate([0, 0, -90])  gripper_c920_support_with_camera();
 }
 //---------------------------------------------------------------------------
 module fore_arm_with_elbow_pulley()
@@ -369,23 +369,23 @@ module shoulder()
     motor_pulley();
     
     // motor housing
-    translate ([shoulder_plate_size[0] / 2 + motor_housing_width / 2, latime_tabla_umar , 0]) 
+    translate ([shoulder_plate_size[0] / 2 + motor_housing_width / 2, shoulder_plate_size[1] , 0]) 
     mirror([0, 0, 1])
     rotate ([0, -90, 90]) 
     shoulder_motor_housing();
     
     // bone support 1
-    translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, 30, grosime_tabla_alu + 25]) 
+    translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, 30, alu_sheet_3_thick + 25]) 
     mirror([0, 0, 1])
     radial_bearing_608_vertical_housing();
     
     // bone support 2
-    translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, shoulder_plate_size[1] - rbearing_608_enclosed_housing_size[1], grosime_tabla_alu + 25]) 
+    translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, shoulder_plate_size[1] - rbearing_608_enclosed_housing_size[1], alu_sheet_3_thick + 25]) 
 mirror([0, 0, 1])    
     radial_bearing_608_vertical_housing();
         
     // continuation with upper arm
-    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_608_external_radius + grosime_tabla_alu]) rotate ([0, angle_fore_arm, 0]) upper_arm();    
+    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_608_external_radius + alu_sheet_3_thick]) rotate ([0, angle_fore_arm, 0]) upper_arm();    
 
 }
 //---------------------------------------------------------------------------
@@ -407,8 +407,7 @@ module plate_body_articulation()
             echo([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] + rotate_z(90, nema_17_housing_base_holes[i]));
             translate ([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(nema_17_housing_base_holes[i])  cylinder ( h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
         }
-        // holes for the other bearing housing
-        
+        // holes for the other bearing housing     
   }
 }
 //---------------------------------------------------------------------------
@@ -524,9 +523,7 @@ module body_arm_bone(bone_length)
     difference(){
         cube_empty(6, 10, bone_length);
         for (i=[0:1]){
-            //echo(chest_height / 2 + rotate_y (90, pozitie_gauri_trunchi[i])[2]);
-            
-            translate ([-bone_thick / 2, 0, bone_length / 2 + pozitie_gauri_trunchi[i][0]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = bone_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+            translate ([-bone_thick / 2, 0, bone_length / 2 + body_holes_position[i]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = bone_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
         }
     }
 }
@@ -544,7 +541,6 @@ module arm(bone_length)
     translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
-
 
 arm(200);
 
