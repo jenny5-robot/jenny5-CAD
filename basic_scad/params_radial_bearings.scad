@@ -54,6 +54,10 @@ rb_624_internal_radius = 2;
 rb_624_external_radius = 6.5;
 rb_624_thick = 5;
 
+rb_625_internal_radius = 2.5;
+rb_625_external_radius = 8;
+rb_625_thick = 5;
+
 rb_626_internal_radius = 3;
 rb_626_external_radius = 9.5;
 rb_626_thick = 6;
