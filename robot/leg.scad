@@ -33,19 +33,18 @@ include <../basic_scad/params_motor_housing.scad>
 //-------------------------------------------------------
 module base_side()
 {
-//echo("distanta baza to gaura sustinere", grosime_placa_alu + dist_to_incheietura_talpa_motor);
     difference(){
         color (aluminium_color) cube(lateral_base_size);
      // hole first bone
-        translate ([dist_to_first_bone, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        translate ([dist_to_first_bone, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
      // hole second bone
-        translate ([dist_to_second_bone, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        translate ([dist_to_second_bone, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
         // hole spacer 1
-        translate ([dist_to_first_spacer, 0, rectangular_tube_30x30x3_size[1] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        translate ([dist_to_first_spacer, 0, rectangular_tube_30x30x3_size[1] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
         // hole spacer 2
-        translate ([dist_to_second_spacer, 0, rectangular_tube_30x30x3_size[1] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        translate ([dist_to_second_spacer, 0, rectangular_tube_30x30x3_size[1] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
      // hole second bone
-        translate ([dist_to_push_motor_hole, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
+        translate ([dist_to_push_motor_hole, 0, dist_to_incheietura_talpa_motor] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
     }
 }
 //-------------------------------------------------------
@@ -55,19 +54,19 @@ module knee_side()
         // sheet
         color (aluminium_color) cube(knee_side_simple_sizes);
         // front hole bottom
-        translate ([dist_to_first_bone, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
+        translate ([dist_to_first_bone, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
         // front hole top
-        translate ([dist_to_first_bone, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
+        translate ([dist_to_first_bone, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
         // back hole bottom
-        translate ([dist_to_second_bone, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
+        translate ([dist_to_second_bone, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
         // back hole top
-        translate ([dist_to_second_bone, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = grosime_placa_alu + 2 * display_tolerance, r = 4, $fn = 30);
+        translate ([dist_to_second_bone, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
     }
 }
 //-------------------------------------------------------
 module base()
 {
-    translate ([0, - grosime_placa_alu -crotch_width / 2, 0]) base_side();
+    translate ([0, - alu_sheet_10_thick -crotch_width / 2, 0]) base_side();
 
     translate ([0, crotch_width / 2, 0]) base_side();
     
@@ -87,7 +86,7 @@ module base()
 module knee()
 {
     // one side
-    translate ([0, - grosime_placa_alu, 0]) knee_side();
+    translate ([0, - alu_sheet_10_thick, 0]) knee_side();
 // other side
     translate ([0, crotch_width, 0]) knee_side();
     // knee spacer

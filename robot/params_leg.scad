@@ -7,11 +7,9 @@
 include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_basic_components.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
-
+include <../basic_scad/params_sheets.scad>
 
 angle_knee = 20;
-
-
 
 rectangular_tube_30x30x3_size = [30, 30];
 rectangular_tube_30x30x3_wall_thick = 3;
@@ -26,8 +24,6 @@ dist_to_incheietura_talpa_os = 32;//80;
 
 shaft_radius = 4;
 
-grosime_placa_alu = 10;
-
 max_torque_leg_angle = 60;
 
 distance_to_push_nut = 200; 
@@ -41,9 +37,9 @@ dist_to_first_bone = 22;
 dist_to_second_bone = 110;
 dist_to_push_motor_hole = 250;
 
-knee_side_simple_sizes = [dist_to_second_bone + dist_to_first_bone, grosime_placa_alu, 60];
+knee_side_simple_sizes = [dist_to_second_bone + dist_to_first_bone, alu_sheet_10_thick, 60];
 
-lateral_base_size = [base_length, grosime_placa_alu, 40];
+lateral_base_size = [base_length, alu_sheet_10_thick, 40];
 
 foot_spacer_holes = 
 [[dist_to_first_spacer, -50, 0],
