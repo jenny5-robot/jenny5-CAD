@@ -7,6 +7,9 @@
 include <../basic_scad/params_basic_components.scad>
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function semi_perimeter(l1, l2, l3) = (l1 + l2 + l3) / 2;
+
+function area_heron(l1, l2, l3) = sqrt(semi_perimeter(l1, l2, l3) * (semi_perimeter(l1, l2, l3) - l1) * (semi_perimeter(l1, l2, l3) - l2) * (semi_perimeter(l1, l2, l3) - l3));
 
 function heat_sink_height(number_of_wings) = 2 * number_of_wings - 1;
 
