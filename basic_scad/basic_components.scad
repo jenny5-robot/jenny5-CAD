@@ -228,8 +228,21 @@ module arc_thick(radius_exterior = 100, radius_interior = 90, thick = 10, angle 
     }
 }
 //--------------------------------------------------------------
+module arc_thick_rounded(radius_exterior = 100, radius_interior = 90, thick = 10, angle = 90)
+{
+    intersection(){
+        difference(){
+            cylinder(h = thick, r = radius_exterior, $fn = 100);
+            translate (-display_tolerance_z) cylinder(h = thick + 2 * display_tolerance, r = radius_interior, $fn = 100);
+        }
+        cube([radius_exterior, radius_exterior, thick]);
+        rotate(angle - 90) cube([radius_exterior, radius_exterior, thick]);
+    }
+    rotate ([0, 0, angle]) translate([(radius_exterior + radius_interior) / 2, 0, 0]) cylinder (h = thick, r = (radius_exterior - radius_interior) / 2, $fn = 30);
+}
+//--------------------------------------------------------------
 
-arc_thick(angle = 45);
+arc_thick_rounded(angle = 45);
 
 //corner(40, 20, 30, 3);
 
