@@ -27,29 +27,31 @@ module linear_stepper_motor()
 //------------------------------------------------------
 module linear_dc_motor(stroke, current_pos)
 {
-    base_length = 105 + stroke - 26;
+    base_length = 105 + stroke - 20;
     // tube
     color("grey") 
       translate([0, 0, 10]) cylinder (h = base_length, r = 20);
     // base support
     translate ([0, 0, -10]) 
       difference() {
-          cylinder (h = 20, r = 10);
+          color("grey") cylinder (h = 20, r = 10);
+          // hole
           translate ([0, -10, 10]) rotate([-90, 0, 0]) cylinder(h = 20, r = 4);
       }
     // pusher
     color("grey") translate([0, 0, base_length + 10]) 
       difference(){
         cylinder (h = current_pos + 20, r = 10);
+          // hole
         translate ([0, -10, current_pos + 10]) rotate([-90, 0, 0]) cylinder(h = 20, r = 4);
       }
     
     // motor
     color("grey") 
-      translate ([-40, 0, 13]) cylinder(h = 100, r = 20);
+      translate ([-40, 0, 10]) cylinder(h = 100, r = 20);
 }
 //------------------------------------------------------
 
 //linear_stepper_motor();
 
-linear_dc_motor(100, 20);
+linear_dc_motor(100, 0);
