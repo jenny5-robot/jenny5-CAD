@@ -11,9 +11,9 @@ include <params_tracks.scad>
 include <../basic_scad/config.scad>
 
 //--------------------------------------------------------------------
-module track(length = 25, width = 60, height = 8)
+module track(length = 25, width = 80, height = 8)
 {
-    togue_width = width / 5;
+    togue_width = width / 7;
     
     hole_radius = 1.2;
     togue_tolerance = 1.2;
@@ -32,7 +32,15 @@ module track(length = 25, width = 60, height = 8)
             }
 		}
 
-// holes for screws for connecting to the other track
+        // holes for rubber band
+        translate ([length / 2, 8, 0] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([length / 2, 8, height - m3_autolock_nut_thick]) cylinder (h = height + display_tolerance, r = m3_nut_radius, $fn = 6);
+// other side
+        translate ([length / 2, width - 8, 0] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+        translate ([length / 2, width - 8, height - m3_autolock_nut_thick]) cylinder (h = height + display_tolerance, r = m3_nut_radius, $fn = 6);
+        
+        
+// holes for rods for connecting to the other track
 		rotate([-90, 0, 0]) translate([length, -height / 2, 0] - display_tolerance_z) cylinder(h = width + 2 * display_tolerance, r = hole_radius, $fn = 20, center = false);
 		rotate([-90, 0, 0]) translate([0, -height / 2, 0] - display_tolerance_z) cylinder(h = width + 2 * display_tolerance, r = hole_radius, $fn = 20, center = false);
         
@@ -41,14 +49,16 @@ module track(length = 25, width = 60, height = 8)
         translate ([0, width, height / 2]) rotate ([0, 90, 0]) cylinder (h = 15, r = hole_radius, $fn = 20);
 // front
 // center
-		translate([length - height / 2 - togue_tolerance / 2, (width - togue_width) / 2 - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance , height + 2 * display_tolerance], center = false);
-// margins
-		translate([length - height / 2 - togue_tolerance / 2, 0, 0] - display_tolerance_yz) cube([height + togue_tolerance, togue_width + togue_width_tolerance, height] + 2 * display_tolerance_z + display_tolerance_y, center = false);
-		translate([length - height / 2 - togue_tolerance / 2, width - togue_width - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + togue_width_tolerance, height] + 2 * display_tolerance_z + display_tolerance_y, center = false);
-	
+        right_side_ears_count = 4;
+for (i = [0 : right_side_ears_count - 1])
+        translate([length - height / 2 - togue_tolerance / 2, togue_width * 2 * i - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance , height + 2 * display_tolerance], center = false);
+
 // the other side
-		translate([-height / 2, togue_width - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance, height] + 2 * display_tolerance_z, center = false);
-		translate([-height / 2, width / 2 + togue_width / 2 - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance, height] + 2 * display_tolerance_z, center = false);
+
+        left_side_ears_count = 3;
+for (i = [0 : left_side_ears_count - 1])
+		translate([-height / 2, togue_width * (2 * i + 1) - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance, height] + 2 * display_tolerance_z, center = false);
+
 
 // circular middle holes for wheel bumps
         translate([length / 2, width / 2, 0]) cylinder(h = height + 0.001, r1 = 2, r2 = 6, $fn = 40);
@@ -79,9 +89,9 @@ module string_of_tracks (num_tracks)
     }
 }
 //--------------------------------------------------------------------
-//track(length = 25, width = 80, height = 8);
+track(length = 25, width = 80, height = 8);
 
-tracks_on_circle(16, 58.8, 90, 10);
+//tracks_on_circle(16, 58.8, 90, 10);
 
 //tracks_on_circle(6, 17.7, 90, 6);
 
