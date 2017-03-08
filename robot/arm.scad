@@ -153,9 +153,7 @@ module elbow_pulley()
         
         translate ([38, 25, 0] - display_tolerance_z) cylinder( h = 11 + 2 * display_tolerance, r = 3, $fn = 50);
         translate ([38, -25, 0] - display_tolerance_z) cylinder( h = 11 + 2 * display_tolerance, r = 3, $fn = 50);
-
   }
-    
 }
 //---------------------------------------------------------------------------
 module forearm_motor_housing()
@@ -227,7 +225,6 @@ module elbow_pulley_with_components()
     
     // potentiometer
     translate ([55 - 7 - 2 - 2, 0, -10]) rotate ([0, 90, 0]) potentiometer_BOURNS_3852A_282_103AL();
-
 }
 //---------------------------------------------------------------------------
 module forearm_bone()
@@ -274,9 +271,10 @@ module fore_arm()
 //---------------------------------------------------------------------------
 module fore_arm_with_elbow_pulley()
 {
-  translate ([18, 0, 22]) 
-    rotate ([0, 90,0]) rotate([0, 0, 180]) 
-    fore_arm();
+  translate ([18, 0, 22])
+   rotate([angle_fore_arm, 0, 0]) 
+    rotate ([0, 90, 0]) rotate([0, 0, 180]) 
+        fore_arm();
 // elbow pulley
     elbow_pulley_with_components();
 }
@@ -385,7 +383,7 @@ mirror([0, 0, 1])
     radial_bearing_608_vertical_housing();
         
     // continuation with upper arm
-    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_608_external_radius + alu_sheet_3_thick]) rotate ([0, angle_fore_arm, 0]) upper_arm();    
+    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_608_external_radius + alu_sheet_3_thick]) rotate ([0, angle_upper_arm, 0]) upper_arm();    
 
 }
 //---------------------------------------------------------------------------
