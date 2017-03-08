@@ -13,7 +13,7 @@ include <../basic_scad/config.scad>
 //--------------------------------------------------------------------
 module track(length = 25, width = 80, height = 8)
 {
-    togue_width = width / 7;
+    togue_width = width / 5;
     
     hole_radius = 1.2;
     togue_tolerance = 1.2;
@@ -49,13 +49,13 @@ module track(length = 25, width = 80, height = 8)
         translate ([0, width, height / 2]) rotate ([0, 90, 0]) cylinder (h = 15, r = hole_radius, $fn = 20);
 // front
 // center
-        right_side_ears_count = 4;
+        right_side_ears_count = 3;
 for (i = [0 : right_side_ears_count - 1])
         translate([length - height / 2 - togue_tolerance / 2, togue_width * 2 * i - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance , height + 2 * display_tolerance], center = false);
 
 // the other side
 
-        left_side_ears_count = 3;
+        left_side_ears_count = 2;
 for (i = [0 : left_side_ears_count - 1])
 		translate([-height / 2, togue_width * (2 * i + 1) - togue_width_tolerance, 0] - display_tolerance_z) cube([height + togue_tolerance, togue_width + 2 * togue_width_tolerance, height] + 2 * display_tolerance_z, center = false);
 
