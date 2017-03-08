@@ -48,7 +48,7 @@ module linear_dc_motor(stroke, current_pos)
     
     // motor
     color("grey") 
-      translate ([-34, 0, 10]) cylinder(h = 100, r = 20);
+      translate ([-20 - 17, 0, 10]) cylinder(h = 100, r = 20);
 }
 //------------------------------------------------------
 
