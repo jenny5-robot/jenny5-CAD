@@ -6,12 +6,17 @@
 
 base_platform_size = [600, 250, 18];
 
-    first_tracks_offset = -rb_608_external_radius - 7;
-    second_tracks_offset = 30;
-    distance_between_wheels = 230;
+first_tracks_offset = -rb_608_external_radius - 7;
+second_tracks_offset = 30;
+distance_between_wheels = 230;
     
-    wheels_bearing_housing_1_offset_y = 16;
-    
-    wheels_bearing_housing_2_offset_y = 80;
+wheels_bearing_housing_1_offset_y = 16;
+   
+wheels_bearing_housing_2_offset_y = 80;
 
 tracks_tensioner_size = [60, 20, base_platform_size[2]];
+
+leg_postion_on_platform = 90 + 40;
+
+num_tracks_per_circle = 14; // 16
+tracks_wheel_radius = 50.8; // 58.8
