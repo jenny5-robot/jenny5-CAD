@@ -4,16 +4,14 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_basic_components.scad>
+include <params_basic_components.scad>
 include <func_3d.scad>
-use <../basic_scad/basic_components.scad>
-include <../basic_scad/params_radial_bearings.scad>
-include <../basic_scad/params_linear_bearings.scad>
-//include <params_machine.scad>
-include <../basic_scad/params_alu_profiles.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-include <../basic_scad/params_pulleys.scad>
-use <../basic_scad/pulleys.scad>
+use <basic_components.scad>
+include <params_linear_bearings.scad>
+include <params_alu_profiles.scad>
+include <params_screws_nuts_washers.scad>
+include <params_pulleys.scad>
+use <pulleys.scad>
 
 
 dist_to_screw_linear_bearing_housing_lm10uu = f_dist_to_screw_linear_bearing_housing(lm10uu_external_radius);
@@ -53,15 +51,15 @@ nut_housing_z_axis_height_exterior = m8_nut_radius + wall_thick_3;
 
 washer_thick = washer_8_thick;
 z_screw_support_length = washer_4_12_radius  + wall_thick_5 +  wall_thick_2 + 2 * roata_dintata_t2_5_30_dinti_raza_flansa + wall_thick_2 + wall_thick_5 + washer_4_12_radius;
-z_screw_support_width = 2 * bearing_8_external_radius + 2 * wall_thick_3;
+z_screw_support_width = 2 * lm8uu_external_radius + 2 * wall_thick_3;
 
 
 //echo ("z_screw_support_length", z_screw_support_length);
 
-inaltime_baza_up_screw_support = wall_thick_3 + bearing_8_height;
+inaltime_baza_up_screw_support = wall_thick_3 + lm8uu_height;
 z_screw_support_up_height = inaltime_baza_up_screw_support  + 5 * washer_thick + roata_dintata_t2_5_30_dinti_height ;
 
-inaltime_baza_down_screw_support = wall_thick_3 + bearing_8_height + 0.5;
+inaltime_baza_down_screw_support = wall_thick_3 + lm8uu_height + 0.5;
 z_screw_support_down_height = inaltime_baza_down_screw_support;// + 4 * washer_thick + roata_dintata_t2_5_30_dinti_height / 2 ;
 
 picioruse_dist_to_margin = 4;
