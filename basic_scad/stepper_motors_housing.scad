@@ -380,7 +380,7 @@ nema_motor_housing_x(10, nema_23_57BYGH603_width, nema_23_57BYGH603_height, 70, 
 
 //nema_motor_housing(0, 10, 0);
 
-nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
+//nema_11_housing_with_belt_tensioner_bearing_based_x_and_base_holes(15, 0);
 
 //nema_17_geared_motor_housing(toleranta_x = 0, toleranta_y = 0, motor_deviation_x = 0); // platform motor 2x
 

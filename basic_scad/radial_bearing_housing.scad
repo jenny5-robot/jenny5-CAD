@@ -365,9 +365,9 @@ translate([0, rbearing_608_enclosed_housing_slim_size[1], 0])
 
 //rbearing_608_vertical_housing_bounded_half_small_top();
 
-rbearing_608_housing_with_potentiometer_support();
+//rbearing_608_housing_with_potentiometer_support();
 
-//radial_bearing_608_vertical_housing();
+radial_bearing_608_vertical_housing();
 
 //radial_bearing_608_u_vertical_housing();
 
