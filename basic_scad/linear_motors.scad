@@ -30,7 +30,7 @@ module linear_dc_motor(stroke, current_pos)
     motor_base_length = 105 + stroke - 20;
     // tube
     color("grey") 
-      translate([0, 0, 10]) cylinder (h = motor_base_length, r = 20);
+      translate([0, 0, 10]) cylinder (h = motor_base_length, r = 17);
     // base support
     translate ([0, 0, -10]) 
       difference() {
@@ -48,7 +48,7 @@ module linear_dc_motor(stroke, current_pos)
     
     // motor
     color("grey") 
-      translate ([40, 0, 10]) cylinder(h = 100, r = 20);
+      translate ([-34, 0, 10]) cylinder(h = 100, r = 20);
 }
 //------------------------------------------------------
 
