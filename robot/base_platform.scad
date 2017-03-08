@@ -402,8 +402,8 @@ module platform()
         translate ([second_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate([-90, 0, 0]) traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
 
         //tracks
-  //  translate ([200 + second_tracks_offset, left_tracks_offset, -rb_6201_external_radius]) 
-    //    tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
+    translate ([200 + second_tracks_offset, left_tracks_offset, -rb_6201_external_radius]) 
+        tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
         //tracks_on_3_wheels(num_tracks_per_half_circle = [5, 16, 16], wheels_radius = [20, 58.8, 58.8], wheels_position = [[-100, 0], [0, 0], [distance_between_wheels, 0]]);
     }
 
@@ -427,8 +427,8 @@ module platform()
         translate ([second_tracks_offset + distance_between_wheels, right_tracks_offset, -rb_6001_external_radius]) mirror([0, 1, 0]) rotate([-90, 0, 0]) traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
 
     //tracks
-    //translate ([distance_between_wheels + second_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) 
-      //  tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
+    translate ([distance_between_wheels + second_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) 
+        tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
       // belt
     translate ([second_tracks_offset + distance_between_wheels, right_tracks_offset - 47, -rb_6201_external_radius]) rotate ([0, -155, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(35, 10, distance_between_motor_and_traction_wheel);
     
