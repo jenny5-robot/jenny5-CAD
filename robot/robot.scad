@@ -12,9 +12,9 @@ use <../basic_scad/screws_nuts_washers.scad>
 
 include <../basic_scad/config.scad>
 
-
 use <../basic_scad/masa.scad>
 use <../basic_scad/spacer.scad>
+use <../basic_scad/func_3d.scad>
 
 include <params_robot.scad>
 
@@ -42,19 +42,25 @@ module body_with_head()
 //---------------------------------------------------------------------------
 module platform_foot()
 {
-    translate ([0, 0, base_platform_size[2]]) long_leg(angle_knee);
     // mobile platform
-    translate ([-70, -base_platform_size[1] / 2, 0]) platform();
+    translate ([0, -base_platform_size[1] / 2, 0]) platform();
+    // leg
+    translate ([leg_postion_on_platform, 0, base_platform_size[2]]) long_leg(leg_motor_position);
 }
 //---------------------------------------------------------------------------
 module robot()
 {
-    long_leg_height = 2 * ((leg_bone_length - 2 * dist_to_incheietura) * cos(angle_knee) + (dist_to_incheietura_talpa + dist_to_incheietura_talpa_os));
+    platform_foot();
+
+    h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, 205 + leg_motor_position- 19, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
+   
+    leg_angle = 90 - asin( h / distance_to_push_position);
+    
+    long_leg_height = 2 * ((leg_bone_length - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
     
     echo(long_leg_height = long_leg_height);
     
-    translate ([50, 0, long_leg_height + 10]) rotate ([0, 0, 90]) body_with_head();
-    platform_foot();
+    translate ([leg_postion_on_platform + dist_to_first_bone, 0, long_leg_height + 10]) rotate ([0, 0, 90]) body_with_head();
 }
 //---------------------------------------------------------------------------
 module robot_with_kitchen_table()
@@ -73,6 +79,7 @@ module gear_motor1()
 }
 //---------------------------------------------------------------------------
 //robot_with_kitchen_table();
+
 robot();
 
 //platform_foot();
