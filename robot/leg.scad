@@ -19,8 +19,6 @@ use <../basic_scad/radial_bearing_housing.scad>
 include <../basic_scad/config.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 
-use <../basic_scad/functions_3d.scad>
-
 include <../basic_scad/params_nuts_housing.scad>
 use <../basic_scad/parametric_involute_gear_v5.0.scad>
 

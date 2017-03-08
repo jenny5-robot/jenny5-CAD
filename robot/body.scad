@@ -13,7 +13,7 @@ include <params_body.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 include <../basic_scad/params_radial_bearings.scad>
-use <../basic_scad/functions_3d.scad>
+
 use <../basic_scad/stepper_motors.scad>
 
 include <../basic_scad/params_stepper_motors.scad>
@@ -22,6 +22,7 @@ use <../basic_scad/radial_bearing_housing.scad>
 
 include <../basic_scad/params_potentiometers.scad>
 use <../basic_scad/potentiometers.scad>
+use <../basic_scad/point_transformations_3d.scad>
 
 use <motor_plate.scad>
 

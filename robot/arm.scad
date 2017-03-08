@@ -23,7 +23,7 @@ include <../basic_scad/config.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 use <motor_plate.scad>
 include <params_motor_plate.scad>
-use <../basic_scad/functions_3d.scad>
+use <../basic_scad/point_transformations_3d.scad>
 use <../basic_scad/masa.scad>
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearings.scad>
