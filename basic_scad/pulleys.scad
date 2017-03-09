@@ -55,6 +55,7 @@ T5_pulley_dia_60 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 38);
 T5_pulley_dia_70 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 44);
 T5_pulley_dia_78 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 50);
 T5_pulley_dia_82 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 52);
+T5_pulley_dia_100 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 63);
 T5_pulley_dia_103 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 66);
 
 // The following calls the pulley creation part, and passes the pulley diameter and tooth width to that module
@@ -121,6 +122,8 @@ module pulley(profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_h
   if ( profile == 64 ) { _pulley ( "T5" , T5_pulley_dia_45 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 65 ) { _pulley ( "T5" , T5_pulley_dia_103 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 66 ) { _pulley ( "T5" , T5_pulley_dia_31 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 67 ) { _pulley ( "T5" , T5_pulley_dia_100 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  
   
   
 }
@@ -247,6 +250,7 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
                 if ( profile == 64 ) { T5(pulley_t_ht);}
                 if ( profile == 65 ) { T5(pulley_t_ht);}
                 if ( profile == 66 ) { T5(pulley_t_ht);}
+                if ( profile == 67 ) { T5(pulley_t_ht);}
 			}
 
 			}
@@ -357,6 +361,8 @@ module GT2_5mm(pulley_t_ht)
     //echo(T2_5_pulley_dia_84);
     
     //echo(T5_pulley_dia_31 = T5_pulley_dia_31);
+    //echo(T5_pulley_dia_100 = T5_pulley_dia_100);
+    
     
     //my_pulley(16, 49, 0, 0, 8);
     
@@ -377,4 +383,6 @@ module GT2_5mm(pulley_t_ht)
     //pulley(63, 18, 0, 0, 8);
     
     //pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
-    pulley_with_shaft(66, 20, 0, 0, 8, 4, 0, 0);
+    //pulley_with_shaft(66, 20, 0, 0, 8, 4, 0, 0);
+    
+    pulley_with_shaft(67, 63, 0, 0, 8, 0, 0, 0);
