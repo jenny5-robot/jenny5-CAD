@@ -22,6 +22,4 @@ include <params_dc_motors.scad>
 	[-distance_holes_base_motor_housing_gr_ep_45_x, -distance_holes_large_base_motor_housing_gr_ep_45_y, 0]
 	];
     
-    motor_gr_ep_45_housing_size = [2 * motor_gr_ep_45_radius + 3 + 0, 2 * motor_gr_ep_45_radius + 2 * side_wall_dc_motor_housing_thick + 2 * 15, 40];
-
-echo(motor_gr_ep_45_housing_size);
+    motor_gr_ep_45_housing_size = [2 * motor_gr_ep_45_radius + base_wall_dc_motor_housing_thick, 2 * motor_gr_ep_45_radius + 2 * side_wall_dc_motor_housing_thick + 2 * 15, 40];
