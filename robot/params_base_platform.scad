@@ -12,7 +12,7 @@ distance_between_wheels = 230;
     
 wheels_bearing_housing_1_offset_y = 16;
    
-wheels_bearing_housing_2_offset_y = 80;
+wheels_bearing_housing_2_offset_y = 70;
 
 tracks_tensioner_size = [60, 20, base_platform_size[2]];
 
