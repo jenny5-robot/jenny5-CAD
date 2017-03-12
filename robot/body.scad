@@ -47,7 +47,7 @@ module bearing_housing_top_body()
 module clavicle()
 {
     difference(){
-        color (aluminium_color) L(chest_length, latura_L / 2, latura_L, alu_sheet_3_thick); 
+        color (aluminium_color) L_profile(chest_length, latura_L / 2, latura_L, alu_sheet_3_thick); 
         echo("gauri_os_clavicula left = ");
         for (i = [0:4]){
             echo([alu_sheet_3_thick + rbearing_608_housing_size[0] / 2, dist_edge_to_shaft, 0] + rbearing_608_housing_holes_position[i]);
@@ -79,7 +79,7 @@ module clavicle()
 module diafragma_bone()
 {
     difference(){
-        color (aluminium_color) L(chest_length, latura_L / 2, latura_L, alu_sheet_3_thick);
+        color (aluminium_color) L_profile(chest_length, latura_L / 2, latura_L, alu_sheet_3_thick);
         // left axis hole
         echo("gauri_os_diafragma left = ");
         for (i = [0:4]){

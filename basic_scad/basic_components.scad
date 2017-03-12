@@ -165,7 +165,7 @@ module U(length, base, height, grosime_perete)
     //}
 }
 //--------------------------------------------------------------
-module L(length, edge_1_width = 20, edge_2_width = 20, wall_thick = 3)
+module L_profile(length, edge_1_width = 20, edge_2_width = 20, wall_thick = 3)
 {
    
   difference(){
