@@ -12,7 +12,7 @@ use <../basic_scad/screws_nuts_washers.scad>
 
 include <../basic_scad/config.scad>
 
-use <../basic_scad/masa.scad>
+use <../basic_scad/table.scad>
 use <../basic_scad/spacer.scad>
 use <../basic_scad/func_3d.scad>
 
@@ -66,29 +66,14 @@ module robot()
 module robot_with_kitchen_table()
 {
     robot();
-    translate ([-800, 0, 0]) masa_rotunda(750, 400);
+    translate ([-800, 0, 0]) rounded_table(750, 400);
 }
 //---------------------------------------------------------------------------
+robot_with_kitchen_table();
 
-module gear_motor1()
-{
-    difference(){
-      pulley(54, 32, 0, 0, 8, 4, 0, 0);// motor #1
-        cylinder( h = 5, r = m8_nut_radius, $fn = 6);
-    }
-}
-//---------------------------------------------------------------------------
-//robot_with_kitchen_table();
-
-robot();
+//robot();
 
 //platform_foot();
 
-//arm();
-
 //body_with_head();
 
-//belt_tensioner_base();
-
-
-//body();
