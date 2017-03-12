@@ -118,17 +118,16 @@ module wheel_extension(radius = 42.5, _h = 8, thumb_height = 18, num_faces_nut_h
 module wheel_traction_pulley()
 {
   difference(){
-      color (plastic_color)
-     union(){
+    color (plastic_color)
+      union(){  
+        pulley_with_shaft(profile = 67, num_teeth = 63, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8, shaft_radius = 6, nut_radius = 0, nut_height = 0);
          
-       pulley_with_shaft(profile = 67, num_teeth = 63, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8, shaft_radius = 6, nut_radius = 0, nut_height = 0);
-         
-          cylinder (h = 20, r = 18);
-     }
+        cylinder (h = 20, r = 18);
+      }
      //  fi 12 hole
-     cylinder (h = 12, r = 6, $fn = 50);
+      cylinder (h = 12, r = 6, $fn = 50);
      // M12 nut hole
-     translate ([0, 0, 6]) cylinder (h = 20, r = M12_nut_radius, $fn = 6);
+      translate ([0, 0, 6]) cylinder (h = 20, r = M12_nut_radius, $fn = 6);
   }
 }
 //--------------------------------------------------------------------
@@ -317,6 +316,12 @@ module base_motor_pulley()
 module platform()
 {
   platform_sheet();
+    
+    // reinforcement aluminium profiles
+    // left side
+    translate ([0, -3, -3]) rotate ([-90, 0, 0]) rotate ([0, 0, -90]) L_profile(base_platform_size[0], edge_1_width = 25, edge_2_width = 25, wall_thick = 3);
+    // right side
+    translate ([0, base_platform_size[1] + 3, -3]) rotate ([0, 0, -90]) L_profile(base_platform_size[0], edge_1_width = 25, edge_2_width = 25, wall_thick = 3);
 
   // motor right
     
@@ -359,15 +364,14 @@ module platform()
         //tracks
     translate ([distance_between_wheels + second_tracks_offset, left_tracks_offset, -rb_6201_external_radius]) 
         tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
-        //tracks_on_3_wheels(num_tracks_per_half_circle = [5, 16, 16], wheels_radius = [20, 58.8, 58.8], wheels_position = [[-100, 0], [0, 0], [distance_between_wheels, 0]]);
     }
 
 // belt    
     
-    distance_between_motor_and_traction_wheel = sqrt((motor_gr_ep_45_radius + 3 + 3 + base_platform_size[2] + rb_6201_external_radius)*(motor_gr_ep_45_radius + 3 + 3 + base_platform_size[2] + rb_6201_external_radius) + (second_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 5) * (second_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 5));
+    distance_between_motor_and_traction_wheel = sqrt((motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius)*(motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius) + (second_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10) * (second_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10));
     // 
     
-    translate ([second_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate ([0, -155, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
+    translate ([second_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
     
     echo (belt_length = length_belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel));
 
@@ -386,7 +390,7 @@ module platform()
     translate ([distance_between_wheels + second_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) 
         tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
       // belt
-    translate ([second_tracks_offset + distance_between_wheels, right_tracks_offset - 47, -rb_6201_external_radius]) rotate ([0, -155, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(35, 10, distance_between_motor_and_traction_wheel);
+    translate ([second_tracks_offset + distance_between_wheels, right_tracks_offset - 47, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
     
 }
     // back wheel
@@ -406,7 +410,7 @@ module platform()
 //--------------------------------------------------------------------
 
 
-platform();
+//platform();
 
 //distance_between_wheels = 200;
 
@@ -436,7 +440,7 @@ platform();
 
 //string_of_tracks (10);
 
-//wheel_traction_pulley();
+wheel_traction_pulley();
 
 //wheel_with_teeths(tracks_wheel_radius, num_tracks_per_circle);
 
