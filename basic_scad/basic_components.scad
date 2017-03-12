@@ -131,19 +131,19 @@ module cube_rounded_x_holed_z(cube_size, hole_radius)
     }
 }
 //----------------------------------------------------------------
-module teava_dreptunghiulara(lungime, latime, grosime_perete, inaltime)
+module rectangular_tube(length, width, wall_thick, height)
 {
     difference(){
-		cube([lungime, latime, inaltime]);
-		translate ([grosime_perete, grosime_perete, 0]- display_tolerance_z) cube([lungime - 2 * grosime_perete, latime - 2 * grosime_perete, inaltime + 2 * display_tolerance]);
+		cube([length, width, height]);
+		translate ([wall_thick, wall_thick, 0]- display_tolerance_z) cube([length - 2 * wall_thick, width - 2 * wall_thick, height + 2 * display_tolerance]);
 	}
 }
 //--------------------------------------------------------------
-module cube_empty(latura_interioara, latura_exterioara, inaltime)
+module cube_empty(inside_edge, outside_edge, height)
 {
 	difference(){
-		translate ([-latura_exterioara / 2, - latura_exterioara / 2, 0]) cube([latura_exterioara, latura_exterioara, inaltime]);
-		translate ([- latura_interioara / 2, - latura_interioara / 2, 0] - display_tolerance_z) cube([latura_interioara, latura_interioara, inaltime + 2 * display_tolerance]);
+		translate ([-outside_edge / 2, - outside_edge / 2, 0]) cube([outside_edge, outside_edge, height]);
+		translate ([- inside_edge / 2, - inside_edge / 2, 0] - display_tolerance_z) cube([inside_edge, inside_edge, height + 2 * display_tolerance]);
 	}
 }
 //--------------------------------------------------------------
@@ -155,24 +155,22 @@ module cylinder_empty(_h, external_radius, internal_radius, fn = 30)
 	}
 }
 //--------------------------------------------------------------
-module U(length, base, height, grosime_perete)
+module U(length, base, height, wall_thick)
 {
     //render(){
         difference(){
             cube ([length, base, height]);
-            translate ([-display_tolerance, grosime_perete, grosime_perete]) cube ([length + 2 * display_tolerance, base - 2 * grosime_perete, height - grosime_perete + display_tolerance]);
+            translate ([-display_tolerance, wall_thick, wall_thick]) cube ([length + 2 * display_tolerance, base - 2 * wall_thick, height - wall_thick + display_tolerance]);
         }
     //}
 }
 //--------------------------------------------------------------
 module L_profile(length, edge_1_width = 20, edge_2_width = 20, wall_thick = 3)
 {
-   
   difference(){
     color (aluminium_color) cube ([edge_2_width, length, edge_1_width]);
     translate ([wall_thick, 0, wall_thick] - display_tolerance_y) cube ([edge_2_width - wall_thick, length, edge_1_width - wall_thick] + display_tolerance_xyz + display_tolerance_y);
   }
-    
 }
 //--------------------------------------------------------------
 module heat_sink(external_radius, internal_radius, number_of_wings)

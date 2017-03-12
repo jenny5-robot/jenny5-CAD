@@ -108,7 +108,7 @@ module leg_bone()
 {
     difference(){
         
-        color (aluminium_color) teava_dreptunghiulara(rectangular_tube_30x30x3_size[1], rectangular_tube_30x30x3_size[0], rectangular_tube_30x30x3_wall_thick, leg_bone_length);
+        color (aluminium_color) rectangular_tube(rectangular_tube_30x30x3_size[1], rectangular_tube_30x30x3_size[0], rectangular_tube_30x30x3_wall_thick, leg_bone_length);
         
 // midle hole bottom bearing
         
@@ -281,7 +281,7 @@ module long_leg(motor_position = 0)
 }
 //----------------------------------------------------------------------
 
-//long_leg(leg_motor_position); // between 0 and 100
+long_leg(leg_motor_position); // between 0 and 100
 
 
 //linear_motor_with_top_shaft(100, 50);
@@ -294,6 +294,6 @@ module long_leg(motor_position = 0)
 
 //base_side(40); // 2x
 
-base_side(60); // 2x
+//base_side(60); // 2x
 
 //knee();
