@@ -4,15 +4,15 @@
 // MIT License
 //--------------------------------------------------------------
 
-module masa_rotunda(inaltime, raza)
+module rounded_table(height, radius)
 {
-    grosime_placa = 30;
-// baza
+    sheet_thickness = 30;
+// base
 	cylinder (h = 50, r = 150);
-	// picior
-	cylinder (h = inaltime, r = 50);
-	// masa
-	translate ([0, 0, inaltime - grosime_placa]) cylinder (h = grosime_placa, r = raza);
+	// leg
+	cylinder (h = height, r = 50);
+	// top sheet
+	translate ([0, 0, height - sheet_thickness]) cylinder (h = sheet_thickness, r = radius);
 }
 
-masa_rotunda(750, 400);
+rounded_table(750, 400);
