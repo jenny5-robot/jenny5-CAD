@@ -169,7 +169,7 @@ module L_profile(length, edge_1_width = 20, edge_2_width = 20, wall_thick = 3)
 {
    
   difference(){
-    cube ([edge_2_width, length, edge_1_width]);
+    color (aluminium_color) cube ([edge_2_width, length, edge_1_width]);
     translate ([wall_thick, 0, wall_thick] - display_tolerance_y) cube ([edge_2_width - wall_thick, length, edge_1_width - wall_thick] + display_tolerance_xyz + display_tolerance_y);
   }
     
