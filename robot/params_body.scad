@@ -10,9 +10,6 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sheets.scad>
 
 
-latura_L = 40;
-latura_U = 40;
-
 dist_edge_to_shaft = 14;
 
 chest_height = 350;
@@ -21,7 +18,7 @@ chest_length = 430;
 body_arm_length = chest_height - 2 * wall_thick_3 - 2 * washer_8_thick -  2 * rb_608_thick;
 
 dist_between_motor_and_axis = 89;//radius_roata_reductor + radius_roata_motor_reductor + 10;
-coloana_vertebrala_size = [30, 30, chest_height - 2 * alu_sheet_3_thick];
+vertebral_column_size = [30, 30, chest_height];
    
 motor_housing_tolerance = 10;
 motor_housing_tolerance_large = 20;

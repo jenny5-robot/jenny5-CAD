@@ -15,6 +15,7 @@ include <../basic_scad/config.scad>
 use <../basic_scad/table.scad>
 use <../basic_scad/spacer.scad>
 use <../basic_scad/func_3d.scad>
+include <../basic_scad/params_alu_profiles.scad>
 
 include <params_robot.scad>
 
@@ -34,10 +35,10 @@ module body_with_head()
 {
     body();
     // head
-    translate ([0, -latura_L / 2 - 1, chest_height + 37]) mirror ([0, 1, 0]) head();
+    translate ([0, -L_profile_40x20_short_size - 1, chest_height + 37]) mirror ([0, 1, 0]) head();
     // spacers for linking head with body
-    translate ([29, -latura_L, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
-    translate ([-40, -latura_L, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
+    translate ([29, -L_profile_40x20_long_size, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
+    translate ([-40, -L_profile_40x20_long_size, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
 }
 //---------------------------------------------------------------------------
 module platform_foot()
