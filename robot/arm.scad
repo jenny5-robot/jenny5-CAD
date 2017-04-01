@@ -24,7 +24,6 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 use <motor_plate.scad>
 include <params_motor_plate.scad>
 use <../basic_scad/point_transformations_3d.scad>
-use <../basic_scad/masa.scad>
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/rings.scad>
@@ -409,11 +408,17 @@ module plate_body_articulation()
   }
 }
 //---------------------------------------------------------------------------
-module traction_pulley()
+module body_arm_traction_pulley()
 {
     difference(){
-        pulley_with_shaft(60, 33, 0, 0, 8, 4, m8_nut_radius, m8_nut_height);
-        cylinder (h = 6, r = m8_nut_radius, $fn = 6);
+        rotate ([0, 0, 2.8]) pulley(profile = 60, num_teeth = 33, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+        
+        translate([-bone_thick / 2, -bone_thick / 2, 0] - display_tolerance_z) cube([bone_thick, bone_thick, 11] + 2 * display_tolerance_z);
+        
+        // screw hole
+        translate ([0, 0, 5.5]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
+        // nut hole
+        translate ([4.9, 0, 5.5]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 1, r = m4_nut_radius, $fn = 6);
     }
 }
 //---------------------------------------------------------------------------
@@ -504,7 +509,7 @@ module body_articulation()
     translate ([35, 73, 30 + 3]) 
       rotate ([90, 0, 0]) 
         rotate ([0, 0, angle_shoulder]) 
-          traction_pulley();
+          body_arm_traction_pulley();
 
     // upper arm
     translate ([35 + 10, -90, 30 + plate_body_size[2]]) 
@@ -529,11 +534,11 @@ module body_arm_bone(bone_length)
 module arm(bone_length)
 {
 // vertical axis
-    translate ([0, 0, wall_thick_3 + washer_8_thick + rb_608_thick]) rotate ([0, 0, angle_body_arm])  
+    rotate ([0, 0, angle_body_arm])  
     color (aluminium_color) body_arm_bone(bone_length);
         
-    // reduction pulley
-    translate ([0, 0, 0]) rotate([0, 0, angle_body_arm]) mirror ([0, 0, 1]) traction_pulley();
+    // traction pulley
+    translate ([0, 0, 4]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
     
     // continuation
     translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
@@ -599,7 +604,7 @@ arm(200);
 
 //pot_gear_with_screw_hole_14t();
 
-//traction_pulley();
+//body_arm_traction_pulley();
 
 //elbow_potentiometer_support();
 
