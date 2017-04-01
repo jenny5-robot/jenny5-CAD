@@ -70,9 +70,9 @@ module robot_with_kitchen_table()
     translate ([-800, 0, 0]) rounded_table(750, 400);
 }
 //---------------------------------------------------------------------------
-robot_with_kitchen_table();
+//robot_with_kitchen_table();
 
-//robot();
+robot();
 
 //platform_foot();
 
