@@ -26,6 +26,9 @@ use <../basic_scad/point_transformations_3d.scad>
 
 include <../basic_scad/params_alu_profiles.scad>
 
+include <../basic_scad/params_breadboards.scad>
+use <../basic_scad/breadboards.scad>
+
 use <motor_plate.scad>
 
 include <params_arm.scad>
@@ -157,6 +160,9 @@ module body()
     translate ([-(chest_length / 2 -dist_edge_to_shaft), -(alu_sheet_3_thick + rbearing_608_housing_size[0] / 2), 0]) mirror([1, 0, 0]) arm(body_arm_length);
     // right arm
     translate ([chest_length / 2 - dist_edge_to_shaft, -(alu_sheet_3_thick + rbearing_608_housing_size[0] / 2), 0]) arm(body_arm_length);
+    
+    // breadboard for arms
+    translate ([-arms_breadboard_size[0] / 2, -vertebral_column_size[0], vertebral_column_size[2] / 2 - arms_breadboard_size[1] / 2]) rotate ([90, 0, 0]) arms_breadboard();
 }    
 //---------------------------------------------------------------------------
 

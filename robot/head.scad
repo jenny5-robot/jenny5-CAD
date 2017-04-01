@@ -30,6 +30,9 @@ use <../basic_scad/ultrasonic_support.scad>
 use <../basic_scad/ultrasonic.scad>
 use <../basic_scad/basic_components.scad>
 
+include <../basic_scad/params_breadboards.scad>
+use <../basic_scad/breadboards.scad>
+
 
 use <potentiometer_gears.scad>
 use <../basic_scad/potentiometers.scad>
@@ -129,7 +132,7 @@ module head_base()
 module nema_11_with_gearbox_and_pulley()
 {
     nema_11_with_13_1_gearbox();
-    translate ([0, 0, nema_11_with_13_1_gearbox_height + 12]) pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
+    translate ([0, 0, nema_11_with_13_1_gearbox_height + 3]) pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
 }
 //---------------------------------------------------------------------------
 module hc_sr04_and_c920_with_support()
@@ -183,6 +186,11 @@ module head()
     translate ([0, 60, 52]) mirror ([0, 0, 1]) nema_11_with_gearbox_and_pulley();
     // eye support
     translate ([8, -20, 128]) rotate ([0, 90, 0]) eye_support();
+    
+    // electronics breadboard
+    
+    translate([-WBU_502_breadboard_size[0] / 2, 25, 0]) rotate ([90, 0, 0]) WBU_502_breadboard();
+
 }
 //---------------------------------------------------------------------------
 

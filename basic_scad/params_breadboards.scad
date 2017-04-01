@@ -4,4 +4,6 @@
 // MIT License
 //--------------------------------------------------------------
 
-WBU_502_breadboard_size = [142,73,10];
+WBU_502_breadboard_size = [140, 71, 10];
+
+arms_breadboard_size = [170, 190, 10];
