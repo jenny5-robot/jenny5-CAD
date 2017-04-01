@@ -50,6 +50,8 @@ use <../basic_scad/dc_motors_housing.scad>
 
 include <../basic_scad/params_dc_motors.scad>
 include <../basic_scad/params_dc_motor_housing.scad>
+
+use <../basic_scad/point_transformations_3d.scad>
 //--------------------------------------------------------------------
 module wheel_with_teeths(external_radius = 84, steps = 24)// radius = 42, steps = 12
 {
@@ -244,32 +246,71 @@ module platform_sheet()
 {
   difference(){    
     cube(base_platform_size);
+    
+    // holes  
+    // LEFT SIDE
     // first gear, first bearing
     for (i=[0:1]){
-        translate ([second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+        translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
     cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        echo("1st holes first shaft",  [second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+        echo("first shaft first bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
     }
     // first gear, second bearing
        for (i=[0:1]){
-    translate ([second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
     cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        echo("2nd holes second shaft",  [second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+        echo("first shaft second bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
     }
     // second gear, first bearing
     for (i=[0:1]){
-    translate ([second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
     cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        echo("1st holes third shaft",  [second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+        echo("second shaft first bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
     }
     // second gear, second bearing
     for (i=[0:1]){
-        translate ([second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+        translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
     cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        echo("1st holes third shaft",  [second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+        echo("second shaft second bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
     }
     
-        // holes for fixing the bone to the platform
+    // holes for motor housing
+    for (i = [0 : 3]){
+        echo("motor housing holes = ", [leg_postion_on_platform - motor_gr_ep_45_housing_size[1] / 2 + 10, 25 - 3, 0] + rotate_z(90, motor_gr_ep_45_housing_large_base_holes[i]));
+        translate ([leg_postion_on_platform - motor_gr_ep_45_housing_size[1] / 2 + 10, 25 - 3, 0]) rotate ([0, 0, 90]) translate (motor_gr_ep_45_housing_large_base_holes[i] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+    }
+    
+    
+    // RIGHT SIDE
+     // first gear, first bearing
+    for (i = [0 : 1]){
+        translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, base_platform_size[1] - wheels_bearing_housing_1_offset_y, 0] + [rbearing_6201_enclosed_housing_holes_position[i][0], -rbearing_6201_enclosed_housing_holes_position[i][1], 0] - display_tolerance_z)
+    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        echo("RIGHT; first shaft first bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, base_platform_size[1] - wheels_bearing_housing_1_offset_y, 0] - rbearing_6201_enclosed_housing_holes_position[i]);
+    }
+    // first gear, second bearing
+    for (i = [0 : 1]){
+   //     translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, base_platform_size[1]- wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        echo("first shaft second bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, base_platform_size[1] - wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+    }
+    // second gear, first bearing
+    for (i = [0 : 1]){
+    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, base_platform_size[1] - wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        echo("second shaft first bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, base_platform_size[1] - wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+    }
+    // second gear, second bearing
+    for (i = [0 : 1]){
+        translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+        echo("second shaft second bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+    }
+// motor housing holes
+    for (i = [0 : 3])
+        translate ([leg_postion_on_platform - motor_gr_ep_45_housing_size[1] / 2 + 10, base_platform_size[1] - (25 - 3), 0]) rotate ([0, 0, 90]) translate (motor_gr_ep_45_housing_large_base_holes[i] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+
+        // holes for fixing the leg to the platform
     for (i=[0:3])
       translate (foot_spacer_holes[i] + [135, base_platform_size[1] / 2, 0] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
   }    
@@ -302,7 +343,7 @@ module base_motor_pulley()
   pulley_t_ht = 8;	// length of toothed part of pulley
   pulley_base_height = 1.5;
   difference(){    
-    rotate ([0, 0, 10.8]) pulley_with_shaft(62, 15, 0, 0, 8, 5, 0, 0);
+    rotate ([0, 0, 10.8]) pulley_with_shaft(68, 17, 0, 0, 8, 5, 0, 0);
         
         // M4 screws
         
@@ -339,39 +380,39 @@ module platform()
     
 // first wheel    
     // first radial bearing housing
-    translate ([second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
+    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
    
     // second radial bearing housing
-    translate ([second_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
+    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
 
 // traction shaft
     // first radial bearing housing
-    translate ([second_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
+    translate ([first_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
    
     // second radial bearing housing
-    translate ([second_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
+    translate ([first_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
 
 // gears
     left_tracks_offset = -5;
     translate ([0, -track_size[0] / 2 - 15, 0]) {
             
     //first gear
-        translate ([second_tracks_offset, left_tracks_offset, -rb_6201_external_radius]) rotate([-90, 0, 0]) first_gear(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset, left_tracks_offset, -rb_6201_external_radius]) rotate([-90, 0, 0]) first_gear(num_tracks_per_circle, tracks_wheel_radius);
     
     //traction gear
-        translate ([second_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate([-90, 0, 0]) traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate([-90, 0, 0]) traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
 
         //tracks
-    translate ([distance_between_wheels + second_tracks_offset, left_tracks_offset, -rb_6201_external_radius]) 
+    translate ([distance_between_wheels + first_tracks_offset, left_tracks_offset, -rb_6201_external_radius]) 
         tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
     }
 
 // belt    
     
-    distance_between_motor_and_traction_wheel = sqrt((motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius)*(motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius) + (second_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10) * (second_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10));
+    distance_between_motor_and_traction_wheel = sqrt((motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius)*(motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius) + (first_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10) * (first_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10));
     // 
     
-    translate ([second_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
+    translate ([first_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
     
     echo (belt_length = length_belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel));
 
@@ -382,15 +423,15 @@ module platform()
   
     translate([0, base_platform_size[1] + track_size[0] / 2 + 15, 0]){
     // first gear
-        translate ([second_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) rotate([90, 0, 0]) first_gear(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) rotate([90, 0, 0]) first_gear(num_tracks_per_circle, tracks_wheel_radius);
     // traction gear
-        translate ([second_tracks_offset + distance_between_wheels, right_tracks_offset, -rb_6201_external_radius]) mirror([0, 1, 0]) rotate([-90, 0, 0]) traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset + distance_between_wheels, right_tracks_offset, -rb_6201_external_radius]) mirror([0, 1, 0]) rotate([-90, 0, 0]) traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
 
     //tracks
-    translate ([distance_between_wheels + second_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) 
+    translate ([distance_between_wheels + first_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) 
         tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
       // belt
-    translate ([second_tracks_offset + distance_between_wheels, right_tracks_offset - 47, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
+    translate ([first_tracks_offset + distance_between_wheels, right_tracks_offset - 47, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
     
 }
     // back wheel
@@ -410,16 +451,14 @@ module platform()
 //--------------------------------------------------------------------
 
 
-//platform();
+platform();
 
-//distance_between_wheels = 200;
+//platform_sheet(); 
 
-//tracks_on_3_wheels(num_tracks_per_half_circle = 16, wheels_radius = [58.8, 58.8, 20], wheels_position = [[0, 0], [distance_between_wheels, 0], [distance_between_wheels / distance_between_wheels, distance_between_wheels]]);
 
 //base_motor_housing_left(); // 1x
 //base_motor_housing_right(); // 1x
 
-//platform_sheet(); 
 
 
 //traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
@@ -440,7 +479,7 @@ module platform()
 
 //string_of_tracks (10);
 
-wheel_traction_pulley();
+//wheel_traction_pulley();
 
 //wheel_with_teeths(tracks_wheel_radius, num_tracks_per_circle);
 
