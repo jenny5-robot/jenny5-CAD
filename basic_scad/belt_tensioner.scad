@@ -128,6 +128,62 @@ module belt_tensioner_with_branch(h)
     
 }
 //---------------------------------------------------------------------------
+module belt_tensioner_external()
+{
+    wing_thick = 6;
+    pusher_length = 20;
+    
+    size = [20, 12, 2 * wing_thick + 2 * rb_624_thick + 2 * 2];
+    difference(){
+        union(){
+            hull(){
+                cylinder(h = size[2], r = 6, $fn = 40);
+                translate([size[0], 0, 0]) cylinder(h = size[2], r = 6, $fn = 40);
+            }
+            
+            hull(){
+                translate([size[0] / 2, 1, 0]) cylinder(h = size[2], r = rb_624_external_radius);
+                translate([size[0] / 2, pusher_length + 1, 0]) cylinder(h = size[2], r = rb_624_external_radius);
+            }
+        }
+        
+        // remove middle part
+        hull(){
+          translate([size[0] / 2, 6 + 3, wing_thick]) cylinder(h = size[2] - 2 * wing_thick, r = rb_624_external_radius + 1, $fn = 40);
+          translate([size[0] / 2, pusher_length + 1 + 3, wing_thick]) cylinder(h = size[2] - 2 * wing_thick, r = rb_624_external_radius + 1, $fn = 40);
+        }
+        
+        // fixer screw holes
+        translate ( - display_tolerance_z) cylinder(h = size[2] + 2 * display_tolerance, r = 2, $fn = 20);
+        translate([size[0], 0, 0] - display_tolerance_z) cylinder(h = size[2] + 2 * display_tolerance, r = 2, $fn = 20);
+        
+        // shaft hole
+        hull(){
+            translate([size[0] / 2, 6 + 3, 0] - display_tolerance_z) cylinder(h = size[2] + 2 * display_tolerance, r = 2, $fn = 20);
+            translate([size[0] / 2, pusher_length, 0] - display_tolerance_z) cylinder(h = size[2] + 2 * display_tolerance, r = 2, $fn = 20);
+        }
+        
+        // pusher screw 1
+        translate ([size[0] / 2, -7, wing_thick / 2]) rotate ([-90, 0, 0]) cylinder (h = 20, r = m4_screw_radius, $fn = 20);
+        // pusher screw 2
+        translate ([size[0] / 2, -7, size[2] - wing_thick / 2]) rotate ([-90, 0, 0]) cylinder (h = 20, r = m4_screw_radius, $fn = 20);
+
+        // pusher nut 1
+        hull(){
+            translate ([size[0] / 2, -2, wing_thick / 2]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([size[0] / 2, -2, 0]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+        }
+        // pusher nut 2
+        hull(){
+            translate ([size[0] / 2, -2, size[2] - wing_thick / 2]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([size[0] / 2, -2, size[2]]) rotate ([-90, 30, 0]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+
+belt_tensioner_external();
+
 //belt_tensioner_with_branch(31);
 
 //belt_tensioner_housing(20);
@@ -136,6 +192,6 @@ module belt_tensioner_with_branch(h)
 
 //belt_tensioner_base(31);
 
-belt_tensioner_cover(40, 12);
+//belt_tensioner_cover(40, 12);
 
 //belt_tensioner_slider();
