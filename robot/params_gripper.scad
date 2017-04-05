@@ -4,6 +4,8 @@
 // MIT License
 //--------------------------------------------------------------
 
+gripper_pusher_position = 10; // 10...42
+
 spacer_between_fingers = 2;
 
 finger_thick = 6;
@@ -19,7 +21,7 @@ gripper_motor_support_size = [37, 38, 8];
 
 echo(gripper_motor_support_size);
 
-gripper_lateral_sheet_size = [75, gripper_motor_support_size[1], 4];
+gripper_lateral_sheet_size = [76, gripper_motor_support_size[1], 4];
 
-finger_angle = 47;
+finger_angle = 50;
 finger_with_button_angle = finger_angle - 15;

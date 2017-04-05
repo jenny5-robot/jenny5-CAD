@@ -17,6 +17,7 @@ include <../basic_scad/params_motor_housing.scad>
 include <../basic_scad/params_webcam.scad>
 use <../basic_scad/webcam_support.scad>
 include <../basic_scad/config.scad>
+use <../basic_scad/buttons.scad>
 
 //-----------------------------------------------------------------------------------
 module gripper_lateral_support()
@@ -142,6 +143,12 @@ module finger_with_button_support ()
         }
     	translate([finger_first_segment_length, 0, 0] - display_tolerance_z) cylinder (r = m4_screw_radius, h = finger_thick + 2 * display_tolerance, $fn = 30);
     }
+}
+//-----------------------------------------------------------------------------------
+module finger_with_button ()
+{
+    finger_with_button_support ();
+    translate ([finger_first_segment_length, 0, 0]) rotate ([0, 0, finger_with_button_angle]) translate ([finger_second_second_length - 10, 0, 7])  rotate ([-90, 0, 0]) translate ([0, 0, -16]) button();
 }
 //-----------------------------------------------------------------------------------
 module fore_finger()
@@ -315,7 +322,7 @@ module gripper(pusher_position = 25)
     rotate ([0, 0, gripper_angle]) 
     mirror([1, 0, 0])
     translate ([-finger_first_segment_length, 0, gripper_lateral_sheet_size[2] + spacer_between_fingers + U_finger_thick + spacer_between_fingers + finger_thick + spacer_between_fingers]) 
-    finger_with_button_support ();
+    finger_with_button ();
 
 // touch fingers
     translate ([5, - 5, 0])
@@ -354,7 +361,7 @@ module gripper_c920_support()
 }
 //-----------------------------------------------------------------------------------
 
-gripper(pusher_position = 42); // 10...42
+gripper(gripper_pusher_position);
 
 
 //gripper_motor_housing(); // 1x
@@ -368,6 +375,9 @@ gripper(pusher_position = 42); // 10...42
 
 //finger(); // 2x
 //finger_with_button_support(); // 1x
+
+
+//finger_with_button ();
 
 //mirror([0, 0, 1]) gripper_base();//1x
 
