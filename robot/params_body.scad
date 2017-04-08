@@ -13,7 +13,7 @@ include <../basic_scad/params_sheets.scad>
 dist_edge_to_shaft = 14;
 
 chest_height = 350;
-chest_length = 430;
+chest_length = 550;
 
 body_arm_length = chest_height - 2 * wall_thick_3 - 2 * washer_8_thick -  2 * rb_608_thick;
 
