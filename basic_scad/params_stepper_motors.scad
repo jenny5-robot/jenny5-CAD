@@ -99,8 +99,13 @@ gauri_nema_11 = [
 [nema_11_dist_between_screw_holes / 2, nema_11_dist_between_screw_holes / 2, 0]
 ];
 
-gearbox_nema_11_holes_position = [[0, 0, 0], 
-[-nema_11_gearbox_dist_between_screw_holes / 2, -nema_11_gearbox_dist_between_screw_holes / 2, 0], [-nema_11_gearbox_dist_between_screw_holes / 2, nema_11_gearbox_dist_between_screw_holes / 2, 0], [nema_11_gearbox_dist_between_screw_holes / 2, -nema_11_gearbox_dist_between_screw_holes / 2, 0], [nema_11_gearbox_dist_between_screw_holes / 2, nema_11_gearbox_dist_between_screw_holes / 2, 0]];
+gearbox_nema_11_holes_position = [
+[0, 0, 0], 
+[-nema_11_gearbox_dist_between_screw_holes / 2, -nema_11_gearbox_dist_between_screw_holes / 2, 0], 
+[-nema_11_gearbox_dist_between_screw_holes / 2, nema_11_gearbox_dist_between_screw_holes / 2, 0], 
+[nema_11_gearbox_dist_between_screw_holes / 2, -nema_11_gearbox_dist_between_screw_holes / 2, 0], 
+[nema_11_gearbox_dist_between_screw_holes / 2, nema_11_gearbox_dist_between_screw_holes / 2, 0]
+];
 
 gearbox_nema_17_holes_position = [
 [0, 0, 0], 
@@ -109,3 +114,5 @@ gearbox_nema_17_holes_position = [
 [nema_17_gearbox_dist_between_screw_holes / 2, -nema_17_gearbox_dist_between_screw_holes / 2, 0], 
 [nema_17_gearbox_dist_between_screw_holes / 2, nema_17_gearbox_dist_between_screw_holes / 2, 0]
 ];
+
+gearbox_nema_17_holes_radius = [nema_17_gearbox_motor_hole_radius, 1.5, 1.5, 1.5, 1.5];
