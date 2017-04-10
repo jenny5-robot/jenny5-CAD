@@ -7,11 +7,13 @@
 
 include <params_thrust_bearings.scad>
 include <params_basic_components.scad>
+include <config.scad>
 
 //--------------------------------------------------------------
 module thrust_bearing(external_radius, internal_radius, height)
 {
     difference(){
+        color(steel_color)
         cylinder(h = height, r = external_radius, $fn = 100);
         translate (-display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = internal_radius, $fn = 100);
     }
