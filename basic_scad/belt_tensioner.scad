@@ -184,16 +184,18 @@ module belt_tensioner_external()
 module belt_tensioner_external_with_bearings(position = 10)
 {
     belt_tensioner_external();
-    translate ([10, position, 28]) mirror([0, 0, 1]) M4_hexa(25);
+    translate ([10, 8 + position, 0]){
+        translate ([0, 0, 28]) mirror([0, 0, 1]) M4_hexa(25);
     
-    translate ([10, position, 6]) washer_4_12();
-    translate ([10, position, 6 + 1]) 624rs();
-    translate ([10, position, 6 + 1 + rb_624_thick]) 624rs();
-    translate ([10, position, 6 + 1 + 2 * rb_624_thick]) washer_4_12();
+        translate ([0, 0, 6]) washer_4_12();
+        translate ([0, 0, 6 + 1]) 624rs();
+        translate ([0, 0, 6 + 1 + rb_624_thick]) 624rs();
+        translate ([0, 0, 6 + 1 + 2 * rb_624_thick]) washer_4_12();
+    }
 }
 //---------------------------------------------------------------------------
 
-belt_tensioner_external_with_bearings(15);
+belt_tensioner_external_with_bearings(0);
 
 //belt_tensioner_with_branch(31);
 
