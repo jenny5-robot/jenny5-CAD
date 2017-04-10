@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 include <params_thrust_bearing_housing.scad>
 include <params_thrust_bearings.scad>
 include <params_basic_components.scad>
