@@ -22,3 +22,5 @@ vertebral_column_size = [30, 30, chest_height];
    
 motor_housing_tolerance = 10;
 motor_housing_tolerance_large = 20;
+
+body_rotation_sheet_size = [60, 200, 10];
