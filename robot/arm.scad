@@ -373,13 +373,13 @@ module shoulder()
     
     // bone support 1
     translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, 30, alu_sheet_3_thick + 25]) 
-    mirror([0, 0, 1])
-    radial_bearing_608_vertical_housing();
+      mirror([0, 0, 1])
+        radial_bearing_608_vertical_housing();
     
     // bone support 2
     translate ([-rbearing_608_enclosed_housing_size[0] / 2 + shoulder_plate_size[0] / 2, shoulder_plate_size[1] - rbearing_608_enclosed_housing_size[1], alu_sheet_3_thick + 25]) 
-mirror([0, 0, 1])    
-    radial_bearing_608_vertical_housing();
+      mirror([0, 0, 1])    
+        radial_bearing_608_vertical_housing();
         
     // continuation with upper arm
     translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_608_external_radius + alu_sheet_3_thick]) rotate ([0, angle_upper_arm, 0]) upper_arm();    
@@ -470,54 +470,46 @@ module body_articulation()
       
     //support upper arm
     // first bearing housing
-   translate ([-rbearing_608_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, 5, 3])  rbearing_608_vertical_housing_bounded_half_small();
+   translate ([-rbearing_6002_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, rbearing_6002_vertical_housing_size_bounded_half_small[1] / 2, 3])  rbearing_6002_vertical_housing_bounded_half_small();
     
-   translate ([-rbearing_608_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, 5, rbearing_608_vertical_housing_size_bounded_half_small[2] + rbearing_608_vertical_housing_size_bounded_half_small_top[2] + 3])  
+   translate ([-rbearing_6002_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, rbearing_6002_vertical_housing_size_bounded_half_small[1] / 2, rbearing_6002_vertical_housing_size_bounded_half_small[2] + rbearing_6002_vertical_housing_size_bounded_half_small_top[2] + 3])  
    mirror ([0, 0, 1]) 
-    rbearing_608_vertical_housing_bounded_half_small_top();
+    rbearing_6002_vertical_housing_bounded_half_small_top();
     
 // second bearing housing
-   translate ([-rbearing_608_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 9, 3])  rbearing_608_vertical_housing_bounded_half_small();
+   translate ([-rbearing_6002_vertical_housing_size_bounded_half_small[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 9, 3])  rbearing_6002_vertical_housing_bounded_half_small();
     
-   translate ([-rbearing_608_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 9, rbearing_608_vertical_housing_size_bounded_half_small[2] + rbearing_608_vertical_housing_size_bounded_half_small_top[2] + 3])  
+   translate ([-rbearing_6002_vertical_housing_size_bounded_half_small_top[0] / 2 + 5 + plate_body_size[0] / 2, plate_body_size[1] - 9, rbearing_6002_vertical_housing_size_bounded_half_small[2] + rbearing_6002_vertical_housing_size_bounded_half_small_top[2] + 3])  
    mirror ([0, 0, 1]) 
-    rbearing_608_vertical_housing_bounded_half_small_top();
+    rbearing_6002_vertical_housing_bounded_half_small_top();
     
     // potentiometer support
-   translate ([-48 / 2 + plate_body_size[0] / 2, plate_body_size[1] - 9 - 6 - 2, rbearing_608_vertical_housing_size_bounded_half_small[2] + wall_thick_3 + rbearing_608_vertical_housing_size_bounded_half_small_top[2]])  
+   translate ([-48 / 2 + plate_body_size[0] / 2, plate_body_size[1] - 9 - 6 - 2, rbearing_608_vertical_housing_size_bounded_half_small[2] + wall_thick_3 + rbearing_6002_vertical_housing_size_bounded_half_small_top[2]])  
     rotate ([-90, 0, 0]) 
     rotate ([0, 0, -90]) potentiometer_support_shoulder_vertical();
     
-    // screw for upper arm
-    translate ([40, 73, 33 + 5]) 
-    rotate ([90, 0, 0]) 
-    rotate ([0, 0, angle_shoulder]) 
-    translate ([- bone_thick / 2, - bone_thick / 2, 0])
-    color (aluminium_color) 
-    M8_hexa_screw(100);
-    ;  
-
     // shaft
-    translate ([35, -10, 30 + 3]) 
-    rotate ([90, 0, 0]) 
-    rotate ([0, 0, angle_shoulder]) 
-    translate ([- bone_thick / 2, - bone_thick / 2, 0])
-    color (aluminium_color) 
-    cube([bone_thick, bone_thick, 80])
-    ;  
+    translate ([30, 75, 30 + plate_body_size[2]]) 
+      rotate ([0, angle_shoulder, 0]) 
+        rotate ([90, 0, 0]) 
+          translate ([- bone_thick / 2, - bone_thick / 2, 0])
+            color (aluminium_color) 
+              cube([bone_thick, bone_thick, 180])
+    ;
     // pulley 
-    translate ([35, 73, 30 + 3]) 
+    translate ([30, 73, 30 + 3]) 
       rotate ([90, 0, 0]) 
-        rotate ([0, 0, angle_shoulder]) 
+        rotate ([0, 0, -angle_shoulder]) 
           body_arm_traction_pulley();
 
     // upper arm
-    translate ([35 + 10, -90, 30 + plate_body_size[2]]) 
+    translate ([30, -90, 30 + plate_body_size[2]]) 
       rotate ([0, angle_shoulder, 0]) 
-        translate([bone_thick / 2, 0, + bone_thick / 2]) 
+        translate([bone_thick / 2 + 17, 0, + bone_thick / 2]) 
           rotate ([0, 0, 90]) 
     shoulder()
  ;
+ 
 }
 //---------------------------------------------------------------------------
 module body_arm_bone(bone_length)
@@ -525,7 +517,7 @@ module body_arm_bone(bone_length)
     echo("body bone holes");
     difference(){
         cube_empty(6, 10, bone_length);
-        for (i=[0:1]){
+        for (i = [0 : 1]){
             translate ([-bone_thick / 2, 0, bone_length / 2 + body_holes_position[i]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = bone_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
         }
     }
@@ -538,14 +530,21 @@ module arm(bone_length)
     color (aluminium_color) body_arm_bone(bone_length);
         
     // traction pulley
-    translate ([0, 0, 4]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
+    translate ([0, 0, 6]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
     
     // continuation
     translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
 }
 //---------------------------------------------------------------------------
 
-arm(200);
+//arm(200);
+
+body_articulation();
+
+//shoulder();
+//upper_arm();
+
+//fore_arm();
 
 //potentiometer_support_shoulder_vertical();
 
@@ -553,7 +552,6 @@ arm(200);
 
 //body_arm_bone(300);
 
-//body_articulation();
 
 //nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
@@ -565,13 +563,10 @@ arm(200);
 
 //shoulder_motor_housing();
 
-//shoulder();
-//upper_arm();
 
 //forearm_pulley();
 //forearm_motor_pulley();
 
-//fore_arm();
 
 //fore_arm_with_elbow_pulley();
 
