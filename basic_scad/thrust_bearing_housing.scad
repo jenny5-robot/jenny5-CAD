@@ -9,13 +9,15 @@ include <params_thrust_bearings.scad>
 include <params_basic_components.scad>
 include <config.scad>
 
+use <basic_components.scad>
+
 //--------------------------------------------------
 module thrust_bearing_housing(housing_size, bearing_external_radius, bearing_internal_radius)
 {
     translate ([-housing_size[0] / 2, -housing_size[1] / 2, 0])
     difference(){
         color (plastic_color)
-        cube(housing_size);
+        my_cube_rounded2(housing_size);
         
         // bearing
         translate([housing_size[0] / 2, housing_size[1] / 2, housing_size[2] - thrust_bearing_depth])
