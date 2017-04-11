@@ -14,23 +14,23 @@ use <basic_components.scad>
 //--------------------------------------------------
 module thrust_bearing_housing(housing_size, bearing_external_radius, bearing_internal_radius)
 {
-    translate ([-housing_size[0] / 2, -housing_size[1] / 2, 0])
     difference(){
         color (plastic_color)
-        my_cube_rounded2(housing_size);
+            translate ([-housing_size[0] / 2, -housing_size[1] / 2, 0])
+                my_cube_rounded2(housing_size);
         
         // bearing
-        translate([housing_size[0] / 2, housing_size[1] / 2, housing_size[2] - thrust_bearing_depth])
+        translate([0, 0, housing_size[2] - thrust_bearing_depth])
             difference(){
                 cylinder(h = thrust_bearing_depth + 1, r = bearing_external_radius, $fn = 100);
                 translate (-display_tolerance_z) cylinder(h = thrust_bearing_depth + 1 + 2 * display_tolerance, r = bearing_internal_radius, $fn = 100);
             }
         // central shaft
-        translate ([housing_size[0] / 2, housing_size[1] / 2, 0] -display_tolerance_z) cylinder(h = housing_size[2] + 2 * display_tolerance, r = 5, $fn = 100);
+        translate (-display_tolerance_z) cylinder(h = housing_size[2] + 2 * display_tolerance, r = 9.5, $fn = 100);
             
             // screw holes
-            for (i = [0 : 3])
-        translate(thrust_bearing_housing_51105_holes[i] - display_tolerance_z) cylinder (h = housing_size[2] + 2 * display_tolerance, r = 2, $fn = 20);
+        for (i = [0 : 3])
+          translate(thrust_bearing_housing_51105_holes[i] - display_tolerance_z) cylinder (h = housing_size[2] + 2 * display_tolerance, r = 2, $fn = 20);
     }
 }
 //--------------------------------------------------
