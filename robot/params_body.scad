@@ -9,6 +9,7 @@ include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sheets.scad>
 
+body_rotation_linear_motor_position = 50;
 
 dist_edge_to_shaft = 14;
 

@@ -26,7 +26,7 @@ module thrust_bearing_housing(housing_size, bearing_external_radius, bearing_int
                 translate (-display_tolerance_z) cylinder(h = thrust_bearing_depth + 1 + 2 * display_tolerance, r = bearing_internal_radius, $fn = 100);
             }
         // central shaft
-        translate (-display_tolerance_z) cylinder(h = housing_size[2] + 2 * display_tolerance, r = 9.5, $fn = 100);
+        translate (-display_tolerance_z) cylinder(h = housing_size[2] + 2 * display_tolerance, r = 9.5, $fn = 100); // for 928 bearing
             
             // screw holes
         for (i = [0 : 3])

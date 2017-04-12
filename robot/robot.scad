@@ -33,7 +33,7 @@ use <body.scad>
 //---------------------------------------------------------------------------
 module body_with_head()
 {
-    body();
+    body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
     // head
     translate ([0, -L_profile_40x20_short_size - 1, chest_height + 37]) mirror ([0, 1, 0]) head();
     // spacers for linking head with body

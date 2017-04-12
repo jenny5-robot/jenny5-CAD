@@ -163,6 +163,12 @@ module diafragma_bone()
           translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
         } 
         
+        // holes for thrust bearing housing
+        for (i = [0 : 3])
+            translate ([alu_sheet_3_thick + 37 / 2, chest_length / 2, 0] - display_tolerance_z) rotate([0, 0, 90]) translate (thrust_bearing_housing_51105_holes[i]) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 10);
+
+//hole for M6 screw for push
+        translate ([alu_sheet_3_thick + 15, chest_length / 2 + 55, 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 3, $fn = 20);
     }
 }
 //---------------------------------------------------------------------------
@@ -189,6 +195,10 @@ module diafragma_with_pieces()
   
     // motor gear
     translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), +7]) motor_pulley();
+    
+    //M6 screw for push
+    translate ([alu_sheet_3_thick + 15, chest_length / 2 + 55, 4]) mirror([0, 0, 1]) M6_hexa_screw(40);
+
 }
 //---------------------------------------------------------------------------
 module body_rotation_sheet()
@@ -239,9 +249,16 @@ module body()
     // top thrust bearing housing
     translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick]) mirror([0, 0, 1]) thrust_bearing_housing_51105();
 
-// bottom thrust bearing housing
+
+}    
+//---------------------------------------------------------------------------
+module body_with_rotation(linear_motor_position)
+{
+    translate ([0, -(alu_sheet_3_thick + 37 / 2), 0]) rotate ([0, 0, 25]) translate ([0, alu_sheet_3_thick + 37 / 2, 0]) body();
+    // bottom thrust bearing housing
     translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick - 2 * thrust_bearing_housing_51105_size[2] - tb_51105_height + 2 * thrust_bearing_depth]) thrust_bearing_housing_51105();
     
+    //thrust bearing
     translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick - thrust_bearing_housing_51105_size[2] - tb_51105_height + thrust_bearing_depth])
         thrust_bearing_51105();
     
@@ -250,14 +267,14 @@ module body()
     body_rotation_sheet();
     
     // linear motor
-    translate ([0, -190, -25]) rotate ([0, 0, -16]) rotate ([-90, 0, 0]) linear_dc_motor(50, 25);
+    translate ([0, -190, -27]) rotate ([0, 0, -18]) rotate ([-90, 0, 0]) linear_dc_motor(50, linear_motor_position);
     
     // screw for linear motor base
     translate ([0, -190, -62]) M6_hexa_screw(50);
-}    
+}
 //---------------------------------------------------------------------------
 
-body();
+body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
 
 
