@@ -26,11 +26,16 @@ module motor_zga17()
     translate ([0, 0, motor_zga17_length]) cylinder(h = 10, r = 1.5, $fn = 50);
 }
 //--------------------------------------------------------------
-module motor_gr_ep_45()
+module motor_gr_ep_45_13_7_1()
 {
-    dc_motor(motor_gr_ep_45_length, motor_gr_ep_45_radius, motor_gr_ep_45_distance_between_screws, motor_gr_ep_45_shaft_radius, motor_gr_ep_45_shaft_length, motor_gr_ep_45_shaft_cilinder_radius);
+    dc_motor(motor_gr_ep_45_13_7_1_length, motor_gr_ep_45_radius, motor_gr_ep_45_distance_between_screws, motor_gr_ep_45_shaft_radius, motor_gr_ep_45_shaft_length, motor_gr_ep_45_shaft_cilinder_radius);
+}
+//--------------------------------------------------------------
+module motor_gr_ep_45_188_1()
+{
+    dc_motor(motor_gr_ep_45_188_1_length, motor_gr_ep_45_radius, motor_gr_ep_45_distance_between_screws, motor_gr_ep_45_shaft_radius, motor_gr_ep_45_shaft_length, motor_gr_ep_45_shaft_cilinder_radius);
 }
 //--------------------------------------------------------------
 
-motor_gr_ep_45();
+motor_gr_ep_45_13_7_1();
 //motor_zga17();

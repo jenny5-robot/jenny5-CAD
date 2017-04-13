@@ -233,13 +233,13 @@ module base_motor_housing_right()
 module base_motor_with_housing_left()
 {
     motor_gr_ep_45_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, 0);
-    translate ([motor_gr_ep_45_radius + base_wall_dc_motor_housing_thick + 2, motor_gr_ep_45_radius + side_wall_dc_motor_housing_thick + 15, motor_gr_ep_45_length + 3]) mirror([0, 0, 1]) motor_gr_ep_45();
+    translate ([motor_gr_ep_45_radius + base_wall_dc_motor_housing_thick + 2, motor_gr_ep_45_radius + side_wall_dc_motor_housing_thick + 15, motor_gr_ep_45_188_1_length + 3]) mirror([0, 0, 1]) motor_gr_ep_45_188_1();
 }
 //--------------------------------------------------------------------
 module base_motor_with_housing_right()
 {
     motor_gr_ep_45_housing_with_belt_tensioner_bearing_based_y_and_base_holes(15, 0, 1);
-    translate ([motor_gr_ep_45_radius + base_wall_dc_motor_housing_thick + 2, motor_gr_ep_45_radius + side_wall_dc_motor_housing_thick + 15, motor_gr_ep_45_length + 3]) mirror([0, 0, 1]) motor_gr_ep_45();
+    translate ([motor_gr_ep_45_radius + base_wall_dc_motor_housing_thick + 2, motor_gr_ep_45_radius + side_wall_dc_motor_housing_thick + 15, motor_gr_ep_45_188_1_length + 3]) mirror([0, 0, 1]) motor_gr_ep_45_188_1();
 }
 //--------------------------------------------------------------------
 module platform_sheet()
