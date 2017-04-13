@@ -358,7 +358,7 @@ module platform()
 {
   platform_sheet();
     
-    // reinforcement aluminium profiles
+    // reinforcement aluminium L profiles
     // left side
     translate ([0, -3, -3]) rotate ([-90, 0, 0]) rotate ([0, 0, -90]) L_profile(base_platform_size[0], edge_1_width = 25, edge_2_width = 25, wall_thick = 3);
     // right side
@@ -439,7 +439,7 @@ module platform()
     translate ([base_platform_size[0] + 100, base_platform_size[1]/2, -rb_6201_external_radius - tracks_wheel_radius - track_size[2] + chair_wheel_radius]) rotate ([0, 0, 90]) chair_wheel();
     
     // laptop
-    translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 110]) rotate ([0, 15, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
+    translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 50]) rotate ([0, 0, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
 
     // lidar
 
