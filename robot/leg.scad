@@ -27,6 +27,7 @@ include <params_leg.scad>
 use <../basic_scad/linear_motors.scad>
 
 include <../basic_scad/params_motor_housing.scad>
+include <../basic_scad/params_alu_profiles.scad>
 
 use <../basic_scad/func_3d.scad>
 
@@ -121,7 +122,7 @@ module leg_bone()
         translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 30); 
 
 // holes for fixing the bottom bearing
-        for (i=[1:4]){
+        for (i = [1 : 4]){
             echo ("holes for screws holes bottom bearing support", [rectangular_tube_30x30x3_size[1] / 2, dist_to_wrist_in_bone, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
             
             translate ([rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 1.6, $fn = 30); 
@@ -132,7 +133,7 @@ module leg_bone()
         translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 30); 
 
 // holes for fixing the top bearing
-        for (i=[1:4]){
+        for (i = [1 : 4]){
             echo ("holes for screws holes top bearing support", [rectangular_tube_30x30x3_size[1] / 2, dist_to_wrist_in_bone, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
             
             translate ([rectangular_tube_30x30x3_size[1] / 2, 0, leg_bone_length - dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 1.6, $fn = 30); 
@@ -178,7 +179,7 @@ module sheet_push_motor()
 //----------------------------------------------------------------------
 module linear_motor_with_top_shaft(stroke, current_position)
 {
-    linear_dc_motor(stroke, current_position);
+    rotate([0, 0, 180]) linear_dc_motor(stroke, current_position);
 
     motor_base_length = 105 + stroke - 20;
 
@@ -189,10 +190,10 @@ module linear_motor_with_top_shaft(stroke, current_position)
 //----------------------------------------------------------------------
 module half_leg(motor_position = 0, base_height = 40)
 {
-    h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, 205 + motor_position- 19, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
+    h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, leg_motor_max_stroke + 105 + motor_position, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
    
     echo(h = h);
-    leg_angle = 90 - asin( h / distance_to_push_position);
+    leg_angle = 90 - asin( h / distance_to_push_position) +11;
     echo(leg_angle = leg_angle);
     
     // bottom sheet
@@ -232,13 +233,14 @@ module half_leg(motor_position = 0, base_height = 40)
 
     // linear motor
 
-    motor_angle = 90 - asin(h / (205 + motor_position - 19));
+    motor_angle = (distance_to_push_position * cos(90 - leg_angle) <= leg_base_length - 16) ?(90 - asin(h / (leg_motor_max_stroke + 105 + motor_position))):-(90 - asin(h / (leg_motor_max_stroke + 105 + motor_position)));
+    
     echo(motor_angle = motor_angle);
     
     translate([dist_to_push_motor_hole_in_base, 0, base_height - 8])
       rotate ([0, -motor_angle, 0])
-         linear_motor_with_top_shaft(100, motor_position);
-
+        linear_motor_with_top_shaft(leg_motor_max_stroke, motor_position);
+        
 
 // knee shaft - first bone    
 
@@ -261,15 +263,16 @@ module half_leg(motor_position = 0, base_height = 40)
 module long_leg(motor_position = 0)
 {
 
- h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, 205 + motor_position- 19, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
+ h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, leg_motor_max_stroke + 105 + motor_position, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
    
-    leg_angle = 90 - asin( h / distance_to_push_position);
+    leg_angle = 90 - asin( h / distance_to_push_position) + 11;
 
     // bottom leg
-    half_leg(motor_position, 60);
+    half_leg(motor_position, 40);
 
     // top leg
-    translate ([0, 0, 2 * ((leg_bone_length - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + (50 - 8 + knee_side_simple_sizes[2] / 2 - 8))]) 
+    translate ([0, 0, 
+    2 * ((leg_bone_length - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + dist_to_wrist_in_base + 22)]) 
     mirror ([0, 0, 1]) half_leg(motor_position, 40);
         
     // knee
