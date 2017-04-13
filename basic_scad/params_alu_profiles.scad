@@ -13,6 +13,8 @@ dist_edge_profile_to_small_hole = 4;
 L_profile_40x20_long_size = 40;
 L_profile_40x20_short_size = 20;
 
+rectangular_tube_30x30x3_size = [30, 30];
+rectangular_tube_30x30x3_wall_thick = 2;
 
 groove_diameter = 8.22;
 groove_height = 10;
