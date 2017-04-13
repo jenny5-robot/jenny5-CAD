@@ -4,7 +4,7 @@
 // MIT License
 //--------------------------------------------------------------
 
-base_platform_size = [600, 250, 18];
+base_platform_size = [600, 300, 18];
 
 first_tracks_offset = 30;
 distance_between_wheels = 230;
