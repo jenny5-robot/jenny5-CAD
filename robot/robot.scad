@@ -53,9 +53,9 @@ module robot()
 {
     platform_foot();
 
-    h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, 205 + leg_motor_position- 19, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
+    h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, leg_motor_max_stroke + 105 + leg_motor_position, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
    
-    leg_angle = 90 - asin( h / distance_to_push_position);
+    leg_angle = 90 - asin( h / distance_to_push_position) + 11;
     
     long_leg_height = 2 * ((leg_bone_length - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
     
