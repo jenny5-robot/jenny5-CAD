@@ -15,7 +15,10 @@ wheels_bearing_housing_2_offset_y = 70;
 
 tracks_tensioner_size = [60, 20, base_platform_size[2]];
 
-leg_postion_on_platform = 90 + 40;
+lidar_position = 90;
+
+leg_postion_on_platform = lidar_position + 30; // nema_17_width / 2 + 10
 
 num_tracks_per_circle = 14; // 16
 tracks_wheel_radius = 50.8; // 58.8
+

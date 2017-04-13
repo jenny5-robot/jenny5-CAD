@@ -366,13 +366,13 @@ module platform()
 
   // motor right
     
-  translate ([leg_postion_on_platform + 10, base_platform_size[1], base_platform_size[2]]) 
+  translate ([motor_gr_ep_45_housing_size[1], base_platform_size[1], base_platform_size[2]]) 
     rotate([90, 0, 0])
       rotate([0, 0, 90]) 
         base_motor_with_housing_right();
     
     // motor left
-  translate ([-motor_gr_ep_45_housing_size[1] + leg_postion_on_platform + 10, 0, base_platform_size[2]])
+  translate ([0, 0, base_platform_size[2]])
     //rotate([0, 0, 180])
       rotate([-90, 0, 0])
         rotate([0, 0, -90]) 
@@ -407,14 +407,7 @@ module platform()
         tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
     }
 
-// belt    
-    
-    distance_between_motor_and_traction_wheel = sqrt((motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius)*(motor_gr_ep_45_radius + 4 + base_platform_size[2] + rb_6201_external_radius) + (first_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10) * (first_tracks_offset + distance_between_wheels- leg_postion_on_platform + motor_gr_ep_45_housing_size[1] / 2 - 10));
-    // 
-    
-    translate ([first_tracks_offset + distance_between_wheels, left_tracks_offset, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
-    
-    echo (belt_length = length_belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel));
+
 
 
 // other side
@@ -430,9 +423,7 @@ module platform()
     //tracks
     translate ([distance_between_wheels + first_tracks_offset, right_tracks_offset, -rb_6201_external_radius]) 
         tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
-      // belt
-    translate ([first_tracks_offset + distance_between_wheels, right_tracks_offset - 47, -rb_6201_external_radius]) rotate ([0, -158, 0]) rotate ([90, 0, 0]) belt_on_2_pulleys(50, 10, distance_between_motor_and_traction_wheel);
-    
+
 }
     // back wheel
     
@@ -443,7 +434,7 @@ module platform()
 
     // lidar
 
-    translate([50, base_platform_size[1] / 2, base_platform_size[2]]) rotate([0, 0, 90]) tera_ranger_one_lidar();
+    translate([lidar_position, base_platform_size[1] / 2, base_platform_size[2] + 25]) rotate([0, 0, 90]) tera_ranger_one_lidar();
 
 // battery
   //  translate([160, multistar_4s_20000_size[2], base_platform_size[2]]) rotate ([90, 0, 0]) multistar_4s_20000();
