@@ -82,7 +82,7 @@ module bevel_gear_pair (
 //Bevel Gear Finishing Options:
 bevel_gear_flat = 0;
 bevel_gear_back_cone = 1;
-
+//==================================================
 module bevel_gear (
 	number_of_teeth=11,
 	cone_distance=100,
@@ -225,7 +225,7 @@ module bevel_gear (
 		cylinder (r=bore_diameter/2,h=apex_to_apex);
 	}
 }
-
+//==================================================
 module involute_bevel_gear_tooth (
 	back_cone_radius,
 	root_radius,
@@ -292,7 +292,7 @@ module involute_bevel_gear_tooth (
 		}
 	}
 }
-
+//==================================================
 module gear (
 	number_of_teeth=15,
 	circular_pitch=false, diametral_pitch=false,
@@ -395,7 +395,7 @@ module gear (
 		}
 	}
 }
-
+//==================================================
 module linear_exturde_flat_option(flat =false, height = 10, center = false, convexity = 2, twist = 0)
 {
 	if(flat==false)
@@ -437,7 +437,7 @@ module gear_shape (
 		}
 	}
 }
-
+//==================================================
 module involute_gear_tooth (
 	pitch_radius,
 	root_radius,
@@ -695,4 +695,5 @@ module test_backlash ()
 	translate([0,0,-5])
 	cylinder ($fn=20,r=backlash / 4,h=25);
 }
+
 
