@@ -386,5 +386,5 @@ module GT2_5mm(pulley_t_ht)
     //pulley_with_shaft(66, 20, 0, 0, 8, 4, 0, 0);
     
     //pulley_with_shaft(67, 63, 0, 0, 8, 0, 0, 0);
-    pulley_with_shaft(68, 17, 0, 0, 8, 0, 0, 0);
-    //echo(T5_pulley_dia_25);
+    //pulley_with_shaft(68, 17, 0, 0, 8, 0, 0, 0);
+    echo(T5_pulley_dia_51);

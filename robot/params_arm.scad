@@ -10,10 +10,10 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sheets.scad>
 
 
-angle_body_arm = 38;// -90...90
-angle_shoulder = -30; // -180... 0
+angle_body_arm = 90;// -90...90
+angle_shoulder = -0; // -180... 0
 angle_upper_arm = 90; // - 180 ... 0
-angle_elbow = -180; // -90, 0
+angle_elbow = -90; // -180, 0
 angle_fore_arm = 90;
 
 

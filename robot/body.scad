@@ -248,13 +248,11 @@ module body()
     translate ([-arms_breadboard_size[0] / 2, -vertebral_column_size[0] -alu_sheet_3_thick, vertebral_column_size[2] / 2 - arms_breadboard_size[1] / 2]) rotate ([90, 0, 0]) arms_breadboard();
     // top thrust bearing housing
     translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick]) mirror([0, 0, 1]) thrust_bearing_housing_51105();
-
-
 }    
 //---------------------------------------------------------------------------
 module body_with_rotation(linear_motor_position)
 {
-    translate ([0, -(alu_sheet_3_thick + 37 / 2), 0]) rotate ([0, 0, 25]) translate ([0, alu_sheet_3_thick + 37 / 2, 0]) body();
+    translate ([0, -(alu_sheet_3_thick + 37 / 2), 0]) rotate ([0, 0, 0]) translate ([0, alu_sheet_3_thick + 37 / 2, 0]) body();
     // bottom thrust bearing housing
     translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick - 2 * thrust_bearing_housing_51105_size[2] - tb_51105_height + 2 * thrust_bearing_depth]) thrust_bearing_housing_51105();
     
