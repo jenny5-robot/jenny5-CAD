@@ -49,7 +49,7 @@ m10_nut_thick = 8;
 m10_nut_radius = 9.8;
 
 M12_screw_radius = 6;
-M12_nut_thick = 8;
+M12_nut_thick = 10;
 M12_nut_radius = 11;
 M12_long_long_nut_thick = 36;
 M12_long_nut_thick = 36;
