@@ -13,6 +13,8 @@ include <../basic_scad/config.scad>
 //--------------------------------------------------------------------
 module track(length = 25, width = 80, height = 8)
 {
+			color (plastic_color) 
+    render(){
     togue_width = width / 5;
     
     hole_radius = 1.2;
@@ -25,11 +27,9 @@ module track(length = 25, width = 80, height = 8)
   union(){
 	difference(){
 		union(){
-			color (plastic_color){ 
                 cube(size=[length, width, height], center = false);
                 rotate([-90,0,0]) translate([length, -height / 2, 0]) cylinder(h = width, r = height / 2, $fn = 40, center = false);
                 rotate([-90,0,0]) translate([0,-height / 2, 0]) cylinder(h=width, r = height / 2, $fn = 40, center = false);
-            }
 		}
 
         // holes for rubber band
@@ -64,6 +64,7 @@ for (i = [0 : left_side_ears_count - 1])
         translate([length / 2, width / 2, 0]) cylinder(h = height + 0.001, r1 = 2, r2 = 6, $fn = 40);
         translate([length / 2, width / 2, 0] - display_tolerance_z) cylinder(h = 2 * display_tolerance, r = 2, $fn = 40);
 	}
+  }
   }
 }
 //--------------------------------------------------------------------
