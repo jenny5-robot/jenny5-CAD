@@ -155,24 +155,6 @@ module cylinder_empty(_h, external_radius, internal_radius, fn = 30)
 	}
 }
 //--------------------------------------------------------------
-module U(length, base, height, wall_thick)
-{
-    //render(){
-        difference(){
-            cube ([length, base, height]);
-            translate ([-display_tolerance, wall_thick, wall_thick]) cube ([length + 2 * display_tolerance, base - 2 * wall_thick, height - wall_thick + display_tolerance]);
-        }
-    //}
-}
-//--------------------------------------------------------------
-module L_profile(length, edge_1_width = 20, edge_2_width = 20, wall_thick = 3)
-{
-  difference(){
-    color (aluminium_color) cube ([edge_2_width, length, edge_1_width]);
-    translate ([wall_thick, 0, wall_thick] - display_tolerance_y) cube ([edge_2_width - wall_thick, length, edge_1_width - wall_thick] + display_tolerance_xyz + display_tolerance_y);
-  }
-}
-//--------------------------------------------------------------
 module heat_sink(external_radius, internal_radius, number_of_wings)
 {
 	heatsink_wing_height = 1;

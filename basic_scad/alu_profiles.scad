@@ -16,8 +16,10 @@ module alu_sigma_profile_30x30(length)
 	diametru_mare = 16.5;
     
 	
+    color(frame_color)
+    render()
     difference(){
-        color(frame_color)
+        
             translate ([-profile_30x30_size[0] / 2, -profile_30x30_size[1] / 2, 0]) cube([profile_30x30_size[0], profile_30x30_size[1], length]);
 // center hole
 		translate (sigma_profile_holes[0] - display_tolerance_z) cylinder (h = length + 2 * display_tolerance, r = 3.4, $fn = 30);
@@ -40,4 +42,23 @@ module alu_sigma_profile_30x30(length)
 	}
 }
 //-----------------------------------------------------------------------
+module U(length, base, height, wall_thick)
+{
+    //render(){
+        difference(){
+            cube ([length, base, height]);
+            translate ([-display_tolerance, wall_thick, wall_thick]) cube ([length + 2 * display_tolerance, base - 2 * wall_thick, height - wall_thick + display_tolerance]);
+        }
+    //}
+}
+//--------------------------------------------------------------
+module L_profile(length, edge_1_width = 20, edge_2_width = 20, wall_thick = 3)
+{
+  difference(){
+    color (aluminium_color) cube ([edge_2_width, length, edge_1_width]);
+    translate ([wall_thick, 0, wall_thick] - display_tolerance_y) cube ([edge_2_width - wall_thick, length, edge_1_width - wall_thick] + display_tolerance_xyz + display_tolerance_y);
+  }
+}
+//--------------------------------------------------------------
+
 alu_sigma_profile_30x30(length = 300);

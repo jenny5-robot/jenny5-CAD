@@ -6,6 +6,7 @@
 
 include <params_chair_wheel.scad>
 use <basic_components.scad>
+use <alu_profiles.scad>
 
 module chair_wheel()
 {
