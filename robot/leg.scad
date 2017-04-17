@@ -34,9 +34,11 @@ use <../basic_scad/func_3d.scad>
 //-------------------------------------------------------
 module base_side(base_height = 40)
 {
+    color (aluminium_color) 
+    render()
     difference(){
         echo("leg base size = ", lateral_base_size[0], lateral_base_size[1], base_height);
-        color (aluminium_color) cube([lateral_base_size[0], lateral_base_size[1], base_height]);
+        cube([lateral_base_size[0], lateral_base_size[1], base_height]);
         
      // hole first bone
         echo("first bone hole position = ", dist_to_first_bone, base_height - 8);
@@ -107,9 +109,12 @@ module knee()
 //----------------------------------------------------------------------
 module leg_bone()
 {
+    color (aluminium_color) 
+    render()
+    
     difference(){
         
-        color (aluminium_color) rectangular_tube(rectangular_tube_30x30x3_size[1], rectangular_tube_30x30x3_size[0], rectangular_tube_30x30x3_wall_thick, leg_bone_length);
+        rectangular_tube(rectangular_tube_30x30x3_size[1], rectangular_tube_30x30x3_size[0], rectangular_tube_30x30x3_wall_thick, leg_bone_length);
         
 // midle hole bottom bearing
         
@@ -147,7 +152,7 @@ module leg_bone_with_bearings()
 
   translate ([rectangular_tube_30x30x3_size[1] / 2, 0, rbearing_608_housing_size[0] / 2]) rotate ([-90, 0, 0]) mirror([0, 0, 1]) translate (rbearing_608_housing_holes_position[0]) rbearing_608_housing_with_bearing();
 // screws for bottom bearing    
-    for (i=[1:4]){            
+    for (i = [1 : 4]){            
         translate ([rectangular_tube_30x30x3_size[1] / 2, - rbearing_608_housing_size[2] - m4_nut_thick - washer_4_9_thick, dist_to_wrist_in_bone]) rotate ([-90, 0, 0])    translate (rbearing_608_housing_holes_position[i]) M4x12_hexa();
     }
 

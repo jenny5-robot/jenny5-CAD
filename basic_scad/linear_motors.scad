@@ -27,28 +27,30 @@ module linear_stepper_motor()
 //------------------------------------------------------
 module linear_dc_motor(stroke, current_pos)
 {
-    motor_base_length = 105 + stroke - 20;
-    // tube
     color("grey") 
-      translate([0, 0, 10]) cylinder (h = motor_base_length, r = 17);
-    // base support
-    translate ([0, 0, -10]) 
-      difference() {
-          color("grey") cylinder (h = 20, r = 10);
-          // hole
-          translate ([0, -10, 10]) rotate([-90, 0, 0]) cylinder(h = 20, r = 4);
-      }
-    // pusher
-    color("grey") translate([0, 0, motor_base_length + 10]) 
-      difference(){
-        cylinder (h = current_pos + 20, r = 10);
-          // hole
-        translate ([0, -10, current_pos + 10]) rotate([-90, 0, 0]) cylinder(h = 20, r = 4);
-      }
-    
-    // motor
-    color("grey") 
-      translate ([-20 - 17, 0, 10]) cylinder(h = 100, r = 20);
+    render()
+    {
+        motor_base_length = 105 + stroke - 20;
+        // tube
+          translate([0, 0, 10]) cylinder (h = motor_base_length, r = 17);
+        // base support
+        translate ([0, 0, -10]) 
+          difference() {
+              cylinder (h = 20, r = 10);
+              // hole
+              translate ([0, -10, 10]) rotate([-90, 0, 0]) cylinder(h = 20, r = 4);
+          }
+        // pusher
+        translate([0, 0, motor_base_length + 10]) 
+          difference(){
+            cylinder (h = current_pos + 20, r = 10);
+              // hole
+            translate ([0, -10, current_pos + 10]) rotate([-90, 0, 0]) cylinder(h = 20, r = 4);
+          }
+        
+        // motor
+          translate ([-20 - 17, 0, 10]) cylinder(h = 100, r = 20);
+    }
 }
 //------------------------------------------------------
 

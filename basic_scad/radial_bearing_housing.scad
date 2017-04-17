@@ -21,6 +21,7 @@ module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_posi
     echo(housing_height=housing_height);
     
    color(plastic_color)
+    render()
         difference(){
             translate ([-rbearing_housing_size[0] / 2, -rbearing_housing_size[1] / 2, 0]) my_cube_rounded2([rbearing_housing_size[0], rbearing_housing_size[1], housing_height]);
             // bearing
@@ -28,7 +29,7 @@ module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_posi
             // bearing support hole
           translate (rbearing_housing_holes_position[0]-display_tolerance_z) cylinder (h = rb_thick + radial_bearing_housing_grosime_perete_baza + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
             // screws holes
-    for (i=[1:4])
+    for (i = [1 : 4])
         translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = housing_height + 2 * display_tolerance, r = screw_radius, $fn = 20);  
     
         }
@@ -88,34 +89,37 @@ module radial_bearing_enclosed_housing_with_nema_holes(height, rb_external_radiu
         radial_bearing_enclosed_housing_half(rb_external_radius + radial_bearing_housing_grosime_perete_lateral, rb_external_radius, rb_thick);    
 }
 //---------------------------------------------------------------------------
-module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_housing_size, rbearing_enclosed_housing_holes_position = rbearing_608_enclosed_housing_holes_position, grosime_perete_lateral_lungime_exterior = radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior,grosime_perete_lateral_lungime_interior = radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior, grosime_perete_lateral_latime = radial_bearing_vertical_housing_grosime_perete_lateral_latime, screw_holes_tolerance = 0)
+module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_housing_size, rbearing_enclosed_housing_holes_position = rbearing_608_enclosed_housing_holes_position, grosime_perete_lateral_lungime_exterior = radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior, grosime_perete_lateral_lungime_interior = radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior, grosime_perete_lateral_latime = radial_bearing_vertical_housing_grosime_perete_lateral_latime, screw_holes_tolerance = 0)
 {
-    buza = 2;
-    
-    rb_thick = housing_size[1] - 2 * grosime_perete_lateral_latime;
-    rb_external_radius = housing_size[0] / 2 - (grosime_perete_lateral_lungime_exterior + grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius);
+    color(plastic_color)
+    render(){
+        buza = 2;
+        
+        rb_thick = housing_size[1] - 2 * grosime_perete_lateral_latime;
+        rb_external_radius = housing_size[0] / 2 - (grosime_perete_lateral_lungime_exterior + grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius);
 
-//echo(housing_size=housing_size);
-//echo(rb_thick=rb_thick);
-    difference(){
-       color(plastic_color) my_cube_rounded3_x(housing_size + [2 * screw_holes_tolerance, 0, 0]);
-        // rulmentul
-        
-        hull(){
-            translate ([housing_size[0] / 2 + screw_holes_tolerance, grosime_perete_lateral_latime, radial_bearing_vertical_housing_grosime_perete_baza + rb_external_radius]) rotate ([-90, 0, 0]) cylinder (h =  rb_thick, r = rb_external_radius, $fn = 100);
-            translate ([housing_size[0] / 2 + screw_holes_tolerance, grosime_perete_lateral_latime, housing_size[2] ]) rotate ([-90, 0, 0]) cylinder (h =  rb_thick, r = rb_external_radius, $fn = 100);
-        }
-        
-        // margine rulment
-        hull(){
-            translate ([housing_size[0] / 2 + screw_holes_tolerance, 0, radial_bearing_vertical_housing_grosime_perete_baza + rb_external_radius] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h =  housing_size[1] + 2 * display_tolerance, r = rb_external_radius - buza, $fn = 100);
-            translate ([housing_size[0] / 2 + screw_holes_tolerance, 0, housing_size[2]] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h =  housing_size[1] + 2 * display_tolerance, r = rb_external_radius - buza, $fn = 100);
-        }
-        // gauri suruburi
-        for (i=[0:1]){
+    //echo(housing_size=housing_size);
+    //echo(rb_thick=rb_thick);
+        difference(){
+            my_cube_rounded3_x(housing_size + [2 * screw_holes_tolerance, 0, 0]);
+            // bearing hole
+            
             hull(){
-            translate(rbearing_enclosed_housing_holes_position[i] + i * [screw_holes_tolerance, 0, 0]- display_tolerance_z)cylinder (h = housing_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-            translate(rbearing_enclosed_housing_holes_position[i] + (i + 1) * [screw_holes_tolerance, 0, 0]- display_tolerance_z)cylinder (h = housing_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+                translate ([housing_size[0] / 2 + screw_holes_tolerance, grosime_perete_lateral_latime, radial_bearing_vertical_housing_grosime_perete_baza + rb_external_radius]) rotate ([-90, 0, 0]) cylinder (h =  rb_thick, r = rb_external_radius, $fn = 100);
+                translate ([housing_size[0] / 2 + screw_holes_tolerance, grosime_perete_lateral_latime, housing_size[2] ]) rotate ([-90, 0, 0]) cylinder (h =  rb_thick, r = rb_external_radius, $fn = 100);
+            }
+            
+            // bearing margin
+            hull(){
+                translate ([housing_size[0] / 2 + screw_holes_tolerance, 0, radial_bearing_vertical_housing_grosime_perete_baza + rb_external_radius] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h =  housing_size[1] + 2 * display_tolerance, r = rb_external_radius - buza, $fn = 100);
+                translate ([housing_size[0] / 2 + screw_holes_tolerance, 0, housing_size[2]] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h =  housing_size[1] + 2 * display_tolerance, r = rb_external_radius - buza, $fn = 100);
+            }
+            // screw holes
+            for (i = [0 : 1]){
+                hull(){
+                    translate(rbearing_enclosed_housing_holes_position[i] + i * [screw_holes_tolerance, 0, 0]- display_tolerance_z)cylinder (h = housing_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+                    translate(rbearing_enclosed_housing_holes_position[i] + (i + 1) * [screw_holes_tolerance, 0, 0]- display_tolerance_z)cylinder (h = housing_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+                }
             }
         }
     }
