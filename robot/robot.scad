@@ -61,7 +61,7 @@ module robot()
     
     echo(long_leg_height = long_leg_height);
     
-    translate ([leg_postion_on_platform + dist_to_first_bone, 0, long_leg_height + 20 + 36]) rotate ([0, 0, 90]) body_with_head();
+    translate ([leg_postion_on_platform + dist_to_first_bone, 0, long_leg_height + base_platform_size[2] + 58]) rotate ([0, 0, 90]) body_with_head();
 }
 //---------------------------------------------------------------------------
 module robot_with_kitchen_table()
