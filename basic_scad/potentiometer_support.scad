@@ -107,12 +107,12 @@ module potentiometer_support_on_rectangular_axis(length, width, potentiometer_he
 //potentiometer_support(46, 35, 3, 50, 0, 3, 2);
 //potentiometer_support_with_screw_holes(25, 48, 13, 29);
 
-potentiometer_support_on_rectangular_axis(length = 25, width = 23.3, potentiometer_height = 4, box_height = 15, vertical_distance_to_potentiometer = 4, stopper_shift = -0.9);
+//potentiometer_support_on_rectangular_axis(length = 25, width = 23.3, potentiometer_height = 4, box_height = 15, vertical_distance_to_potentiometer = 4, stopper_shift = -0.9);
 
 //rectangular_axis_slider(20);
 
 //potentiometer_support(27, 28, 5, 10, 5, 3, 0);
 
-//potentiometer_support_squared(length = 27, width = 28, height = 5, dist_to_hole = 10, hole_tolerance = 15, wall_thick = 3, pot_width = 16);
+potentiometer_support_squared(length = 27, width = 28, height = 5, dist_to_hole = 10, hole_tolerance = 15, wall_thick = 3, pot_width = 16, stopper_shift = 0.0);
 
 //potentiometer_support_squared_with_screw_holes(25, 48, 13, 30);
