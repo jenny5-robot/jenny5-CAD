@@ -55,13 +55,13 @@ module robot()
 
     h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, leg_motor_max_stroke + 105 + leg_motor_position, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
    
-    leg_angle = 90 - asin( h / distance_to_push_position) + 11;
+    leg_angle = 90 - asin( h / distance_to_push_position) + leg_angle_offset;
     
     long_leg_height = 2 * ((leg_bone_length - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
     
     echo(long_leg_height = long_leg_height);
     
-    translate ([leg_postion_on_platform + dist_to_first_bone, 0, long_leg_height + base_platform_size[2] + 58]) rotate ([0, 0, 90]) body_with_head();
+    translate ([leg_postion_on_platform + dist_to_first_bone, 0, long_leg_height + base_platform_size[2] + 55]) rotate ([0, 0, 90]) body_with_head();
 }
 //---------------------------------------------------------------------------
 module robot_with_kitchen_table()

@@ -26,7 +26,7 @@ shaft_radius = 4;
 
 max_torque_leg_angle = 60;
 
-distance_to_push_position = 90;//leg_bone_length - 2 * (rb_608_external_radius + 3); 
+distance_to_push_position = 87;//leg_bone_length - 2 * (rb_608_external_radius + 3); 
 
 crotch_width = 46 + 2 * rectangular_tube_30x30x3_size[1] + 2 * 5 + 2 * rb_608_thick;
 
@@ -47,3 +47,5 @@ foot_spacer_holes =
 [dist_to_second_spacer, -50, 0],
 [dist_to_second_spacer, 50, 0]
 ];
+
+leg_angle_offset = 13;
