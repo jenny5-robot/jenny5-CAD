@@ -7,6 +7,7 @@
 include <params_screws_nuts_washers.scad>
 include <params_basic_components.scad>
 include <params_radial_bearings.scad>
+include <params_belt_tensioner.scad>
 include <config.scad>
 
 use <screws_nuts_washers.scad>
@@ -130,19 +131,18 @@ module belt_tensioner_with_branch(h)
 //---------------------------------------------------------------------------
 module belt_tensioner_external()
 {
-    wing_thick = 6;
-    pusher_length = 20;
+
+    size = belt_tensioner_external_size;
     
-    size = [20, 12, 2 * wing_thick + 2 * rb_624_thick + 2];
     difference(){
         union(){
             hull(){
-                cylinder(h = size[2], r = 6, $fn = 40);
-                translate([size[0], 0, 0]) cylinder(h = size[2], r = 6, $fn = 40);
+                cylinder(h = size[2], r = size[1] / 2, $fn = 40);
+                translate([size[0], 0, 0]) cylinder(h = size[2], r = size[1] / 2, $fn = 40);
             }
             
             hull(){
-                translate([size[0] / 2, 1, 0]) cylinder(h = size[2], r = rb_624_external_radius);
+                translate([size[0] / 2, 2, 0]) cylinder(h = size[2], r = rb_624_external_radius);
                 translate([size[0] / 2, pusher_length + 1, 0]) cylinder(h = size[2], r = rb_624_external_radius);
             }
         }
@@ -184,7 +184,7 @@ module belt_tensioner_external()
 module belt_tensioner_external_with_bearings(position = 10)
 {
     belt_tensioner_external();
-    translate ([10, 8 + position, 0]){
+    translate ([belt_tensioner_external_dist_between_holes / 2, 8 + position, 0]){
         translate ([0, 0, 28]) mirror([0, 0, 1]) M4_hexa(25);
     
         translate ([0, 0, 6]) washer_4_12();
