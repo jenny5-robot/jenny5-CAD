@@ -48,4 +48,6 @@ module thrust_bearing_housing_51105_small()
 }
 //--------------------------------------------------
 
-thrust_bearing_housing_51105();
+//thrust_bearing_housing_51105();
+
+thrust_bearing_housing_51105_small();
