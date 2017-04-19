@@ -68,15 +68,24 @@ module knee_side()
 {
     difference(){
         // sheet
+        echo("knee size", knee_side_simple_sizes);
         color (aluminium_color) cube(knee_side_simple_sizes);
         // front hole bottom
+        echo("knee side holes = ");
+        echo([dist_to_first_bone, 0, 8], "radius = 4");
         translate ([dist_to_first_bone, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
         // front hole top
+        echo([dist_to_first_bone, 0, knee_side_simple_sizes[2] - 8], "radius = 4");
         translate ([dist_to_first_bone, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
         // back hole bottom
+        echo([dist_to_second_bone, 0, 8], "radius = 4");
         translate ([dist_to_second_bone, 0, 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
         // back hole top
+        echo([dist_to_second_bone, 0, knee_side_simple_sizes[2] - 8], "radius = 4");
         translate ([dist_to_second_bone, 0, knee_side_simple_sizes[2] - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 4, $fn = 30);
+        // middle hole for spacer
+        echo([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] / 2], "radius = 4");
+        translate([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] / 2] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = knee_side_simple_sizes[1] + 2 * display_tolerance, r = 4);
     }
 }
 //-------------------------------------------------------
@@ -292,7 +301,7 @@ module long_leg(motor_position = 0)
 }
 //----------------------------------------------------------------------
 
-long_leg(leg_motor_position); // between 0 and 50
+//long_leg(leg_motor_position); // between 0 and 50
 
 
 //translate ([0, 0, 30]) rotate ([0, 90, 0]) leg_bone();
@@ -305,8 +314,8 @@ long_leg(leg_motor_position); // between 0 and 50
 
 //base();
 
-//base_side(40); // 2x
-
-//base_side(60); // 2x
+//base_side(40); // 4x
 
 //knee();
+
+knee_side();

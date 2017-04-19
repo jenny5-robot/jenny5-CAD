@@ -29,6 +29,7 @@ max_torque_leg_angle = 60;
 distance_to_push_position = 87;//leg_bone_length - 2 * (rb_608_external_radius + 3); 
 
 crotch_width = 46 + 2 * rectangular_tube_30x30x3_size[1] + 2 * 5 + 2 * rb_608_thick;
+echo(crotch_width=crotch_width);
 
 dist_to_first_spacer = 70;
 dist_to_second_spacer = 165;
