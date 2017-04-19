@@ -13,8 +13,8 @@ body_rotation_linear_motor_position = 0;
 
 dist_edge_to_shaft = 14;
 
-chest_height = 350;
-chest_length = 550;
+chest_height = 400;
+chest_length = 500;
 
 body_arm_length = chest_height - 2 * wall_thick_3 - 2 * washer_8_thick -  2 * rb_608_thick;
 
@@ -25,3 +25,5 @@ motor_housing_tolerance = 10;
 motor_housing_tolerance_large = 20;
 
 body_rotation_sheet_size = [60, 200, 10];
+
+dist_to_belt_tensioner = 62;
