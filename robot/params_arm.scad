@@ -10,7 +10,7 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sheets.scad>
 
 
-angle_body_arm = -0;// -90...90
+angle_body_arm = 00;// -90...90
 angle_shoulder = -0; // -180... 0
 angle_upper_arm = -90; // - 90 ... 90
 angle_elbow = -90; // -180, 0
@@ -32,5 +32,3 @@ elbow_gear_wall = 1.5;
 elbow_gear_thick = bearing_6_height + 2 * elbow_gear_wall;
    
 upper_arm_motor_housing_shift = 16;
-   
-body_holes_position = [-15.5, 15.5];

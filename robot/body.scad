@@ -246,6 +246,19 @@ module body_rotation_sheet()
     }
 }
 //---------------------------------------------------------------------------
+module body_arm_bone(bone_length)
+{
+    echo("body arm bone length = ", bone_length);
+    echo("body arm bone holes position = ");
+    difference(){
+        cube_empty(6, 10, bone_length);
+        for (i = [0 : 1]){
+            echo(bone_length / 2 + body_holes_position[i], "radius = 2");
+            translate ([-bone_thick / 2, 0, bone_length / 2 + body_holes_position[i]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = bone_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+        }
+    }
+}
+//---------------------------------------------------------------------------
 module body()
 {
     // bottom 
@@ -262,16 +275,36 @@ module body()
     translate ([0, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) vertebral_column();
     
     // left arm
-    translate ([-(chest_length / 2 -dist_edge_to_shaft), -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) mirror([1, 0, 0]) arm(body_arm_length);
-    
+    // vertical axis
+    translate ([-(chest_length / 2 -dist_edge_to_shaft), -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) {
+        rotate ([0, 0, angle_body_arm])  
+            color (aluminium_color) body_arm_bone(body_arm_length);
+        
+    // traction pulley
+        translate ([0, 0, 6]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
+
+        mirror([1, 0, 0]) translate ([0, 0, body_arm_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) arm(body_arm_length);
+    }
+
+    //translate ([-(chest_length / 2 -dist_edge_to_shaft), -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) mirror([1, 0, 0]) 
+        
     // belt left arm
     translate ([-chest_length / 2 + rbearing_608_housing_size[0] / 2, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 9]) rotate([0, 0, 0]) belt_on_2_pulleys(25.8, 11.5, 89, 6);
     
     echo ("belt length = ", length_belt_on_2_pulleys(25.8, 11.5, 89, 6));
     
     // right arm
-    translate ([chest_length / 2 - dist_edge_to_shaft, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) arm(body_arm_length);
-    
+    //translate ([chest_length / 2 - dist_edge_to_shaft, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) arm(body_arm_length);
+
+    translate ([(chest_length / 2 -dist_edge_to_shaft), -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]){
+        rotate ([0, 0, angle_body_arm])  
+    color (aluminium_color) body_arm_bone(body_arm_length);
+        
+    // traction pulley
+        translate ([0, 0, 6]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
+
+        translate ([0, 0, body_arm_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) arm(body_arm_length);
+    }    
     // breadboard for arms
     translate ([0, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2) - vertebral_column_size[0] / 2, vertebral_column_size[2] / 2 - arms_breadboard_size[1] / 2]) rotate([0, 0, -180]) arms_breadboard();
     // top thrust bearing housing
@@ -300,10 +333,14 @@ module body_with_rotation(linear_motor_position)
 }
 //---------------------------------------------------------------------------
 
-body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
+//body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
 //clavicle_bone();
 
 //diafragma_bone();
 
 //diafragma_with_pieces();
+
+//rbearing_608_housing_with_potentiometer_support();
+
+body_arm_bone(body_arm_length);

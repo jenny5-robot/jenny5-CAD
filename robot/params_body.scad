@@ -16,7 +16,7 @@ dist_edge_to_shaft = 14;
 chest_height = 400;
 chest_length = 500;
 
-body_arm_length = chest_height - 2 * wall_thick_3 - 2 * washer_8_thick -  2 * rb_608_thick;
+body_arm_length = chest_height - 2 * washer_8_thick -  2 * rb_608_thick - 3;
 
 dist_between_motor_and_axis = 89;//radius_roata_reductor + radius_roata_motor_reductor + 10;
 vertebral_column_size = [30, 30, chest_height];
@@ -27,3 +27,5 @@ motor_housing_tolerance_large = 20;
 body_rotation_sheet_size = [60, 200, 10];
 
 dist_to_belt_tensioner = 62;
+
+body_holes_position = [-25, 25];

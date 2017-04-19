@@ -512,34 +512,15 @@ module body_articulation()
  
 }
 //---------------------------------------------------------------------------
-module body_arm_bone(bone_length)
-{
-    echo("body bone holes");
-    difference(){
-        cube_empty(6, 10, bone_length);
-        for (i = [0 : 1]){
-            translate ([-bone_thick / 2, 0, bone_length / 2 + body_holes_position[i]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = bone_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-        }
-    }
-}
-//---------------------------------------------------------------------------
-module arm(bone_length)
-{
-// vertical axis
-    rotate ([0, 0, angle_body_arm])  
-    color (aluminium_color) body_arm_bone(bone_length);
-        
-    // traction pulley
-    translate ([0, 0, 6]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
-    
-    // continuation
-    translate ([0, 0, bone_length / 2 + plate_body_size[0] / 2 + 1.5]) rotate ([0, 0, angle_body_arm]) translate ([bone_thick / 2, -3 / 2 * bone_thick, 0]) rotate ([0, 90, 0]) body_articulation();
+module arm()
+{    
+    body_articulation();
 }
 //---------------------------------------------------------------------------
 
-//arm(200);
+arm();
 
-body_articulation();
+//body_articulation();
 
 //shoulder();
 //upper_arm();
