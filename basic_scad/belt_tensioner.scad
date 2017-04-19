@@ -129,7 +129,7 @@ module belt_tensioner_with_branch(h)
     
 }
 //---------------------------------------------------------------------------
-module belt_tensioner_external()
+module belt_tensioner_external_half()
 {
 
     size = belt_tensioner_external_size;
@@ -137,13 +137,13 @@ module belt_tensioner_external()
     difference(){
         union(){
             hull(){
-                cylinder(h = size[2], r = size[1] / 2, $fn = 40);
-                translate([size[0], 0, 0]) cylinder(h = size[2], r = size[1] / 2, $fn = 40);
+                cylinder(h = size[2] / 2, r = size[1] / 2, $fn = 40);
+                translate([size[0], 0, 0]) cylinder(h = size[2] / 2, r = size[1] / 2, $fn = 40);
             }
             
             hull(){
-                translate([size[0] / 2, 2, 0]) cylinder(h = size[2], r = rb_624_external_radius);
-                translate([size[0] / 2, pusher_length + 1, 0]) cylinder(h = size[2], r = rb_624_external_radius);
+                translate([size[0] / 2, 2, 0]) cylinder(h = size[2] / 2, r = rb_624_external_radius);
+                translate([size[0] / 2, pusher_length + 1, 0]) cylinder(h = size[2] / 2, r = rb_624_external_radius);
             }
         }
         
@@ -183,7 +183,9 @@ module belt_tensioner_external()
 //---------------------------------------------------------------------------
 module belt_tensioner_external_with_bearings(position = 10)
 {
-    belt_tensioner_external();
+    belt_tensioner_external_half();
+    translate ([0, 0, belt_tensioner_external_size[2]]) mirror([0, 0, 1]) belt_tensioner_external_half();
+
     translate ([belt_tensioner_external_dist_between_holes / 2, 8 + position, 0]){
         translate ([0, 0, 28]) mirror([0, 0, 1]) M4_hexa(25);
     
@@ -196,6 +198,8 @@ module belt_tensioner_external_with_bearings(position = 10)
 //---------------------------------------------------------------------------
 
 belt_tensioner_external_with_bearings(0);
+
+//belt_tensioner_external_half();
 
 //belt_tensioner_with_branch(31);
 
