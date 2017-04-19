@@ -225,17 +225,17 @@ module motor_gear()
     
     difference(){
         rotate ([0, 0, 7.5])
-            gear (number_of_teeth=25,
-					circular_pitch=500,
-					bore_diameter=0,
-					hub_diameter=20,
-					rim_width=4,
-					hub_thickness=motor_gear_height + extra_length,
-					rim_thickness=motor_gear_height,
-					gear_thickness=motor_gear_height,
-					pressure_angle=31);
+            gear (number_of_teeth = 25,
+					circular_pitch = 500,
+					bore_diameter = 10,
+					hub_diameter = 25,
+					rim_width = 4,
+					hub_thickness = motor_gear_height + extra_length,
+					rim_thickness = motor_gear_height,
+					gear_thickness = motor_gear_height,
+					pressure_angle = 31);
         // motor shaft hole
-        translate (-display_tolerance_z) cylinder (h = motor_gear_height + extra_length + 2 * display_tolerance, r = 5, $fn = 30);
+        //translate (-display_tolerance_z) cylinder (h = motor_gear_height + extra_length + 2 * display_tolerance, r = 5, $fn = 30);
         
         // screw hole
         translate ([0, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
@@ -500,16 +500,16 @@ module platform()
 //--------------------------------------------------------------------
 
 
-platform();
+//platform();
 
 //platform_sheet(); 
 
 //motor_gear();
 //wheel_gear();
 
-//traction_wheel(num_tracks_per_circle, tracks_wheel_radius);
+//second_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
 
-//first_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
+first_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
 
 //base_motor_pulley();
 
