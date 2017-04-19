@@ -31,6 +31,8 @@ include <../basic_scad/params_alu_profiles.scad>
 
 use <../basic_scad/func_3d.scad>
 
+use <../basic_scad/point_transformations_3d.scad>
+
 //-------------------------------------------------------
 module base_side(base_height = 40)
 {
@@ -118,30 +120,30 @@ module leg_bone()
         
 // midle hole bottom bearing
         
-        echo ("middle hole bottom bearing", [rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_wrist_in_bone] + rbearing_608_housing_holes_position[0], "raza = 6");
+        echo ("middle hole bottom bearing", [rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_wrist_in_bone] + rbearing_608_housing_holes_position[0], "radius = 6.5 minimum");
         
         translate ([rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) 
-        translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 30); 
+        translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 20); 
 
-        translate ([rectangular_tube_30x30x3_size[1] / 2, 0, distance_to_push_position + dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) 
-        translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 30); 
+       // translate ([rectangular_tube_30x30x3_size[1] / 2, 0, distance_to_push_position + dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) 
+       // translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 20); 
 
 // holes for fixing the bottom bearing
         for (i = [1 : 4]){
-            echo ("holes for screws holes bottom bearing support", [rectangular_tube_30x30x3_size[1] / 2, dist_to_wrist_in_bone, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
+            echo ("holes for screws holes bottom bearing support", [dist_to_wrist_in_bone, rectangular_tube_30x30x3_size[1] / 2, 0] + rotate_z(-90, rbearing_608_housing_holes_position[i]), "radius = 2");
             
-            translate ([rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 1.6, $fn = 30); 
+            translate ([rectangular_tube_30x30x3_size[1] / 2, 0, dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 2, $fn = 30); 
         }
         
 // top bearing hole
         translate ([rectangular_tube_30x30x3_size[1] / 2, 0, leg_bone_length - dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) 
-        translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 30); 
+        translate (rbearing_608_housing_holes_position[0]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 4, $fn = 20); 
 
 // holes for fixing the top bearing
         for (i = [1 : 4]){
-            echo ("holes for screws holes top bearing support", [rectangular_tube_30x30x3_size[1] / 2, dist_to_wrist_in_bone, 0] + rbearing_608_housing_holes_position[i], "raza = 1.6");
+            echo ("holes for screws holes top bearing support", [rectangular_tube_30x30x3_size[1] / 2, dist_to_wrist_in_bone, 0] + rbearing_608_housing_holes_position[i], "radius = 2");
             
-            translate ([rectangular_tube_30x30x3_size[1] / 2, 0, leg_bone_length - dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 1.6, $fn = 30); 
+            translate ([rectangular_tube_30x30x3_size[1] / 2, 0, leg_bone_length - dist_to_wrist_in_bone] - display_tolerance_y) rotate ([-90, 0, 0]) translate (rbearing_608_housing_holes_position[i]) cylinder (h = rectangular_tube_30x30x3_size[0] + 2 * display_tolerance, r = 2, $fn = 10); 
         }
     }
 }
@@ -289,8 +291,10 @@ module long_leg(motor_position = 0)
 }
 //----------------------------------------------------------------------
 
-long_leg(leg_motor_position); // between 0 and 100
+long_leg(leg_motor_position); // between 0 and 50
 
+
+//translate ([0, 0, 30]) rotate ([0, 90, 0]) leg_bone();
 
 //linear_motor_with_top_shaft(100, 50);
 
