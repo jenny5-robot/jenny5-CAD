@@ -94,12 +94,29 @@ module upper_arm_pulley()
       cylinder (h = 6, r = m8_nut_radius, $fn = 6);
       // motor housing fixer holes
       
-      for (i=[0:3]){
+      for (i = [0 : 3]){
           translate (nema_17_housing_small_base_holes_position[i] + [0, -0, 0] - display_tolerance_z) cylinder (h = 9 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
           translate (nema_17_housing_small_base_holes_position[i] + [0, -0, 4] - display_tolerance_z) cylinder (h = 9 + 2 * display_tolerance, r = m4_nut_radius, $fn = 6);
       }
   }
     
+}
+//---------------------------------------------------------------------------
+module body_arm_traction_pulley()
+{
+    difference(){
+        rotate ([0, 0, 2.8]) pulley(profile = 60, num_teeth = 33, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+        
+        translate([-bone_thick / 2, -bone_thick / 2, 0] - display_tolerance_z) cube([bone_thick, bone_thick, 11] + 2 * display_tolerance_z);
+        
+        // screw hole
+        translate ([0, 0, 5.5]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
+        // nut hole
+        hull(){
+            translate ([10, 0, 5.5]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
+            translate ([10, 0, 11]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
+        }
+    }
 }
 //---------------------------------------------------------------------------
 module upper_arm_motor_housing()
@@ -109,15 +126,15 @@ module upper_arm_motor_housing()
 //---------------------------------------------------------------------------
 module upper_arm_pulley_with_components()
 {
-   upper_arm_pulley(); 
+  upper_arm_pulley(); 
     // motor housing
-    translate ([-motor_housing_width / 2, upper_arm_motor_housing_shift, 0]) rotate ([0, 90, -90]) 
+  translate ([-motor_housing_width / 2, upper_arm_motor_housing_shift, 0]) rotate ([0, 90, -90]) 
     upper_arm_motor_housing();
 }
 //---------------------------------------------------------------------------
 module shoulder_pulley()
 {
-    pulley_with_shaft(64, 29, 0, 0, 8, 4, m8_nut_radius, m8_nut_thick);
+  pulley_with_shaft(64, 29, 0, 0, 8, 4, m8_nut_radius, m8_nut_thick);
 }
 //---------------------------------------------------------------------------
 module elbow_pulley()
@@ -138,14 +155,14 @@ module elbow_pulley()
         translate ([distance_to_fore_arm_gear + 4, -25, 0] - display_tolerance_z) cube([15, 50, 20]);
         // holes for fixing the forearm
         // first bearing holes
-        for (i= [0:1]){
+        for (i= [0 : 1]){
             translate ([distance_to_fore_arm_gear + 37 - 7 - 2, (rbearing_608_enclosed_housing_slim_holes_position[0][0] - rbearing_608_enclosed_housing_slim_holes_position[1][0]) / 2 - rbearing_608_enclosed_housing_slim_holes_position[0][0], 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(rbearing_608_enclosed_housing_slim_holes_position[i]) cylinder (h = 30, r = 2, $fn = 30);
         // holes for fixing the forearm
         // second bearing holes
             translate ([distance_to_fore_arm_gear + 37, (rbearing_608_enclosed_housing_slim_holes_position[0][0] - rbearing_608_enclosed_housing_slim_holes_position[1][0]) / 2 - rbearing_608_enclosed_housing_slim_holes_position[0][0], 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(rbearing_608_enclosed_housing_slim_holes_position[i]) cylinder (h = 30, r = 2, $fn = 20);
         }
         // holes for fixing the motor housing
-        for (i= [0:3]){
+        for (i = [0 : 3]){
             translate (nema_11_housing_base_holes[i] - display_tolerance_z)  cylinder (h = 30, r = m4_screw_radius, $fn = 20);      
             translate (nema_11_housing_base_holes[i] + [0, 0, 5])  cylinder (h = 40, r = m4_nut_radius, $fn = 6);      
         }
@@ -208,7 +225,7 @@ module elbow_pulley_with_components()
       forearm_motor_housing_with_components();
     
     // stepper motor
-  translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
+    translate ([-10 - 2 - nema_11_27_1_gearbox_length, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
     nema_11_with_27_1_gearbox();
     
     // motor pulley
@@ -308,7 +325,7 @@ module upper_arm()
     translate ([0, 9, 0]) rotate ([90, 0, 0]) upper_arm_pulley_with_components(); 
     
     // stepper motor 
-    translate ([0, nema_17_width / 2 + 9 + 3, -nema_17_with_5_1_gearbox_height + upper_arm_motor_housing_shift - 3]) nema_17_with_5_1_gearbox();
+    translate ([0, nema_17_width / 2 + 9 + 3, -nema_17_with_13_1_gearbox_height + upper_arm_motor_housing_shift - 3]) nema_17_with_13_1_gearbox();
     
     // motor pulley
     translate ([0, nema_17_width / 2 + 9 + 3, 33]) mirror([0, 0, 1])motor_pulley();
@@ -337,18 +354,18 @@ module shoulder_plate()
         translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 22 - perete_motor_motor_housing, 0] - nema_17_housing_base_holes[i] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
         }
         echo("bearing housing holes:");
-        for (i=[0:1]){
+        for (i = [0 : 1]){
             echo(rbearing_608_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick, 0]);
             translate (rbearing_608_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius);
         }
-        for (i=[0:1])
+        for (i = [0 : 1])
             translate (rbearing_608_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[0][0] + rbearing_608_enclosed_housing_holes_position[1][0]) / 2, bone_thick + 40, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius);
     }
 }
 //---------------------------------------------------------------------------
 module shoulder_motor_housing()
 {
-    nema_motor_housing_with_belt_tensioner_bearing_based_x(10, 12, nema_17_width, nema_17_height, base_height = 40, nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 0);
+    nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 10, belt_tensioner_offset = 12, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 40,  nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 0);
 }
 //---------------------------------------------------------------------------
 module shoulder()
@@ -357,11 +374,11 @@ module shoulder()
     shoulder_plate();
     
     // motor
-    translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - nema_17_with_13_1_gearbox_height - perete_baza_motor_housing, -(nema_17_width / 2 + 3 + perete_baza_motor_housing +32)]) 
+    translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - nema_17_with_13_1_gearbox_height - perete_baza_motor_housing, -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 22)]) 
     rotate ([-90, 0, 0]) 
     nema_17_with_13_1_gearbox();
 // motor gear for forearm  rotation
-    translate ([shoulder_plate_size[0] / 2, (shoulder_plate_size[1] + 17), -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 32)]) 
+    translate ([shoulder_plate_size[0] / 2, (shoulder_plate_size[1] + 17), -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 22)]) 
     rotate ([90, 0, 0]) 
     motor_pulley();
     
@@ -394,32 +411,18 @@ module plate_body_articulation()
         // screws holes for body bone connection
         // rest of arms screws
         // first bearing housing support holes
-      for (i = [0:1]){
+      for (i = [0 : 1]){
       echo([plate_body_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[1][0] - rbearing_608_enclosed_housing_holes_position[0][0]) / 2 - rbearing_608_enclosed_housing_holes_position[0][0], 0, 0] + rbearing_608_enclosed_housing_holes_position[i]);
           translate ([plate_body_size[0] / 2 - (rbearing_608_enclosed_housing_holes_position[1][0] - rbearing_608_enclosed_housing_holes_position[0][0]) / 2 - rbearing_608_enclosed_housing_holes_position[0][0], 0, 0] - display_tolerance_z) translate(rbearing_608_enclosed_housing_holes_position[i])  cylinder ( h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
         // motor housing base screw holes
       echo("motor holes position:");
-        for (i = [0:3]){
+        for (i = [0 : 3]){
             echo([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] + rotate_z(90, nema_17_housing_base_holes[i]));
             translate ([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(nema_17_housing_base_holes[i])  cylinder ( h = wall_thick_3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
         }
         // holes for the other bearing housing     
   }
-}
-//---------------------------------------------------------------------------
-module body_arm_traction_pulley()
-{
-    difference(){
-        rotate ([0, 0, 2.8]) pulley(profile = 60, num_teeth = 33, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
-        
-        translate([-bone_thick / 2, -bone_thick / 2, 0] - display_tolerance_z) cube([bone_thick, bone_thick, 11] + 2 * display_tolerance_z);
-        
-        // screw hole
-        translate ([0, 0, 5.5]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
-        // nut hole
-        translate ([4.9, 0, 5.5]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 1, r = m4_nut_radius, $fn = 6);
-    }
 }
 //---------------------------------------------------------------------------
 module potentiometer_support_shoulder_vertical()
@@ -585,3 +588,5 @@ arm();
 //elbow_potentiometer_support();
 
 //gripper_c920_support_with_camera();
+
+//body_arm_traction_pulley();
