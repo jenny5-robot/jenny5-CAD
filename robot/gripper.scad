@@ -214,9 +214,7 @@ module gripper_base()
         
         translate ([gripper_motor_support_size[0] / 2, gripper_motor_support_size[1] / 2, 0] - display_tolerance_z) {
         // middle screw hole
-            cylinder(h = gripper_motor_support_size[2] + 2 * display_tolerance, r = 4, $fn = 40);
-            // 
-            cylinder(h = rb_625_thick + display_tolerance, r = rb_625_external_radius, $fn = 40);
+            cylinder(h = gripper_motor_support_size[2] + 2 * display_tolerance, r = 5, $fn = 40);
         }
         // holes for fixing the motor support to lateral support
         translate ([0, 9, gripper_motor_support_size[2] / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = gripper_motor_support_size[1] + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
@@ -298,7 +296,7 @@ module gripper(pusher_position = 25)
     translate([gripper_lateral_sheet_size[0], 0, 4]) rotate([0, -90, 0]) gripper_base();
     
      // motor
-    translate([gripper_lateral_sheet_size[0] + nema_14_39BYGL215A_height + 200, gripper_lateral_sheet_size[1] / 2, gripper_lateral_sheet_size[2] + gripper_motor_support_size[0] / 2]) rotate ([0, -90, 0]) nema_14_39BYGL215A();
+    translate([gripper_lateral_sheet_size[0] + nema_14_39BYGL215A_height + 200, gripper_lateral_sheet_size[1] / 2, gripper_lateral_sheet_size[2] + gripper_motor_support_size[0] / 2]) rotate ([0, -90, 0]) nema_14_39BYGL215A(290, -pusher_position + 5);
     
     // motor housing
     translate([gripper_lateral_sheet_size[0] + 200 - 3, nema_14_39BYGL215A_width + 1.5, 0]) rotate ([0, -90, 180]) 
@@ -307,9 +305,6 @@ module gripper(pusher_position = 25)
     // motor housing cover
     translate([gripper_lateral_sheet_size[0] + 200 - 3 + nema_14_39BYGL215A_height / 2, nema_14_39BYGL215A_width / 2 - 0.5, -13]) rotate([0, 0, 90]) 
     gripper_motor_housing_cover();
-    
-    // shaft - motor pusher
-    translate([49, gripper_lateral_sheet_size[1] / 2, gripper_lateral_sheet_size[2] + gripper_motor_support_size[0] / 2]) rotate ([0, 90, 0]) color ("gray") cylinder (h = 200, r = 3);
     
     // fingers
     translate ([5, gripper_lateral_sheet_size[1] + 5, 0])

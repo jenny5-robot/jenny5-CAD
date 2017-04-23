@@ -4,7 +4,7 @@
 // MIT License
 //--------------------------------------------------------------
 
-gripper_pusher_position = 10; // 10...42
+gripper_pusher_position = 42; // 10...42
 
 spacer_between_fingers = 2;
 
