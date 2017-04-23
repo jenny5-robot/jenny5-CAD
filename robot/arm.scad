@@ -461,6 +461,10 @@ module body_articulation()
     plate_body_articulation();
     // motor
     translate ([plate_body_size[0] / 2, -nema_17_with_13_1_gearbox_height + plate_body_size[1] - 3, -nema_17_width / 2 - 3 - 25]) rotate ([-90, 0, 0]) nema_17_with_13_1_gearbox();
+    
+    translate ([plate_body_size[0] / 2, + plate_body_size[1] + 4, -nema_17_width / 2 - 3 - 25]) rotate ([-90, 0, 0]) 
+    motor_pulley();
+
 // motor housing
     translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 2 , plate_body_size[1], 0]) 
       rotate ([90, 0, 0]) 
@@ -521,9 +525,9 @@ module arm()
 }
 //---------------------------------------------------------------------------
 
-arm();
+//arm();
 
-//body_articulation();
+body_articulation();
 
 //shoulder();
 //upper_arm();
