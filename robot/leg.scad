@@ -33,6 +33,8 @@ use <../basic_scad/func_3d.scad>
 
 use <../basic_scad/point_transformations_3d.scad>
 
+use <../basic_scad/alu_profiles.scad>
+
 //-------------------------------------------------------
 module base_side(base_height = 40)
 {
@@ -89,6 +91,23 @@ module knee_side()
     }
 }
 //-------------------------------------------------------
+module leg_spacer()
+{    
+  rotate([-90, 0, 0]) alu_sigma_profile_30x30(crotch_width);
+}
+//-------------------------------------------------------
+module leg_spacer_base()
+{
+  render(){
+    difference(){
+        leg_spacer();
+        // holes for fixing the bone to the platform   
+        translate([0, crotch_width / 2 - dist_to_foot_spacer_hole, -15]) cylinder (h = 30, r = 4);
+        translate([0, crotch_width / 2 + dist_to_foot_spacer_hole, -15]) cylinder (h = 30, r = 4);
+    }
+  }
+}
+//-------------------------------------------------------
 module base(base_height = 40)
 {
     translate ([0, - alu_sheet_10_thick -crotch_width / 2, 0]) base_side(base_height);
@@ -98,13 +117,10 @@ module base(base_height = 40)
     difference(){
         union(){
         // first spacer
-            color (aluminium_color) translate ([dist_to_first_spacer - rectangular_tube_30x30x3_size[1] / 2, - crotch_width / 2, 0]) cube([rectangular_tube_30x30x3_size[1], crotch_width, rectangular_tube_30x30x3_size[1]]);
+            color (aluminium_color) translate ([dist_to_first_spacer, - crotch_width / 2, 15]) leg_spacer();
     // second spacer
-            color (aluminium_color) translate ([dist_to_second_spacer - rectangular_tube_30x30x3_size[1] / 2, - crotch_width / 2, 0]) cube([rectangular_tube_30x30x3_size[1], crotch_width, rectangular_tube_30x30x3_size[1]]);
+            color (aluminium_color) translate ([dist_to_second_spacer, - crotch_width / 2, 15]) leg_spacer();
         }
-        // holes for fixing the bone to the platform   
-        for (i = [0 : 3])
-            translate (foot_spacer_holes[i] - display_tolerance_z) cylinder (h = rectangular_tube_30x30x3_size[1] + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
     }
 }
 //----------------------------------------------------------------------
@@ -115,7 +131,7 @@ module knee()
 // other side
     translate ([0, crotch_width, 0]) knee_side();
     // knee spacer
-     color (aluminium_color) translate ([knee_side_simple_sizes[0] / 2, -0, knee_side_simple_sizes[2] / 2]) rotate ([-90, 0, 0]) cylinder (h = crotch_width, r = 15 * sqrt(2), $fn = 4);
+     color (aluminium_color) translate ([knee_side_simple_sizes[0] / 2, -0, knee_side_simple_sizes[2] / 2]) rotate ([0, 45, 0]) leg_spacer();
 }
 //----------------------------------------------------------------------
 module leg_bone()
@@ -301,7 +317,7 @@ module long_leg(motor_position = 0)
 }
 //----------------------------------------------------------------------
 
-//long_leg(leg_motor_position); // between 0 and 50
+long_leg(leg_motor_position); // between 0 and 50
 
 
 //translate ([0, 0, 30]) rotate ([0, 90, 0]) leg_bone();
@@ -318,4 +334,6 @@ module long_leg(motor_position = 0)
 
 //knee();
 
-knee_side();
+//knee_side();
+
+//leg_spacer();

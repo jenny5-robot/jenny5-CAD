@@ -42,11 +42,6 @@ knee_side_simple_sizes = [dist_to_second_bone + dist_to_first_bone, alu_sheet_10
 
 lateral_base_size = [leg_base_length, alu_sheet_10_thick, 40];
 
-foot_spacer_holes = 
-[[dist_to_first_spacer, -50, 0],
-[dist_to_first_spacer, 50, 0],
-[dist_to_second_spacer, -50, 0],
-[dist_to_second_spacer, 50, 0]
-];
+dist_to_foot_spacer_hole = 30;
 
 leg_angle_offset = 13;
