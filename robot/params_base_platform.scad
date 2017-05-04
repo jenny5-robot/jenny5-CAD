@@ -4,6 +4,8 @@
 // MIT License
 //--------------------------------------------------------------
 
+include <params_tracks.scad>
+
 base_platform_size = [600, 300, 18];
 
 first_tracks_offset = 30;
@@ -13,7 +15,7 @@ wheels_bearing_housing_1_offset_y = 22;// must be larger than the reinforcement 
    
 wheels_bearing_housing_2_offset_y = 85;
 
-tracks_tensioner_size = [60, 20, base_platform_size[2]];
+//tracks_tensioner_size = [60, 20, base_platform_size[2]];
 
 lidar_position = 90;
 
@@ -28,4 +30,14 @@ wheel_gear_nut_depth = 10;
 
 base_motor_offset = 56;
 
-tracks_offset = 0;
+tracks_offset = 15;
+
+dist_to_tracks_tensioner_support = 150;
+dist_to_tracks_support1 = 130;
+dist_to_tracks_support2 = 185;
+
+tracks_tensioner_support_size = [20, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset - 2 * 10, 10];
+
+tracks_support_size = [10, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset, 10];
+
+tracks_tensioner_size = [tracks_tensioner_support_size[0], 12, 50];
