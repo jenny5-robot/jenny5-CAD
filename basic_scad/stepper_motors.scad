@@ -121,6 +121,11 @@ module nema_17_with_13_1_gearbox()
 	nema_motor_with_gearbox(nema_17_width, nema_17_height, nema_17_13_1_gearbox_height, nema_17_motor_gearbox_radius, nema_17_gearbox_base_height, gearbox_nema_17_holes_position, nema_17_shaft_length, nema_17_gearbox_shaft_radius);
 }
 //--------------------------------------------------------------
+module nema_17_with_19_1_gearbox()
+{
+	nema_motor_with_gearbox(nema_17_width, nema_17_height, nema_17_19_1_gearbox_height, nema_17_motor_gearbox_radius, nema_17_gearbox_base_height, gearbox_nema_17_holes_position, nema_17_shaft_length, nema_17_gearbox_shaft_radius);
+}
+//--------------------------------------------------------------
 module nema_17_with_13_1_gearbox_and_screw(gearbox_shaft_length = 100)
 {
     nema_17_with_13_1_gearbox();
