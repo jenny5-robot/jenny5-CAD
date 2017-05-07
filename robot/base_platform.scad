@@ -421,10 +421,15 @@ module tracks_tensioner()
             }
 
 // hole for M8 screw
-            translate ([tracks_tensioner_size[0] / 2, 0, tracks_tensioner_size[2]] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = tracks_tensioner_size[1] + 2 * display_tolerance, r = 4);
+            translate ([tracks_tensioner_size[0] / 2, 0, tracks_tensioner_size[2] + 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = tracks_tensioner_size[1] + 2 * display_tolerance, r = 4);
             
-            // base hole
+            // base screw hole
             translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1] / 2, 0] - display_tolerance_z) cylinder(h = 30, r = m4_screw_radius, $fn = 14);
+            // base nut hole
+            hull(){
+            translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1] / 2, 25] - display_tolerance_z) rotate([0, 0, 30]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1], 25] - display_tolerance_z) rotate([0, 0, 30]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            }
 
     }
 }
@@ -586,10 +591,10 @@ tracks_support();
 //--------------------------------------------------------------------
 
 
-platform();
+//platform();
 
 
-//tracks_tensioner();
+tracks_tensioner();
 //track_tensioner_support_with_pieces();
 
 //platform_sheet(); 

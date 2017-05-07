@@ -40,4 +40,4 @@ tracks_tensioner_support_size = [20, base_platform_size[1] + 2 * track_size[0] +
 
 tracks_support_size = [10, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset, 10];
 
-tracks_tensioner_size = [tracks_tensioner_support_size[0], 12, 50];
+tracks_tensioner_size = [tracks_tensioner_support_size[0], 12, 60];
