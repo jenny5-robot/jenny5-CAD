@@ -221,14 +221,15 @@ module first_wheel_with_shaft(num_tracks_per_circle, wheel_radius)
 //--------------------------------------------------------------------
 module motor_gear()
 {
-    extra_length =  8;
+    extra_length =  10;
     
     difference(){
         rotate ([0, 0, 7.5])
+        color(plastic_color)
             gear (number_of_teeth = 25,
 					circular_pitch = 500,
 					bore_diameter = 10,
-					hub_diameter = 25,
+					hub_diameter = 30,
 					rim_width = 4,
 					hub_thickness = motor_gear_height + extra_length,
 					rim_thickness = motor_gear_height,
@@ -237,12 +238,19 @@ module motor_gear()
         // motor shaft hole
         //translate (-display_tolerance_z) cylinder (h = motor_gear_height + extra_length + 2 * display_tolerance, r = 5, $fn = 30);
         
-        // screw hole
+        // 1st screw hole
         translate ([0, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
-        // nut hole
+        // 1st nut hole
         hull(){
-            translate ([15, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            translate ([15, 0, motor_gear_height]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([18, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([18, 0, motor_gear_height]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+        }
+        // 2nd screw hole
+        translate ([0, 0, motor_gear_height + extra_length / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
+        // 2nd nut hole
+        hull(){
+            translate ([7, 0, motor_gear_height + extra_length / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([7, 0, motor_gear_height + extra_length]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
         }
     }
 }
@@ -591,10 +599,10 @@ tracks_support();
 //--------------------------------------------------------------------
 
 
-//platform();
+platform();
 
 
-tracks_tensioner();
+//tracks_tensioner();
 //track_tensioner_support_with_pieces();
 
 //platform_sheet(); 

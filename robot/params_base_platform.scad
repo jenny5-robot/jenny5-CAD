@@ -24,7 +24,7 @@ leg_postion_on_platform = lidar_position + 30; // nema_17_width / 2 + 10
 num_tracks_per_circle = 14; // 16
 tracks_wheel_radius = 50.8; // 58.8
 
-motor_gear_height = 10;
+motor_gear_height = 11;
 wheel_gear_height = 15;
 wheel_gear_nut_depth = 10;
 
