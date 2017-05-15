@@ -13,8 +13,8 @@ body_rotation_linear_motor_position = 0;
 
 dist_edge_to_shaft = 14;
 
-chest_height = 400;
-chest_length = 500;
+chest_height = 380;
+chest_length = 450;
 
 body_arm_length = chest_height - 2 * washer_8_thick -  2 * rb_608_thick - 3;
 

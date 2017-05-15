@@ -24,6 +24,8 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 use <motor_plate.scad>
 include <params_motor_plate.scad>
 use <../basic_scad/point_transformations_3d.scad>
+
+include <../basic_scad/params_pulleys.scad>
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/rings.scad>
@@ -496,26 +498,26 @@ module body_articulation()
     rotate ([0, 0, -90]) potentiometer_support_shoulder_vertical();
     
     // shaft
-    translate ([30, 75, 30 + plate_body_size[2]]) 
+    translate ([30, plate_body_size[0] + pulley_T5_6mm_thick + 4, 30 + plate_body_size[2]]) 
       rotate ([0, angle_shoulder, 0]) 
         rotate ([90, 0, 0]) 
           translate ([- bone_thick / 2, - bone_thick / 2, 0])
             color (aluminium_color) 
-              cube([bone_thick, bone_thick, 180])
+              cube([bone_thick, bone_thick, upper_arm_shaft_support_length])
     ;
     // pulley 
-    translate ([30, 73, 30 + 3]) 
-      rotate ([90, 0, 0]) 
-        rotate ([0, 0, -angle_shoulder]) 
+    translate ([30, plate_body_size[0] + pulley_T5_6mm_thick + 4, 30 + 3])
+      rotate ([90, 0, 0])
+        rotate ([0, 0, -angle_shoulder])
           body_arm_traction_pulley();
 
     // upper arm
-    translate ([30, -90, 30 + plate_body_size[2]]) 
-      rotate ([0, angle_shoulder, 0]) 
-        translate([bone_thick / 2 + 17, 0, + bone_thick / 2]) 
-          rotate ([0, 0, 90]) 
-    shoulder()
- ;
+    translate ([30, -upper_arm_shaft_support_length + shoulder_plate_size[0] + pulley_T5_6mm_thick + 4, 30 + plate_body_size[2]])
+      rotate ([0, angle_shoulder, 0])
+        translate([bone_thick / 2 + 17, 0, + bone_thick / 2])
+          rotate ([0, 0, 90])
+            shoulder()
+                ;
  
 }
 //---------------------------------------------------------------------------
