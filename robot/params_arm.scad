@@ -22,7 +22,7 @@ bone_thick = 10;
 upper_arm_length = 270;
 fore_arm_length = 300;
 
-shoulder_plate_size = [50, 130, alu_sheet_3_thick];
+shoulder_plate_size = [60, 110, alu_sheet_3_thick];
 
 plate_body_size = ([60, 60, 3]);
   
