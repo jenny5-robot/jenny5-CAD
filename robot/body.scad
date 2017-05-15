@@ -206,7 +206,7 @@ module diafragma_with_pieces()
     // bearing housing
     translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_shaft, -rbearing_608_housing_size[2] - alu_sheet_3_thick]) rbearing_608_housing_with_bearing();
     // motor
-    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, dist_edge_to_shaft + dist_between_motor_and_axis, -nema_17_with_13_1_gearbox_height - alu_sheet_3_thick]) nema_17_with_13_1_gearbox();
+    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, dist_edge_to_shaft + dist_between_motor_and_axis, -nema_17_with_19_1_gearbox_height - alu_sheet_3_thick]) nema_17_with_19_1_gearbox();
   
     // motor gear
     translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, dist_edge_to_shaft + dist_between_motor_and_axis, 0 + 7]) motor_pulley();
@@ -218,7 +218,7 @@ module diafragma_with_pieces()
     // bearing housing
     translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_shaft, -rbearing_608_housing_size[2] - alu_sheet_3_thick]) rbearing_608_housing_with_bearing();
     // motor
-    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), -nema_17_with_13_1_gearbox_height - alu_sheet_3_thick]) nema_17_with_13_1_gearbox();
+    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), -nema_17_with_19_1_gearbox_height - alu_sheet_3_thick]) nema_17_with_19_1_gearbox();
   
     // motor gear
     translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, chest_length - (dist_edge_to_shaft + dist_between_motor_and_axis), +7]) motor_pulley();
@@ -333,7 +333,7 @@ module body_with_rotation(linear_motor_position)
 }
 //---------------------------------------------------------------------------
 
-//body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
+body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
 //clavicle_bone();
 
@@ -343,4 +343,4 @@ module body_with_rotation(linear_motor_position)
 
 //rbearing_608_housing_with_potentiometer_support();
 
-body_arm_bone(body_arm_length);
+//body_arm_bone(body_arm_length);

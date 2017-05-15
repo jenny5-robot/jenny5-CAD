@@ -325,7 +325,7 @@ module upper_arm()
     translate ([0, 9, 0]) rotate ([90, 0, 0]) upper_arm_pulley_with_components(); 
     
     // stepper motor 
-    translate ([0, nema_17_width / 2 + 9 + 3, -nema_17_with_13_1_gearbox_height + upper_arm_motor_housing_shift - 3]) nema_17_with_13_1_gearbox();
+    translate ([0, nema_17_width / 2 + 9 + 3, -nema_17_with_19_1_gearbox_height + upper_arm_motor_housing_shift - 3]) nema_17_with_19_1_gearbox();
     
     // motor pulley
     translate ([0, nema_17_width / 2 + 9 + 3, 33]) mirror([0, 0, 1])motor_pulley();
@@ -374,9 +374,9 @@ module shoulder()
     shoulder_plate();
     
     // motor
-    translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - nema_17_with_13_1_gearbox_height - perete_baza_motor_housing, -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 22)]) 
+    translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - nema_17_with_19_1_gearbox_height - perete_baza_motor_housing, -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 22)]) 
     rotate ([-90, 0, 0]) 
-    nema_17_with_13_1_gearbox();
+    nema_17_with_19_1_gearbox();
 // motor gear for forearm  rotation
     translate ([shoulder_plate_size[0] / 2, (shoulder_plate_size[1] + 17), -(nema_17_width / 2 + 3 + perete_baza_motor_housing + 22)]) 
     rotate ([90, 0, 0]) 
@@ -460,9 +460,9 @@ module body_articulation()
     // plate
     plate_body_articulation();
     // motor
-    translate ([plate_body_size[0] / 2, -nema_17_with_13_1_gearbox_height + plate_body_size[1] - 3, -nema_17_width / 2 - 3 - 25]) rotate ([-90, 0, 0]) nema_17_with_13_1_gearbox();
+    translate ([plate_body_size[0] / 2, -nema_17_with_19_1_gearbox_height + plate_body_size[1] - 3, -nema_17_width / 2 - 3 - 25]) rotate ([-90, 0, 0]) nema_17_with_19_1_gearbox();
     
-    translate ([plate_body_size[0] / 2, + plate_body_size[1] + 4, -nema_17_width / 2 - 3 - 25]) rotate ([-90, 0, 0]) 
+    translate ([plate_body_size[0] / 2, plate_body_size[1] + 4, -nema_17_width / 2 - 3 - 25]) rotate ([-90, 0, 0]) 
     motor_pulley();
 
 // motor housing
