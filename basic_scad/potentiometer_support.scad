@@ -82,6 +82,26 @@ module rectangular_axis_slider(height, wall_thick = 3, hole_depth = 10.5, hole_w
             }
 }
 //---------------------------------------------------------------------------
+module rounded_axis_slider(height, wall_thick = 3, hole_radius = 6)
+{
+  width = wall_thick + 2 * hole_radius;
+    extra_thick = 3;
+    
+  difference(){
+    cube([height, width, width + extra_thick]);
+        // shaft hole
+    translate([0, hole_radius, wall_thick + hole_radius + extra_thick] - display_tolerance_x) rotate ([0, 90, 0]) cylinder( h = height + 2 * display_tolerance, r = hole_radius, $fn = 40); 
+                
+    // screw hole   
+    translate([height / 2, hole_radius, 0] - display_tolerance_z) cylinder (h = extra_thick + 2 * wall_thick + 2, r = m4_screw_radius, $fn = 20);
+    // nut hole
+      hull(){
+    //translate([height / 2, width, 3]) rotate([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+    translate([height / 2, hole_radius, 2.5]) rotate([0, 0, 30]) cylinder (h = m4_nut_thick + 2, r = m4_nut_radius, $fn = 6);
+      }
+  }
+}
+//---------------------------------------------------------------------------
 module potentiometer_support_on_rectangular_axis(length, width, potentiometer_height, box_height, vertical_distance_to_potentiometer = 0, _stopper_shift = -0.9)
 {
     hole_depth = 11.5;
@@ -104,15 +124,18 @@ module potentiometer_support_on_rectangular_axis(length, width, potentiometer_he
     }
 }
 //---------------------------------------------------------------------------
-//potentiometer_support(46, 35, 3, 50, 0, 3, 2);
+//potentiometer_support(length = 40, width = 20, height = 4, dist_to_hole = 10, hole_tolerance = 15, wall_thick = 2)
+
 //potentiometer_support_with_screw_holes(25, 48, 13, 29);
 
 //potentiometer_support_on_rectangular_axis(length = 25, width = 23.3, potentiometer_height = 4, box_height = 15, vertical_distance_to_potentiometer = 4, stopper_shift = -0.9);
 
 //rectangular_axis_slider(20);
 
+rounded_axis_slider(height = 30, wall_thick = 3, hole_depth = 10.5, hole_width = 10.5);
+
 //potentiometer_support(27, 28, 5, 10, 5, 3, 0);
 
-potentiometer_support_squared(length = 27, width = 28, height = 5, dist_to_hole = 10, hole_tolerance = 15, wall_thick = 3, pot_width = 16, stopper_shift = 0.0);
+//potentiometer_support_squared(length = 27, width = 28, height = 5, dist_to_hole = 10, hole_tolerance = 15, wall_thick = 3, pot_width = 16, stopper_shift = 0.0);
 
 //potentiometer_support_squared_with_screw_holes(25, 48, 13, 30);
