@@ -22,6 +22,7 @@ radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime = 1;
 
 function f_radial_bearing_housing_size (rb_external_radius, rb_thick) = [2 * (rb_external_radius + radial_bearing_housing_grosime_perete_lateral), 2 * (rb_external_radius + radial_bearing_housing_grosime_perete_lateral), rb_thick + radial_bearing_housing_grosime_perete_baza];
 
+rbearing_6001_housing_size = f_radial_bearing_housing_size(rb_6001_external_radius, rb_6001_thick);
 rbearing_6002_housing_size = f_radial_bearing_housing_size(rb_6002_external_radius, rb_6002_thick);
 rbearing_626_housing_size = f_radial_bearing_housing_size(rb_626_external_radius, rb_626_thick);
 
@@ -75,6 +76,13 @@ rbearing_6002_housing_holes_position = [[0, 0, 0],
 [(rb_6002_external_radius - 2.5), -(rb_6002_external_radius - 2.5), 0],
 [-(rb_6002_external_radius - 2.5), (rb_6002_external_radius - 2.5), 0],
 [(rb_6002_external_radius - 2.5), (rb_6002_external_radius - 2.5), 0]
+];
+
+rbearing_6001_housing_holes_position = [[0, 0, 0], 
+[-(rb_6001_external_radius - 2), -(rb_6001_external_radius - 2), 0], 
+[(rb_6001_external_radius - 2), -(rb_6001_external_radius - 2), 0],
+[-(rb_6001_external_radius - 2), (rb_6001_external_radius - 2), 0],
+[(rb_6001_external_radius - 2), (rb_6001_external_radius - 2), 0]
 ];
 
 rbearing_6002_enclosed_housing_holes_position = [[radial_bearing_housing_grosime_perete_lateral + m4_screw_radius, (radial_bearing_housing_grosime_perete_baza + rb_6002_thick + radial_bearing_housing_grosime_perete_baza) / 2, 0], [2 * (rb_6002_external_radius + 2 * radial_bearing_housing_grosime_perete_lateral + 2 * m4_screw_radius) - (radial_bearing_housing_grosime_perete_lateral + m4_screw_radius), (radial_bearing_housing_grosime_perete_baza + rb_6002_thick + radial_bearing_housing_grosime_perete_baza) / 2, 0]];

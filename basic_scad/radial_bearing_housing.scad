@@ -270,9 +270,19 @@ module rbearing_608_housing()
     radial_bearing_housing(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, rb_608_thick, rbearing_608_housing_size[2], m4_screw_radius);
 }
 //---------------------------------------------------------------------------
+module rbearing_6001_housing()
+{
+    radial_bearing_housing(rbearing_6001_housing_size, rbearing_6001_housing_holes_position, rb_6001_external_radius, rb_6001_thick, rbearing_6001_housing_size[2], m4_screw_radius);
+}
+//---------------------------------------------------------------------------
 module rbearing_608_housing_double()
 {
     radial_bearing_housing(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, 2 * rb_608_thick, rbearing_608_housing_size[2] + rb_608_thick, m4_screw_radius, 0, 1);
+}
+//---------------------------------------------------------------------------
+module rbearing_6001_housing_double()
+{
+    radial_bearing_housing(rbearing_6001_housing_size, rbearing_6001_housing_holes_position, rb_6001_external_radius, 2 * rb_6001_thick, rbearing_6001_housing_size[2] + rb_6001_thick, m4_screw_radius, 0, 1);
 }
 //---------------------------------------------------------------------------
 module rbearing_608_housing_with_potentiometer_support()
@@ -380,7 +390,7 @@ translate([0, rbearing_608_enclosed_housing_slim_size[1], 0])
 
 //rbearing_608_vertical_housing_bounded_half_small_top();
 
-rbearing_608_housing_with_potentiometer_support();
+//rbearing_608_housing_with_potentiometer_support();
 
 //radial_bearing_608_vertical_housing();
 
@@ -394,11 +404,14 @@ rbearing_608_housing_with_potentiometer_support();
 
 //radial_bearing_608_vertical_housing_slim_double();
 
-//rbearing_6002_housing_with_bearing();
+// rbearing_6002_housing_with_bearing();
 
-//rbearing_608_housing();
-//rbearing_608_housing_double();
-//rbearing_608_housing_with_bearing();
+// rbearing_608_housing();
+
+// rbearing_6001_housing();
+// rbearing_608_housing_double();
+rbearing_6001_housing_double();
+// rbearing_608_housing_with_bearing();
 
 //radial_bearing_6002_enclosed_housing(120); // 1x
 //radial_bearing_608_enclosed_housing(120);
