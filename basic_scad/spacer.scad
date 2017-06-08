@@ -17,11 +17,21 @@ module spacer_with_2_holes(length, width, height, distance_between_holes)
     }
 }
 //---------------------------------------------------------------
+/*
 module spacer_with_1_hole(length, width, height)
 {
     difference(){
         color(plastic_color) cube([length, width, height]);
         translate ([0, width / 2, height / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = length + 2 * display_tolerance, r = 2, $fn = 30);
+    }
+}
+*/
+//---------------------------------------------------------------
+module spacer_with_1_hole(spacer_size)
+{
+    difference(){
+        color(plastic_color) cube(spacer_size);
+        translate ([0, spacer_size[1] / 2, spacer_size[2] / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = spacer_size[0] + 2 * display_tolerance, r = 2, $fn = 30);
     }
 }
 //---------------------------------------------------------------
