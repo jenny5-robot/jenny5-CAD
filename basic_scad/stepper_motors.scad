@@ -30,7 +30,7 @@ module nema_motor_without_shaft(motor_width, motor_height, top_cylinder_radius, 
 		// shaft hole bottom
 			color("Silver") translate (- display_tolerance_z) cylinder (h = 3, r = 5, $fn = 30); 
 		}
-			// cables
+			// wires
 		translate ([-3, motor_width / 2 + 10, 3]) rotate([90, 0, 0]) color("Red") cylinder (h= 10, r = 0.5);
 		translate ([-1, motor_width / 2 + 10, 3]) rotate([90, 0, 0]) color("Black") cylinder (h= 10, r = 0.5);
 		translate ([1, motor_width / 2 + 10, 3]) rotate([90, 0, 0]) color("Blue") cylinder (h= 10, r = 0.5);
@@ -103,12 +103,12 @@ module nema_11()
 //--------------------------------------------------------------
 module nema_11_with_27_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_11_width, nema_11_height, nema_11_27_1_gearbox_length, nema_11_motor_gearbox_radius, 0, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
+	nema_motor_with_gearbox(nema_11_width, nema_11_height, nema_11_27_1_gearbox_length, nema_11_motor_gearbox_radius, nema_11_gearbox_base_height, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
 }
 //--------------------------------------------------------------
 module nema_11_with_13_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_11_width, nema_11_height, nema_11_13_1_gearbox_length, nema_11_motor_gearbox_radius, 0, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
+	nema_motor_with_gearbox(nema_11_width, nema_11_height, nema_11_13_1_gearbox_length, nema_11_motor_gearbox_radius, nema_11_gearbox_base_height, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
 }
 //--------------------------------------------------------------
 module nema_17_with_5_1_gearbox()
