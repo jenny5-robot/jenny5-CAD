@@ -19,9 +19,6 @@ include <config.scad>
 //--------------------------------------------------------------------
 module dc_motor_housing(motor_offset_x, motor_offset_y, motor_radius, motor_length, base_height, motor_center_hole_radius, motor_holes_position, base_thick)
 {
-
-
-
     housing_length = 2 * motor_radius + base_thick + motor_offset_x + airflow_spacer_x;
     housing_width = 2 * motor_radius + 2 * side_wall_dc_motor_housing_thick + 2 * airflow_spacer_y + 2 * motor_offset_y;
     

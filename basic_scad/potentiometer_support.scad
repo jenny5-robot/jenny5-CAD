@@ -84,16 +84,15 @@ module rectangular_axis_slider(height, wall_thick = 3, hole_depth = 10.5, hole_w
 //---------------------------------------------------------------------------
 module rounded_axis_slider(height, wall_thick = 3, hole_radius = 6)
 {
-  width = wall_thick + 2 * hole_radius;
-    extra_thick = 3;
+  width = 2 * wall_thick + 2 * hole_radius;
     
   difference(){
-    cube([height, width, width + extra_thick]);
+    cube([height, width, width]);
         // shaft hole
-    translate([0, hole_radius, wall_thick + hole_radius + extra_thick] - display_tolerance_x) rotate ([0, 90, 0]) cylinder( h = height + 2 * display_tolerance, r = hole_radius, $fn = 40); 
+    translate([0, wall_thick + hole_radius, wall_thick + hole_radius] - display_tolerance_x) rotate ([0, 90, 0]) cylinder( h = height + 2 * display_tolerance, r = hole_radius, $fn = 40); 
                 
     // screw hole   
-    translate([height / 2, hole_radius, 0] - display_tolerance_z) cylinder (h = extra_thick + 2 * wall_thick + 2, r = m4_screw_radius, $fn = 20);
+    translate([height / 2, hole_radius, 0] - display_tolerance_z) cylinder (h = wall_thick + 2, r = m4_screw_radius, $fn = 20);
     // nut hole
       hull(){
     //translate([height / 2, width, 3]) rotate([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);

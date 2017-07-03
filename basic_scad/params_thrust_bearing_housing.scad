@@ -6,7 +6,7 @@
 
 thrust_bearing_housing_51105_size = [60, 37, 20];
 
-thrust_bearing_housing_51105_thin_size = [60, 37, 17];
+thrust_bearing_housing_51105_thin_size = [60, 37, 6];
 
 thrust_bearing_depth = 3;
 
