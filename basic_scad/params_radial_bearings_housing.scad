@@ -41,6 +41,8 @@ rbearing_6001_enclosed_housing_size = ([2 * (rb_6001_external_radius +  radial_b
 
 rbearing_608_enclosed_housing_slim_size = ([2 * (rb_608_external_radius + 2 * radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime + 2 * m4_screw_radius), 2 * radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime + rb_608_thick, 2 *rb_608_external_radius + radial_bearing_vertical_housing_grosime_perete_baza]);
 
+rbearing_6001_enclosed_housing_slim_size = ([2 * (rb_6001_external_radius + 2 * radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime + 2 * m4_screw_radius), 2 * radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime + rb_6001_thick, 2 *rb_6001_external_radius + radial_bearing_vertical_housing_grosime_perete_baza]);
+
 rbearing_698_enclosed_housing_touch_size = ([2 * (rb_698_external_radius + radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime + 2 * m4_screw_radius), 2 * radial_bearing_vertical_housing_grosime_perete_lateral_latime + rb_698_thick, 2 *rb_698_external_radius + radial_bearing_vertical_housing_grosime_perete_baza]);
 
 /*
@@ -119,6 +121,15 @@ rbearing_608_enclosed_housing_slim_size[1] / 2,
 0]
 ];
 
+rbearing_6001_enclosed_housing_slim_holes_position = [
+[radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime + m4_screw_radius, 
+rbearing_6001_enclosed_housing_slim_size[1] / 2, 
+0], 
+[rbearing_6001_enclosed_housing_slim_size[0] - (radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime + m4_screw_radius), 
+rbearing_6001_enclosed_housing_slim_size[1] / 2,
+0]
+];
+
 rbearing_698_enclosed_housing_touch_holes_position = [
 [radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime + m4_screw_radius, 
 rbearing_608_enclosed_housing_slim_size[1] / 2, 
@@ -131,6 +142,9 @@ rbearing_608_enclosed_housing_slim_size[1] / 2,
 //rbearing_608_vertical_housing_size_bounded_half = [60 + 10, 10, 30]; // distance between holes + 2 * radius
 rbearing_608_vertical_housing_size_bounded_half_small =[30 + 10, 10, 30]; // distance between holes + 2 * radius
 rbearing_608_vertical_housing_size_bounded_half_small_top =[30 + 10, 10, rb_608_external_radius + 4]; // distance between holes + 2 * radius
+
+
+rbearing_6001_vertical_housing_size_bounded_half_small =[30 + 10, rb_6001_thick + 2, 30]; // distance between holes + 2 * radius
 
 //rbearing_6002_vertical_housing_size_bounded_half = [60 + 10, 10, 30]; // distance between holes + 2 * radius
 rbearing_6002_vertical_housing_size_bounded_half_small = [2 * rb_6002_external_radius + 20, rb_6002_thick + 4, 30]; // distance between holes + 2 * radius
