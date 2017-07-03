@@ -139,6 +139,32 @@ module rectangular_tube(length, width, wall_thick, height)
 	}
 }
 //--------------------------------------------------------------
+module rectangular_tube_with_rounded_hole(length, width, hole_radius, height)
+{
+    difference(){
+		cube([length, width, height]);
+		translate ([length / 2, width / 2, 0] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = hole_radius) ;
+	}
+}
+//--------------------------------------------------------------
+module rectangular_tube_with_rounded_hole_and_screw_fixers(length, width, hole_radius, height)
+{
+    screw_support_size = 10;
+    difference(){
+        union(){
+            rectangular_tube_with_rounded_hole(length, width, hole_radius, height);
+          //  translate([0, -screw_support_size, 0]) cube([length, screw_support_size, screw_support_size]);
+            translate([0, -screw_support_size, height - screw_support_size]) cube([length, screw_support_size,  screw_support_size]);
+        }
+        translate([length / 2, width / 2, height - screw_support_size / 2])  rotate([90, 0, 0]) cylinder(h = width / 2 + screw_support_size + display_tolerance, r = 2, $fn = 10);
+// nut hole
+        hull(){
+        translate([length / 2, -2, height - screw_support_size / 2])  rotate([90, 30, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+        translate([length / 2, -2, height])  rotate([90, 30, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+        }
+    }
+}
+//--------------------------------------------------------------
 module cube_empty(inside_edge, outside_edge, height)
 {
 	difference(){
@@ -222,7 +248,9 @@ module arc_thick_rounded(radius_exterior = 100, radius_interior = 90, thick = 10
 }
 //--------------------------------------------------------------
 
-arc_thick_rounded(angle = 45);
+//arc_thick_rounded(angle = 45);
+
+rectangular_tube_with_rounded_hole_and_screw_fixers(length = 20, width = 15, hole_radius = 6, height = 30);
 
 //corner(40, 20, 30, 3);
 
