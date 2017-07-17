@@ -12,7 +12,7 @@ include <../basic_scad/params_alu_profiles.scad>
 
 leg_motor_max_stroke = 50;
 
-leg_motor_position = 50; // 0 ... 50
+leg_motor_position = 0; // 0 ... 50
 
 leg_base_length = 250;
 leg_base_height = 40;

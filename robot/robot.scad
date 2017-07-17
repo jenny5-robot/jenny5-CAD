@@ -29,6 +29,8 @@ use <head.scad>
 
 include <params_body.scad>
 use <body.scad>
+
+
    
 //---------------------------------------------------------------------------
 module body_with_head()
@@ -36,9 +38,7 @@ module body_with_head()
     body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
     // head
     translate ([0, -L_profile_40x20_short_size - 1, chest_height + 37]) mirror ([0, 1, 0]) head();
-    // spacers for linking head with body
-    translate ([29, -L_profile_40x20_long_size, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
-    translate ([-40, -L_profile_40x20_long_size, chest_height + 30]) rotate ([0, 90, 0]) spacer_with_1_hole(30, 37, 11);
+
 }
 //---------------------------------------------------------------------------
 module platform_foot()

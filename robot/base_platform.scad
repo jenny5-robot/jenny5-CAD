@@ -242,8 +242,8 @@ module motor_gear()
         translate ([0, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
         // 1st nut hole
         hull(){
-            translate ([18, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            translate ([18, 0, motor_gear_height]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([7, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = 2 * m4_nut_thick, r = m4_nut_radius, $fn = 6);
+            translate ([7, 0, 0]) rotate ([0, 90, 0]) cylinder(h = 2 * m4_nut_thick, r = m4_nut_radius, $fn = 6);
         }
         // 2nd screw hole
         translate ([0, 0, motor_gear_height + extra_length / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
@@ -258,7 +258,7 @@ module motor_gear()
 module wheel_gear()
 {    
     difference(){
-        rotate ([0, 0, 12]) gear (number_of_teeth=13,
+        rotate ([0, 0, 12]) gear (number_of_teeth=14,
 					circular_pitch=500,
 					bore_diameter=0,
 					hub_diameter=0,
@@ -267,9 +267,9 @@ module wheel_gear()
 					rim_thickness=wheel_gear_height,
 					gear_thickness=wheel_gear_height,
 					pressure_angle=31);
-        // screw hole
+        // M12 screw hole
         translate (-display_tolerance_z) cylinder(h = wheel_gear_height + 2 * display_tolerance, r = 6, $fn = 40);
-        
+        // M12 nut hole
         translate ([0, 0, wheel_gear_height - wheel_gear_nut_depth]) cylinder(h = wheel_gear_nut_depth + display_tolerance, r = M12_nut_radius, $fn = 6);
     }
 }
@@ -591,10 +591,10 @@ tracks_support();
 translate ([dist_to_tracks_support2, - 80 - tracks_offset, -4 - tracks_tensioner_support_size[2]])
 tracks_support();
 
-// battery
-  //  translate([160, multistar_4s_20000_size[2], base_platform_size[2]]) rotate ([90, 0, 0]) multistar_4s_20000();
-  
-  
+// batteries
+    //translate([base_platform_size[0] - laptop13_size[1], -LiFePO4_20Ah_size[1] / 2 + base_platform_size[1] / 2, base_platform_size[2]]) LiFePO4_20Ah();
+    translate([base_platform_size[0] - laptop13_size[1], 0, base_platform_size[2]]) multistar_4s_16000();
+    translate([base_platform_size[0] - laptop13_size[1], base_platform_size[1] - multistar_4s_16000_size[1], base_platform_size[2]]) multistar_4s_16000(); 
 }
 //--------------------------------------------------------------------
 

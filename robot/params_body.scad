@@ -11,14 +11,14 @@ include <../basic_scad/params_sheets.scad>
 
 body_rotation_linear_motor_position = 0;
 
-dist_edge_to_shaft = 14;
+dist_edge_to_body_shaft = rbearing_6001_housing_size[0] / 2;
 
 chest_height = 380;
 chest_length = 450;
 
-body_arm_length = chest_height - 2 * washer_8_thick -  2 * rb_608_thick - 3;
+body_arm_shaft_length = chest_height +  2 * rb_6001_thick + 3;
 
-dist_between_motor_and_axis = 89;//radius_roata_reductor + radius_roata_motor_reductor + 10;
+dist_between_motor_and_axis = 89;
 vertebral_column_size = [30, 30, chest_height];
    
 motor_housing_tolerance = 10;
@@ -29,3 +29,5 @@ body_rotation_sheet_size = [60, 200, 10];
 dist_to_belt_tensioner = 62;
 
 body_holes_position = [-25, 25];
+
+body_shaft_radius = 6;

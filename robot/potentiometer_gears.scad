@@ -10,11 +10,11 @@ include <../basic_scad/params_basic_components.scad>
 
 include <../basic_scad/config.scad>
 //--------------------------------------------------------------------
-module bone_gear(num_teeth = 14, angle = 13)
+module bone_gear(num_teeth = 14, screw_angle = 13)
 {
     height = 10;
     difference(){
-        rotate ([0, 0, angle])
+        rotate ([0, 0, screw_angle])
 		gear ( 
 			number_of_teeth=num_teeth,
 			circular_pitch=400,
@@ -32,7 +32,7 @@ module bone_gear(num_teeth = 14, angle = 13)
 			involute_facets=0,
 			flat=false
         );
-        translate ([-5.25, -5.25, 0]) cube([10.5, 10.5, 11]);
+        cylinder( h = 11, r = 6);
         
           // m3 screw hole
     translate ([0, 0, height / 2]) rotate([0, 90, 0]) cylinder (h = 20, r = 1.4, $fn = 30);  

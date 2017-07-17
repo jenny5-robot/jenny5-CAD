@@ -17,11 +17,15 @@ U_finger_thick = 3;
 U_pusher_base_size = [4 * spacer_between_fingers + 3 * finger_thick + 2 * U_finger_thick, 20, 8.2];
 U_pusher_height = 25;
 
-gripper_motor_support_size = [37, 38, 8];
+gripper_motor_support_size = [37, 42, 8];
 
 echo(gripper_motor_support_size);
 
-gripper_lateral_sheet_size = [76, gripper_motor_support_size[1], 4];
+gripper_lateral_sheet_size = [76, 38, 4];
 
 finger_angle = 50;
 finger_with_button_angle = finger_angle - 15;
+
+distance_to_base_screw = 5;
+
+gripper_open_button_hole_position = [0, 12, 0];

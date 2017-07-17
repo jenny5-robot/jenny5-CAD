@@ -15,9 +15,7 @@ wheels_bearing_housing_1_offset_y = 22;// must be larger than the reinforcement 
    
 wheels_bearing_housing_2_offset_y = 85;
 
-//tracks_tensioner_size = [60, 20, base_platform_size[2]];
-
-lidar_position = 90;
+lidar_position = 80;
 
 leg_postion_on_platform = lidar_position + 30; // nema_17_width / 2 + 10
 
@@ -25,8 +23,8 @@ num_tracks_per_circle = 14; // 16
 tracks_wheel_radius = 50.8; // 58.8
 
 motor_gear_height = 11;
-wheel_gear_height = 15;
-wheel_gear_nut_depth = 10;
+wheel_gear_height = 17;
+wheel_gear_nut_depth = wheel_gear_height - 2;
 
 base_motor_offset = 56;
 
