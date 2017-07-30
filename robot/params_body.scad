@@ -13,13 +13,15 @@ body_rotation_linear_motor_position = 0;
 
 dist_edge_to_body_shaft = rbearing_6001_housing_size[0] / 2;
 
-chest_height = 380;
-chest_length = 450;
+body_height = 440;
+body_width = 450;
 
-body_arm_shaft_length = chest_height +  2 * rb_6001_thick + 3;
+clavicule_size = [50, 30, body_width];
+
+body_arm_shaft_length = body_height - clavicule_size[1] + 11 + 4;
 
 dist_between_motor_and_axis = 89;
-vertebral_column_size = [30, 30, chest_height];
+vertebral_column_size = [30, 30, body_height - 2 * 3];
    
 motor_housing_tolerance = 10;
 motor_housing_tolerance_large = 20;

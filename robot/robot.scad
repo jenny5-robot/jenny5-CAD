@@ -35,9 +35,10 @@ use <body.scad>
 //---------------------------------------------------------------------------
 module body_with_head()
 {
-    body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
+    //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
+    body_with_arms();
     // head
-    translate ([0, -L_profile_40x20_short_size - 1, chest_height + 37]) mirror ([0, 1, 0]) head();
+    translate ([0, -clavicule_size[1], body_height + 37]) mirror ([0, 1, 0]) head();
 
 }
 //---------------------------------------------------------------------------
@@ -61,7 +62,7 @@ module robot()
     
     echo(long_leg_height = long_leg_height);
     
-    translate ([leg_postion_on_platform + dist_to_first_bone, 0, long_leg_height + base_platform_size[2] + 55]) rotate ([0, 0, 90]) body_with_head();
+    translate ([leg_postion_on_platform + dist_to_first_bone, 0, long_leg_height + base_platform_size[2] + 10 + 30]) rotate ([0, 0, 90]) body_with_head();
 }
 //---------------------------------------------------------------------------
 module robot_with_kitchen_table()

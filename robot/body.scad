@@ -65,46 +65,48 @@ module bearing_housing_top_body()
 //---------------------------------------------------------------------------
 module clavicle_bone()
 {
-    echo("clavicule length", chest_length);
+    echo("clavicule length", body_width);
     echo("L profile 40x20mm, 3mm thick");
     difference(){
-        color (aluminium_color) L_profile(chest_length, L_profile_40x20_short_size, L_profile_40x20_long_size, alu_sheet_3_thick); 
+        color (aluminium_color) 
+        //L_profile(body_width, L_profile_40x20_short_size, clavicule_size[0], alu_sheet_3_thick); 
+        rotate ([-90, 0, 0]) rectangular_tube(50, 30, 3, body_width);
         echo("clavicule bone bearing housing holes = ");
         for (i = [1 : 4]){
-            echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i], "radius = 2");
-            translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
+            echo([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i], "radius = 2");
+            translate ([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
         }
         /*
 // shaft hole
-            echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0], "radius = 10 (approx)");
-            translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
+            echo([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0], "radius = 10 (approx)");
+            translate ([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
 */
         echo("clavicule bone bearing housing holes = the same as the other side!");
         for (i = [1 : 4]){
-        translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
+            translate ([clavicule_size[0] / 2, body_width - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
         }
         /*
 // shaft hole
-        echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0], "radius = 10 (approx)");
-        translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
+        echo([clavicule_size[0] / 2, body_width - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0], "radius = 10 (approx)");
+        translate ([clavicule_size[0] / 2, body_width - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
         */
         // holes for vertebral column screws
         echo("holes for vertebral column screws");
-        echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[0], "radius=", 4);
-        translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 4, $fn = 20);
+        echo([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[0], "radius=", 4);
+        translate ([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 4, $fn = 20);
         
         for (i = [1 : 4]){
-          echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[i], "radius = 2");
-          translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+          echo([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[i], "radius = 2");
+          translate ([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
         }
 
         // head holes
         echo("head holes = ");
-          echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2 - 30, 0], "radius = 2");
-          translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2 - 30, 0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+          echo([clavicule_size[0] / 2, body_width / 2 - 30, 0], "radius = 2");
+          translate ([clavicule_size[0] / 2, body_width / 2 - 30, 0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
 
-          echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2 + 30, 0], "radius = 2");
-          translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2 + 30, 0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+          echo([clavicule_size[0] / 2, body_width / 2 + 30, 0], "radius = 2");
+          translate ([clavicule_size[0] / 2, body_width / 2 + 30, 0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
         
     }
 }
@@ -113,41 +115,43 @@ module clavicle_with_pieces()
 {
     clavicle_bone();
     // bearing housing top - left
-    translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_body_shaft, alu_sheet_3_thick + rbearing_6001_housing_size[2] + 7]) rotate ([0, 0, -90])mirror ([0,0,1]) rbearing_6001_double_housing_with_potentiometer_support();
+    translate ([clavicule_size[0] / 2, body_width - dist_edge_to_body_shaft, rbearing_6001_housing_size[2] + 7]) rotate ([0, 0, -90])mirror ([0,0,1]) rbearing_6001_double_housing_with_potentiometer_support();
     
         // bearing housing top - right
-    translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, alu_sheet_3_thick + rbearing_6001_housing_size[2] + 7]) rotate([0, 0, 90]) mirror ([0,0,1]) rbearing_6001_double_housing_with_potentiometer_support();
+    translate ([clavicule_size[0] / 2, dist_edge_to_body_shaft, rbearing_6001_housing_size[2] + 7]) rotate([0, 0, 90]) mirror ([0,0,1]) rbearing_6001_double_housing_with_potentiometer_support();
     
     // top potentiometer
-    translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft + 30, alu_sheet_3_thick + rbearing_6001_housing_size[2] + 7 - pot_92R1A_J22_L15L_base_height - 2]) rotate([0, 0, 90]) 
+    translate ([clavicule_size[0] / 2, dist_edge_to_body_shaft + 30, rbearing_6001_housing_size[2] + 7 - pot_92R1A_J22_L15L_base_height - 2]) rotate([0, 0, 90]) 
     potentiometer_92R1A_J22_L15L();
 }
 //---------------------------------------------------------------------------
 module diafragma_bone()
 {
-    echo("Diafragma length", chest_length);
+    echo("Diafragma length", body_width);
     echo("L profile 40x20mm, 3mm thick");
 
     difference(){
-        color (aluminium_color) L_profile(chest_length, L_profile_40x20_short_size, L_profile_40x20_long_size, alu_sheet_3_thick);
+        color (aluminium_color) 
+        //L_profile(body_width, L_profile_40x20_short_size, clavicule_size[0], alu_sheet_3_thick);
+        rotate ([-90, 0, 0]) rectangular_tube(50, 30, 3, body_width);
         // left axis bearing housing hole
         echo("diafragma bone bearing holes (left) = ");
 
 // middle hole
-        echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0], "radius = 10");
-        translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
+        echo([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0], "radius = 10");
+        translate ([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
 // screw holes
         for (i = [1 : 4]){
-            echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i], "radius = 2");
-            translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
+            echo([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i], "radius = 2");
+            translate ([clavicule_size[0] / 2, dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
         }
         // right axis bearing housing hole
         echo("diafragma bone bearing holes (right) = the same as left side!");
 
-        translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
+        translate ([clavicule_size[0] / 2, body_width - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 10, $fn = 30);
 
         for (i = [1 : 4]){
-            translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
+            translate ([clavicule_size[0] / 2, body_width - dist_edge_to_body_shaft, 0] + rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
         }
     // motor holes
 
@@ -166,7 +170,7 @@ module diafragma_bone()
         // motor holes
                 
         echo("diafragma right motor holes = the same as the other side");
-        translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, chest_length - (dist_edge_to_body_shaft + dist_between_motor_and_axis), 0] - display_tolerance_z) {
+        translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, body_width - (dist_edge_to_body_shaft + dist_between_motor_and_axis), 0] - display_tolerance_z) {
           translate (gearbox_nema_17_holes_position[0]) cylinder(h = 3 + 2 * display_tolerance, r = gearbox_nema_17_holes_radius[0]);
           for (i = [1 : 4])
             translate (gearbox_nema_17_holes_position[i]) cylinder(h = 3 + 2 * display_tolerance, r = gearbox_nema_17_holes_radius[i]);
@@ -174,34 +178,34 @@ module diafragma_bone()
         
         // holes for vertebral column screws
         echo("holes for vertebral column screws");
-        echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[0], "radius = 4");
-        translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 4, $fn = 20);
+        echo([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[0], "radius = 4");
+        translate ([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[0] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 4, $fn = 20);
         
         for (i = [1 : 4]){
-          echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[i], "radius = 2");
-          translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + sigma_profile_holes[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+          echo([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[i], "radius = 2");
+          translate ([clavicule_size[0] / 2, body_width / 2, 0] + sigma_profile_holes[i] - display_tolerance_z) cylinder(h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
         } 
         
         // holes for thrust bearing housing
         echo("holes for thrust bearing housing");
         for (i = [0 : 3]){
-          echo([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] + rotate_z(90,thrust_bearing_housing_51105_holes[i]), "radius = 2");
+          echo([clavicule_size[0] / 2, body_width / 2, 0] + rotate_z(90,thrust_bearing_housing_51105_holes[i]), "radius = 2");
 
-          translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length / 2, 0] - display_tolerance_z) rotate([0, 0, 90]) translate (thrust_bearing_housing_51105_holes[i]) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 10);
+          translate ([clavicule_size[0] / 2, body_width / 2, 0] - display_tolerance_z) rotate([0, 0, 90]) translate (thrust_bearing_housing_51105_holes[i]) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 10);
         }
 //hole for M6 screw for push
-        echo("hole for M6 screw for push", [alu_sheet_3_thick + 15, chest_length / 2 + 55, 0], "radius = 3");
-        translate ([alu_sheet_3_thick + 15, chest_length / 2 + 55, 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 3, $fn = 20);
+        echo("hole for M6 screw for push", [alu_sheet_3_thick + 15, body_width / 2 + 55, 0], "radius = 3");
+        translate ([alu_sheet_3_thick + 15, body_width / 2 + 55, 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 3, $fn = 20);
         
         // belt tensioner left side
         echo("belt tensioner holes");
-        echo([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2, 0], "radius = 2");
-        echo([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2, 0], "radius = 2");
-        translate([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2, 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
-        translate([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2, 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+        echo([clavicule_size[0] - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2, 0], "radius = 2");
+        echo([clavicule_size[0] - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2, 0], "radius = 2");
+        translate([clavicule_size[0] - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2, 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+        translate([clavicule_size[0] - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2, 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
 // belt tensioner holes; right side
-        translate([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, chest_length - (dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2), 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
-        translate([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, chest_length - (dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2), 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+        translate([clavicule_size[0] - belt_tensioner_external_size[1] / 2, body_width - (dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2), 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
+        translate([clavicule_size[0] - belt_tensioner_external_size[1] / 2, body_width - (dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2), 0] - display_tolerance_z) cylinder (h = alu_sheet_3_thick + 2 * display_tolerance, r = 2, $fn = 20);
     }
 }
 //---------------------------------------------------------------------------
@@ -210,30 +214,34 @@ module diafragma_with_pieces()
     mirror([0, 0, 1]) diafragma_bone();
     
     // bearing housing
-    translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, dist_edge_to_body_shaft, -rbearing_6001_housing_size[2] - rb_6001_thick - alu_sheet_3_thick]) rbearing_6001_double_housing_with_bearings();
+    translate ([clavicule_size[0] / 2, dist_edge_to_body_shaft, clavicule_size[1] + rbearing_6001_housing_size[2] + rb_6001_thick]) mirror([0, 0, 1]) rbearing_6001_double_housing_with_bearings();
     // motor
+   /*
     translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, dist_edge_to_body_shaft + dist_between_motor_and_axis, -nema_17_with_19_1_gearbox_height - alu_sheet_3_thick]) nema_17_with_19_1_gearbox();
-  
+  */
+    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, body_width / 2 - 60, +nema_17_with_19_1_gearbox_height + alu_sheet_3_thick]) mirror([0, 0, 1]) nema_17_with_19_1_gearbox();
+    
+    
     // motor gear
     translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, dist_edge_to_body_shaft + dist_between_motor_and_axis, 0 + 7]) motor_pulley_8mm_shaft();
     
     // belt tensioner
-    //translate ([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2, 0]) rotate([0, 0, 90]) belt_tensioner_external_with_bearings();
+    //translate ([clavicule_size[0] - belt_tensioner_external_size[1] / 2, dist_to_belt_tensioner - belt_tensioner_external_size[0] / 2, 0]) rotate([0, 0, 90]) belt_tensioner_external_with_bearings();
     
     // other side
     // bearing housing
-    translate ([alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2, chest_length - dist_edge_to_body_shaft, -rbearing_6001_housing_size[2] - rb_6001_thick - alu_sheet_3_thick]) rbearing_6001_double_housing_with_bearings();
+    translate ([clavicule_size[0] / 2, body_width - dist_edge_to_body_shaft, alu_sheet_3_thick]) rbearing_6001_double_housing_with_bearings();
     // motor
-    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, chest_length - (dist_edge_to_body_shaft + dist_between_motor_and_axis), -nema_17_with_19_1_gearbox_height - alu_sheet_3_thick]) nema_17_with_19_1_gearbox();
+    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, body_width - (dist_edge_to_body_shaft + dist_between_motor_and_axis), -nema_17_with_19_1_gearbox_height - alu_sheet_3_thick]) nema_17_with_19_1_gearbox();
   
     // motor gear
-    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, chest_length - (dist_edge_to_body_shaft + dist_between_motor_and_axis), +7]) motor_pulley_8mm_shaft();
+    translate ([alu_sheet_3_thick + nema_17_motor_gearbox_radius + 1, body_width - (dist_edge_to_body_shaft + dist_between_motor_and_axis), +7]) motor_pulley_8mm_shaft();
     
     // belt tensioner
-   // translate ([L_profile_40x20_long_size - belt_tensioner_external_size[1] / 2, chest_length - (dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2), 0]) rotate([0, 0, 90]) belt_tensioner_external_with_bearings();
+   // translate ([clavicule_size[0] - belt_tensioner_external_size[1] / 2, body_width - (dist_to_belt_tensioner + belt_tensioner_external_size[0] / 2), 0]) rotate([0, 0, 90]) belt_tensioner_external_with_bearings();
 
     //M6 screw for push
-    translate ([alu_sheet_3_thick + 15, chest_length / 2 + 55, 4]) mirror([0, 0, 1]) M6_hexa_screw(40);
+    translate ([alu_sheet_3_thick + 15, body_width / 2 + 55, 4]) mirror([0, 0, 1]) M6_hexa_screw(40);
 }
 //---------------------------------------------------------------------------
 module body_rotation_sheet()
@@ -307,63 +315,63 @@ module half_2_traction_pulley()
 module body()
 {
     // bottom 
-    translate ([-chest_length / 2, 0, 0]) 
+    translate ([-body_width / 2, 0, 0]) 
         rotate ([0, 0, -90]) 
             diafragma_with_pieces();
     // top 
-    translate ([-chest_length / 2, 0, chest_height + 3]) 
+    translate ([-body_width / 2, 0, body_height - clavicule_size[1]]) 
         rotate ([0, 0, -90]) 
             mirror([0, 0, 1])
                 clavicle_with_pieces();
 
 // vertebral column
-    translate ([0, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) vertebral_column();
+    translate ([0, -clavicule_size[0] / 2, 3]) vertebral_column();
     
     // left arm
-    translate ([-(chest_length / 2 -dist_edge_to_body_shaft), -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) {
+    translate ([-(body_width / 2 -dist_edge_to_body_shaft), -clavicule_size[0] / 2, 0]) {
 
     // vertical axis
-        translate([0, 0, -alu_sheet_3_thick - 2 * rb_6001_thick - 2])
+        translate([0, 0, -11 - 4])
             color ("black") body_arm_bone(body_arm_shaft_length);
         
     // traction pulley
-        translate ([0, 0, 6]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
+        translate ([0, 0, -11 - 4]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
     }
         
     // belt left arm
-    translate ([-chest_length / 2 + rbearing_6001_housing_size[0] / 2, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 9]) rotate([0, 0, 0]) belt_on_2_pulleys(25.8, 11.5, 89, 6);
+    translate ([-body_width / 2 + rbearing_6001_housing_size[0] / 2, -clavicule_size[0] / 2, -4 - 8]) rotate([0, 0, 0]) belt_on_2_pulleys(25.8, 11.5, 89, 6);
     
     echo ("belt length = ", length_belt_on_2_pulleys(25.8, 11.5, 89, 6));
     
-    translate ([(chest_length / 2 -dist_edge_to_body_shaft), -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]){
-        translate([0, 0, -alu_sheet_3_thick - 2 * rb_6001_thick])
+    translate ([(body_width / 2 -dist_edge_to_body_shaft), -clavicule_size[0] / 2, 0]){
+        translate([0, 0, -11 - 4])
           color ("black") body_arm_bone(body_arm_shaft_length);
         
     // traction pulley
-        translate ([0, 0, 6]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
+        translate ([0, 0, -11 - 4]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
     }
     // breadboard for arms
-    translate ([0, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2) - vertebral_column_size[0] / 2, vertebral_column_size[2] / 2 - arms_breadboard_size[1] / 2]) rotate([0, 0, -180]) arms_breadboard();
+    translate ([0, -clavicule_size[0] / 2 - vertebral_column_size[0] / 2, vertebral_column_size[2] / 2 - arms_breadboard_size[1] / 2]) rotate([0, 0, -180]) arms_breadboard();
     // top thrust bearing housing
-    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick]) mirror([0, 0, 1]) thrust_bearing_housing_51105();
+    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, 0]) mirror([0, 0, 1]) thrust_bearing_housing_51105();
 }    
 //---------------------------------------------------------------------------
 module body_with_rotation(linear_motor_position)
 {
     translate ([0, -(alu_sheet_3_thick + 37 / 2), 0]) rotate ([0, 0, 0]) translate ([0, alu_sheet_3_thick + 37 / 2, 0]) body();
     // bottom thrust bearing housing
-    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick - thrust_bearing_housing_51105_thin_size[2] - thrust_bearing_housing_51105_size[2] - tb_51105_height + 2 * thrust_bearing_depth]) thrust_bearing_housing_51105_small();
+    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, - thrust_bearing_housing_51105_thin_size[2] - thrust_bearing_housing_51105_size[2] - tb_51105_height + 2 * thrust_bearing_depth]) thrust_bearing_housing_51105_small();
     
     //bottom thrust bearing
-    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, -alu_sheet_3_thick - thrust_bearing_housing_51105_size[2] - tb_51105_height + thrust_bearing_depth])
+    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, - thrust_bearing_housing_51105_size[2] - tb_51105_height + thrust_bearing_depth])
         thrust_bearing_51105();
     
     // sheet
-    translate ([-30, -body_rotation_sheet_size[1] - alu_sheet_3_thick, -alu_sheet_3_thick - thrust_bearing_housing_51105_size[2] - thrust_bearing_housing_51105_thin_size[2] - tb_51105_height + 2 * thrust_bearing_depth - 10])
+    translate ([-30, -body_rotation_sheet_size[1] - alu_sheet_3_thick, - thrust_bearing_housing_51105_size[2] - thrust_bearing_housing_51105_thin_size[2] - tb_51105_height + 2 * thrust_bearing_depth - 10])
     body_rotation_sheet();
     
     // linear motor
-    translate ([0, -190, 20]) rotate ([0, 0, -18]) rotate ([-90, 0, 0]) linear_dc_motor(50, linear_motor_position);
+    translate ([0, -190, -10]) rotate ([0, 0, -18]) rotate ([-90, 0, 0]) linear_dc_motor(50, linear_motor_position);
     
     // screw for linear motor base
     translate ([0, -190, -62]) M6_hexa_screw(50);
@@ -374,7 +382,7 @@ module body_with_arms()
     body_with_rotation();
     
     // left arm
-    translate ([(-chest_length / 2 + dist_edge_to_body_shaft), -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0])
+    translate ([(-body_width / 2 + dist_edge_to_body_shaft), -clavicule_size[0] / 2, 0])
         rotate ([0, 0, angle_body_arm])  
         
         translate ([0, 0, body_arm_shaft_length / 2 + plate_body_size[0] / 2 + 1.5]) 
@@ -385,23 +393,23 @@ module body_with_arms()
         ;
 
     // right arm
-    translate ([chest_length / 2 - dist_edge_to_body_shaft, -(alu_sheet_3_thick + (L_profile_40x20_long_size - alu_sheet_3_thick) / 2), 0]) 
+    translate ([body_width / 2 - dist_edge_to_body_shaft, -clavicule_size[0] / 2, 0]) 
     translate ([0, 0, body_arm_shaft_length / 2 + plate_body_size[0] / 2 + 1.5]) 
     rotate ([0, 0, -angle_body_arm]) 
     translate ([-bone_thick / 2, -3 / 2 * bone_thick, 0]) 
     mirror([1, 0, 0])
     rotate ([0, 90, 0]) 
-    //arm(body_arm_shaft_length)
+  //  arm(body_arm_shaft_length)
     ;
            
 }
 //---------------------------------------------------------------------------
 
-//body_with_arms();
+body_with_arms();
 
 //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
-body();
+//body();
 
 //clavicle_bone();
 
