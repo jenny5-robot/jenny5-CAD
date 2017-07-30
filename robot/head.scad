@@ -74,7 +74,7 @@ module head_motor_support()
 module bearing_housing_on_axis()
 {
     // bearing housing
-    rbearing_6001_housing_double();
+    rbearing_6001_double_housing();
     // axis support
     translate([rbearing_6001_housing_size[0] / 2, rbearing_6001_housing_size[0] / 2 - 2, 0]) color (plastic_color)
     rotate([0, -90, 0])
@@ -90,7 +90,7 @@ module bearing_housing_with_breadboard_support()
     dist_between_screws = 72;
   
   // bearing housing  
-  rbearing_6001_housing_double();
+  rbearing_6001_double_housing();
     
     // electronics support
     translate ([rbearing_6001_housing_size[0] / 2 + 2, -length / 2, 0]) 
@@ -243,7 +243,7 @@ module head()
 }
 //---------------------------------------------------------------------------
 
-//head();
+head();
 
 //head_traction_pulley(); // 2x
 
@@ -272,4 +272,4 @@ module head()
 //head_bone_gear(); // 2x
 
 //hc_sr04_and_c920_support_plate(); // 1x
-hc_sr04_arm(); // 1x
+//hc_sr04_arm(); // 1x
