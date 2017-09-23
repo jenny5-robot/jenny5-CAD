@@ -52,6 +52,11 @@ module 6002rs()
 	radial_bearing(rb_6002_internal_radius, rb_6002_external_radius, rb_6002_thick);
 }
 ////////////////////////////////////////////////////////////////
+module 6005rs()
+{
+	radial_bearing(rb_6005_internal_radius, rb_6005_external_radius, rb_6005_thick);
+}
+////////////////////////////////////////////////////////////////
 module 608rs()
 {
 	radial_bearing(rb_608_internal_radius, rb_608_external_radius, rb_608_thick);
@@ -62,9 +67,9 @@ module 698rs()
 	radial_bearing(rb_698_internal_radius, rb_698_external_radius, rb_698_thick);
 }
 ////////////////////////////////////////////////////////////////
-module 6002rs()
+module 6000rs()
 {
-	radial_bearing(rb_6002_internal_radius, rb_6002_external_radius, rb_6002_thick);
+	radial_bearing(rb_6000_internal_radius, rb_6000_external_radius, rb_6000_thick);
 }
 ////////////////////////////////////////////////////////////////
 module 6902rs()

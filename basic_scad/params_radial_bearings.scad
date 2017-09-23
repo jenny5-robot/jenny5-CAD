@@ -74,6 +74,10 @@ rb_688_internal_radius = 4;
 rb_688_external_radius = 8;
 rb_688_thick = 4;
 
+rb_6000_internal_radius = 5;
+rb_6000_external_radius = 13;
+rb_6000_thick = 8;
+
 rb_6001_internal_radius = 6;
 rb_6001_external_radius = 14;
 rb_6001_thick = 8;
@@ -89,3 +93,8 @@ rb_6002_thick = 9;
 rb_6902_internal_radius = 7.5;
 rb_6902_external_radius = 14;
 rb_6902_thick = 7;
+
+
+rb_6005_internal_radius = 12.5;
+rb_6005_external_radius = 23.5;
+rb_6005_thick = 12;
