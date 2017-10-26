@@ -48,9 +48,19 @@ module rbearing_6001_housing_with_potentiometer_support()
     radial_bearing_housing_with_potentiometer_support(rbearing_6001_housing_size, rbearing_6001_housing_holes_position, rb_6001_external_radius, rb_6001_thick, rbearing_6001_housing_size[2], m4_screw_radius, 25);
 }
 //---------------------------------------------------------------------------
+module rbearing_6005_housing_with_potentiometer_support()
+{
+    radial_bearing_housing_with_potentiometer_support(rbearing_6005_housing_size, rbearing_6005_housing_holes_position, rb_6001_external_radius, rb_6005_thick, rbearing_6005_housing_size[2], m4_screw_radius, 25);
+}
+//---------------------------------------------------------------------------
 module rbearing_6001_double_housing_with_potentiometer_support()
 {
     radial_bearing_double_housing_with_potentiometer_support(rbearing_6001_housing_size, rbearing_6001_housing_holes_position, rb_6001_external_radius, rb_6001_thick, rbearing_6001_housing_size[2] + rb_6001_thick, m4_screw_radius, 25);
+}
+//---------------------------------------------------------------------------
+module rbearing_6005_double_housing_with_potentiometer_support()
+{
+    radial_bearing_double_housing_with_potentiometer_support(rbearing_6005_housing_size, rbearing_6005_housing_holes_position, rb_6005_external_radius, rb_6005_thick, rbearing_6005_housing_size[2] + rb_6005_thick, m4_screw_radius, 25);
 }
 //---------------------------------------------------------------------------
 // rbearing_608_housing_with_potentiometer_support();
