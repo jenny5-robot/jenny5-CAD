@@ -1,1 +1,0 @@
-"c:\Program Files\OpenSCAD\openscad.exe" -o robot.png --camera=0,0,700,90,0,-45,5000 --imgsize=3000,6000 robot.scad
