@@ -38,7 +38,7 @@ module body_with_head()
     //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
     body_with_arms();
     // head
-    translate ([0, -clavicule_size[1], body_height + 37]) mirror ([0, 1, 0]) head();
+    translate ([0, -0, body_height + 3 * body_shaft_radius]) mirror ([0, 1, 0]) head();
 
 }
 //---------------------------------------------------------------------------
@@ -54,11 +54,11 @@ module robot()
 {
     platform_foot();
 
-    h = 2 * area_heron(leg_base_length - 8 - dist_to_first_bone, leg_motor_max_stroke + 105 + leg_motor_position, distance_to_push_position) / (leg_base_length - 8 - dist_to_first_bone);
+    h = 2 * area_heron(dist_to_push_motor_hole_in_base - dist_to_first_bone, leg_motor_max_stroke + 105 + leg_motor_position - 75, distance_to_push_position) / (dist_to_push_motor_hole_in_base - dist_to_first_bone);
    
     leg_angle = 90 - asin( h / distance_to_push_position) + leg_angle_offset;
     
-    long_leg_height = 2 * ((leg_bone_length - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
+    long_leg_height = 2 * ((leg_bone_length + 4 * (rb_6000_external_radius + 2) - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
     
     echo(long_leg_height = long_leg_height);
     
