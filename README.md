@@ -8,7 +8,7 @@ OpenSCAD from http://www.openscad.org/
 
 ## How to compile
 
-Go to robot folder, open robot.scad with OpenSCAD and press F5 ... and wait for several seconds (or minutes if you have a slow computer).
+Go to robot folder, open jenny5.scad with OpenSCAD and press F5 ... and wait for several seconds (or minutes if you have a slow computer).
 
 ## Contact
 
