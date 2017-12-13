@@ -1,12 +1,18 @@
+// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//--------------------------------------------------------------
+
 include <params_screws_nuts_washers.scad>
 include <params_basic_components.scad>
 include <params_radial_bearings.scad>
 
 //---------------------------------------------------------------------
-leg_connector_length = 40;
+leg_connector_length = 39;
 leg_connector_bearing_housing_length = 2 * (rb_6000_external_radius + wall_thick_2);
 
-leg_connector_base_thick = wall_thick_2;
+leg_connector_base_thick = 1.5;
 
 function f_leg_connector_width(tube_radius) = 2 * tube_radius + 4 * m4_screw_radius + 2 * wall_thick_3;
 function f_leg_connector_height_half(tube_radius) = leg_connector_base_thick + tube_radius - 0.5;
@@ -28,6 +34,6 @@ leg_connector_sheet_size = [leg_connector_length + leg_connector_bearing_housing
 
 //---------------------------------------------------------------------
 
-//echo(leg_connector_sheet_size = leg_connector_sheet_size);
+echo(leg_connector_sheet_size = leg_connector_sheet_size);
 
 //echo(leg_connector_holes = leg_connector_holes);
