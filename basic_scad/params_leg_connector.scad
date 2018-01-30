@@ -10,7 +10,7 @@ include <params_radial_bearings.scad>
 
 //---------------------------------------------------------------------
 leg_connector_length = 39;
-leg_connector_bearing_housing_length = 2 * (rb_6000_external_radius + wall_thick_2);
+leg_connector_bearing_housing_length = 2 * rb_6000_external_radius + wall_thick_2;
 
 leg_connector_base_thick = 1.5;
 
