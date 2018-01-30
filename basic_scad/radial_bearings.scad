@@ -57,6 +57,11 @@ module 6005rs()
 	radial_bearing(rb_6005_internal_radius, rb_6005_external_radius, rb_6005_thick);
 }
 ////////////////////////////////////////////////////////////////
+module 6905rs()
+{
+	radial_bearing(rb_6905_internal_radius, rb_6905_external_radius, rb_6905_thick);
+}
+////////////////////////////////////////////////////////////////
 module 608rs()
 {
 	radial_bearing(rb_608_internal_radius, rb_608_external_radius, rb_608_thick);
