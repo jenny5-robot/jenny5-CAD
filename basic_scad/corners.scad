@@ -29,12 +29,15 @@ module corner_half_T(tube_radius)
 //-------------------------------------------------------------------------
 module corner_sheet(tube_radius)
 {
-        difference(){
-            color(aluminium_color) cube(corner_sheet_size);
-            corner_height = f_corner_height(tube_radius);
-            for (i = [0 : 5])
-            translate(corner_holes[i] - display_tolerance_z) cylinder (h = corner_height + 2 * display_tolerance, r = m4_screw_radius, $fn = 15);
-        }
+    difference(){
+      color(aluminium_color) cube(corner_sheet_size);
+      corner_height = f_corner_height(tube_radius);
+      for (i = [0 : 7]){
+        translate(corner_holes[i] - display_tolerance_z) cylinder (h = corner_height + 2 * display_tolerance, r = m4_screw_radius, $fn = 15);
+          
+      }
+      echo(sheet_corner_holes = corner_holes);
+    }
 }
 //-------------------------------------------------------------------------
 module tube_corner(tube_radius)
@@ -52,5 +55,5 @@ module tube_corner(tube_radius)
 //-------------------------------------------------------------------------
 
 //tube_corner(12.5);
-//corner_sheet(12.5);
-corner_half_T(12.5);
+corner_sheet(12.5);
+//corner_half_T(12.5);
