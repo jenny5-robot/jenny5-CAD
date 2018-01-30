@@ -1,9 +1,8 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// Author: Mihai Oltean, (https://mihaioltean.github.io, mihai.oltean@gmail.com)
 // More details: jenny5.org
 // Source: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
-
 
 use <basic_components.scad>
 
@@ -15,28 +14,27 @@ use <potentiometer_support.scad>
 
 include <config.scad>
 
-
 //--------------------------------------------------------------------
 module nema_motor_housing(motor_offset_x, motor_offset_y, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, motor_screw_holes_rotation_angle = 0)
 {
    // render()
     {
         lungime = nema_width + base_thick + motor_offset_x;
-        latime = nema_width + 2 * perete_lateral_motor_housing + 2 * airflow_spacer + 2 * motor_offset_y;
+        latime = nema_width + 2 * wall_thick_lateral_motor_housing + 2 * airflow_spacer + 2 * motor_offset_y;
         
         difference(){
             color(plastic_color) cube ([lungime, latime, base_height]);
             // make the motor house hole
-            translate ([base_thick, perete_lateral_motor_housing, perete_motor_motor_housing]) cube ([nema_width + base_thick + motor_offset_x, nema_width + 2 * airflow_spacer + 2 * motor_offset_y, base_height]);
+            translate ([base_thick, wall_thick_lateral_motor_housing, wall_thick_motor_housing]) cube ([nema_width + base_thick + motor_offset_x, nema_width + 2 * airflow_spacer + 2 * motor_offset_y, base_height]);
 
-            translate ([base_thick, 0, base_height] - display_tolerance_y) rotate ([0, atan((base_height) / lungime), 0]) cube ([lungime * sqrt(2), nema_width + 2 * airflow_spacer + 2 * display_tolerance + 2 * perete_lateral_motor_housing + 2 * motor_offset_y, base_height]);
+            translate ([base_thick, 0, base_height] - display_tolerance_y) rotate ([0, atan((base_height) / lungime), 0]) cube ([lungime * sqrt(2), nema_width + 2 * airflow_spacer + 2 * display_tolerance + 2 * wall_thick_lateral_motor_housing + 2 * motor_offset_y, base_height]);
             
-            translate([base_thick + motor_offset_x, perete_lateral_motor_housing + airflow_spacer + motor_offset_y, 0] + [nema_width / 2, nema_width / 2, 0]- display_tolerance_z) {
+            translate([base_thick + motor_offset_x, wall_thick_lateral_motor_housing + airflow_spacer + motor_offset_y, 0] + [nema_width / 2, nema_width / 2, 0]- display_tolerance_z) {
                 // center motor hole
               translate (nema_holes_position[0]) cylinder ( h = base_thick + 2 * display_tolerance, r = nema_center_hole_radius, $fn = 50);
               // m3 screw holes
               for (i = [1:4]){
-                rotate([0, 0, motor_screw_holes_rotation_angle]) translate (nema_holes_position[i]) cylinder ( h = perete_baza_motor_housing + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
+                rotate([0, 0, motor_screw_holes_rotation_angle]) translate (nema_holes_position[i]) cylinder ( h = wall_thick_base_motor_housing + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
                 rotate([0, 0, motor_screw_holes_rotation_angle]) translate (nema_holes_position[i]) cylinder ( h = m3_nut_thick, r2 = m3_screw_radius, r1 = m3_nut_radius, $fn = 20);
               }
            }
@@ -46,13 +44,13 @@ module nema_motor_housing(motor_offset_x, motor_offset_y, nema_width, nema_heigh
 //--------------------------------------------------------------------
 module nema_motor_housing_with_base_holes(motor_offset_x, motor_offset_y, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, dist_to_first_hole_z, nema_housing_base_holes, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0)
 {
-    latime = nema_width + 2 * perete_lateral_motor_housing + 2 * airflow_spacer + 2 * motor_offset_y;
+    latime = nema_width + 2 * wall_thick_lateral_motor_housing + 2 * airflow_spacer + 2 * motor_offset_y;
     
     difference(){
         nema_motor_housing(motor_offset_x, motor_offset_y, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, motor_screw_holes_rotation_angle);
         // gauri perete baza
  
-        translate ([0, 0, perete_motor_motor_housing] + [0, latime / 2, dist_to_first_hole_z] - display_tolerance_x)
+        translate ([0, 0, wall_thick_motor_housing] + [0, latime / 2, dist_to_first_hole_z] - display_tolerance_x)
           rotate([0, 90, 0])
             for (i = [0:3]){
             translate (nema_housing_base_holes[i]) cylinder ( h = base_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
@@ -64,7 +62,7 @@ module nema_motor_housing_with_base_holes(motor_offset_x, motor_offset_y, nema_w
 //--------------------------------------------------------------------
 module nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset, belt_tensioner_offset, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, dist_to_first_hole_z, nema_housing_base_holes, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0)
 {
-    latime = nema_width + 2 * perete_lateral_motor_housing + 2 * airflow_spacer;
+    latime = nema_width + 2 * wall_thick_lateral_motor_housing + 2 * airflow_spacer;
     
     
     difference(){
@@ -73,15 +71,15 @@ module nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset, belt
      // belt tensioner hole
             
         hull(){
-            translate ([washer_5_15_external_radius + base_thick + belt_tensioner_offset, perete_lateral_motor_housing + washer_5_15_external_radius, 0] - display_tolerance_z) cylinder ( h = perete_baza_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-            translate ([washer_5_15_external_radius + base_thick + belt_tensioner_offset, latime - washer_5_15_external_radius - perete_lateral_motor_housing, 0] - display_tolerance_z) cylinder ( h = perete_baza_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            translate ([washer_5_15_external_radius + base_thick + belt_tensioner_offset, wall_thick_lateral_motor_housing + washer_5_15_external_radius, 0] - display_tolerance_z) cylinder ( h = wall_thick_base_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            translate ([washer_5_15_external_radius + base_thick + belt_tensioner_offset, latime - washer_5_15_external_radius - wall_thick_lateral_motor_housing, 0] - display_tolerance_z) cylinder ( h = wall_thick_base_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
         }
     }
 }
 //--------------------------------------------------------------------
 module nema_motor_housing_with_belt_tensioner_bearing_based_y(motor_offset, belt_tensioner_offset, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, dist_to_first_hole_z, nema_housing_base_holes, _left, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0)
 {
-    latime = nema_width + 2 * perete_lateral_motor_housing + 2 * airflow_spacer + 2 * motor_offset;
+    latime = nema_width + 2 * wall_thick_lateral_motor_housing + 2 * airflow_spacer + 2 * motor_offset;
     
     difference(){
         nema_motor_housing_with_base_holes(2, motor_offset, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, dist_to_first_hole_z, nema_housing_base_holes, motor_screw_holes_rotation_angle, sunken_base_holes);
@@ -90,15 +88,15 @@ module nema_motor_housing_with_belt_tensioner_bearing_based_y(motor_offset, belt
 //            echo(_left=_left);
     if (_left){
             hull(){
-              translate ([base_thick + nema_width / 2 - 10, perete_lateral_motor_housing + 7.5, 0] - display_tolerance_z) cylinder ( h = perete_baza_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-              translate ([base_thick + nema_width / 2 + 10, perete_lateral_motor_housing + 7.5, 0] - display_tolerance_z) cylinder ( h = perete_baza_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+              translate ([base_thick + nema_width / 2 - 10, wall_thick_lateral_motor_housing + 7.5, 0] - display_tolerance_z) cylinder ( h = wall_thick_base_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+              translate ([base_thick + nema_width / 2 + 10, wall_thick_lateral_motor_housing + 7.5, 0] - display_tolerance_z) cylinder ( h = wall_thick_base_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
             }
         }
         
         else{// right
             hull(){
-              translate ([base_thick + nema_width / 2 - 10, latime - perete_lateral_motor_housing - 7.5, 0] - display_tolerance_z) cylinder ( h = perete_baza_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-              translate ([base_thick + nema_width / 2 + 10, latime - perete_lateral_motor_housing - 7.5, 0] - display_tolerance_z) cylinder ( h = perete_baza_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+              translate ([base_thick + nema_width / 2 - 10, latime - wall_thick_lateral_motor_housing - 7.5, 0] - display_tolerance_z) cylinder ( h = wall_thick_base_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+              translate ([base_thick + nema_width / 2 + 10, latime - wall_thick_lateral_motor_housing - 7.5, 0] - display_tolerance_z) cylinder ( h = wall_thick_base_motor_housing + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
             }
         }
           
@@ -108,12 +106,12 @@ module nema_motor_housing_with_belt_tensioner_bearing_based_y(motor_offset, belt
 /*
 module nema_motor_housing_with_belt_tensioner_bearing_based_y_left_and_base_holes(motor_offset, belt_tensioner_offset, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick, dist_to_first_hole_z, nema_housing_base_holes)
 {
-    latime = nema_width + 2 * perete_lateral_motor_housing + 2 * airflow_spacer;
+    latime = nema_width + 2 * wall_thick_lateral_motor_housing + 2 * airflow_spacer;
     
     difference(){
         nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset, belt_tensioner_offset, nema_width, nema_height, base_height, nema_center_hole_radius, nema_holes_position, base_thick);
         // gauri perete baza
-        translate ([0, 0, perete_motor_motor_housing] + [0, latime / 2, dist_to_first_hole_z] - display_tolerance_x)
+        translate ([0, 0, wall_thick_motor_housing] + [0, latime / 2, dist_to_first_hole_z] - display_tolerance_x)
           rotate([0, 90, 0])
             for (i = [0:3]){
             translate (nema_housing_base_holes[i]) cylinder ( h = base_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
@@ -126,11 +124,11 @@ module nema_motor_housing_with_belt_tensioner_bearing_based_y_left_and_base_hole
 /*
 module nema_motor_housing_with_base_holes(toleranta_x, toleranta_y, motor_deviation_x = 0, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 43, nema_center_hole_radius = nema_17_motor_hole_radius_camiel, gauri_nema = gauri_nema_17, nema_housing_base_holes = nema_17_housing_base_holes, dist_to_gauri_baza = 22, base_thick = 3)
 {
-    latime = nema_width + abs(toleranta_y) + 2 * perete_lateral_motor_housing + 2 * airflow_spacer;
+    latime = nema_width + abs(toleranta_y) + 2 * wall_thick_lateral_motor_housing + 2 * airflow_spacer;
     difference(){
         nema_motor_housing(toleranta_x, toleranta_y, motor_deviation_x, nema_width, nema_height, base_height, nema_center_hole_radius, gauri_nema, base_thick);
     // gauri perete baza
-        translate ([0, 0, perete_motor_motor_housing] + [0, latime / 2, dist_to_gauri_baza] - display_tolerance_x)
+        translate ([0, 0, wall_thick_motor_housing] + [0, latime / 2, dist_to_gauri_baza] - display_tolerance_x)
         rotate([0, 90, 0])
             for (i = [0:3]){
             translate (nema_housing_base_holes[i]) cylinder ( h = base_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
@@ -142,7 +140,7 @@ module nema_motor_housing_with_base_holes(toleranta_x, toleranta_y, motor_deviat
 //--------------------------------------------------------------------
 module nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, motor_deviation_x = 0, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 43, nema_center_hole_radius = nema_17_motor_hole_radius_camiel, gauri_nema = gauri_nema_17, nema_housing_base_holes = nema_17_housing_base_holes, dist_to_gauri_baza = 22, base_thick = 3, dist_between_nuts_y = 32, dist_to_nuts_x = 5.5, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0)
 {
-    latime = nema_width + abs(toleranta_y) + 2 * perete_lateral_motor_housing + 2 * airflow_spacer;
+    latime = nema_width + abs(toleranta_y) + 2 * wall_thick_lateral_motor_housing + 2 * airflow_spacer;
     difference(){
         nema_motor_housing_with_base_holes(toleranta_x, toleranta_y, motor_deviation_x, nema_width, nema_height, base_height, nema_center_hole_radius, gauri_nema, nema_housing_base_holes, dist_to_gauri_baza, base_thick, motor_screw_holes_rotation_angle, sunken_base_holes);
         
@@ -157,7 +155,7 @@ module nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, mot
 //--------------------------------------------------------------------
 module nema_motor_housing_with_potentiometer_support(toleranta_x, toleranta_y, motor_deviation_x = 0, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 43, nema_center_hole_radius = nema_17_motor_hole_radius_camiel, gauri_nema = gauri_nema_17, nema_housing_base_holes = nema_17_housing_base_holes, dist_to_gauri_baza = 22, base_thick = 3, left = false, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0)
 {
-    latime = nema_width + abs(toleranta_y) + 2 * perete_lateral_motor_housing;
+    latime = nema_width + abs(toleranta_y) + 2 * wall_thick_lateral_motor_housing;
     
     nema_motor_housing_with_base_holes(toleranta_x, toleranta_y, motor_deviation_x, nema_width, nema_height, base_height, nema_center_hole_radius, gauri_nema, nema_housing_base_holes, dist_to_gauri_baza, base_thick, motor_screw_holes_rotation_angle, sunken_base_holes );
 // potentiometer support
