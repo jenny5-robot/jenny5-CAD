@@ -106,3 +106,7 @@ rb_6006_thick = 13;
 rb_3205_internal_radius = 12.5;
 rb_3205_external_radius = 26;
 rb_3205_thick = 20.6;
+
+rb_6905_internal_radius = 12.5;
+rb_6905_external_radius = 21;
+rb_6905_thick = 9;
