@@ -203,7 +203,6 @@ module half_cylinder(_h, _r, _fn)
         translate ([-_r, -_r, 0] - display_tolerance_z)cube([_r, 2 * _r, _h + 2 * display_tolerance]);
     }
 }
-
 //--------------------------------------------------------------
 module half_box(size_x, size_y, size_z, wall_thick_x, wall_thick_y, wall_thick_z)
 {
