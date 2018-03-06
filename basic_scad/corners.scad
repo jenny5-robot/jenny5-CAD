@@ -29,6 +29,7 @@ module corner_half_T(tube_radius)
 //-------------------------------------------------------------------------
 module corner_sheet(tube_radius)
 {
+    echo(corner_sheet_size = corner_sheet_size);
     difference(){
       color(aluminium_color) cube(corner_sheet_size);
       corner_height = f_corner_height(tube_radius);
