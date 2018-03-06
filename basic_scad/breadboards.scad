@@ -18,12 +18,3 @@ module WBU_202_breadboard()
     cube(WBU_202_breadboard_size);
 }
 //--------------------------------------------------
-module arms_breadboard()
-{
-    translate ([WBU_202_breadboard_size[1] / 2, WBU_202_breadboard_size[2], 0]) rotate ([0, 0, 90]) rotate ([0, -90, 0]) WBU_202_breadboard();
-    translate ([-WBU_202_breadboard_size[1] / 2 + WBU_202_breadboard_size[2], -WBU_202_breadboard_size[1], 0]) rotate ([0, -90, 0]) WBU_202_breadboard();
-    translate ([WBU_202_breadboard_size[1] / 2, -WBU_202_breadboard_size[1], 0]) rotate ([0, -90, 0]) WBU_202_breadboard();
-}
-//--------------------------------------------------
-
-arms_breadboard();
