@@ -7,13 +7,13 @@
 include <params_basic_components.scad>
 include <params_stepper_motors.scad>
 
-airflow_spacer = 0;
+    motor_housing_airflow_spacer = 0;
 
-wall_thick_lateral_motor_housing = wall_thick_2;
+    wall_thick_lateral_motor_housing = wall_thick_2;
 	wall_thick_base_motor_housing = wall_thick_3;
 	wall_thick_motor_housing = wall_thick_3;
 
-	motor_housing_width = nema_17_width + 2 * wall_thick_lateral_motor_housing;
+	nema_17_housing_width = nema_17_width + 2 * wall_thick_lateral_motor_housing + 2 * motor_housing_airflow_spacer;
 	//motor_housing_height = perete_motor_motor_housing + 40; //wall_thick_base_motor_housing + 40;
     motor_housing_length = nema_17_width + 2 * wall_thick_lateral_motor_housing;
 	
