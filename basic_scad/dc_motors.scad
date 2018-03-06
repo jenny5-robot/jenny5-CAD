@@ -14,9 +14,9 @@ module dc_motor(motor_length, motor_radius, motor_distance_between_screws, motor
         // motor
          cylinder(h = motor_length, r = motor_radius, $fn = 50);
         // shaft base
-        translate ([0, 0, motor_length]) cylinder (h = 1, r = motor_shaft_cilinder_radius, $fn = 30);
+        translate ([0, 0, motor_length]) cylinder (h = 2, r = motor_shaft_cilinder_radius, $fn = 30);
         // shaft
-        translate ([0, 0, motor_length]) cylinder (h = motor_shaft_length, r = motor_shaft_radius, $fn = 20);
+        translate ([0, 0, motor_length + 2]) cylinder (h = motor_shaft_length, r = motor_shaft_radius, $fn = 20);
 	}
 }
 //--------------------------------------------------------------
