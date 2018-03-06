@@ -7,6 +7,7 @@
 include <params_basic_components.scad>
 include <config.scad>
 include <params_alu_profiles.scad>
+include <tolerance.scad>
 
 //-----------------------------------------------------------------------
 module alu_sigma_profile_30x30(length)

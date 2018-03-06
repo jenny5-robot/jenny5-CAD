@@ -6,6 +6,7 @@
 
 include <params_basic_components.scad>
 include <params_infrared_sensors.scad>
+include <tolerance.scad>
 
 //------------------------------------------------------
 module GP2Y0D805Z0F()

@@ -6,7 +6,7 @@
 
 include <params_slip_rings.scad>
 include <params_basic_components.scad>
-
+include <tolerance.scad>
 
 //----------------------------------------------------------
 module SRC022A_6()

@@ -25,6 +25,7 @@ include <params_basic_components.scad>
 
 include <params_pulleys.scad>
 include <params_screws_nuts_washers.scad>
+include <tolerance.scad>
 
 // The following set the pulley diameter for a given number of teeth
 
@@ -59,6 +60,8 @@ T5_pulley_dia_100 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 63);
 T5_pulley_dia_103 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 66);
 T5_pulley_dia_26 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 17);
 T5_pulley_dia_73 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 46);
+
+HTD_8mm_pulley_dia = tooth_spacing (8, 0.6858, 8);
 
 // The following calls the pulley creation part, and passes the pulley diameter and tooth width to that module
 
@@ -165,7 +168,7 @@ retainer_ht = 1.5;	// height of retainer flange over pulley, standard = 1.5
 //idler = 1;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 
-	//echo (str("Belt type = ",belt_type,"; Number of teeth = ",num_teeth,"; Pulley Outside Diameter = ",pulley_OD,"mm "));
+	echo (str("Belt type = ",belt_type,"; Number of teeth = ",num_teeth,"; Pulley Outside Diameter = ",pulley_OD,"mm "));
 	tooth_distance_from_centre = sqrt( pow(pulley_OD/2,2) - pow((tooth_width+additional_tooth_width)/2,2));
 	tooth_width_scale = (tooth_width + additional_tooth_width ) / tooth_width;
 	tooth_depth_scale = ((tooth_depth + additional_tooth_depth ) / tooth_depth) ;
@@ -390,4 +393,6 @@ module GT2_5mm(pulley_t_ht)
     
     //pulley_with_shaft(67, 63, 0, 0, 8, 0, 0, 0);
     //pulley_with_shaft(68, 17, 0, 0, 8, 0, 0, 0);
-    echo(T5_pulley_dia_74);
+   // echo(T5_pulley_dia_74);
+    
+    pulley(profile = 11, num_teeth = 8, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8);

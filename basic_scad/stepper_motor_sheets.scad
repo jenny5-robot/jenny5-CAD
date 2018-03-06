@@ -9,6 +9,7 @@ include <params_stepper_motor_gearbox.scad>
 include <params_stepper_motors.scad>
 include <params_basic_components.scad>
 include <config.scad>
+include <tolerance.scad>
 
 //--------------------------------------------------------------
 module stepper_gearbox_motor_sheet(sheet_size, gearbox_hole_position, screw_hole_position, gearbox_radius)

@@ -7,6 +7,7 @@
 include <params_leg_connector.scad>
 include <config.scad>
 use <radial_bearings.scad>
+include <tolerance.scad>
 
 //-------------------------------------------------------------------------
 module leg_connector_half(tube_radius)

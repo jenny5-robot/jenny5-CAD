@@ -9,6 +9,8 @@ include <params_stepper_motors.scad>
 include <params_basic_components.scad>
 include <params_screws_nuts_washers.scad>
 
+include <tolerance.scad>
+
 //--------------------------------------------------------------
 module nema_motor_without_shaft(motor_width, motor_height, top_cylinder_radius, top_cylinder_height = 2, nema_holes)
 {

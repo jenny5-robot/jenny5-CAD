@@ -6,7 +6,7 @@
 
 include <params_screws_nuts_washers.scad>
 include <params_basic_components.scad>
-
+include <tolerance.scad>
 
 //---------------------------------------------------------------------------
 module potentiometer_support(length, width, height, dist_to_hole = 10, hole_tolerance = 5, wall_thick = 2)

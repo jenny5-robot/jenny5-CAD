@@ -10,7 +10,7 @@ include <params_basic_components.scad>
 include <params_slip_rings.scad>
 include <params_infrared_sensors.scad>
 include <params_screws_nuts_washers.scad>
-
+include <tolerance.scad>
 include <config.scad>
 
 use <basic_components.scad>

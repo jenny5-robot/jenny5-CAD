@@ -7,6 +7,7 @@
 include <params_screws_nuts_washers.scad>
 include <params_basic_components.scad>
 include <config.scad>
+include <tolerance.scad>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module nut (internal_radius, external_radius, height)

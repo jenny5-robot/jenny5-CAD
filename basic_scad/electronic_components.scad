@@ -6,6 +6,7 @@
 
 include <params_basic_components.scad>
 include <params_electronic_components.scad>
+include <tolerance.scad>
 
 //--------------------------------------------------------------------
 module potentiometer()

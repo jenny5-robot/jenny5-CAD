@@ -5,6 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_potentiometers.scad>
+include <tolerance.scad>
 
 //--------------------------------------------------------------
 module potentiometer_rectangular(base_length, base_width, base_height, base_shaft_radius, base_shaft_length, shaft_radius, shaft_length)

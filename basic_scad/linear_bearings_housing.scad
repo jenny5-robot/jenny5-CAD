@@ -7,8 +7,7 @@
 include <params_linear_bearings_housing.scad>
 include <func_3d.scad>
 include <params_alu_profiles.scad>
-//include <params_machine.scad>
-
+include <tolerance.scad>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 module gauri_bearing_housing_3(bearing_external_radius, inaltime, latime)

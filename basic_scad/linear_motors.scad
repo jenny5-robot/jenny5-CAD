@@ -8,6 +8,7 @@ include <params_stepper_motors.scad>
 
 use <stepper_motors.scad>
 use <pulleys.scad>
+include <tolerance.scad>
 
 
 //------------------------------------------------------

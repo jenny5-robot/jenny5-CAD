@@ -14,7 +14,7 @@ use <radial_bearings.scad>
 use <basic_components.scad>
 use <potentiometer_support.scad>
 include <radial_bearing_housing.scad>
-
+include <tolerance.scad>
 
 
 //---------------------------------------------------------------------------

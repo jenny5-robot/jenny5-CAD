@@ -1,3 +1,5 @@
+include <tolerance.scad>
+
 module laptop_fixer_corner_left()
 {
   difference(){

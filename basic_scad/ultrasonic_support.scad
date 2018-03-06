@@ -11,7 +11,7 @@ use <basic_components.scad>
 include <params_basic_components.scad>
 include <params_webcam.scad>
 use <webcam_support.scad>
-
+include <tolerance.scad>
 
 //--------------------------------------------------------------
 module hc_sr04_support_plate()

@@ -6,6 +6,7 @@
 
 include <params_basic_components.scad>
 include <config.scad>
+include <tolerance.scad>
 
 //---------------------------------------------------------------
 module spacer_with_2_holes(length, width, height, distance_between_holes)

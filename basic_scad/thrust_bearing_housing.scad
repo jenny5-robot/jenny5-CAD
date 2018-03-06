@@ -11,6 +11,7 @@ include <config.scad>
 include <params_screws_nuts_washers.scad>
 
 use <basic_components.scad>
+include <tolerance.scad>
 
 //--------------------------------------------------
 module thrust_bearing_housing(housing_size, bearing_external_radius, bearing_internal_radius)

@@ -5,7 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_dc_motors.scad>
-
+include <tolerance.scad>
 //--------------------------------------------------------------
 module dc_motor(motor_length, motor_radius, motor_distance_between_screws, motor_shaft_radius, motor_shaft_length, motor_shaft_cilinder_radius)
 {

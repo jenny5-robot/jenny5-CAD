@@ -5,6 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_corners.scad>
+include <tolerance.scad>
 
 //-------------------------------------------------------------------------
 module corner_half_T(tube_radius)

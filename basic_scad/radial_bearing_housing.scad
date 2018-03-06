@@ -13,6 +13,7 @@ include <params_stepper_motors.scad>
 use <radial_bearings.scad>
 use <basic_components.scad>
 use <potentiometer_support.scad>
+include <tolerance.scad>
           
 //---------------------------------------------------------------------------
 module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, housing_height, screw_radius = m4_screw_radius, extension = 0)

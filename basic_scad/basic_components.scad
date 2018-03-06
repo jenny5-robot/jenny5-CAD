@@ -9,6 +9,7 @@ include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/utils.scad>
 
 include <config.scad>
+include <tolerance.scad>
 
 
 //--------------------------------------------------------------

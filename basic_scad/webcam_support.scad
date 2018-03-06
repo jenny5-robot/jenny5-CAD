@@ -9,6 +9,7 @@ include <params_screws_nuts_washers.scad>
 use <basic_components.scad>
 include <params_basic_components.scad>
 include <params_webcam.scad>
+include <tolerance.scad>
 
 //--------------------------------------------------------------
 module c920_support()

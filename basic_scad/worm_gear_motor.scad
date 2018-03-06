@@ -1,4 +1,5 @@
 include <params_worm_gear_motor.scad>
+include <tolerance.scad>
 
 //---------------------------------------------------------------
 module worm_gear_motor(gear_box_size,

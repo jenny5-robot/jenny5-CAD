@@ -5,6 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_tube_bracket.scad>
+include <tolerance.scad>
 
 //-------------------------------------------------------------------------
 module tube_bracket_half(bracket_length, tube_radius)

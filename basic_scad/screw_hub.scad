@@ -6,6 +6,7 @@
 
 include <params_basic_components.scad>
 include <config.scad>
+include <tolerance.scad>
 
 module screw_hub(internal_radius, large_external_radius, small_external_radius, large_cylinder_thick, small_cylinder_thick, screws_hole_radius, distance_between_screws_hole)
 {

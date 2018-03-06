@@ -4,7 +4,9 @@
 // MIT License
 //--------------------------------------------------------------
 include <params_basic_components.scad>
+include <tolerance.scad>
 
+//--------------------------------------------------------------
 module bush_bearing_bone(radial_bearing_radius = 7.5, bone_edge = 10, height = 9)
 {
     difference(){

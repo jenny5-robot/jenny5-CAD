@@ -8,6 +8,7 @@
 include <params_thrust_bearings.scad>
 include <params_basic_components.scad>
 include <config.scad>
+include <tolerance.scad>
 
 //--------------------------------------------------------------
 module thrust_bearing(external_radius, internal_radius, height)

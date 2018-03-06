@@ -5,6 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_basic_components.scad>
+include <tolerance.scad>
 
 //------------------------------------------------------------------------
 module belt_arc(_r, start_angle, end_angle, belt_width = 6, belt_thick = 2)

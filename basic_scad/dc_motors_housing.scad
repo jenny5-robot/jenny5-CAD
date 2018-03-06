@@ -12,6 +12,7 @@ include <params_dc_motor_housing.scad>
 include <params_screws_nuts_washers.scad>
 include <params_dc_motors.scad>
 use <screws_nuts_washers.scad>
+include <tolerance.scad>
 
 include <config.scad>
 

@@ -7,6 +7,7 @@
 use <basic_components.scad>
 include <params_linear_bearings.scad>
 include <params_basic_components.scad>
+include <tolerance.scad>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module linear_bearing(internal_radius, external_radius, height)

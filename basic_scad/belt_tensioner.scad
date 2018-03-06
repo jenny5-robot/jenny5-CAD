@@ -9,6 +9,7 @@ include <params_basic_components.scad>
 include <params_radial_bearings.scad>
 include <params_belt_tensioner.scad>
 include <config.scad>
+include <tolerance.scad>
 
 use <screws_nuts_washers.scad>
 use <radial_bearings.scad>

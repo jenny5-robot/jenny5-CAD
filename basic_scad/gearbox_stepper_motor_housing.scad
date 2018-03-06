@@ -8,6 +8,7 @@ use <basic_components.scad>
 
 include <params_screws_nuts_washers.scad>
 include <params_stepper_motors.scad>
+include <tolerance.scad>
 
 module stepper_motor_holder()
 {

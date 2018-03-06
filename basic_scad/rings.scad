@@ -6,6 +6,7 @@
 
 include <params_basic_components.scad>
 include <params_screws_nuts_washers.scad>
+include <tolerance.scad>
 
 //-------------------------------------------------------------
 module ring_with_flanges(external_radius, internal_radius, height, flange_size = 1.5)

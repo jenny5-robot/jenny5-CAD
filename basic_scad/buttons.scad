@@ -9,8 +9,9 @@ include <params_stepper_motors.scad>
 include <params_basic_components.scad>
 include <params_screws_nuts_washers.scad>
 use <basic_components.scad>
+include <tolerance.scad>
 
-include <../basic_scad/config.scad>
+include <config.scad>
 //--------------------------------------------------------
 module button()
 {
