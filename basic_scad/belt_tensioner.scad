@@ -197,8 +197,25 @@ module belt_tensioner_external_with_bearings(position = 10)
     }
 }
 //---------------------------------------------------------------------------
+module belt_tensioner_spacer(distance_between_screws)
+{
+    length = distance_between_screws + 2 * m4_nut_radius + 2 * wall_thick_2;
+    height = 5;
+    difference(){
+        translate ([- length / 2, -6, 0]) cube([length, 12, height]);
+// first screw
+        translate ([-distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = 2);
+        translate ([-distance_between_screws / 2, 0, height - m4_nut_thick]) cylinder(h = height + 2 * display_tolerance, r = m4_nut_radius, $fn = 6);
+// second screw hole
+        translate ([distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = 2);
+        translate ([distance_between_screws / 2, 0, height - m4_nut_thick]) cylinder(h = height + 2 * display_tolerance, r = m4_nut_radius, $fn = 6);
+    }
+}
+//---------------------------------------------------------------------------
+belt_tensioner_spacer(28);
 
-belt_tensioner_external_with_bearings(0);
+
+//belt_tensioner_external_with_bearings(0);
 
 //belt_tensioner_external_half();
 
