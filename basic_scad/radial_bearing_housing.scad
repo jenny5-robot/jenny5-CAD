@@ -256,9 +256,14 @@ module rbearing_6005_vertical_housing_bounded_half_small_top()
     radial_bearing_vertical_housing_bounded(rbearing_6005_vertical_housing_size_bounded_half_small_top, rb_6005_external_radius, rb_6005_thick, 60);
 }
 //---------------------------------------------------------------------------
-module rbearing_6905_vertical_housing_bounded_half_small_extra_height(extra_height)
+module rbearing_6905_vertical_housing_bounded_half_small_extra_height(extra_height = 0)
 {
     radial_bearing_vertical_housing_bounded(f_rbearing_6905_vertical_housing_size_bounded_half_small(extra_height), rb_6905_external_radius, rb_6905_thick, rbearing_6905_enclosed_housing_holes_position);
+}
+//---------------------------------------------------------------------------
+module rbearing_6905_vertical_double_housing_bounded_half_small_extra_height(extra_height = 0)
+{
+    radial_bearing_vertical_housing_bounded(f_rbearing_6905_vertical_double_housing_size_bounded_half_small(extra_height), rb_6905_external_radius, 2 * rb_6905_thick, rbearing_6905_enclosed_housing_holes_position);
 }
 //---------------------------------------------------------------------------
 module radial_bearing_608_u_vertical_housing()
@@ -429,8 +434,8 @@ module radial_bearing_6905_vertical_housing(screw_holes_tolerance = 0)
 //---------------------------------------------------------------------------
 module radial_bearing_6905_double_vertical_housing(screw_holes_tolerance = 0)
 {
-    echo(rbearing_6905_enclosed_double_housing_size);
-    echo(rbearing_6905_enclosed_housing_holes_position);
+    //echo(rbearing_6905_enclosed_double_housing_size);
+    //echo(rbearing_6905_enclosed_housing_holes_position);
     radial_bearing_vertical_housing(rbearing_6905_enclosed_double_housing_size, rbearing_6905_enclosed_housing_holes_position, screw_holes_tolerance = 0);    
 }
 //---------------------------------------------------------------------------
