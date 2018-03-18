@@ -220,3 +220,5 @@ rbearing_6002_vertical_housing_size_bounded_half_small_top = [2 * rb_6002_extern
 //rbearing_6905_vertical_housing_size_bounded_half_small_top = [2 * rb_6905_external_radius + 20, rb_6905_thick + 4, rb_6905_external_radius + 4];
 
 function f_rbearing_6905_vertical_housing_size_bounded_half_small(extra_height) = [2 * rb_6905_external_radius + 2 * (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), rb_6905_thick + 4, rb_6905_external_radius + 4 + extra_height];
+
+function f_rbearing_6905_vertical_double_housing_size_bounded_half_small(extra_height) = [2 * rb_6905_external_radius + 2 * (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), 2 * rb_6905_thick + 4, rb_6905_external_radius + 4 + extra_height];
