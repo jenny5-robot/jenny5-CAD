@@ -8,6 +8,6 @@ aluminium_color = "Silver";
 screw_color = "LightSlateGray";
 frame_color = aluminium_color;
 shaft_color = "Silver";
-plastic_color = "LimeGreen";
+plastic_color = "Yellow";
 pulley_color = "DarkSlateGray";
 steel_color = "LightSlateGray";
