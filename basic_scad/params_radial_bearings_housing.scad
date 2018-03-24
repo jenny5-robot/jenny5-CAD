@@ -137,10 +137,12 @@ rbearing_6001_enclosed_housing_holes_position = [
 ];
 
 rbearing_6005_enclosed_housing_holes_position = [
-[radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + m4_screw_radius, 
-(radial_bearing_housing_base_wall_thickness + rb_6005_thick + radial_bearing_housing_base_wall_thickness) / 2, 
+[- (rb_6005_external_radius + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + m4_screw_radius), 
+0, 
 0], 
-[2 * (rb_6005_external_radius + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius) - (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + m4_screw_radius), (radial_bearing_housing_base_wall_thickness + rb_6005_thick + radial_bearing_housing_base_wall_thickness) / 2, 0]
+[(rb_6005_external_radius + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + m4_screw_radius), 
+0, 
+0]
 ];
 
 rbearing_6905_enclosed_housing_holes_position = [
