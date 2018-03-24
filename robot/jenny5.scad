@@ -12,7 +12,7 @@ use <../basic_scad/screws_nuts_washers.scad>
 
 include <../basic_scad/config.scad>
 
-use <../basic_scad/table.scad>
+
 use <../basic_scad/spacer.scad>
 use <../basic_scad/func_3d.scad>
 include <../basic_scad/params_alu_profiles.scad>
