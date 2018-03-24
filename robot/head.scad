@@ -39,6 +39,7 @@ use <../basic_scad/potentiometers.scad>
 
 include <params_head.scad>
 include <../basic_scad/params_alu_profiles.scad>
+include <../basic_scad/tolerance.scad>
 
 //----------------------------------------------------------
 module head_motor_support()
