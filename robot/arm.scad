@@ -154,14 +154,7 @@ module elbow_pulley()
 //---------------------------------------------------------------------------
 module forearm_motor_housing()
 {
-  nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 0, belt_tensioner_offset = 12, nema_width = belt_hole_forearm_pulley, nema_height = nema_11_height, base_height = 20, nema_center_hole_radius = 5, nema_holes_position = gearbox_nema_11_holes_position, base_thick = 3, dist_to_first_hole_z = 14, nema_housing_base_holes = undef, motor_screw_holes_rotation_angle = 0, belt_tensioner_distance_between_holes = 30);
-}
-//---------------------------------------------------------------------------
-module forearm_motor_housing_with_components()
-{
-    forearm_motor_housing();
-    translate ([12, belt_hole_forearm_pulley / 2 + wall_thick_lateral_motor_housing - 15, -5]) belt_tensioner_slider();
-    translate ([12, belt_hole_forearm_pulley / 2 + wall_thick_lateral_motor_housing + 15, -5]) belt_tensioner_slider();
+  nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 0, belt_tensioner_offset = 12, nema_width = belt_hole_forearm_pulley, nema_height = nema_11_height, base_height = 20, nema_center_hole_radius = 5, nema_holes_position = nema11_gearbox_tensioner_sheet_screw_hole_position, base_thick = 3, dist_to_first_hole_z = 14, nema_housing_base_holes = undef, motor_screw_holes_rotation_angle = 0, belt_tensioner_distance_between_holes = 30);
 }
 //---------------------------------------------------------------------------
 module forearm_potentiometer_support()
@@ -179,10 +172,23 @@ module elbow_gear()
     pot_gear(13, rb_626_external_radius, 10); 
 }
 //---------------------------------------------------------------------------
+module foreram_motor_with_sheet()
+{
+    nema_11_with_27_1_gearbox();
+    translate ([0, 0, nema_11_with_27_1_gearbox_height + 2]) mirror([0, 0, 1]) stepper_gearbox_nema_11_motor_sheet();
+}
+//---------------------------------------------------------------------------
+
 module elbow_pulley_with_components()
 {
     // pulley 
     elbow_pulley();
+    
+    // belt tensioner bearings
+    translate ([distance_to_fore_arm_gear - 3, -belt_hole_forearm_pulley / 2 - 2, 3]) rotate ([0, 90, 0]) {
+        translate ([12, belt_hole_forearm_pulley / 2 + wall_thick_lateral_motor_housing - 15, -5]) belt_tensioner_slider();
+        translate ([12, belt_hole_forearm_pulley / 2 + wall_thick_lateral_motor_housing + 15, -5]) belt_tensioner_slider();
+    }
     
     // M6 screw
     translate([0, 0, 2 * rb_626_thick + 2 * washer_6_thick + elbow_gear_grip_sheet_size[2]]) mirror([0, 0, 1]) M6_sunken(30);
@@ -201,12 +207,12 @@ module elbow_pulley_with_components()
       //forearm_motor_housing_with_components();
     
     // stepper motor
-    translate ([distance_to_fore_arm_gear - nema_11_with_27_1_gearbox_height - 3 - wall_thick_3, 0, -nema_11_width / 2 - 3 - 15]) 
-    rotate ([0, 90, 0]) 
-    nema_11_with_27_1_gearbox();
+    translate ([distance_to_fore_arm_gear - nema_11_with_27_1_gearbox_height - 2 - wall_thick_3, 0, -nema_11_width / 2 - 3 - 20]) 
+    rotate ([0, 90, 0])
+        foreram_motor_with_sheet();
     
     // motor pulley
-    translate ([distance_to_fore_arm_gear + 1, 0, -nema_11_width / 2 - 3 - 15]) rotate ([0, 90, 0]) 
+    translate ([distance_to_fore_arm_gear + 1, 0, -nema_11_width / 2 - 3 - 20]) rotate ([0, 90, 0]) 
     motor_pulley_6mm_shaft();
     
     // belt
@@ -703,15 +709,13 @@ module arm()
 //motor_pulley_6mm_shaft(); // 2x
 
 
-fore_arm_with_elbow_pulley();
+//fore_arm_with_elbow_pulley();
 
 //forearm_motor_housing();
 
-//forearm_motor_housing_with_components();
-
 //elbow_pulley();
 
-//elbow_pulley_with_components();
+elbow_pulley_with_components();
 
 //upper_arm_pulley();
 //upper_arm_motor_housing();
