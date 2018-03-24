@@ -4,38 +4,44 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <params_tracks.scad>
 
-base_platform_size = [600, 300, 18];
 
-first_tracks_offset = 30;
-distance_between_wheels = 230;
+include <../basic_scad/params_dc_motor_housing.scad>
+
+front_tracks_angle = 0; // 0 = horizontal, 90 = up, -90 = down
+back_tracks_angle = 180;
+
+base_platform_size = [500, 300, 18];
+
+first_tracks_offset = 35;
+
+distance_between_tracks = base_platform_size[0] - 2 * first_tracks_offset;
     
-wheels_bearing_housing_1_offset_y = 22;// must be larger than the reinforcement profile
+wheels_bearing_housing_1_offset_y = 0;// must be larger than the reinforcement profile
    
 wheels_bearing_housing_2_offset_y = 85;
 
 lidar_position = 80;
 
-leg_postion_on_platform = lidar_position + 30; // nema_17_width / 2 + 10
+leg_postion_on_platform = 100; // nema_17_width / 2 + 10
 
-num_tracks_per_circle = 14; // 16
-tracks_wheel_radius = 50.8; // 58.8
+
 
 motor_gear_height = 11;
-wheel_gear_height = 17;
-wheel_gear_nut_depth = wheel_gear_height - 2;
 
-base_motor_offset = 56;
 
-tracks_offset = 15;
 
-dist_to_tracks_tensioner_support = 150;
-dist_to_tracks_support1 = 130;
-dist_to_tracks_support2 = 185;
+//base_motor_offset = 56;
 
-tracks_tensioner_support_size = [20, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset - 2 * 10, 10];
+tracks_offset_y = 30;
+tracks_offset_z = 10;
 
-tracks_support_size = [10, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset, 10];
+motor_offset_x = motor_gr_ep_45_housing_size[1] + 70;
+motor_offset_y = 65;
 
-tracks_tensioner_size = [tracks_tensioner_support_size[0], 12, 60];
+
+
+
+
+
+worm_gear_motor_with_pinion_offset = 20;
