@@ -30,7 +30,7 @@ use <head.scad>
 include <params_body.scad>
 use <body.scad>
 
-
+include <../basic_scad/tolerance.scad>
    
 //---------------------------------------------------------------------------
 module body_with_head()
@@ -54,11 +54,17 @@ module robot()
 {
     platform_foot();
 
-    h = 2 * area_heron(dist_to_push_motor_hole_in_base - dist_to_first_bone, leg_motor_max_stroke + 105 + leg_motor_position - 75, distance_to_push_position) / (dist_to_push_motor_hole_in_base - dist_to_first_bone);
-   
-    leg_angle = 90 - asin( h / distance_to_push_position) + leg_angle_offset;
+    motor_length = 105 + leg_motor_position + leg_motor_max_stroke;
+    dist_leg_base_to_leg_spacer_top = sqrt(leg_spacer * leg_spacer + distance_to_push_position * distance_to_push_position);
+    area = area_heron(motor_length, dist_to_push_motor_hole_in_base - dist_to_first_bone, dist_leg_base_to_leg_spacer_top);
+    h = 2 * area / (dist_to_push_motor_hole_in_base - dist_to_first_bone);
+    motor_angle_to_horizontal = asin(h / motor_length);
+    motor_projection_on_horizontal = motor_length * cos(motor_angle_to_horizontal);
+    gamma = atan(leg_spacer / distance_to_push_position);
+    gama_plus_motor_angle_to_horizontal = motor_projection_on_horizontal < dist_to_push_motor_hole_in_base - dist_to_first_bone ? asin(h / dist_leg_base_to_leg_spacer_top): 180 - asin(h / dist_leg_base_to_leg_spacer_top);
+    leg_angle_to_horizontal = gama_plus_motor_angle_to_horizontal - gamma;
     
-    long_leg_height = 2 * ((leg_bone_length + 4 * (rb_6000_external_radius + 2) - 2 * dist_to_wrist_in_bone) * cos(leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
+    long_leg_height = 2 * ((leg_bone_length + 4 * (rb_6000_external_radius + 2) - 2 * dist_to_wrist_in_bone) * cos(90 - leg_angle_to_horizontal) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
     
     echo(long_leg_height = long_leg_height);
     
