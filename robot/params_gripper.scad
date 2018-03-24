@@ -26,6 +26,8 @@ gripper_lateral_sheet_size = [76, 38, 4];
 finger_angle = 50;
 finger_with_button_angle = finger_angle - 15;
 
-distance_to_base_screw = 5;
+gripper_distance_to_base_screw = 5;
+
+gripper_distance_to_camera_support = 30;
 
 gripper_open_button_hole_position = [0, 12, 0];
