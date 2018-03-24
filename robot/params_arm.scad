@@ -10,7 +10,7 @@ include <../basic_scad/params_stepper_motors.scad>
 
 angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
 angle_upper_arm = -135; // -180 ... 0 // default = -90
-angle_elbow = -140; // -180 (back), 0 (front) // default = 0
+angle_elbow = -40; // -180 (back), 0 (front) // default = 0
 angle_fore_arm = 45; // default = 90
 
 upper_arm_bone_length = 350;
