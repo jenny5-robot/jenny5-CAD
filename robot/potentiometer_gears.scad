@@ -9,6 +9,7 @@ include <../basic_scad/params_screws_nuts_washers.scad>
 include <../basic_scad/params_basic_components.scad>
 
 include <../basic_scad/config.scad>
+include <../basic_scad/tolerance.scad>
 //--------------------------------------------------------------------
 module bone_gear(num_teeth = 14, screw_rotation_angle = 13, internal_radius = 12.5, height = 10)
 {    
