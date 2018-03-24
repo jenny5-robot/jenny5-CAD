@@ -11,6 +11,7 @@ include <../basic_scad/params_basic_components.scad>
 include <../basic_scad/config.scad>
 
 use <../basic_scad/basic_components.scad>
+include <../basic_scad/tolerance.scad>
 
 //----------------------------------------------------------------------------
 module motor_plate_holes(length, width, adancime, radius1 = 1.5, radius2 = 1.5, tolerance_x, tolerance_y)
