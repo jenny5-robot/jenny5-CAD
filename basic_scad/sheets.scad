@@ -14,5 +14,6 @@ module rounded_table(height, radius)
 	// top sheet
 	translate ([0, 0, height - sheet_thickness]) cylinder (h = sheet_thickness, r = radius);
 }
+//--------------------------------------------------------------
 
 rounded_table(750, 400);
