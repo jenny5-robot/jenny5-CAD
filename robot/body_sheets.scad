@@ -131,6 +131,32 @@ module body_sheet_for_motor_support()
     }
 }
 //---------------------------------------------------------------------------
+module body_sheet_for_motor_support_top()
+{
+    echo(body_motor_sheet_size =  body_motor_sheet_size);
+    difference(){
+        color(aluminium_color) cube(body_motor_sheet_size);
+        // motor holes
+        // middle hole
+        echo("motor holes = ");
+        echo([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, 0]);
+        translate([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, 0] - display_tolerance_z) cylinder (h = body_motor_sheet_size[2] + 2 * display_tolerance, r = 18);
+        bracket_holes = f_tube_bracket_holes(body_motor_sheet_size[0], body_shaft_radius);
+        echo("braket holes");
+        for (i = [0 : 3]){
+            echo(bracket_holes[i]);
+            translate( - display_tolerance_z) translate(bracket_holes[i]) cylinder (h = body_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+        }
+        
+        for (i = [0 : 3]){
+            echo([0, body_motor_sheet_size[1] - f_bracket_width(body_shaft_radius), 0] + bracket_holes[i]);
+            translate([0, body_motor_sheet_size[1] - f_bracket_width(body_shaft_radius), 0] - display_tolerance_z) translate(bracket_holes[i]) cylinder (h = body_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+        }
+
+    }
+
+}
+//---------------------------------------------------------------------------
 module body_sheet_for_intramodule()
 {
     difference(){
