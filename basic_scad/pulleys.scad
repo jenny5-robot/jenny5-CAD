@@ -52,6 +52,7 @@ T5_pulley_dia_40 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 25);
 T5_pulley_dia_45 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 29);
 T5_pulley_dia_50 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 32);
 T5_pulley_dia_51 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 33);
+T5_pulley_dia_55 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 35);
 T5_pulley_dia_60 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 38);
 T5_pulley_dia_70 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 44);
 T5_pulley_dia_78 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 50);
@@ -130,6 +131,7 @@ module pulley(profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_h
   if ( profile == 67 ) { _pulley ( "T5" , T5_pulley_dia_100 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 68 ) { _pulley ( "T5" , T5_pulley_dia_26 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 69 ) { _pulley ( "T5" , T5_pulley_dia_73 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 70 ) { _pulley ( "T5" , T5_pulley_dia_55 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
 }
 
 
@@ -257,6 +259,7 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
                 if ( profile == 67 ) { T5(pulley_t_ht);}
                 if ( profile == 68 ) { T5(pulley_t_ht);}
                 if ( profile == 69 ) { T5(pulley_t_ht);}
+                if ( profile == 70 ) { T5(pulley_t_ht);}
 			}
 
 			}
@@ -395,4 +398,6 @@ module GT2_5mm(pulley_t_ht)
     //pulley_with_shaft(68, 17, 0, 0, 8, 0, 0, 0);
    // echo(T5_pulley_dia_74);
     
-    pulley(profile = 11, num_teeth = 8, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8);
+    //pulley(profile = 11, num_teeth = 8, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8);
+    
+    pulley(profile = 70, num_teeth = 35, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
