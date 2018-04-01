@@ -242,7 +242,7 @@ module body_sheet_with_motor()
 {
     body_sheet_for_motor_support();
     
-    translate ([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, -nema_17_with_19_1_gearbox_height]) nema_17_with_19_1_gearbox();
+    translate ([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, -nema_17_with_19_1_gearbox_height]) rotate ([0, 0, 45]) nema_17_with_19_1_gearbox();
     
     translate ([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, body_motor_sheet_size[2] + 5]) motor_pulley_8mm_shaft();
 }
@@ -324,11 +324,35 @@ module body_motor_module()
 {
     translate ([-body_motor_sheet_size[0] / 2, -body_motor_sheet_size[1] / 2, -body_shaft_radius - tube_bracket_base_thick_strong])  mirror ([0, 0, 1]) body_sheet_with_motor();
       // motor sheet bracket
+// bottom
     translate ([-body_motor_sheet_size[0] / 2 + bracket_thick / 2, -(body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
     translate ([-body_motor_sheet_size[0] / 2 + bracket_thick / 2, body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2, 0]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
+// top
+    translate ([-body_motor_sheet_size[0] / 2 + bracket_thick / 2, -(body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0]) mirror([0, 0, 1]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
+    translate ([-body_motor_sheet_size[0] / 2 + bracket_thick / 2, body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2, 0]) mirror([0, 0, 1]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
 
+
+// other side
+    // bottom
     translate ([-body_motor_sheet_size[0] / 2 - bracket_thick / 2 + body_motor_sheet_size[0], -(body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
     translate ([-body_motor_sheet_size[0] / 2 - bracket_thick / 2 + body_motor_sheet_size[0], body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2, 0]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
+    // top
+    translate ([-body_motor_sheet_size[0] / 2 - bracket_thick / 2 + body_motor_sheet_size[0], -(body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0]) mirror([0, 0, 1]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
+    translate ([-body_motor_sheet_size[0] / 2 - bracket_thick / 2 + body_motor_sheet_size[0], body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2, 0]) mirror([0, 0, 1]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
+    
+    // top sheet
+    translate ([-body_motor_sheet_size[0] / 2, -body_motor_sheet_size[1] / 2, +body_shaft_radius + tube_bracket_base_thick_strong])
+    body_sheet_for_motor_support_top();
+    
+    // screws
+    bracket_holes = f_tube_bracket_holes(body_motor_sheet_size[0], body_shaft_radius);
+    for (i = [0 : 3]){
+            translate([-body_motor_sheet_size[0] / 2, -body_motor_sheet_size[1] / 2, 25] - display_tolerance_z) translate(bracket_holes[i]) mirror([0, 0, 1]) M4_hexa(50);
+    }
+
+        for (i = [0 : 3]){
+            translate([-body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius), 25] - display_tolerance_z) translate(bracket_holes[i])mirror([0, 0, 1]) M4_hexa(50);
+        }
 
 }
 //---------------------------------------------------------------------------
@@ -499,11 +523,11 @@ module body_with_arms()
 //---------------------------------------------------------------------------
 
 
-body_with_arms();
+//body_with_arms();
 
 //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
-//body();
+body();
 
 //body_arm_traction_pulley();
 
@@ -525,8 +549,6 @@ body_with_arms();
 
 //body_arm_traction_gear();
 
-//body_motor_module();
-
 //body_module_corner();
 
 
@@ -545,3 +567,7 @@ body_with_arms();
 //bearing_housing_top_body();
 
 //radial_bearing_housing_with_potentiometer_body();
+
+//tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
+
+//body_motor_module();
