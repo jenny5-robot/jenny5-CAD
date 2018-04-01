@@ -119,6 +119,20 @@ module shoulder_traction_pulley()
   }
 }
 //---------------------------------------------------------------------
+
+module forearm_pulley()
+{
+    difference(){
+        pulley_base_height = 1.5;
+        pulley_with_shaft(70, 35, 0, 0, 8, 12.5, m8_nut_radius, m8_nut_height);
+        for (i = [1:4])
+            translate ( nema_14_39BYGL215A_screw_hole_position[i]) cylinder (h = 11, r = 1.5, $fn = 10);
+    }
+}
+//---------------------------------------------------------------------------
+
 //upper_arm_pulley();
 
-shoulder_traction_pulley();
+//shoulder_traction_pulley();
+
+forearm_pulley();
