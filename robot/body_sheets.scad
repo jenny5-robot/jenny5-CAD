@@ -18,6 +18,7 @@ use <../basic_scad/thrust_bearing_housing.scad>
 include <../basic_scad/params_thrust_bearing_housing.scad>
 
 include <../basic_scad/tolerance.scad>
+include <../basic_scad/point_transformations_3d.scad>
 
 //---------------------------------------------------------------------------
 module body_rotation_sheet()
@@ -114,8 +115,8 @@ module body_sheet_for_motor_support()
         translate([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, 0] - display_tolerance_z) cylinder (h = body_motor_sheet_size[2] + 2 * display_tolerance, r = nema_17_gearbox_motor_hole_radius);
         // screw holes
         for (i = [1 : 4]){
-            echo([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, 0] + gearbox_nema_17_holes_position[i]);
-            translate([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, 0] - display_tolerance_z) translate(gearbox_nema_17_holes_position[i]) cylinder (h = body_motor_sheet_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            echo([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, 0] + rotate_z(45, gearbox_nema_17_holes_position[i]));
+            translate([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, 0] - display_tolerance_z) rotate ([0, 0, 45]) translate(gearbox_nema_17_holes_position[i]) cylinder (h = body_motor_sheet_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
         }
         bracket_holes = f_tube_bracket_holes(body_motor_sheet_size[0], body_shaft_radius);
         echo("braket holes");
