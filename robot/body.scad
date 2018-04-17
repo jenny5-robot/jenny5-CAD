@@ -423,7 +423,7 @@ module body()
           color ("black") body_arm_bone(body_arm_shaft_length);
         
     // traction pulley
-        translate ([0, 0, body_shaft_radius + body_sheet_size[2] + tube_bracket_base_thick + 5]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
+        translate ([0, 0, -(body_shaft_radius + body_sheet_size[2] + tube_bracket_base_thick + 5) - 11]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
         
     // bottom arm support
         mirror ([1, 0, 0]) body_bearing_support_bottom();
