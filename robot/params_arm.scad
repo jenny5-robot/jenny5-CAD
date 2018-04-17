@@ -70,3 +70,5 @@ fore_arm_x_offset = 42; // distance from elbow gear center to forearm support
 distance_between_elbow_gear_grip_sheets = 17;
 
 forearm_pulley_thick = 11;
+
+belt_tensioner_distance_between_holes = 22;
