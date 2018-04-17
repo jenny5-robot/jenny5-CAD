@@ -10,7 +10,7 @@ include <../basic_scad/params_stepper_motors.scad>
 
 angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
 angle_upper_arm = -135; // -180 ... 0 // default = -90
-angle_elbow = -40; // -180 (back), 0 (front) // default = 0
+angle_elbow = -90; // -180 (back), 0 (front) // default = 0
 angle_fore_arm = 45; // default = 90
 
 upper_arm_bone_length = 350;
@@ -25,7 +25,7 @@ extra_height_arm_bearing = 14;
 rbearing_6905_vertical_housing_size_bounded_half_small_bottom = f_rbearing_6905_vertical_housing_size_bounded_half_small(extra_height_arm_bearing);
 rbearing_6905_vertical_housing_size_bounded_half_small_top = f_rbearing_6905_vertical_housing_size_bounded_half_small(0);
 
-plate_body_size = ([rbearing_6905_vertical_housing_size_bounded_half_small_bottom[0], nema_17_with_50_1_gearbox_height + 5, alu_sheet_5_thick]);
+plate_body_size = ([70, nema_17_with_50_1_gearbox_height + 5, alu_sheet_5_thick]);
   
 distance_to_fore_arm_gear = 16;
       

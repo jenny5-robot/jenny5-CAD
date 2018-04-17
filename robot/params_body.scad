@@ -46,7 +46,7 @@ body_arm_shaft_length = body_height + 2 * tube_bracket_base_thick_strong + 2 * b
 
 body_shaft_pulley_height = 11;
 
-body_arm_offset = 35;
+body_arm_offset = 32;
 
 body_arm_bracket_thick = 12;
 

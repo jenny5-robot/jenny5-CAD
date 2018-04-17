@@ -469,7 +469,7 @@ module body_with_arms()
     translate ([(body_width / 2 - dist_edge_to_body_shaft), 0, body_shaft_radius + body_height / 2 + plate_body_size[0] / 2])
         rotate ([0, 0, angle_body_arm])  
         translate ([0, -body_arm_offset, 0]) 
-        translate ([-body_shaft_radius - plate_body_size[2], 0, 0]) 
+        translate ([body_shaft_radius, 0, 0]) 
         rotate ([0, 90, 0]) 
         arm(body_arm_shaft_length)
         ;
@@ -479,14 +479,14 @@ module body_with_arms()
         translate ([(body_width / 2 - dist_edge_to_body_shaft), 0, body_shaft_radius + body_height / 2 + plate_body_size[0] / 2])    
     rotate ([0, 0, angle_body_arm])
     translate ([0, 0, -body_arm_bracket_thick / 2]) 
-    rotate ([0, -90, 0]) 
+    rotate ([0, 90, 0]) 
     tube_bracket_long_one_hole(bracket_thick = body_arm_bracket_thick, tube_radius = body_shaft_radius)
     ;
 // bottom
         translate ([(body_width / 2 - dist_edge_to_body_shaft), 0, body_shaft_radius + body_height / 2 - plate_body_size[0] / 2])    
     rotate ([0, 0, angle_body_arm])
     translate ([0, 0, body_arm_bracket_thick / 2]) 
-    rotate ([0, -90, 0]) 
+    rotate ([0, 90, 0]) 
     tube_bracket_long_one_hole(bracket_thick = body_arm_bracket_thick, tube_radius = body_shaft_radius)
     ;
 /////////////////////////////////////////////////////////////////////////
@@ -495,7 +495,7 @@ module body_with_arms()
         rotate ([0, 0, -angle_body_arm]) 
            translate ([0, -body_arm_offset, 0]) 
     
-    translate ([body_shaft_radius + plate_body_size[2], 0, 0]) 
+    translate ([-body_shaft_radius, 0, 0]) 
     mirror([1, 0, 0])
     rotate ([0, 90, 0]) 
     arm(body_arm_shaft_length)
@@ -506,7 +506,7 @@ module body_with_arms()
         translate ([-(body_width / 2 - dist_edge_to_body_shaft), 0, body_shaft_radius + body_height / 2 + plate_body_size[0] / 2])    
     rotate ([0, 0, -angle_body_arm])
     translate ([0, 0, -body_arm_bracket_thick / 2]) 
-    rotate ([0, 90, 0]) 
+    rotate ([0, -90, 0]) 
     tube_bracket_long_one_hole(bracket_thick = body_arm_bracket_thick, tube_radius = body_shaft_radius)
     ;
 // bottom
@@ -514,7 +514,7 @@ module body_with_arms()
         translate ([-(body_width / 2 - dist_edge_to_body_shaft), 0, body_shaft_radius + body_height / 2 - plate_body_size[0] / 2])   
     rotate ([0, 0, -angle_body_arm])
     translate ([0, 0, body_arm_bracket_thick / 2]) 
-    rotate ([0, 90, 0]) 
+    rotate ([0, -90, 0]) 
     tube_bracket_long_one_hole(bracket_thick = body_arm_bracket_thick, tube_radius = body_shaft_radius)
     ;
 
@@ -523,11 +523,11 @@ module body_with_arms()
 //---------------------------------------------------------------------------
 
 
-//body_with_arms();
+body_with_arms();
 
 //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
-body();
+//body();
 
 //body_arm_traction_pulley();
 
