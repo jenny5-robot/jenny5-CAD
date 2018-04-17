@@ -443,22 +443,6 @@ module body()
 module body_with_rotation(linear_motor_position)
 {
     translate ([0, -(alu_sheet_3_thick + 37 / 2), 0]) rotate ([0, 0, 0]) translate ([0, alu_sheet_3_thick + 37 / 2, 0]) body();
-    // bottom thrust bearing housing
-    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, - thrust_bearing_housing_51105_thin_size[2] - thrust_bearing_housing_51105_size[2] - tb_51105_height + 2 * thrust_bearing_depth]) thrust_bearing_housing_51105_small();
-    
-    //bottom thrust bearing
-    translate ([0, -thrust_bearing_housing_51105_size[1] / 2 - alu_sheet_3_thick, - thrust_bearing_housing_51105_size[2] - tb_51105_height + thrust_bearing_depth])
-        thrust_bearing_51105();
-    
-    // sheet
-    translate ([-30, -body_rotation_sheet_size[1] - alu_sheet_3_thick, - thrust_bearing_housing_51105_size[2] - thrust_bearing_housing_51105_thin_size[2] - tb_51105_height + 2 * thrust_bearing_depth - 10])
-    body_rotation_sheet();
-    
-    // linear motor
-    translate ([0, -190, -10]) rotate ([0, 0, -18]) rotate ([-90, 0, 0]) linear_dc_motor(50, linear_motor_position);
-    
-    // screw for linear motor base
-    translate ([0, -190, -62]) M6_hexa_screw(50);
 }
 //---------------------------------------------------------------------------
 module body_with_arms()
