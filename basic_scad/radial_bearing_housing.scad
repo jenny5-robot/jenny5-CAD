@@ -529,4 +529,5 @@ translate([0, rbearing_6001_enclosed_housing_slim_size[1], 0])
 
 //radial_bearing_6905_double_vertical_housing();
 
-radial_bearing_6906_vertical_housing();
+//radial_bearing_6906_vertical_housing();
+radial_bearing_6905_vertical_housing();
