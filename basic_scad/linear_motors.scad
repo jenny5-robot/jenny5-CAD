@@ -54,7 +54,34 @@ module linear_dc_motor(stroke, current_pos)
     }
 }
 //------------------------------------------------------
+module linear_dc_motor_simple(stroke)
+{
+    color("grey") 
+    render()
+    {
+        motor_base_length = stroke - 20;
+        // screw
+          translate([0, 0, 10]) cylinder (h = motor_base_length, r = 6);
+        // base support
+        translate ([0, 0, -10]) 
+          difference() {
+              cylinder (h = 20, r = 10);
+              // hole
+              translate ([0, -10, 10]) rotate([-90, 0, 0]) cylinder(h = 20, r = 4);
+          }
+        
+        // motor
+          translate ([-20 - 17, 0, 10]) cylinder(h = 74, r = 20);
+          hull(){
+              translate([0, 0, 10]) cylinder(h = 26, r = 20);
+              translate([-20 - 17, 0, 10]) cylinder(h = 26, r = 20);
+          }
+    }
+}
+//------------------------------------------------------
 
 //linear_stepper_motor();
 
-linear_dc_motor(100, 0);
+//linear_dc_motor(100, 0);
+
+linear_dc_motor_simple(150);
