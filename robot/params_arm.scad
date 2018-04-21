@@ -8,8 +8,8 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sheets.scad>
 include <../basic_scad/params_stepper_motors.scad>
 
-angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
-angle_upper_arm = -135; // -180 ... 0 // default = -90
+angle_shoulder = 0; // -180 (up)... 0(down) // default = 0
+angle_upper_arm = -115; // -180 ... 0 // default = -90
 angle_elbow = -90; // -180 (back), 0 (front) // default = 0
 angle_fore_arm = 45; // default = 90
 
@@ -18,7 +18,7 @@ fore_arm_length = 300;
 
 shoulder_shaft_radius = 12.5;
 
-shoulder_plate_size = [rbearing_6906_enclosed_housing_size[0], 95, alu_sheet_5_thick];
+shoulder_plate_size = [rbearing_6906_enclosed_housing_size[0], 110, alu_sheet_5_thick];
 
 extra_height_arm_bearing = 14;
 
