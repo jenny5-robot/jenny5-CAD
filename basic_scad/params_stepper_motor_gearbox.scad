@@ -1,5 +1,7 @@
 nema_17_gearbox_sheet_size = [42, 42, 5];
 
+nema_17_gearbox_alu_sheet_size = [40, 42, 3];
+
 nema_11_gearbox_sheet_size = [40, 40, 5];
 
 dist_to_screw_hole_position = 5;
