@@ -60,7 +60,7 @@ elbow_gear_grip_sheet_holes_radius = [2, 2, 3];
 
 arm_bracket_thick = 10;
 
-offset_shoulder_plate_bracket = 7;
+offset_shoulder_plate_bracket = 60;
 
 belt_hole_forearm_pulley = 50;
 
