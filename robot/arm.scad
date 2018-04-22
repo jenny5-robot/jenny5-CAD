@@ -6,23 +6,15 @@
 
 include <params_arm.scad>
 
-include <../basic_scad/params_stepper_motors.scad>
-
 include <../basic_scad/params_basic_components.scad>
 use <../basic_scad/basic_components.scad>
 use <../basic_scad/stepper_motors.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
-include <../basic_scad/params_radial_bearings.scad>
-include <../basic_scad/params_dc_motors.scad>
-use <../basic_scad/dc_motors.scad>
 use <../basic_scad/stepper_motors_housing.scad>
 include <../basic_scad/params_motor_housing.scad>
 use <../basic_scad/radial_bearing_housing.scad>
 include <../basic_scad/config.scad>
-include <../basic_scad/params_radial_bearings_housing.scad>
-use <motor_plate.scad>
-include <params_motor_plate.scad>
 use <../basic_scad/point_transformations_3d.scad>
 
 include <../basic_scad/params_pulleys.scad>
@@ -38,12 +30,9 @@ use <../basic_scad/potentiometer_support.scad>
 use <../basic_scad/potentiometers.scad>
 include <../basic_scad/params_potentiometers.scad>
 
-use <potentiometer_gears.scad>
 include <../basic_scad/params_webcam.scad>
 
 use <../basic_scad/webcam.scad>
-
-use <../basic_scad/parametric_involute_gear_v5.0.scad>
 
 use <../basic_scad/tube_bracket.scad>
 include <../basic_scad/params_tube_bracket.scad>
