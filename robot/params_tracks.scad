@@ -1,3 +1,10 @@
+// Author: Mihai Oltean, 
+// https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//-------------------------------------------------------------- 
+
 track_width = 50;
 
 track_shaft_length = 190;
