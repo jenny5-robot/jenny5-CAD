@@ -97,9 +97,9 @@ module body_arm_traction_pulley()
         dist_to_1st_screw = 17;
         
         dist_to_nut = 14;
-        translate ([-30, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
+        translate ([-25, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
         // 1 st screw head hole
-        translate ([15, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 30, r = 3.5, $fn = 20);
+        translate ([20, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 30, r = 3.5, $fn = 20);
         // nut hole
         hull(){
             translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
@@ -108,9 +108,9 @@ module body_arm_traction_pulley()
 
         // 2nd screw hole
         
-        translate ([-25, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 55, r = m4_screw_radius, $fn = 20);
+        translate ([-25, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 51, r = m4_screw_radius, $fn = 20);
         // screw head hole
-        translate ([-40, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 17, r = 3.5, $fn = 20);
+        translate ([-40, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 20, r = 3.5, $fn = 20);
         // nut hole
         hull(){
             translate ([dist_to_nut, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
@@ -119,19 +119,19 @@ module body_arm_traction_pulley()
     }
 }
 //---------------------------------------------------------------------------
-module half_1_traction_pulley()
+module half_1_body_arm_traction_pulley()
 {
     difference(){
         body_arm_traction_pulley();
-        translate ([0, -40, 0] - display_tolerance_z) cube([40, 80, 13] + 2 * display_tolerance_z);
+        translate ([-0.25, -40, 0] - display_tolerance_z) cube([40, 80, 13] + 2 * display_tolerance_z);
     }
 }
 //---------------------------------------------------------------------------
-module half_1_traction_pulley()
+module half_2_body_arm_traction_pulley()
 {
     difference(){
         body_arm_traction_pulley();
-        translate ([-30, -30, 0] - display_tolerance_z) cube([30, 60, 11] + 2 * display_tolerance_z);
+        translate ([-40, -40, 0] - display_tolerance_z) cube([40.25, 80, 11] + 2 * display_tolerance_z);
     }
 }
 //---------------------------------------------------------------------------
@@ -507,13 +507,16 @@ module body_with_arms()
 //---------------------------------------------------------------------------
 
 
-body_with_arms();
+//body_with_arms();
 
 //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
 //body();
 
 //body_arm_traction_pulley();
+
+//half_1_body_arm_traction_pulley();
+//half_2_body_arm_traction_pulley();
 
 //body_sheet_for_bearing_support();
 
@@ -531,12 +534,9 @@ body_with_arms();
 
 //body_sheet_with_bearing_and_belt_tensioner();
 
-//body_arm_traction_gear();
-
 //body_module_corner();
 
-
-     //body_intramodule();
+//body_intramodule();
 //half_1_traction_gear(); // 2x
 //half_2_traction_gear(); // 2x
 
@@ -552,6 +552,6 @@ body_with_arms();
 
 //radial_bearing_housing_with_potentiometer_body();
 
-//tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
+//tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, false); // 2x
 
 //body_motor_module();
