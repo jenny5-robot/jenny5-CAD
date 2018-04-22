@@ -485,36 +485,37 @@ rotate([90, 0, 0])
 module plate_body_articulation()
 {
   difference(){
-        echo("Body-arm plate size: ", plate_body_size);
-        color (aluminium_color) cube(plate_body_size);
+      echo("Body-arm plate size: ", plate_body_size);
+      color (aluminium_color) cube(plate_body_size);
         // screws holes for body bone connection
         // rest of arms screws
         // first bearing housing support holes
+      echo("first bearing housing support holes:");
       for (i = [0 : 1]){
             echo([plate_body_size[0] / 2, f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] + rbearing_6905_enclosed_housing_holes_position[i]);
             translate ([plate_body_size[0] / 2, f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_enclosed_housing_holes_position[i])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
         // motor housing base screw holes
       echo("motor holes position:");
-        for (i = [0 : 3]){
+      for (i = [0 : 3]){
             echo([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] + rotate_z(90, nema_17_housing_base_holes[i]));
             translate ([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(nema_17_housing_base_holes[i])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        }
-        // holes for the other bearing housing     
+      }
+        // holes for the other bearing housing
+      echo("second bearing housing support holes:");     
       for (i = [0 : 1]){
             echo([plate_body_size[0] / 2, f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] + rbearing_6905_enclosed_housing_holes_position[i]);
-            translate ([plate_body_size[0] / 2, plate_body_size[1] - f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_enclosed_housing_holes_position[i])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-      }  
+            translate ([plate_body_size[0] / 2, plate_body_size[1] - f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_enclosed_housing_holes_position[i]) cylinder (h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+      }
       //holes for body shaft
       echo("shaft holes = ");
       holes = f_tube_bracket_single_hole(body_arm_bracket_thick, body_shaft_radius);
       bracket_width = f_bracket_width(body_shaft_radius);
       for (i = [0 : 1]){
-          
-          echo([0, body_arm_offset, 0] + holes[i]);
-            translate ([0, -bracket_width / 2 + body_arm_offset, 0] + holes[i] - display_tolerance_z) cylinder(h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius);
-          echo([plate_body_size[0] - body_arm_bracket_thick, body_arm_offset, 0] + holes[i]);
-            translate ([plate_body_size[0] - body_arm_bracket_thick, -bracket_width / 2 + body_arm_offset, 0] + holes[i] - display_tolerance_z) cylinder(h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius);
+          echo([0, -bracket_width / 2 + body_arm_offset, 0] + holes[i]);
+          translate ([0, -bracket_width / 2 + body_arm_offset, 0] + holes[i] - display_tolerance_z) cylinder(h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius);
+          echo([plate_body_size[0] - body_arm_bracket_thick, -bracket_width / 2 + body_arm_offset, 0] + holes[i]);
+          translate ([plate_body_size[0] - body_arm_bracket_thick, -bracket_width / 2 + body_arm_offset, 0] + holes[i] - display_tolerance_z) cylinder(h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius);
       }
     }
 }
@@ -526,7 +527,7 @@ module potentiometer_support_shoulder_vertical()
 //---------------------------------------------------------------------------
 module body_stepper_motor_housing()
 {
-      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 3, belt_tensioner_offset = 20, nema_width = 40, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
+      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 4, belt_tensioner_offset = 20, nema_width = 41, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
 }
 //---------------------------------------------------------------------------
 module body_stepper_motor_housing_with_belt_tensioner()
@@ -584,7 +585,11 @@ module body_arm_motor_with_sheet()
     
     // screws
     for (i = [1: 4])
-        translate(nema17_gearbox_tensioner_sheet_screw_hole_position[i] + [0, 0, nema_17_with_19_1_gearbox_height - m4_nut_thick]) M4_hexa(16);
+        translate(nema17_gearbox_tensioner_sheet_screw_hole_position[i] + [0, 0, nema_17_with_19_1_gearbox_height]){
+            translate([0, 0, -m4_nut_thick]) M4_hexa(12);
+            translate([0, 0, 6]) washer_4_12();
+        }
+    
 }
 //---------------------------------------------------------------------------
 module potentiometer_support_motor1()
@@ -605,13 +610,13 @@ module body_articulation()
     
     plate_body_articulation();
     // motor
-    translate ([plate_body_size[0] / 2, -nema_17_with_19_1_gearbox_height + plate_body_size[1] - wall_thick_motor_housing - nema_17_gearbox_alu_sheet_size[2], -nema_17_width / 2 - wall_thick_base_motor_housing - 3 - 20]) rotate ([-90, 0, 0]) body_arm_motor_with_sheet();
+    translate ([plate_body_size[0] / 2, -nema_17_with_19_1_gearbox_height + plate_body_size[1] - wall_thick_motor_housing - nema_17_gearbox_alu_sheet_size[2], -nema_17_width / 2 - wall_thick_base_motor_housing - 4 - 19]) rotate ([-90, 0, 0]) body_arm_motor_with_sheet();
     
     // motor gear
     translate ([plate_body_size[0] / 2, plate_body_size[1] + 4, -nema_17_width / 2 - wall_thick_base_motor_housing - 3 - 20]) rotate ([-90, 0, 0])motor_pulley_8mm_shaft();
 
 // motor housing
-    translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 1, plate_body_size[1], 0]) 
+    translate ([plate_body_size[0] / 2 - 41 / 2 - 2, plate_body_size[1], 0]) 
       rotate ([90, 0, 0]) 
         rotate ([0, 0, -90])
           body_stepper_motor_housing_with_belt_tensioner()
