@@ -25,7 +25,7 @@ extra_height_arm_bearing = 14;
 rbearing_6905_vertical_housing_size_bounded_half_small_bottom = f_rbearing_6905_vertical_housing_size_bounded_half_small(extra_height_arm_bearing);
 rbearing_6905_vertical_housing_size_bounded_half_small_top = f_rbearing_6905_vertical_housing_size_bounded_half_small(0);
 
-plate_body_size = ([70, nema_17_with_50_1_gearbox_height + 5, alu_sheet_5_thick]);
+plate_body_size = ([67, nema_17_with_50_1_gearbox_height + 5, alu_sheet_5_thick]);
   
 distance_to_fore_arm_gear = 16;
       
