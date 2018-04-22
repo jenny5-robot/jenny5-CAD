@@ -9,7 +9,7 @@ include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_tube_bracket.scad>
 
-angle_body_arm = 90;// 180 (closed - front)...-90 (open-back); // default = -90
+angle_body_arm = 10;// 180 (closed - front)...-90 (open-back); // default = -90
 
 body_rotation_linear_motor_position = 0;
 
@@ -46,7 +46,7 @@ body_arm_shaft_length = body_height + 2 * tube_bracket_base_thick_strong + 2 * b
 
 body_shaft_pulley_height = 11;
 
-body_arm_offset = 32;
+body_arm_offset = 33;
 
 body_arm_bracket_thick = 12;
 
