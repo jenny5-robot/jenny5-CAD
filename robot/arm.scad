@@ -175,7 +175,7 @@ module elbow_gear()
 module foreram_motor_with_sheet()
 {
     nema_11_with_27_1_gearbox();
-    translate ([0, 0, nema_11_with_27_1_gearbox_height + 2]) mirror([0, 0, 1]) stepper_gearbox_nema_11_motor_sheet();
+    translate ([0, 0, nema_11_with_27_1_gearbox_height + 2]) mirror([0, 0, 1]) stepper_gearbox_nema_11_motor_platic_sheet();
 }
 //---------------------------------------------------------------------------
 
@@ -450,7 +450,7 @@ module shoulder()
     translate ([shoulder_plate_size[0] / 2 + nema_17_housing_width / 2, shoulder_plate_size[1] , 0]) 
     mirror([0, 0, 1])
     rotate ([0, -90, 90])
-    body_stepper_motor_housing_with_components();
+    body_stepper_motor_housing_with_belt_tensioner();
     
     // bone support 1
     translate ([shoulder_plate_size[0] / 2, first_bearing_shoulder_offset + rbearing_6906_enclosed_housing_size[1] / 2, shoulder_plate_size[2] + rbearing_6906_enclosed_housing_size[2]])
@@ -526,10 +526,10 @@ module potentiometer_support_shoulder_vertical()
 //---------------------------------------------------------------------------
 module body_stepper_motor_housing()
 {
-      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 3, belt_tensioner_offset = 20, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
+      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 3, belt_tensioner_offset = 20, nema_width = 40, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
 }
 //---------------------------------------------------------------------------
-module body_stepper_motor_housing_with_components()
+module body_stepper_motor_housing_with_belt_tensioner()
 {
     body_stepper_motor_housing();
 // first belt tensioner
@@ -575,11 +575,16 @@ module pot_gear_with_screw_hole_14t()
     }
 }
 //---------------------------------------------------------------------------
-module body_arm_motor()
+module body_arm_motor_with_sheet()
 {
     nema_17_with_19_1_gearbox();
     
-    translate ([0, 0, nema_17_with_19_1_gearbox_height]) stepper_gearbox_motor_sheet(nema_17_gearbox_sheet_size, gearbox_nema_17_holes_position, nema17_gearbox_tensioner_sheet_screw_hole_position, nema_17_gearbox_motor_hole_radius);
+    translate ([0, 0, nema_17_with_19_1_gearbox_height]) 
+        stepper_gearbox_motor_alu_sheet(nema_17_gearbox_alu_sheet_size, gearbox_nema_17_holes_position, nema17_gearbox_tensioner_sheet_screw_hole_position, nema_17_gearbox_motor_hole_radius);
+    
+    // screws
+    for (i = [1: 4])
+        translate(nema17_gearbox_tensioner_sheet_screw_hole_position[i] + [0, 0, nema_17_with_19_1_gearbox_height - m4_nut_thick]) M4_hexa(16);
 }
 //---------------------------------------------------------------------------
 module potentiometer_support_motor1()
@@ -600,16 +605,16 @@ module body_articulation()
     
     plate_body_articulation();
     // motor
-    translate ([plate_body_size[0] / 2, -nema_17_with_19_1_gearbox_height + plate_body_size[1] - wall_thick_motor_housing - nema_17_gearbox_sheet_size[2], -nema_17_width / 2 - wall_thick_base_motor_housing - 3 - 20]) rotate ([-90, 0, 0]) body_arm_motor();
+    translate ([plate_body_size[0] / 2, -nema_17_with_19_1_gearbox_height + plate_body_size[1] - wall_thick_motor_housing - nema_17_gearbox_alu_sheet_size[2], -nema_17_width / 2 - wall_thick_base_motor_housing - 3 - 20]) rotate ([-90, 0, 0]) body_arm_motor_with_sheet();
     
     // motor gear
     translate ([plate_body_size[0] / 2, plate_body_size[1] + 4, -nema_17_width / 2 - wall_thick_base_motor_housing - 3 - 20]) rotate ([-90, 0, 0])motor_pulley_8mm_shaft();
 
 // motor housing
-    translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 2 , plate_body_size[1], 0]) 
+    translate ([plate_body_size[0] / 2 - nema_17_width / 2 - 1, plate_body_size[1], 0]) 
       rotate ([90, 0, 0]) 
         rotate ([0, 0, -90])
-          body_stepper_motor_housing_with_components()
+          body_stepper_motor_housing_with_belt_tensioner()
     ;
     
   translate ([plate_body_size[0] / 2, plate_body_size[1], plate_body_size[2] + 3])
@@ -632,7 +637,7 @@ module body_articulation()
     
    translate ([plate_body_size[0] / 2, plate_body_size[1] - rbearing_6905_vertical_housing_size_bounded_half_small_bottom[1] / 2, rbearing_6905_enclosed_housing_size[2] + plate_body_size[2]])  
    mirror ([0, 0, 1]) 
-    radial_bearing_6905_vertical_housing(0);
+    radial_bearing_6905_vertical_housing();
 
     // bearing
     translate ([plate_body_size[0] / 2, plate_body_size[1]  - rbearing_6905_vertical_housing_size_bounded_half_small_bottom[1] / 2 + rb_6905_thick / 2, plate_body_size[2] + rb_6905_external_radius])
@@ -666,9 +671,9 @@ module arm()
     body_articulation();
 }
 //---------------------------------------------------------------------------
-//arm();
+arm();
 
-body_articulation();
+//body_articulation();
 
 //shoulder();
 //upper_arm();
@@ -723,11 +728,11 @@ body_articulation();
 //rbearing_6905_vertical_housing_bounded_half_small();
 //rbearing_6905_vertical_housing_bounded_half_small_top();
 
-//body_arm_motor();
+//body_arm_motor_with_sheet();
 
 //body_stepper_motor_housing();
 
-//body_stepper_motor_housing_with_components();
+//body_stepper_motor_housing_with_belt_tensioner();
 
 //pot_gear_with_screw_hole_14t();
 
@@ -739,6 +744,10 @@ body_articulation();
 
 //body_arm_traction_pulley();
 
-//rbearing_6905_vertical_housing_bounded_half_small_bottom();
+//radial_bearing_6905_vertical_housing(); // 2x
+
+//radial_bearing_6906_vertical_housing(); // 2x
 
 //upper_arm_motor_corners();
+
+//tube_bracket_long_one_hole(bracket_length = shoulder_bracket_length, tube_radius = shoulder_shaft_radius);
