@@ -1,3 +1,9 @@
+// Author: Mihai Oltean, 
+// https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//-------------------------------------------------------------- 
 include <tolerance.scad>
 
 module laptop_fixer_corner_left()

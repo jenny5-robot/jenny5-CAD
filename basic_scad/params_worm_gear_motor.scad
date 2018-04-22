@@ -1,3 +1,10 @@
+// Author: Mihai Oltean, 
+// https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//-------------------------------------------------------------- 
+
 worm_600JSX_gear_box_size = [82.5, 58, 46];
 worm_600JSX_motor_radius = 22;
 worm_600JSX_motor_length = 66.53;

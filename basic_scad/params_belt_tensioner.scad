@@ -1,3 +1,10 @@
+// Author: Mihai Oltean, 
+// https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: jenny5.org
+// Source: github.com/jenny5-robot
+// MIT License
+//-------------------------------------------------------------- 
+
 include <params_radial_bearings.scad>
 
 wing_thick = 6;
