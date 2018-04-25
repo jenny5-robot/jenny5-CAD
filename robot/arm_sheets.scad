@@ -22,10 +22,10 @@ module shoulder_plate()
 
         color (aluminium_color) cube(shoulder_plate_size);
         echo("motor housing holes:");
-        for (i = [0 : 3]){
-            echo([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - wall_thick_motor_housing, 0] - nema_17_housing_base_holes[i]);
-        translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - wall_thick_motor_housing, 0] - nema_17_housing_base_holes[i] - display_tolerance_z) cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-        }
+      for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
+            echo([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 33 / 2, 0]));
+            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 33 / 2, 0])  cylinder ( h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+      }
         echo("bearing housing holes:");
         for (i = [0 : 1]){
             echo(rbearing_6906_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6906_enclosed_housing_holes_position[0][0] + rbearing_6906_enclosed_housing_holes_position[1][0]) / 2, first_bearing_shoulder_offset + rbearing_6906_enclosed_housing_size[1] / 2, 0]);
@@ -82,9 +82,9 @@ module plate_body_articulation()
       }
         // motor housing base screw holes
       echo("motor holes position:");
-      for (i = [0 : 3]){
-            echo([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] + rotate_z(90, nema_17_housing_base_holes[i]));
-            translate ([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate(nema_17_housing_base_holes[i])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+      for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
+            echo([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 33 / 2, 0]));
+            translate ([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 33 / 2, 0])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
         // holes for the other bearing housing
       echo("second bearing housing support holes:");     
@@ -107,4 +107,4 @@ module plate_body_articulation()
 //---------------------------------------------------------------------------
 
 plate_body_articulation();
-shoulder_plate();
+//shoulder_plate();
