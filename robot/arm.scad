@@ -132,7 +132,7 @@ module elbow_pulley()
 //---------------------------------------------------------------------------
 module forearm_motor_housing()
 {
-  nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 0, belt_tensioner_offset = 12, nema_width = belt_hole_forearm_pulley, nema_height = nema_11_height, base_height = 20, nema_center_hole_radius = 5, nema_holes_position = nema11_gearbox_tensioner_sheet_screw_hole_position, base_thick = 3, dist_to_first_hole_z = 14, nema_housing_base_holes = undef, motor_screw_holes_rotation_angle = 0, belt_tensioner_distance_between_holes = 30);
+  nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 0, belt_tensioner_offset = 12, nema_width = belt_hole_forearm_pulley, nema_height = nema_11_height, base_height = 20, nema_center_hole_radius = 5, nema_holes_position = nema11_gearbox_tensioner_sheet_screw_hole_position, base_thick = 3, dist_to_base_holes_center_z = 14, nema_housing_base_holes = undef, motor_screw_holes_rotation_angle = 0, belt_tensioner_distance_between_holes = 30);
 }
 //---------------------------------------------------------------------------
 module forearm_potentiometer_support()
@@ -363,7 +363,7 @@ module upper_arm()
 //---------------------------------------------------------------------------
 module shoulder_motor_housing()
 {
-    nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 2 * shoulder_shaft_radius, belt_tensioner_offset = 0, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 40,  nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 0);
+    nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 2 * shoulder_shaft_radius, belt_tensioner_offset = 0, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 40,  nema_center_hole_radius = nema_17_gearbox_motor_hole_radius, nema_holes_position = gearbox_nema_17_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 0);
 }
 //---------------------------------------------------------------------------
 module shoulder()
@@ -424,7 +424,7 @@ module potentiometer_support_shoulder_vertical()
 //---------------------------------------------------------------------------
 module body_stepper_motor_housing()
 {
-      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 4, belt_tensioner_offset = 20, nema_width = 41, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_first_hole_z = 18, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
+      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 4, belt_tensioner_offset = 20, nema_width = 41, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_base_holes_center_z = 16, nema_housing_base_holes = nema_17_housing_base_holes, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
 }
 //---------------------------------------------------------------------------
 module body_stepper_motor_housing_with_belt_tensioner()
@@ -573,9 +573,9 @@ module arm()
     body_articulation();
 }
 //---------------------------------------------------------------------------
-//arm();
+arm();
 
-body_articulation();
+//body_articulation();
 
 //shoulder();
 //upper_arm();
