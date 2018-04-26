@@ -15,18 +15,24 @@ include <params_screws_nuts_washers.scad>
 //--------------------------------------------------------------
 module stepper_gearbox_motor_alu_sheet(sheet_size, gearbox_hole_position, screw_hole_position, gearbox_hole_radius, gearbox_radius, rotate_screw_holes)
 {
+    echo(sheet_size = sheet_size);
     difference(){
         translate ([-sheet_size[0] / 2, -sheet_size[1] / 2, 0]) cube(sheet_size);
         // middle hole
+        echo("middle hole = ", [sheet_size[0] / 2, sheet_size[1] / 2]);
         translate (-display_tolerance_z) cylinder(h = sheet_size[2] + 2 * display_tolerance, r = gearbox_hole_radius);
        // translate ([0, 0, nema_17_gearbox_sheet_base_wall_thick]) cylinder(h = sheet_size[2], r = gearbox_radius,$fn = 80);
         // gearbox holes
-        for (i = [1 : 4])
-            rotate ([0, 0, rotate_screw_holes]) translate (+ gearbox_hole_position[i]) cylinder(h = sheet_size[2] , r2 = 1.5, r1 = 2.5, $fn = 10);
-
-// screw holes for belt tensioner        
+        echo("motor holes = ");
+        for (i = [1 : 4]){
+            echo([sheet_size[0] / 2, sheet_size[1] / 2, 0] + gearbox_hole_position[i]);
+            rotate ([0, 0, rotate_screw_holes]) translate (gearbox_hole_position[i]) cylinder(h = sheet_size[2] , r2 = 1.5, r1 = 2.5, $fn = 10);
+        }
+echo("screw holes for belt tensioner =");
+        
         for (i = [0 : 4]){
             translate (-display_tolerance_z + screw_hole_position[i]) cylinder(h = sheet_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
+            echo([sheet_size[0] / 2, sheet_size[1] / 2, 0] + screw_hole_position[i]);
         }
     }
 }
