@@ -54,9 +54,9 @@ module upper_arm_motor_housing()
     nema_motor_housing_with_base_holes(0, 0, nema_17_width, nema_17_height, 40, nema_17_gearbox_motor_hole_radius, gearbox_nema_17_holes_position, 3, 13, nema_17_housing_small_base_holes_position);    
 }
 //---------------------------------------------------------------------------
-module upper_arm_motor_corners()
+module rbearing_608_housing_thicker(extra_thick = 0)
 {
-    nema_motor_housing_with_base_holes(motor_offset_x = 12, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 15, nema_center_hole_radius = 5, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
+radial_bearing_housing(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, rb_608_thick, rbearing_608_housing_size[2] + extra_thick, m4_screw_radius);
 }
 //---------------------------------------------------------------------------
 module upper_arm_motor_with_components()
@@ -90,13 +90,9 @@ module upper_arm_motor_with_components()
     
     // bearing housing
 // base
-    translate ([0, -distance_upper_arm_motor_shaft, rbearing_608_housing_size[2]]) mirror([0, 0, 1]) rbearing_608_housing();
+    translate ([0, -distance_upper_arm_motor_shaft, rbearing_608_housing_size[2] + 6]) mirror([0, 0, 1]) rbearing_608_housing_thicker(6);
     // top
-    translate ([0, -distance_upper_arm_motor_shaft, nema_17_with_19_1_gearbox_height - rbearing_608_housing_size[2]]) rbearing_608_housing();
-    // bottom corner
-    translate ([-16 - 8 - 5, -distance_upper_arm_motor_shaft - 16, rbearing_608_housing_size[2] + 5]) upper_arm_motor_corners();
-    // top corner
-    translate ([-16 - 8 - 5, -distance_upper_arm_motor_shaft - 16, -rbearing_608_housing_size[2] + nema_17_with_19_1_gearbox_height - 5]) mirror ([0, 0, 1]) upper_arm_motor_corners();
+    translate ([0, -distance_upper_arm_motor_shaft, nema_17_with_19_1_gearbox_height - rbearing_608_housing_size[2] - 6]) rbearing_608_housing_thicker(6);
 }
 //---------------------------------------------------------------------------
 module shoulder_pulley()
@@ -319,7 +315,7 @@ module elbow_upper_arm_connector()
     translate ([0, -8 + m4_nut_thick, elbow_sheet_size[1] - 16]) rotate ([90, 0, 0]) {
         M4_hexa(20);
     }
-    translate ([elbow_sheet_size[0]/ 2 - 10, -12, elbow_sheet_size[1] - 10]) rotate ([90, 0, 0]) potentiometer_BOURNS_3852A_282_103AL();
+    translate ([elbow_sheet_size[0] / 2 - 10, -12, elbow_sheet_size[1] - 10]) rotate ([90, 0, 0]) potentiometer_BOURNS_3852A_282_103AL();
 }
 //---------------------------------------------------------------------------
 module upper_arm_bone_with_components()
@@ -339,8 +335,8 @@ module upper_arm()
     // bone
    translate([0, 11, 0]) rotate ([90, 0, 0]) upper_arm_bone_with_components();
          
-    // gear
-    translate ([0, 9, 0]) rotate([0, 90, 0]) rotate ([90, 0, 0]) upper_arm_pulley(); 
+    // pulley
+    translate ([0, -1, 0]) rotate([0, 90, 0]) rotate ([-90, 0, 0]) upper_arm_pulley(); 
     
     // stepper motor 
     translate ([0, sheet_upper_arm_motor_top_size[0] / 2 + 11 + 6, -nema_17_with_19_1_gearbox_height / 2]) 
@@ -442,7 +438,8 @@ rotate([90, 0, 0])
         6906rs();
         
     // continuation with upper arm
-    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_6906_external_radius + shoulder_plate_size[2]]) rotate ([0, angle_upper_arm, 0]) upper_arm();    
+    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_6906_external_radius + shoulder_plate_size[2]]) rotate ([0, angle_upper_arm, 0]) upper_arm(); 
+    
 // brackets for shoulder shaft
     translate ([(shoulder_plate_size[0] - ceil(nema_17_width)) / 2 - shoulder_bracket_length, 0, -f_bracket_height_strong(shoulder_shaft_radius)]) tube_bracket_long_one_hole(bracket_length = shoulder_bracket_length, tube_radius = shoulder_shaft_radius);
     translate ([shoulder_plate_size[0] - (shoulder_plate_size[0] - ceil(nema_17_width)) / 2, 0, -f_bracket_height_strong(shoulder_shaft_radius)]) tube_bracket_long_one_hole(bracket_length = shoulder_bracket_length, tube_radius = shoulder_shaft_radius);
@@ -655,7 +652,7 @@ shoulder();
 
 //upper_arm_pulley();
 //upper_arm_motor_housing();
-//upper_arm_pulley_with_components();
+
 
 //plate_body_articulation();
 

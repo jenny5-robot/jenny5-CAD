@@ -15,25 +15,33 @@ include <params_arm.scad>
 
 use <../basic_scad/pulleys.scad>
 include <../basic_scad/tolerance.scad>
+use <../basic_scad/stepper_motors_housing.scad>
+
 
 //---------------------------------------------------------------------------
+module upper_arm_motor_corner()
+{
+    nema_motor_housing_with_base_holes(motor_offset_x = 14, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 13, nema_center_hole_radius = 5, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
+}
+//---------------------------------------------------------------------------
+
 module upper_arm_pulley()
 {
     difference(){
-        rotate ([0, 0, 2])         
-           color (plastic_color) pulley(profile = 56, num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
-        
+        rotate ([0, 0, 0])         
+           color (plastic_color) {
+               pulley(profile = 56, num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
+                translate ([nema_17_with_19_1_gearbox_height / 2, -rbearing_608_housing_size[0] / 2 - 2, 8]) 
+                rotate([0, -90, 0]){
+      // bottom corner
+                translate ([0, 0, rbearing_608_housing_size[2] + 6]) upper_arm_motor_corner();
+    // top corner
+                translate ([0, 0, -(rbearing_608_housing_size[2] + 6 - nema_17_with_19_1_gearbox_height)]) mirror ([0, 0, 1]) upper_arm_motor_corner();
+  }
+            }
         
         // middle hole
         translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = upper_arm_shaft_radius, $fn = 30);
-
-// holes for connecting the motor
-        dist_x = 23;
-        dist_y = 8;
-        translate([dist_x, -dist_y, 0] - display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = 2, $fn = 10);
-        translate([dist_x, dist_y, 0] - display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = 2, $fn = 10);
-        translate([-dist_x, -dist_y, 0] - display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = 2, $fn = 10);
-        translate([-dist_x, dist_y, 0] - display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = 2, $fn = 10);
         
         // holes for connecting 2 half pulleys
         // 1st screw hole
@@ -59,18 +67,9 @@ module upper_arm_pulley()
             translate ([dist_to_nut, -dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
             translate ([dist_to_nut, -dist_to_1st_screw, upper_arm_gear_thick]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
         }
-    
-      
-      // screw hole
-      cylinder (h = 6, r = m8_nut_radius, $fn = 6);
-      // motor housing fixer holes
-      
-      for (i = [0 : 3]){
-          translate (nema_17_housing_small_base_holes_position[i] + [0, -0, 0] - display_tolerance_z) cylinder (h = 9 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-          translate (nema_17_housing_small_base_holes_position[i] + [0, -0, 4] - display_tolerance_z) cylinder (h = 9 + 2 * display_tolerance, r = m4_nut_radius, $fn = 6);
-      }
   }
     
+  //-16 - 8 - 5
 }
 //---------------------------------------------------------------------------
 module shoulder_traction_pulley()
@@ -131,8 +130,8 @@ module forearm_pulley()
 }
 //---------------------------------------------------------------------------
 
-//upper_arm_pulley();
+upper_arm_pulley();
 
 //shoulder_traction_pulley();
 
-forearm_pulley();
+//forearm_pulley();
