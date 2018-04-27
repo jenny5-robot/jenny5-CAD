@@ -26,10 +26,10 @@ module nema_motor_housing(motor_offset_x, motor_offset_y, nema_width, nema_heigh
         
         difference(){
             color(plastic_color) cube ([housing_length, housing_width, base_height]);
-            // make the motor house hole
+            // make the motor house rectangular hole
             translate ([base_thick, wall_thick_lateral_motor_housing, wall_thick_motor_housing]) cube ([nema_width + base_thick + motor_offset_x + motor_play_x + tolerance, nema_width + 2 * motor_housing_airflow_spacer + 2 * motor_offset_y, base_height]);
-
-            translate ([base_thick, 0, base_height] - display_tolerance_y) rotate ([0, atan((base_height) / housing_length), 0]) cube ([housing_length * sqrt(2), nema_width + 2 * motor_housing_airflow_spacer + 2 * display_tolerance + 2 * wall_thick_lateral_motor_housing + 2 * motor_offset_y, base_height]);
+// cut at angle 
+            translate ([base_thick, 0, base_height] - display_tolerance_y) rotate ([0, atan((base_height - base_thick)/ (housing_length - base_thick)), 0]) cube ([sqrt((housing_length - base_thick) * (housing_length - base_thick) + (base_height - 3) * (base_height - 3)), nema_width + 2 * motor_housing_airflow_spacer + 2 * display_tolerance + 2 * wall_thick_lateral_motor_housing + 2 * motor_offset_y, base_height]);
             
             translate([base_thick + motor_offset_x, wall_thick_lateral_motor_housing + motor_housing_airflow_spacer + motor_offset_y, 0] + [nema_width / 2, nema_width / 2, 0]- display_tolerance_z) {
                 // center motor hole
