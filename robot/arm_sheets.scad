@@ -23,8 +23,8 @@ module shoulder_plate()
         color (aluminium_color) cube(shoulder_plate_size);
         echo("motor housing holes:");
       for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
-            echo([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 33 / 2, 0]));
-            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 33 / 2, 0])  cylinder ( h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            echo([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 35 / 2, 0]));
+            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 35 / 2, 0])  cylinder ( h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
         echo("bearing housing holes:");
         for (i = [0 : 1]){
@@ -106,5 +106,5 @@ module plate_body_articulation()
 }
 //---------------------------------------------------------------------------
 
-plate_body_articulation();
-//shoulder_plate();
+//plate_body_articulation();
+shoulder_plate();
