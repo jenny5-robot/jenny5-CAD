@@ -45,7 +45,7 @@ module upper_arm_pulley()
         
         // holes for connecting 2 half pulleys
         // 1st screw hole
-        dist_to_1st_screw = 17;
+        dist_to_1st_screw = 19;
         
         dist_to_nut = 14;
         translate ([-30, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
@@ -70,6 +70,22 @@ module upper_arm_pulley()
   }
     
   //-16 - 8 - 5
+}
+//---------------------------------------------------------------------------
+module upper_arm_pulley_half_1()
+{
+    difference(){
+        upper_arm_pulley();
+        translate ([-0.25, -40, -1]) cube([40, 100, 100]);
+    }
+}
+//---------------------------------------------------------------------------
+module upper_arm_pulley_half_2()
+{
+    difference(){
+        upper_arm_pulley();
+        translate ([-40, -40, -1]) cube([40.25, 100, 100]);
+    }
 }
 //---------------------------------------------------------------------------
 module shoulder_traction_pulley()
@@ -130,7 +146,10 @@ module forearm_pulley()
 }
 //---------------------------------------------------------------------------
 
-upper_arm_pulley();
+//upper_arm_pulley();
+
+//upper_arm_pulley_half_1();
+upper_arm_pulley_half_2();
 
 //shoulder_traction_pulley();
 
