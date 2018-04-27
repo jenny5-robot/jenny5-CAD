@@ -357,7 +357,7 @@ module upper_arm()
 //---------------------------------------------------------------------------
 module shoulder_motor_housing()
 {
-      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 4, belt_tensioner_offset = 20, nema_width = 41, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = 28, nema_housing_base_holes_V_distance = 33, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
+      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 4, belt_tensioner_offset = 20, nema_width = 43, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = 28, nema_housing_base_holes_V_distance = 35, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
 }
 //---------------------------------------------------------------------------
 module shoulder_motor_housing_with_belt_tensioner()
@@ -401,7 +401,7 @@ module shoulder()
     motor_pulley_8mm_shaft();
     
     // motor housing
-    translate ([shoulder_plate_size[0] / 2 + 41 / 2 + 2, shoulder_plate_size[1] , 0]) 
+    translate ([shoulder_plate_size[0] / 2 + 43 / 2 + 2, shoulder_plate_size[1] , 0]) 
     mirror([0, 0, 1])
     rotate ([0, -90, 90])
     shoulder_motor_housing_with_belt_tensioner();
@@ -410,8 +410,8 @@ module shoulder()
     // screws for fixing motor housing to alu sheet
     
       for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
-            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, -wall_thick_base_motor_housing]) translate([i[0] * 33 / 2, i[1] * 28 / 2, 0])  M4_sunken(8);
-            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, shoulder_plate_size[2]]) translate([i[0] * 33 / 2, i[1] * 28 / 2, 0])  rotate ([0, 0, 30]) M4_autolock_nut();
+            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, -wall_thick_base_motor_housing]) translate([i[0] * 35 / 2, i[1] * 28 / 2, 0])  M4_sunken(8);
+            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, shoulder_plate_size[2]]) translate([i[0] * 35 / 2, i[1] * 28 / 2, 0])  rotate ([0, 0, 30]) M4_autolock_nut();
           
       }    
     // bone support 1
@@ -438,7 +438,9 @@ rotate([90, 0, 0])
         6906rs();
         
     // continuation with upper arm
-    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_6906_external_radius + shoulder_plate_size[2]]) rotate ([0, angle_upper_arm, 0]) upper_arm(); 
+    translate ([shoulder_plate_size[0]/ 2, shoulder_plate_size[1] + 7, rb_6906_external_radius + shoulder_plate_size[2]]) rotate ([0, angle_upper_arm, 0]) 
+    //upper_arm()
+    ; 
     
 // brackets for shoulder shaft
     translate ([(shoulder_plate_size[0] - ceil(nema_17_width)) / 2 - shoulder_bracket_length, 0, -f_bracket_height_strong(shoulder_shaft_radius)]) tube_bracket_long_one_hole(bracket_length = shoulder_bracket_length, tube_radius = shoulder_shaft_radius);
