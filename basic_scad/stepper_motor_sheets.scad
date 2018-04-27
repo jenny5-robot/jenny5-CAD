@@ -30,7 +30,7 @@ module stepper_gearbox_motor_alu_sheet(sheet_size, gearbox_hole_position, screw_
         }
 echo("screw holes for belt tensioner =");
         
-        for (i = [0 : 4]){
+        for (i = [1 : 4]){
             translate (-display_tolerance_z + screw_hole_position[i]) cylinder(h = sheet_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
             echo([sheet_size[0] / 2, sheet_size[1] / 2, 0] + screw_hole_position[i]);
         }
