@@ -33,21 +33,25 @@ module shoulder_plate()
         }
         // other side holes for bearing
         
-        for (i = [0 : 1])
+        for (i = [0 : 1]){
+            echo(rbearing_6906_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6906_enclosed_housing_holes_position[0][0] + rbearing_6906_enclosed_housing_holes_position[1][0]) / 2, shoulder_plate_size[1] - rbearing_6906_enclosed_housing_size[1] / 2, 0]);
+
             translate (rbearing_6906_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6906_enclosed_housing_holes_position[0][0] +rbearing_6906_enclosed_housing_holes_position[1][0]) / 2, shoulder_plate_size[1] - rbearing_6906_enclosed_housing_size[1] / 2, 0] - display_tolerance_z) cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius);
-        
+        }
         // holes for brackets
+        echo("shoulder holes for brackets");
         shoulder_bracket_holes_position = f_tube_bracket_holes(shoulder_bracket_length, shoulder_shaft_radius);
         for (i = [0 : 1]){
-            echo("shoulder holes for brackets", shoulder_bracket_holes_position[i] + [(shoulder_plate_size[0] - ceil(nema_17_width)) / 2 - shoulder_bracket_length, offset_shoulder_plate_bracket, 0]);
+            echo(shoulder_bracket_holes_position[i] + [(shoulder_plate_size[0] - ceil(nema_17_width)) / 2 - shoulder_bracket_length, shoulder_plate_size[0] - offset_shoulder_plate_bracket, 0]);
             translate(shoulder_bracket_holes_position[i] + [(shoulder_plate_size[0] - ceil(nema_17_width)) / 2 - shoulder_bracket_length, shoulder_plate_size[0] - offset_shoulder_plate_bracket, 0] - display_tolerance_z)
         cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius);
         }
         // other side
-        for (i = [0 : 1])
+        for (i = [0 : 1]){
+            echo(shoulder_bracket_holes_position[i] + [shoulder_plate_size[0] - (shoulder_plate_size[0] - ceil(nema_17_width)) / 2, shoulder_plate_size[0] - offset_shoulder_plate_bracket, 0]);
             translate(shoulder_bracket_holes_position[i] + [shoulder_plate_size[0] - (shoulder_plate_size[0] - ceil(nema_17_width)) / 2, shoulder_plate_size[0] - offset_shoulder_plate_bracket, 0] - display_tolerance_z)
         cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius);  
-  
+        }
             // potentiometer support holes
     }
 }
