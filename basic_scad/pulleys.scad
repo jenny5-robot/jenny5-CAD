@@ -61,6 +61,7 @@ T5_pulley_dia_100 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 63);
 T5_pulley_dia_103 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 66);
 T5_pulley_dia_26 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 17);
 T5_pulley_dia_73 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 46);
+T5_pulley_dia_109 = tooth_spaceing_curvefit (0.6523,1.591,1.064, 69);
 
 HTD_8mm_pulley_dia = tooth_spacing (8, 0.6858, 8);
 
@@ -132,9 +133,10 @@ module pulley(profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_h
   if ( profile == 68 ) { _pulley ( "T5" , T5_pulley_dia_26 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 69 ) { _pulley ( "T5" , T5_pulley_dia_73 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
   if ( profile == 70 ) { _pulley ( "T5" , T5_pulley_dia_55 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
+  if ( profile == 71 ) { _pulley ( "T5" , T5_pulley_dia_109 , 1.19 , 3.264, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); }
 }
 
-
+//----------------------------------------------------------------------------------
 // Functions
 
 function tooth_spaceing_curvefit (b,c,d, teeth)
@@ -144,7 +146,7 @@ function tooth_spacing(tooth_pitch,pitch_line_offset, teeth)
 	= (2*((teeth*tooth_pitch)/(3.14159265*2)-pitch_line_offset)) ;
 
 // Main Module
-
+//----------------------------------------------------------------------------------
 module _pulley( belt_type , pulley_OD , tooth_depth , tooth_width, profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8)
 {
         
@@ -260,6 +262,7 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
                 if ( profile == 68 ) { T5(pulley_t_ht);}
                 if ( profile == 69 ) { T5(pulley_t_ht);}
                 if ( profile == 70 ) { T5(pulley_t_ht);}
+                if ( profile == 71 ) { T5(pulley_t_ht);}
 			}
 
 			}
@@ -282,7 +285,7 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 	   
 	}
 
-
+//----------------------------------------------------------------------------------
 // Tooth profile modules
 
 module MXL(pulley_t_ht)
@@ -354,6 +357,8 @@ module GT2_5mm(pulley_t_ht)
 	{
 	linear_extrude(height=pulley_t_ht+2) polygon([[-1.975908,-0.75],[-1.975908,0],[-1.797959,0.03212],[-1.646634,0.121224],[-1.534534,0.256431],[-1.474258,0.426861],[-1.446911,0.570808],[-1.411774,0.712722],[-1.368964,0.852287],[-1.318597,0.989189],[-1.260788,1.123115],[-1.195654,1.25375],[-1.12331,1.380781],[-1.043869,1.503892],[-0.935264,1.612278],[-0.817959,1.706414],[-0.693181,1.786237],[-0.562151,1.851687],[-0.426095,1.9027],[-0.286235,1.939214],[-0.143795,1.961168],[0,1.9685],[0.143796,1.961168],[0.286235,1.939214],[0.426095,1.9027],[0.562151,1.851687],[0.693181,1.786237],[0.817959,1.706414],[0.935263,1.612278],[1.043869,1.503892],[1.123207,1.380781],[1.195509,1.25375],[1.26065,1.123115],[1.318507,0.989189],[1.368956,0.852287],[1.411872,0.712722],[1.447132,0.570808],[1.474611,0.426861],[1.534583,0.256431],[1.646678,0.121223],[1.798064,0.03212],[1.975908,0],[1.975908,-0.75]]);
 	}
+//----------------------------------------------------------------------------------
+// examples
     
     //my_pulley(19, 139, 7, 25, 8, 0);
     
@@ -400,4 +405,6 @@ module GT2_5mm(pulley_t_ht)
     
     //pulley(profile = 11, num_teeth = 8, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8);
     
-    pulley(profile = 70, num_teeth = 35, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+    //pulley(profile = 70, num_teeth = 35, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+    pulley(profile = 71, num_teeth = 69, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+    
