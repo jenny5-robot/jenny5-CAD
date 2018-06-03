@@ -68,7 +68,11 @@ module sheet_upper_arm_motor_top()
 //---------------------------------------------------------------------------
 module elbow_sheet()
 {
-    color (aluminium_color) cube(elbow_sheet_size);
+    difference(){
+        color (aluminium_color) cube(elbow_sheet_size);
+        translate ([elbow_sheet_size[0], 60, 0] - display_tolerance_z) rotate ([0, 0, 12]) cube(elbow_sheet_size + 2 * display_tolerance_z);
+        translate ([-elbow_sheet_size[0], 60, 0] - display_tolerance_z) rotate ([0, 0, -12]) cube(elbow_sheet_size + 2 * display_tolerance_z);
+    }
 }
 //---------------------------------------------------------------------------
 module plate_body_articulation()
@@ -111,4 +115,6 @@ module plate_body_articulation()
 //---------------------------------------------------------------------------
 
 //plate_body_articulation();
-shoulder_plate();
+//shoulder_plate();
+
+elbow_sheet();
