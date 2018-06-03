@@ -1,5 +1,5 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: http://jenny5.org, https://jenny5-robot.github.io/
 // Source: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
@@ -16,15 +16,23 @@ include <params_arm.scad>
 use <../basic_scad/pulleys.scad>
 include <../basic_scad/tolerance.scad>
 use <../basic_scad/stepper_motors_housing.scad>
+use <../basic_scad/point_transformations_3d.scad>
+use <../basic_scad/potentiometer_support.scad>
+
+use <arm_motor_housings.scad>
 
 
+//---------------------------------------------------------------------------
+module forearm_potentiometer_support()
+{
+    potentiometer_support_with_screw_holes(30, 30, 10, 29, 8);
+}
 //---------------------------------------------------------------------------
 module upper_arm_motor_corner()
 {
     nema_motor_housing_with_base_holes(motor_offset_x = 14, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 13, nema_center_hole_radius = 5, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
 }
 //---------------------------------------------------------------------------
-
 module upper_arm_pulley()
 {
     difference(){
@@ -134,7 +142,6 @@ module shoulder_traction_pulley()
   }
 }
 //---------------------------------------------------------------------
-
 module forearm_pulley()
 {
     difference(){
@@ -145,6 +152,44 @@ module forearm_pulley()
     }
 }
 //---------------------------------------------------------------------------
+module shoulder_pulley()
+{
+  pulley_with_shaft(64, 29, 0, 0, 8, 4, m8_nut_radius, m8_nut_thick);
+}
+//---------------------------------------------------------------------------
+
+module elbow_pulley()
+{
+  difference(){
+      union(){
+          pulley(profile = 71, num_teeth = 69, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+          // motor housing
+        translate ([distance_to_fore_arm_gear - 3, -belt_hole_forearm_pulley / 2 - 2, 3]) rotate ([0, 90, 0]) 
+          forearm_motor_housing();
+          // potentiometer support
+        translate ([49, 15, 3]) rotate ([0, 90, 180]) forearm_potentiometer_support();
+      }
+     
+        // bearing hole    
+        translate ([0, 0, 0] - display_tolerance_z) cylinder( h = 11 + 2 * display_tolerance, r = rb_626_external_radius, $fn = 50);
+
+        // cut hole for belt
+        translate ([distance_to_fore_arm_gear, -belt_hole_forearm_pulley / 2, 0] - display_tolerance_z) cube([15, belt_hole_forearm_pulley, 20]);
+        // holes for fixing the forearm
+        // first bearing holes
+        for (i= [0 : 1]){
+            echo([fore_arm_x_offset, 0, 0] + rotate_z(90, rbearing_6905_enclosed_housing_holes_position[i]));
+            translate ([fore_arm_x_offset, 0, 0] + rotate_z(90, rbearing_6905_enclosed_housing_holes_position[i]) - display_tolerance_z) cylinder (h = 11 + 2 * display_tolerance, r = 2, $fn = 30);
+        }
+  }
+}
+//---------------------------------------------------------------------------
+module elbow_gear()
+{// partial gear
+    pot_gear(13, rb_626_external_radius, 10); 
+}
+//---------------------------------------------------------------------------
+
 
 //upper_arm_pulley();
 
