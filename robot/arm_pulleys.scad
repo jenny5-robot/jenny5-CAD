@@ -20,18 +20,8 @@ use <../basic_scad/point_transformations_3d.scad>
 use <../basic_scad/potentiometer_support.scad>
 
 use <arm_motor_housings.scad>
+use <arm_potentiometer_support.scad>
 
-
-//---------------------------------------------------------------------------
-module forearm_potentiometer_support()
-{
-    potentiometer_support_with_screw_holes(30, 30, 10, 29, 8);
-}
-//---------------------------------------------------------------------------
-module upper_arm_motor_corner()
-{
-    nema_motor_housing_with_base_holes(motor_offset_x = 14, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 13, nema_center_hole_radius = 5, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
-}
 //---------------------------------------------------------------------------
 module upper_arm_pulley()
 {

@@ -29,6 +29,12 @@ module shoulder_potentiometer_support()
 potentiometer_support_squared_with_screw_holes(length = 25, width = 42, height = 13, dist_between_support_holes = 30, dist_to_support_holes = 5, stopper_shift = 0);
 }
 //---------------------------------------------------------------------------
+module forearm_potentiometer_support()
+{
+    potentiometer_support_with_screw_holes(30, 30, 10, 29, 8);
+}
+//---------------------------------------------------------------------------
+
 
 potentiometer_support_shoulder_vertical();
 elbow_potentiometer_support();
