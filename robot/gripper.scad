@@ -1,9 +1,11 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: http://jenny5.org, https://jenny5-robot.github.io/
 // Source: github.com/jenny5-robot
 // MIT License
-//--------------------------------------------------------------
 
+//---------------------------------------------------------------
+
+include <../basic_scad/tolerance.scad>
 use <../basic_scad/basic_components.scad>
 include <params_gripper.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
@@ -15,7 +17,8 @@ use <../basic_scad/webcam_support.scad>
 include <../basic_scad/config.scad>
 use <../basic_scad/buttons.scad>
 
-include <../basic_scad/tolerance.scad>
+use <../basic_scad/webcam.scad>
+
 //-----------------------------------------------------------------------------------
 module gripper_lateral_support()
 {
@@ -347,10 +350,17 @@ module gripper_c920_support()
     }
 }
 //-----------------------------------------------------------------------------------
+module gripper_c920_support_with_camera()
+{
+    gripper_c920_support();
+    translate ([0, 0, c920_depth]) rotate ([90, 0, 0]) mirror ([0, 1, 0]) c920();
+}
+//---------------------------------------------------------------------------
+
 
 rotate([0, 90, 0])
 translate ([-gripper_lateral_sheet_size[0], -gripper_lateral_sheet_size[1] / 2, -gripper_motor_support_size[0] / 2 - gripper_lateral_sheet_size[2]]) gripper(gripper_pusher_position);
-
+//---------------------------------------------------------------------------
 //gripper_base();
 
 //gripper_motor_housing_cover(); // 1x
