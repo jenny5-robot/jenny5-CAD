@@ -9,8 +9,8 @@ include <../basic_scad/params_sheets.scad>
 include <../basic_scad/params_stepper_motors.scad>
 
 angle_shoulder = 0; // -180 (up)... 0(down) // default = 0
-angle_upper_arm = -115; // -180 ... 0 // default = -90
-angle_elbow = -90; // -180 (back), 0 (front) // default = 0
+angle_upper_arm = -50; // -180 ... 0 // default = -90
+angle_elbow = -135; // -180 (back), 0 (front) // default = 0
 angle_fore_arm = 45; // default = 90
 
 upper_arm_bone_length = 350;
@@ -51,20 +51,20 @@ sheet_upper_arm_motor_base_size = [42,  21 + distance_upper_arm_motor_shaft + rb
 
 sheet_upper_arm_motor_top_size = [42,  21 + distance_upper_arm_motor_shaft + rbearing_608_housing_size[0] / 2, 3];
 
-elbow_sheet_size = [47, 70, 3];
+elbow_sheet_size = [47, 130, 3];
 elbow_sheet_grip_length = 40;
 
-elbow_gear_grip_sheet_size = [15, 70, 3];
-elbow_gear_grip_sheet_holes = [4, 15, 62];
-elbow_gear_grip_sheet_holes_radius = [2, 2, 3];
+//elbow_gear_grip_sheet_size = [15, 70, 3];
+//elbow_gear_grip_sheet_holes = [4, 15, 62];
+//elbow_gear_grip_sheet_holes_radius = [2, 2, 3];
 
 arm_bracket_thick = 10;
 
-offset_shoulder_plate_bracket = 60;
+offset_shoulder_plate_bracket = 57;
 
 belt_hole_forearm_pulley = 50;
 
-fore_arm_z_offset = 13;
+fore_arm_z_offset = 20;
 fore_arm_x_offset = 42; // distance from elbow gear center to forearm support 
 
 distance_between_elbow_gear_grip_sheets = 17;
@@ -72,3 +72,5 @@ distance_between_elbow_gear_grip_sheets = 17;
 forearm_pulley_thick = 11;
 
 belt_tensioner_distance_between_holes = 22;
+
+elbow_connector_belt_tensioner_offset = 19;
