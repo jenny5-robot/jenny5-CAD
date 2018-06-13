@@ -26,8 +26,8 @@ module stepper_motor_holder()
             translate ([length / 2, width / 2, 0] + [i * nema_17_gearbox_dist_between_screw_holes / 2, j * nema_17_gearbox_dist_between_screw_holes / 2, 0]) cylinder (h = 1.5, r2 = m3_screw_radius, r1 = m3_nut_radius, $fn = 20);
             }
         for (k = [0: 4]){
-            echo([length / 2, width / 2, 0] + gauri_nema_17[k]);
-            translate ([length / 2, width / 2, 0] + gauri_nema_17[k]) cylinder (h = thick, r = m3_screw_radius, $fn = 20);
+            echo([length / 2, width / 2, 0] + nema_17_holes[k]);
+            translate ([length / 2, width / 2, 0] + nema_17_holes[k]) cylinder (h = thick, r = m3_screw_radius, $fn = 20);
         }
     }
 }

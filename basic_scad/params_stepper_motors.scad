@@ -78,7 +78,7 @@ nema_14_39BYGL215A_top_cylinder_height = 2;
 
 nema_11_sizes = [nema_11_width, nema_11_width, nema_11_height];
 
-gauri_nema_17 = [
+nema_17_holes = [
 [0, 0, 0], 
 [-nema_17_dist_between_screw_holes / 2, -nema_17_dist_between_screw_holes / 2, 0], 
 [-nema_17_dist_between_screw_holes / 2, nema_17_dist_between_screw_holes / 2, 0], 
@@ -95,7 +95,7 @@ nema_14_39BYGL215A_screw_hole_position = [
 ];
 
 
-gauri_nema_11 = [
+nema_11_holes = [
 [0, 0, 0], 
 [-nema_11_dist_between_screw_holes / 2, -nema_11_dist_between_screw_holes / 2, 0], 
 [-nema_11_dist_between_screw_holes / 2, nema_11_dist_between_screw_holes / 2, 0], 

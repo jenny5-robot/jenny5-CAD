@@ -76,10 +76,10 @@ module slip_ring_with_motor_support()
                 color (plastic_color) half_box(nema_17_width + 2 * wall_thick_2, 20 + wall_thick_2, 12, wall_thick_2, wall_thick_2, wall_thick_2);
                 translate([nema_17_width / 2 + wall_thick_2, - nema_17_width / 2 + 20, 0] - display_tolerance_z){
                     for (i=[1:4])
-                        translate(gauri_nema_17[i])
+                        translate(nema_17_holes[i])
                             cylinder(h = wall_thick_2 + 2 * display_tolerance, r = 1.5, $fn = 30);
                     // center hole
-                    translate(gauri_nema_17[0])
+                    translate(nema_17_holes[0])
                         cylinder(h = wall_thick_2 + 2 * display_tolerance, r = nema_17_motor_hole_radius_camiel, $fn = 30);
                 }
             }

@@ -75,7 +75,7 @@ module nema_motor_with_gearbox(motor_width, motor_height, gearbox_length, gearbo
 //--------------------------------------------------------------
 module nema_17()
 {
-	nema_motor(nema_17_42BYGHW804_width, nema_17_42BYGHW804_height, nema_17_42BYGHW804_shaft_length, nema_17_42BYGHW804_shaft_radius, nema_17_42BYGHW804_top_radius, nema_17_42BYGHW804_top_cylinder_height, gauri_nema_17);
+	nema_motor(nema_17_42BYGHW804_width, nema_17_42BYGHW804_height, nema_17_42BYGHW804_shaft_length, nema_17_42BYGHW804_shaft_radius, nema_17_42BYGHW804_top_radius, nema_17_42BYGHW804_top_cylinder_height, nema_17_holes);
 }
 //--------------------------------------------------------------
 module nema_14_39BYGL215A(shaft_length = 100, shaft_position = 0)
@@ -85,7 +85,7 @@ module nema_14_39BYGL215A(shaft_length = 100, shaft_position = 0)
 //--------------------------------------------------------------
 module nema_17_42BYGHW804()
 {
-	nema_motor(nema_17_42BYGHW804_width, nema_17_42BYGHW804_height, nema_17_42BYGHW804_shaft_length, nema_17_42BYGHW804_shaft_radius, nema_17_42BYGHW804_top_radius, nema_17_42BYGHW804_top_cylinder_height, gauri_nema_17);
+	nema_motor(nema_17_42BYGHW804_width, nema_17_42BYGHW804_height, nema_17_42BYGHW804_shaft_length, nema_17_42BYGHW804_shaft_radius, nema_17_42BYGHW804_top_radius, nema_17_42BYGHW804_top_cylinder_height, nema_17_holes);
 }
 //--------------------------------------------------------------
 module nema_23_57BYGH603()
