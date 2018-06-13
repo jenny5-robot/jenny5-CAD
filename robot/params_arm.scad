@@ -9,11 +9,11 @@ include <../basic_scad/params_sheets.scad>
 include <../basic_scad/params_stepper_motors.scad>
 
 angle_shoulder = 0; // -180 (up)... 0(down) // default = 0
-angle_upper_arm = -50; // -180 ... 0 // default = -90
+angle_upper_arm = -30; // -180 ... 0 // default = -90
 angle_elbow = -135; // -180 (back), 0 (front) // default = 0
 angle_fore_arm = 45; // default = 90
 
-upper_arm_bone_length = 350;
+upper_arm_bone_length = 400;
 fore_arm_length = 300;
 
 shoulder_shaft_radius = 12.5;
@@ -45,32 +45,42 @@ shoulder_bracket_length = 10;
 
 first_bearing_shoulder_offset = 0;
 
-distance_upper_arm_motor_shaft = 21 + 19;
+distance_upper_arm_motor_shaft = 21 + 15;
 
-sheet_upper_arm_motor_base_size = [42,  21 + distance_upper_arm_motor_shaft + rbearing_608_housing_size[0] / 2, 3];
+sheet_upper_arm_motor_base_size = [40,  21 + distance_upper_arm_motor_shaft + rbearing_608_housing_size[0] / 2, 3];
 
-sheet_upper_arm_motor_top_size = [42,  21 + distance_upper_arm_motor_shaft + rbearing_608_housing_size[0] / 2, 3];
+sheet_upper_arm_motor_top_size = [40,  21 + distance_upper_arm_motor_shaft + rbearing_608_housing_size[0] / 2, 3];
 
 elbow_sheet_size = [47, 130, 3];
 elbow_sheet_grip_length = 40;
-
-//elbow_gear_grip_sheet_size = [15, 70, 3];
-//elbow_gear_grip_sheet_holes = [4, 15, 62];
-//elbow_gear_grip_sheet_holes_radius = [2, 2, 3];
 
 arm_bracket_thick = 10;
 
 offset_shoulder_plate_bracket = 57;
 
-belt_hole_forearm_pulley = 50;
+belt_hole_forearm_pulley_length = 40;
+belt_hole_forearm_pulley_width = 14;
 
-fore_arm_z_offset = 20;
-fore_arm_x_offset = 42; // distance from elbow gear center to forearm support 
+fore_arm_z_offset = 15;
+fore_arm_x_offset = 41; // distance from elbow gear center to forearm support 
 
 distance_between_elbow_gear_grip_sheets = 17;
 
 forearm_pulley_thick = 11;
+elbow_pulley_thick = 11;
+
+forearm_motor_offset = 15;
 
 belt_tensioner_distance_between_holes = 22;
 
 elbow_connector_belt_tensioner_offset = 19;
+
+gripper_motor_sheet_size = [50, 50, 3];
+
+upper_arm_bone_top_shift = 11;
+
+upper_arm_bone_cleft_thick = 14; // where the elbow pulley will enter
+upper_arm_bone_cleft_length = 90; // where the elbow pulley will enter
+
+shoulder_left_right_motor_offset = 4;
+shoulder_left_right_belt_tensioner_offset = 30;
