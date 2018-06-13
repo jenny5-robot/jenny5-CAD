@@ -9,7 +9,7 @@ include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_tube_bracket.scad>
 
-angle_body_arm = 10;// 180 (closed - front)...-90 (open-back); // default = -90
+angle_body_arm = 0;// 180 (closed - front)...-90 (open-back); // default = -90
 
 body_rotation_linear_motor_position = 0;
 
@@ -37,7 +37,7 @@ body_sheet_size = [rbearing_6905_housing_size[0] + 2 * bracket_thick + 2 * wall_
 
 body_sheet_size_bottom = body_sheet_size + [10, 0, 0];
 
-body_motor_sheet_size = [40, distance_between_body_modules + 2 * body_shaft_radius + 2 * braket_lateral_wall_thick, 3];
+body_motor_sheet_size = [60, distance_between_body_modules + 2 * body_shaft_radius + 2 * braket_lateral_wall_thick, 3];
 
 body_intermodule_sheet_size = [40, distance_between_body_modules + 2 * body_shaft_radius + 2 * braket_lateral_wall_thick, 3];
 
