@@ -32,6 +32,8 @@ module belt_on_2_pulleys(r1, r2, distance_between_pulleys, belt_width = 6, belt_
     // belt around pulley
     belt_arc(r1, angle, 360 - angle, belt_width, belt_thick);
     translate ([distance_between_pulleys, 0, 0]) belt_arc(r2, 360 - angle, angle, belt_width, belt_thick);
+    
+    echo("belt length = ", length_belt_on_2_pulleys(r1, r2, distance_between_pulleys));
 }
 //------------------------------------------------------------------------
 function length_belt_on_2_pulleys(r1, r2, distance_between_pulleys) = PI * r1 + PI * r2 + 2 * sqrt(distance_between_pulleys * distance_between_pulleys + abs(r1-r2));
