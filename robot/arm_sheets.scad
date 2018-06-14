@@ -58,12 +58,51 @@ module shoulder_plate()
 //---------------------------------------------------------------------------
 module sheet_upper_arm_motor_base()
 {
-    color(aluminium_color) cube(sheet_upper_arm_motor_base_size);
+    difference(){
+        color(aluminium_color) cube(sheet_upper_arm_motor_base_size);
+        echo(sheet_upper_arm_motor_base_size=sheet_upper_arm_motor_base_size);
+        // motor holes
+        echo("motor holes");
+        for (i = [1 : 4]){
+            translate([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2 +  distance_upper_arm_motor_shaft, 0] + nema_17_holes[i] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            echo([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2 +  distance_upper_arm_motor_shaft, 0] + nema_17_holes[i], "radius = 1.5");
+        }
+        // rb608 bearing housing holes
+        echo("rb608 bearing housing holes");
+        for (i = [1 : 4]){
+            translate([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0] + rbearing_608_housing_holes_position[i] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            echo([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0] + rbearing_608_housing_holes_position[i], "radius = 2");
+        }
+// middle hole
+        echo("bearing housing middle hole", [sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0], "radius = 10");
+        translate([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 10, $fn = 30);
+        
+    }
 }
 //---------------------------------------------------------------------------
 module sheet_upper_arm_motor_top()
 {
-    color(aluminium_color) cube(sheet_upper_arm_motor_top_size);
+    difference(){
+        color(aluminium_color) cube(sheet_upper_arm_motor_top_size);
+        echo(sheet_upper_arm_motor_top_size = sheet_upper_arm_motor_top_size);
+        echo("motor gearbox holes");
+        for (i = [1 : 4]){
+            translate([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2 + distance_upper_arm_motor_shaft, 0] + gearbox_nema_17_holes_position[i] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            echo([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2 + distance_upper_arm_motor_shaft, 0] + gearbox_nema_17_holes_position[i], "radius = 1.5");
+        }
+// bearbox middle hole
+            translate([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2 + distance_upper_arm_motor_shaft, 0] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 11, $fn = 30);
+            echo([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2 + distance_upper_arm_motor_shaft, 0], "radius = 11");
+        // rb608 bearing housing holes
+        echo("rb608 bearing housing holes");
+        for (i = [1 : 4]){
+            translate([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0] + rbearing_608_housing_holes_position[i] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            echo([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0] + rbearing_608_housing_holes_position[i], "radius = 2");
+        }
+// middle hole
+        translate([sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 10, $fn = 30);
+        echo("bearing housing middle hole", [sheet_upper_arm_motor_base_size[0] / 2, rbearing_608_housing_size[0] / 2, 0]);
+    }
 }
 //---------------------------------------------------------------------------
 module elbow_sheet()
@@ -113,8 +152,17 @@ module plate_body_articulation()
     }
 }
 //---------------------------------------------------------------------------
+module gripper_motor_sheet()
+{
+    color (aluminium_color) cube(gripper_motor_sheet_size);
+}
+//---------------------------------------------------------------------------
 
 //plate_body_articulation();
 //shoulder_plate();
 
-elbow_sheet();
+//elbow_sheet();
+
+//sheet_upper_arm_motor_base();
+
+sheet_upper_arm_motor_top();
