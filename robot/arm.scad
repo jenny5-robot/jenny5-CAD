@@ -62,30 +62,29 @@ module upper_arm_motor_with_components()
     nema_17_with_19_1_gearbox();
     
     // screw for rotation
-    translate([0, - distance_upper_arm_motor_shaft, 0]) M8_hexa (nema_17_with_19_1_gearbox_height + 20); 
+    translate([0, - distance_upper_arm_motor_shaft, nema_17_with_19_1_gearbox_height + 11 + 3 + 2]) mirror ([0, 0, 1]) M8_hexa (nema_17_with_19_1_gearbox_height + 20); 
     
     // base sheet
-    translate ([-sheet_upper_arm_motor_base_size[0] / 2, -sheet_upper_arm_motor_base_size[1] + sheet_upper_arm_motor_base_size[0] / 2, -sheet_upper_arm_motor_base_size[2]]) sheet_upper_arm_motor_base();
+    translate ([-sheet_upper_arm_motor_base_size[0] / 2, -sheet_upper_arm_motor_base_size[1] + nema_17_width / 2, -sheet_upper_arm_motor_base_size[2]]) sheet_upper_arm_motor_base();
     
     // top sheet
-    translate ([-sheet_upper_arm_motor_top_size[0] / 2, -sheet_upper_arm_motor_top_size[1] + sheet_upper_arm_motor_top_size[0] / 2, nema_17_with_19_1_gearbox_height]) sheet_upper_arm_motor_top();
+    translate ([-sheet_upper_arm_motor_top_size[0] / 2, -sheet_upper_arm_motor_top_size[1] + nema_17_width / 2, nema_17_with_19_1_gearbox_height]) sheet_upper_arm_motor_top();
     
-    //motor pulley
+    //screw pulley
     translate ([0, -distance_upper_arm_motor_shaft, nema_17_with_19_1_gearbox_height + 5])
-    pulley(profile = 63, num_teeth = 18, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
+    upper_arm_screw_rotation_pulley();
   
   // shaft pulley at motor 
-    translate ([0, 0, nema_17_with_19_1_gearbox_height + 5])
-    pulley(profile = 63, num_teeth = 18, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
-
+    translate ([0, 0, nema_17_with_19_1_gearbox_height + 5]) upper_arm_motor_pulley();
+    
 // belt
     rotate ([0, 0, -90])
-    translate ([0, 0, nema_17_with_19_1_gearbox_height + 7]) belt_on_2_pulleys(14, 14, distance_upper_arm_motor_shaft, 6);
+    translate ([0, 0, nema_17_with_19_1_gearbox_height + 7]) belt_on_2_pulleys(11.6, 11.6, distance_upper_arm_motor_shaft, 6);
 // belt length    
     //echo (length_belt_on_2_pulleys(r1 = 14, r2 = 14, distance_between_pulleys = distance_upper_arm_motor_shaft));
 
     translate ([0, -distance_upper_arm_motor_shaft, nema_17_with_19_1_gearbox_height / 2 - 3])
-    pulley(profile = 51, num_teeth = 13, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
+    pulley(profile = "T5mm_pulley", num_teeth = 13, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
     
     // bearing housing
 // base
@@ -434,7 +433,7 @@ module arm()
     body_articulation();
 }
 //---------------------------------------------------------------------------
-//arm();
+arm();
 
 //body_articulation();
 
@@ -451,7 +450,7 @@ module arm()
 
 //motor_pulley_8mm_shaft(); //6x
 
-upper_arm_motor_with_components();
+//upper_arm_motor_with_components();
 
 //nema_17_housing_with_belt_tensioner_bearing_based_x_and_base_holes(20, 5);
 
