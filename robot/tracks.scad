@@ -86,7 +86,7 @@ module base_shaft_gear()
 module base_shaft_pulley()
 {    
     difference(){
-        pulley(profile = 64, num_teeth = 29, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8);
+        pulley(profile = "T5mm_pulley", num_teeth = 29, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_ht = 8);
         // M12 screw hole
         translate (-display_tolerance_z) cylinder(h = wheel_gear_height + 2 * display_tolerance, r = 12.5, $fn = 40);
     }

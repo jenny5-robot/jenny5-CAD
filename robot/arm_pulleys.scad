@@ -29,7 +29,7 @@ module upper_arm_pulley()
     difference(){
         rotate ([0, 0, 0])         
            color (plastic_color) {
-               pulley(profile = 56, num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
+               pulley(profile = "T5mm_pulley", num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
                 translate ([nema_17_with_19_1_gearbox_height / 2, -rbearing_608_housing_size[0] / 2 - 2, 8]) 
                 rotate([0, -90, 0]){
       // bottom corner
@@ -91,7 +91,7 @@ module shoulder_traction_pulley()
 {
     difference(){
                
-        color (plastic_color) pulley(profile = 56, num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
+        color (plastic_color) pulley(profile = "T5mm_pulley", num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
         
         translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = shoulder_shaft_radius, $fn = 30);
 
@@ -137,7 +137,7 @@ module forearm_pulley()
 {
     difference(){
                
-        color (plastic_color) pulley(profile = 56, num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
+        color (plastic_color) pulley(profile = "T5mm_pulley", num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
         
         translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = shoulder_shaft_radius, $fn = 30);
 
@@ -190,7 +190,7 @@ module forearm_pulley()
 //---------------------------------------------------------------------------
 module shoulder_pulley()
 {
-  pulley_with_shaft(64, 29, 0, 0, 8, 4, m8_nut_radius, m8_nut_thick);
+  pulley_with_shaft("T5mm_pulley", 29, 0, 0, 8, 4, m8_nut_radius, m8_nut_thick);
 }
 //---------------------------------------------------------------------------
 
@@ -198,7 +198,7 @@ module elbow_pulley()
 {
   difference(){
       union(){
-         color (plastic_color) pulley(profile = 71, num_teeth = 69, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+         color (plastic_color) pulley(profile = "T5mm_pulley", num_teeth = 69, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
           // motor housing
         translate ([distance_to_fore_arm_gear - 3, -belt_hole_forearm_pulley_length / 2 - 2, 3]) rotate ([0, 90, 0]) 
           forearm_motor_housing();
@@ -274,14 +274,24 @@ module elbow_gear()
     pot_gear(13, rb_626_external_radius, 10); 
 }
 //---------------------------------------------------------------------------
+module upper_arm_motor_pulley()
+{
+    pulley(profile = "HTD_3mm_pulley", num_teeth = 26, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+}
+//---------------------------------------------------------------------------
+module upper_arm_screw_rotation_pulley()
+{
+    pulley(profile = "HTD_3mm_pulley", num_teeth = 26, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+}
+//---------------------------------------------------------------------------
 
-
+upper_arm_screw_rotation_pulley();
 //upper_arm_pulley();
 
 //upper_arm_pulley_half_1();
 //upper_arm_pulley_half_2();
 
-elbow_pulley();
+//elbow_pulley();
 //elbow_pulley_top_half();
 //elbow_pulley_bottom_half();
 

@@ -137,7 +137,7 @@ module head_base()
 module nema_11_with_gearbox_and_pulley()
 {
     nema_11_with_27_1_gearbox();
-    translate ([0, 0, nema_11_with_27_1_gearbox_height + 3]) pulley_with_shaft(57, 12, 0, 0, 8, 3, 0, 0);
+    translate ([0, 0, nema_11_with_27_1_gearbox_height + 3]) pulley_with_shaft("T5mm_pulley", 12, 0, 0, 8, 3, 0, 0);
 }
 //---------------------------------------------------------------------------
 module hc_sr04_and_c920_with_support()
@@ -153,7 +153,7 @@ module hc_sr04_and_c920_with_support()
 module head_traction_pulley()
 {
     difference(){
-        rotate ([0, 0, 2.8]) pulley(profile = 60, num_teeth = 33, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+        rotate ([0, 0, 2.8]) pulley(profile = "T5mm_pulley", num_teeth = 33, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
         
         translate(- display_tolerance_z) cylinder(h = 11 + 2 * display_tolerance, r = 6, $fn = 30);
         

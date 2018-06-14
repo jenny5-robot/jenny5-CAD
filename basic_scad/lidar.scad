@@ -112,7 +112,7 @@ module tera_ranger_one_lidar()
 module tera_ranger_support_pulley()
 {
     difference(){
-        pulley(24, 30, 0, 0, 6);
+        pulley("T2_5mm_pulley", 30, 0, 0, 6);
         // hole for LIDAR support
         translate ([-6, -6, 0] - display_tolerance_z) cube([12, 12, 12]);
 // screw
@@ -126,7 +126,7 @@ module tera_ranger_support_pulley()
 module lidar_motor_pulley()
 {
     difference(){
-        pulley_with_shaft(24, 30, 0, 0, 6, 2.5);
+        pulley_with_shaft("T2_5mm_pulley", 30, 0, 0, 6, 2.5);
         
 // screw hole
         translate([0, 0, 4.5]) rotate([0, 90, 0]) cylinder (h = 15, r = 2, $fn = 20);

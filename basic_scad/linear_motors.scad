@@ -21,7 +21,7 @@ module linear_stepper_motor()
     translate ([-20, -20, nema_17_gearbox_shaft_length - 3]) cube([80, 40, 3]);
     
     // pulleys
-    my_pulley(24, 30, 0, 0, 0);
+    my_pulley("T5mm_pulley", 30, 0, 0, 0);
     
     translate([40, 0, 0]) my_pulley(24, 30, 0, 0, 0);
 }

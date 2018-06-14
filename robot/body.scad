@@ -89,7 +89,7 @@ module body_arm_bone(bone_length)
 module body_arm_traction_pulley()
 {
     difference(){
-        pulley(profile = 56, num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
+        pulley(profile = "T5mm_pulley", num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
         
         translate(- display_tolerance_z) cylinder(h = body_shaft_pulley_height + 2 * display_tolerance, r = body_shaft_radius, $fn = 30);
 
