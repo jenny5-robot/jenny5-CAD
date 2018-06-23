@@ -219,16 +219,18 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 		}
 			
 		//belt retainer / idler
+        // top
 		color (pulley_color)
             translate ([0,0, pulley_b_ht + pulley_t_ht + retainer_ht]) 
 		rotate_extrude($fn=num_teeth*4)  
 		polygon([[0,0],[pulley_OD/2,0],[pulley_OD/2 + retainer_ht , retainer_ht],[0 , retainer_ht],[0,0]]);
             
-		
+		// base
 		color (pulley_color)
-            translate ([0,0, pulley_b_ht - idler_ht + retainer_ht]) 
-		rotate_extrude($fn=num_teeth*4)  
-		polygon([[0,0],[pulley_OD/2 + idler_ht,0],[pulley_OD/2 , idler_ht],[0, idler_ht],[0,0]]);
+            translate ([0, 0, pulley_b_ht - idler_ht + retainer_ht]) 
+//		rotate_extrude($fn = num_teeth * 4)  
+	//	polygon([[0,0],[pulley_OD/2 + idler_ht,0],[pulley_OD/2 , idler_ht],[0, idler_ht],[0,0]]);
+        cylinder (h = 1.5, r = pulley_OD / 2 + 1.5);
         
 	
 	}
