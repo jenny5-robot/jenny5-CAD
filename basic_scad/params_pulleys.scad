@@ -20,3 +20,5 @@ roata_dintata_t2_5_30_dinti_height = 17;
 roata_dintata_t2_5_30_dinti_raza_flansa = 14;
 
 pulley_T5_6mm_thick = 11;
+
+pulley_HTD_5m_thick = 13;
