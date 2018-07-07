@@ -13,7 +13,7 @@ include <tolerance.scad>
 
 use <screws_nuts_washers.scad>
 use <radial_bearings.scad>
-
+include <as5147_params.scad>
 
 //---------------------------------------------------------------------------
 module belt_tensioner_cover(length, width)
@@ -212,7 +212,30 @@ module belt_tensioner_spacer(distance_between_screws)
     }
 }
 //---------------------------------------------------------------------------
-belt_tensioner_spacer(28);
+module belt_tensioner_spacer_with_sensor_support(distance_between_screws, width = 60)
+{
+    length = distance_between_screws + 2 * m4_nut_radius + 2 * wall_thick_2;
+    height = 5;
+    difference(){
+        color(plastic_color)
+        union(){
+            translate ([- length / 2, -6, 0]) cube([length, width, height]);
+        }
+// first screw
+        translate ([-distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = 2);
+        translate ([-distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = m4_nut_thick + display_tolerance, r = m4_nut_radius, $fn = 6);
+// second screw hole
+        translate ([distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = 2);
+        translate ([distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = m4_nut_thick + display_tolerance, r = m4_nut_radius, $fn = 6);
+        
+        for (i = [0: 3])
+             translate ([0, width - 6 - as5147_space_between_holes_length / 2 - 2, 0]) rotate ([0, 0, 90]) translate ([-as5147_distance_hole_from_margin - as5147_space_between_holes_length / 2, -as5147_distance_hole_from_margin - as5147_space_between_holes_width / 2, 0] + as5147_holes_position[i] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = 1.3);
+    }
+}
+//---------------------------------------------------------------------------
+belt_tensioner_spacer_with_sensor_support(distance_between_screws = 28, width = 60);
+
+//belt_tensioner_spacer(28);
 
 
 //belt_tensioner_external_with_bearings(0);
