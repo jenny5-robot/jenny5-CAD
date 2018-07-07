@@ -18,5 +18,7 @@ as5147_holes_position = [
 ];
 
 as5147_pin_area_length = 7.5;
+as5147_voltage_selector_pins_length = 10;
+as5147_voltage_selector_pins_position = 15.5;
 
 as5147_sensor_center = [as5147_distance_hole_from_margin + as5147_space_between_holes_length / 2, as5147_space_between_holes_length + as5147_space_between_holes_width / 2];

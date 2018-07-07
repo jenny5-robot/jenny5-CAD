@@ -13,8 +13,12 @@ module as5147()
 {
     difference(){
         union(){
+            // PCB
             color ("green") cube(as5147_board_size);
-            translate ([as5147_board_size[0] - as5147_pin_area_length, 0, as5147_board_size[2]]) color ("black") cube([23, as5147_board_size[1], 2 * 2.54]);
+            // connector
+            translate ([as5147_board_size[0] - as5147_pin_area_length, 0, as5147_board_size[2]]) color ("black") cube([as5147_pin_area_length, as5147_board_size[1], 9]);
+            // voltage selector pins
+            translate ([as5147_voltage_selector_pins_position, -as5147_voltage_selector_pins_length / 2 + as5147_board_size[1] / 2, as5147_board_size[2]]) color ("black") cube([2.54, as5147_voltage_selector_pins_length, 9]);
         }
         for (i = [0 : 3])
             translate (as5147_holes_position[i] - display_tolerance_z) cylinder (h = as5147_board_size[2] + 2 * display_tolerance, r = 1.3, $fn = 10);
@@ -42,6 +46,6 @@ module magnetic_holder_with_magnet(holder_height = 10, magnet_radius = 4, magnet
 }
 //--------------------------------------------------------------
 
-//as5147();
+as5147();
 
-magnetic_holder(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11);
+//magnetic_holder(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11);
