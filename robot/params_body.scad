@@ -44,7 +44,7 @@ body_intermodule_sheet_size = [40, distance_between_body_modules + 2 * body_shaf
 
 body_arm_shaft_length = body_height + 2 * tube_bracket_base_thick_strong + 2 * body_sheet_size[2] + 4 * body_shaft_radius + rbearing_6905_housing_size[2];
 
-body_shaft_pulley_height = 11;
+body_shaft_pulley_height = 13;
 
 body_arm_offset = 33;
 
