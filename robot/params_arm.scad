@@ -10,7 +10,7 @@ include <../basic_scad/params_stepper_motors.scad>
 
 angle_shoulder = 0; // -180 (up)... 0(down) // default = 0
 angle_upper_arm = -30; // -180 ... 0 // default = -90
-angle_elbow = -135; // -180 (back), 0 (front) // default = 0
+angle_elbow = -90; // -270 (closed), -180 (front) -90 (full extend) // default = 0
 angle_fore_arm = 45; // default = 90
 
 upper_arm_bone_length = 400;
@@ -39,7 +39,7 @@ upper_arm_shaft_support_length = 200;
 upper_arm_shaft_radius = 15;
 forearm_shaft_radius = 12.5;
 
-upper_arm_gear_thick = 11;
+upper_arm_gear_thick = 13;
 
 shoulder_bracket_length = 10;
 
@@ -71,7 +71,9 @@ elbow_pulley_thick = 11;
 
 forearm_motor_offset = 15;
 
-belt_tensioner_distance_between_holes = 22;
+body_motor_housing_interior_width = 41;
+
+belt_tensioner_distance_between_holes = (body_motor_housing_interior_width + 4) / 2;
 
 elbow_connector_belt_tensioner_offset = 19;
 
@@ -83,4 +85,9 @@ upper_arm_bone_cleft_thick = 14; // where the elbow pulley will enter
 upper_arm_bone_cleft_length = 90; // where the elbow pulley will enter
 
 shoulder_left_right_motor_offset = 4;
-shoulder_left_right_belt_tensioner_offset = 30;
+shoulder_left_right_belt_tensioner_offset = 20;
+
+body_stepper_motor_housing_belt_tensioner_offset = 20;
+
+
+elbow_rotation_motor_offset = 11;
