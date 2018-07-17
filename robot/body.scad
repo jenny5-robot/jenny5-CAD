@@ -1,5 +1,5 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
+// Author: Mihai Oltean, mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: jenny5.org, jenny5-robot.github.io
 // Source: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
@@ -48,8 +48,7 @@ use <../basic_scad/thrust_bearings.scad>
 use <../basic_scad/linear_motors.scad>
 include <../basic_scad/tolerance.scad>
 
-include <../basic_scad/params_pulleys.scad>
-use <../basic_scad/pulleys.scad>
+
 use <../basic_scad/radial_bearing_housing_pot_support.scad>
 
 use <../basic_scad/radial_bearings.scad>
@@ -67,6 +66,11 @@ include <../basic_scad/params_corners.scad>
 
 use <body_sheets.scad>
 use <motor_pulley.scad>
+use <body_pulleys.scad>
+
+include <../basic_scad/as5147_params.scad>
+use <../basic_scad/as5147.scad>
+
 
 //---------------------------------------------------------------------------
 module radial_bearing_housing_with_potentiometer_body()
@@ -84,55 +88,6 @@ module body_arm_bone(bone_length)
     echo("body arm bone length = ", bone_length);
     
     cylinder_empty(bone_length, body_shaft_radius, body_shaft_radius - 2);
-}
-//---------------------------------------------------------------------------
-module body_arm_traction_pulley()
-{
-    difference(){
-        pulley(profile = "T5mm_pulley", num_teeth = 44, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 8);
-        
-        translate(- display_tolerance_z) cylinder(h = body_shaft_pulley_height + 2 * display_tolerance, r = body_shaft_radius, $fn = 30);
-
-        // 1st screw hole
-        dist_to_1st_screw = 17;
-        
-        dist_to_nut = 14;
-        translate ([-25, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
-        // 1 st screw head hole
-        translate ([20, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 30, r = 3.5, $fn = 20);
-        // nut hole
-        hull(){
-            translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-            translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, body_shaft_pulley_height]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-        }
-
-        // 2nd screw hole
-        
-        translate ([-25, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 51, r = m4_screw_radius, $fn = 20);
-        // screw head hole
-        translate ([-40, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 20, r = 3.5, $fn = 20);
-        // nut hole
-        hull(){
-            translate ([dist_to_nut, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-            translate ([dist_to_nut, -dist_to_1st_screw, body_shaft_pulley_height]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-        }
-    }
-}
-//---------------------------------------------------------------------------
-module half_1_body_arm_traction_pulley()
-{
-    difference(){
-        body_arm_traction_pulley();
-        translate ([-0.25, -40, 0] - display_tolerance_z) cube([40, 80, 13] + 2 * display_tolerance_z);
-    }
-}
-//---------------------------------------------------------------------------
-module half_2_body_arm_traction_pulley()
-{
-    difference(){
-        body_arm_traction_pulley();
-        translate ([-40, -40, 0] - display_tolerance_z) cube([40.25, 80, 11] + 2 * display_tolerance_z);
-    }
 }
 //---------------------------------------------------------------------------
 module body_module_corner()
@@ -252,34 +207,45 @@ module body_potentiometer_shaft_gear()
     bone_gear(num_teeth = 17, screw_rotation_angle = 11, internal_radius = 12.5, height = 10);
 }
 //---------------------------------------------------------------------------
+module body_sensor_support()
+{
+    belt_tensioner_spacer_with_sensor_support(belt_tensioner_distance_between_holes, body_sheet_size[1] / 2 - 6 + as5147_space_between_holes_length / 2 + 2, 3);
+}
+//---------------------------------------------------------------------------
 module body_bearing_support_top()
 {
-        // bottom sheet
-       translate ([-body_sheet_size[0] / 2, -body_sheet_size[1] / 2, -body_shaft_radius - tube_bracket_base_thick_strong - body_sheet_size[2]] ) body_sheet_with_bearing();
+    // bottom sheet
+    translate ([-body_sheet_size[0] / 2, -body_sheet_size[1] / 2, -body_shaft_radius - tube_bracket_base_thick_strong - body_sheet_size[2]] ) body_sheet_with_bearing();
     // top sheet
-       translate ([-body_sheet_size[0] / 2, -body_sheet_size[1] / 2, body_shaft_radius + tube_bracket_base_thick_strong + body_sheet_size[2]]) mirror([0, 0, 1]) body_sheet_with_bearing();
+    translate ([-body_sheet_size[0] / 2, -body_sheet_size[1] / 2, body_shaft_radius + tube_bracket_base_thick_strong + body_sheet_size[2]]) mirror([0, 0, 1]) body_sheet_with_bearing();
     
-            translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
+    // sensor
+    translate ([0, -body_sheet_size[1] / 2 + 6 + 5, body_shaft_radius + tube_bracket_base_thick_strong + body_sheet_size[2] + 5]) mirror ([0, 0, 1]) body_sensor_support();
+    
+    // brackets
+    translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
-        translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
+    translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
         mirror([0, 0, 1])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
        
-        translate ([+body_sheet_size[0] / 2 - bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
+    translate ([+body_sheet_size[0] / 2 - bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
-        translate ([body_sheet_size[0] / 2 - bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
+    translate ([body_sheet_size[0] / 2 - bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
         mirror([0, 0, 1])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
 // back
-        translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
+    translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
-        translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
+    
+    translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
         mirror([0, 0, 1])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
        
-        translate ([+body_sheet_size[0] / 2 - bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
+    translate ([+body_sheet_size[0] / 2 - bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
-        translate ([body_sheet_size[0] / 2 - bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
+            
+    translate ([body_sheet_size[0] / 2 - bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
         mirror([0, 0, 1])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
 
@@ -531,6 +497,8 @@ body_with_arms();
 //half_1_body_arm_traction_pulley();
 //half_2_body_arm_traction_pulley();
 
+//body_bearing_support_top();
+
 //body_sheet_for_bearing_support();
 
 //body_sheet_for_motor_support();
@@ -568,3 +536,5 @@ body_with_arms();
 //tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, false); // 2x
 
 //body_motor_module();
+
+//body_sensor_support();
