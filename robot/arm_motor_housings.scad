@@ -13,6 +13,9 @@ use <../basic_scad/screws_nuts_washers.scad>
 include <../basic_scad/params_basic_components.scad>
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/belt_tensioner.scad>
+include <params_arm.scad>
+include <../basic_scad/as5147_params.scad>
+use <../basic_scad/as5147.scad>
 
 //---------------------------------------------------------------------------
 module shoulder_left_right_motor_housing()
@@ -28,21 +31,21 @@ module shoulder_left_right_motor_housing_with_belt_tensioner()
     // screws
         translate ([0, 0, wall_thick_base_motor_housing + m4_nut_thick + 1]) mirror([0, 0, 1]) M4_hexa(25);
     // bearings
-       translate ([0, 0, -bearing_4_height - 1]) 624rs(); 
-       translate ([0, 0, -2 * bearing_4_height - 1]) 624rs(); 
-       translate ([0, 0, -3 * bearing_4_height - 1]) 624rs(); 
+      translate ([0, 0, -bearing_4_height - 2]) 624rs(); 
+       translate ([0, 0, -2 * bearing_4_height - 2]) 624rs(); 
+       translate ([0, 0, -3 * bearing_4_height - 2]) 624rs(); 
     }
 // second belt tensioner
     translate ([shoulder_left_right_belt_tensioner_offset, nema_17_housing_width / 2 + belt_tensioner_distance_between_holes / 2, 0]){
     // screws
         translate ([0, 0, wall_thick_base_motor_housing + m4_nut_thick + 1]) mirror([0, 0, 1]) M4_hexa(25);
     // bearings
-       translate ([0, 0, -bearing_4_height - 1]) 624rs(); 
-       translate ([0, 0, -2 * bearing_4_height - 1]) 624rs(); 
-       translate ([0, 0, -3 * bearing_4_height - 1]) 624rs(); 
+       translate ([0, 0, -bearing_4_height - 2]) 624rs(); 
+       translate ([0, 0, -2 * bearing_4_height - 2]) 624rs(); 
+       translate ([0, 0, -3 * bearing_4_height - 2]) 624rs(); 
     }
-    
-    translate ([shoulder_left_right_belt_tensioner_offset, nema_17_housing_width / 2, -16]) mirror([0, 0, 1]) rotate ([0, 0, 90]) belt_tensioner_spacer(belt_tensioner_distance_between_holes);
+    // belt tensioner cover
+    translate ([shoulder_left_right_belt_tensioner_offset, nema_17_housing_width / 2, -3 * bearing_4_height - 4]) mirror([0, 0, 1]) rotate ([0, 0, 90]) belt_tensioner_spacer(belt_tensioner_distance_between_holes);
 }
 //---------------------------------------------------------------------------
 
@@ -58,41 +61,63 @@ module upper_arm_motor_housing()
 //---------------------------------------------------------------------------
 module body_stepper_motor_housing()
 {
-      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 4, belt_tensioner_offset = 20, nema_width = 41, motor_housing_interior_width = 41, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = 28, nema_housing_base_holes_V_distance = 33, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
+      nema_motor_housing_with_belt_tensioner_bearing_based_x(motor_offset = 4, belt_tensioner_offset = body_stepper_motor_housing_belt_tensioner_offset, nema_width = 41, motor_housing_interior_width = body_motor_housing_interior_width, nema_height = nema_17_height, base_height = 40, nema_center_hole_radius = 5, nema_holes_position = nema17_gearbox_tensioner_sheet_screw_hole_position, base_thick = wall_thick_base_motor_housing, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = 28, nema_housing_base_holes_V_distance = 33, sunken_base_holes = 1, belt_tensioner_distance_between_holes = belt_tensioner_distance_between_holes, motor_play_x = 10);
 }
 //---------------------------------------------------------------------------
+module shoulder_sensor_support()
+{
+        belt_tensioner_spacer_with_sensor_support(belt_tensioner_distance_between_holes, body_stepper_motor_housing_belt_tensioner_offset + rb_6905_external_radius + plate_body_size[2] + 6 + as5147_space_between_holes_length / 2 + 2, 3);
+}
+//---------------------------------------------------------------------------
+module belt_tensioner_spacer_with_sensor_support_and_sensor()
+{
+    // support
+    shoulder_sensor_support();
+    
+    // sensor
+    translate ([-as5147_board_size[1] / 2, body_stepper_motor_housing_belt_tensioner_offset + rb_6905_external_radius + plate_body_size[2] + as5147_space_between_holes_length / 2 + 2, 4 + 1]) rotate ([0, 0, -90]) as5147();
+}
+//---------------------------------------------------------------------------
+
 module body_stepper_motor_housing_with_belt_tensioner()
 {
     body_stepper_motor_housing();
 // first belt tensioner
-    translate ([washer_4_12_external_radius + wall_thick_base_motor_housing + 10, nema_17_housing_width / 2 - belt_tensioner_distance_between_holes / 2, 0]){
+    translate ([body_stepper_motor_housing_belt_tensioner_offset, (body_motor_housing_interior_width + 4) / 2 - belt_tensioner_distance_between_holes / 2, 0]){
     // screws
-        translate ([0, 0, wall_thick_base_motor_housing + m4_nut_thick + 1]) mirror([0, 0, 1]) M4_hexa(25);
+        translate ([0, 0, wall_thick_base_motor_housing + m4_nut_thick + 1]) mirror([0, 0, 1]) M4_hexa(45);
     // bearings
        translate ([0, 0, -bearing_4_height - 1]) 624rs(); 
        translate ([0, 0, -2 * bearing_4_height - 1]) 624rs(); 
        translate ([0, 0, -3 * bearing_4_height - 1]) 624rs(); 
     }
 // second belt tensioner
-    translate ([washer_4_12_external_radius + wall_thick_base_motor_housing + 10, nema_17_housing_width / 2 + belt_tensioner_distance_between_holes / 2, 0]){
+    translate ([body_stepper_motor_housing_belt_tensioner_offset, (body_motor_housing_interior_width + 4) / 2 + belt_tensioner_distance_between_holes / 2, 0]){
     // screws
-        translate ([0, 0, wall_thick_base_motor_housing + m4_nut_thick + 1]) mirror([0, 0, 1]) M4_hexa(25);
+        translate ([0, 0, wall_thick_base_motor_housing + m4_nut_thick + 1]) mirror([0, 0, 1]) M4_hexa(45);
     // bearings
        translate ([0, 0, -bearing_4_height - 1]) 624rs(); 
        translate ([0, 0, -2 * bearing_4_height - 1]) 624rs(); 
        translate ([0, 0, -3 * bearing_4_height - 1]) 624rs(); 
     }
     
-    translate ([washer_4_12_external_radius + wall_thick_base_motor_housing + 10, nema_17_housing_width / 2, -16]) mirror([0, 0, 1]) rotate ([0, 0, 90]) belt_tensioner_spacer(belt_tensioner_distance_between_holes);
+    translate ([body_stepper_motor_housing_belt_tensioner_offset, (body_motor_housing_interior_width + 4) / 2, -16 - 5 - 3 - 10]) rotate ([0, 0, 90]) belt_tensioner_spacer_with_sensor_support_and_sensor();
     
 }
 //---------------------------------------------------------------------------
 module upper_arm_motor_corner()
 {
-    nema_motor_housing_with_base_holes(motor_offset_x = 2, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], motor_housing_interior_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 13, nema_center_hole_radius = 10, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
+    nema_motor_housing_with_base_holes(motor_offset_x = elbow_rotation_motor_offset, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], motor_housing_interior_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 13, nema_center_hole_radius = 10, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
 }
 //---------------------------------------------------------------------------
 
-upper_arm_motor_corner();
+//upper_arm_motor_corner();
 //forearm_motor_housing();
 //shoulder_motor_housing();
+//body_stepper_motor_housing_with_belt_tensioner();
+
+//belt_tensioner_spacer_with_sensor_support_and_sensor();
+
+//shoulder_sensor_support();
+
+shoulder_left_right_motor_housing_with_belt_tensioner();
