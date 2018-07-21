@@ -107,7 +107,7 @@ module body_stepper_motor_housing_with_belt_tensioner()
 //---------------------------------------------------------------------------
 module upper_arm_motor_corner()
 {
-    nema_motor_housing_with_base_holes(motor_offset_x = elbow_rotation_motor_offset, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], motor_housing_interior_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 13, nema_center_hole_radius = 10, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
+    nema_motor_housing_with_base_holes(motor_offset_x = elbow_rotation_motor_offset, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], motor_housing_interior_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 22, nema_center_hole_radius = 10, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
 }
 //---------------------------------------------------------------------------
 
