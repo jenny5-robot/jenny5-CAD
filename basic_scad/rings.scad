@@ -9,15 +9,40 @@ include <params_screws_nuts_washers.scad>
 include <tolerance.scad>
 
 //-------------------------------------------------------------
+module ring(external_radius, internal_radius, height)
+{
+    
+    difference(){
+        cylinder(h = height, r = external_radius, $fn = 50);
+        translate (-display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = internal_radius, $fn = 50);
+    }
+}
+//-------------------------------------------------------------
+module ring_with_clamp(external_radius, internal_radius, height)
+{
+    difference(){
+        union(){
+            translate ([-external_radius, - external_radius, 0]) cube([external_radius + 8 + internal_radius, 2 * external_radius, 8]);
+            translate ([0, 0, 8]) cylinder(h = height, r = external_radius, $fn = 50);
+        }
+        // midle hole
+        translate (-display_tolerance_z) cylinder(h = height + 8 + 2 * display_tolerance, r = internal_radius, $fn = 50);
+        // screw hole
+        translate ([internal_radius + 4, - external_radius, 4] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = external_radius + 2 * external_radius + 2 * display_tolerance, r = 2, $fn = 20);
+        // window
+        cube([external_radius + 8 - (external_radius - internal_radius), 2, height + 8]);
+    } 
+}
+//-------------------------------------------------------------
 module ring_with_flanges(external_radius, internal_radius, height, flange_size = 1.5)
 {
     
   difference(){
       union(){
-    cylinder(h = height, r = external_radius, $fn = 50);
+        cylinder(h = height, r = external_radius, $fn = 50);
           // flanges
-          cylinder(h = flange_size, r2 = external_radius, r1= external_radius + flange_size , $fn = 50);
-          translate ([0, 0, height - flange_size])cylinder(h = flange_size, r1 = external_radius, r2= external_radius + flange_size , $fn = 50);
+        cylinder(h = flange_size, r2 = external_radius, r1= external_radius + flange_size , $fn = 50);
+        translate ([0, 0, height - flange_size])cylinder(h = flange_size, r1 = external_radius, r2= external_radius + flange_size , $fn = 50);
       }
     translate (-display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = internal_radius, $fn = 50);
   }
@@ -56,8 +81,10 @@ module potentiometer_button()
 
 //ring_with_flanges(10, 6.6, 12);
 
-ring_with_flanges(7, 4, 8, 0);
+//ring_with_flanges(7, 4, 8, 0);
 
 //ring_with_flanges_and_rectangular_hole(10, 10.5, 9);
 
 //potentiometer_button();
+
+ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 5);
