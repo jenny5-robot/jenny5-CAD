@@ -317,4 +317,5 @@ module GT2_5mm(pulley_t_ht)
 //        pulley(profile = "T2_5mm_pulley", num_teeth = 16, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
 //        pulley(profile = "T5mm_pulley", num_teeth = 16, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
      //   pulley(profile = "HTD_3mm_pulley", num_teeth = 20, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
-    pulley(profile = "HTD_5mm_pulley", num_teeth = 12, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+    //pulley(profile = "HTD_5mm_pulley", num_teeth = 12, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+//pulley_with_shaft(profile = "HTD_5mm_pulley", num_teeth = 12, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = 4, nut_radius = 8, nut_height = 0);

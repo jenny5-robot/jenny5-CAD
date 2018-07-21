@@ -49,7 +49,7 @@ module upper_arm_pulley()
         dist_to_nut = 14;
         translate ([-25, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 45, r = m4_screw_radius, $fn = 20);
         // 1 st screw head hole
-        translate ([15, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 30, r = 3.5, $fn = 20);
+        translate ([18, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 30, r = 3.5, $fn = 20);
         // nut hole
         hull(){
             translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
@@ -74,22 +74,7 @@ module upper_arm_pulley()
   //-16 - 8 - 5
 }
 //---------------------------------------------------------------------------
-module upper_arm_pulley_half_1()
-{
-    difference(){
-        upper_arm_pulley();
-        translate ([-0.25, -40, -1]) cube([40, 100, 100]);
-    }
-}
-//---------------------------------------------------------------------------
-module upper_arm_pulley_half_2()
-{
-    difference(){
-        upper_arm_pulley();
-        translate ([-40, -40, -1]) cube([40.25, 100, 100]);
-    }
-}
-//---------------------------------------------------------------------------
+
 module shoulder_traction_pulley()
 {
     spacer_length = 4;
@@ -131,22 +116,6 @@ module shoulder_traction_pulley()
         // cut window
         cube([2, 40, 20]);
   }
-}
-//---------------------------------------------------------------------
-module half_1_shoulder_traction_pulley()
-{
-    difference(){
-        shoulder_traction_pulley();
-        translate ([-0.25, -40, 0] - display_tolerance_z) cube([40, 80, 19] + 2 * display_tolerance_z);
-    }
-}
-//---------------------------------------------------------------------------
-module half_2_shoulder_traction_pulley()
-{
-    difference(){
-        shoulder_traction_pulley();
-        translate ([-40, -40, 0] - display_tolerance_z) cube([40.25, 80, 19] + 2 * display_tolerance_z);
-    }
 }
 //---------------------------------------------------------------------------
 
@@ -293,13 +262,13 @@ module elbow_gear()
 //---------------------------------------------------------------------------
 module upper_arm_motor_pulley()
 {
-    pulley_with_shaft(profile = "HTD_3mm_pulley", num_teeth = 26, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8, shaft_radius = m8_screw_radius, nut_radius = 0, nut_height = 0);
+    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 20, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = 0, nut_height = 0);
     translate([-4, 3, 0]) cube([8, 2, 11]);
 }
 //---------------------------------------------------------------------------
 module upper_arm_screw_rotation_pulley()
 {
-    pulley_with_shaft(profile = "HTD_3mm_pulley", num_teeth = 26, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8, shaft_radius = m8_screw_radius, nut_radius = m8_nut_radius, nut_height = m8_nut_thick);
+    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 20, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = m8_nut_radius, nut_height = m8_nut_thick);
 }
 //---------------------------------------------------------------------------
 
@@ -307,9 +276,11 @@ module upper_arm_screw_rotation_pulley()
 //upper_arm_motor_pulley();
 //upper_arm_pulley();
 
+//elbow_pulley_bottom_half();
+
 
 //elbow_pulley();
 
-shoulder_traction_pulley();
+//shoulder_traction_pulley();
 
 //forearm_pulley();
