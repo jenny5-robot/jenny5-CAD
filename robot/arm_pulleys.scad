@@ -119,7 +119,7 @@ module shoulder_traction_pulley()
 }
 //---------------------------------------------------------------------------
 
-module forearm_pulley()
+module fore_arm_pulley()
 {
     difference(){
                
@@ -217,22 +217,22 @@ module elbow_pulley()
       
       // hole for the first belt tensioner shaft
       
-      translate ([distance_to_fore_arm_gear - 5, -belt_hole_forearm_pulley_length / 2 + rb_624_external_radius, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 25, r = 2, $fn = 10);
+      translate ([distance_to_fore_arm_gear - 5, -belt_hole_fore_arm_pulley_length / 2 + rb_624_external_radius, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 25, r = 2, $fn = 10);
       // hole for the 2nd belt tensioner shaft
       
       hull(){
-        translate ([distance_to_fore_arm_gear - 7.5, belt_hole_forearm_pulley_length / 2 - rb_624_external_radius, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 30, r = 2, $fn = 10);
-        translate ([distance_to_fore_arm_gear - 7.5, belt_hole_forearm_pulley_length / 2 - rb_624_external_radius - 10, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 30, r = 2, $fn = 10);
+        translate ([distance_to_fore_arm_gear - 7.5, belt_hole_fore_arm_pulley_length / 2 - rb_624_external_radius, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 30, r = 2, $fn = 10);
+        translate ([distance_to_fore_arm_gear - 7.5, belt_hole_fore_arm_pulley_length / 2 - rb_624_external_radius - 10, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 30, r = 2, $fn = 10);
       }
       
       // screw hole for belt tensioner pusher 1st
       translate ([distance_to_fore_arm_gear - 4, 5, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) cylinder (h = 55, r = 2, $fn = 20);
       // nut hole
-      translate ([distance_to_fore_arm_gear - 4, belt_hole_forearm_pulley_length / 2 + 2, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) rotate ([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+      translate ([distance_to_fore_arm_gear - 4, belt_hole_fore_arm_pulley_length / 2 + 2, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) rotate ([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
       
       // screw hole for belt tensioner pusher 2nd
-      translate ([distance_to_fore_arm_gear + belt_hole_forearm_pulley_width + 4, 5, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) cylinder (h = 55, r = 2, $fn = 20);
-      translate ([distance_to_fore_arm_gear + belt_hole_forearm_pulley_width + 4, belt_hole_forearm_pulley_length / 2 + 2, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) rotate ([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+      translate ([distance_to_fore_arm_gear + belt_hole_fore_arm_pulley_width + 4, 5, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) cylinder (h = 55, r = 2, $fn = 20);
+      translate ([distance_to_fore_arm_gear + belt_hole_fore_arm_pulley_width + 4, belt_hole_fore_arm_pulley_length / 2 + 2, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) rotate ([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
       
 
   }
@@ -283,4 +283,4 @@ module upper_arm_screw_rotation_pulley()
 
 //shoulder_traction_pulley();
 
-//forearm_pulley();
+//fore_arm_pulley();

@@ -37,7 +37,7 @@ upper_arm_motor_housing_shift = -10;
 upper_arm_shaft_support_length = 200;
 
 upper_arm_shaft_radius = 15;
-forearm_shaft_radius = 15;
+fore_arm_shaft_radius = 15;
 
 upper_arm_gear_thick = 13;
 
@@ -58,18 +58,18 @@ arm_bracket_thick = 10;
 
 offset_shoulder_plate_bracket = 57;
 
-belt_hole_forearm_pulley_length = 40;
-belt_hole_forearm_pulley_width = 14;
+belt_hole_fore_arm_pulley_length = 40;
+belt_hole_fore_arm_pulley_width = 14;
 
 fore_arm_z_offset = 15;
 fore_arm_x_offset = 41; // distance from elbow gear center to forearm support 
 
 distance_between_elbow_gear_grip_sheets = 17;
 
-forearm_pulley_thick = 11;
-elbow_pulley_thick = 11;
+fore_arm_pulley_thick = 13;
+elbow_pulley_thick = 13;
 
-forearm_motor_offset = 15;
+fore_arm_motor_offset = 15;
 
 body_motor_housing_interior_width = 41;
 

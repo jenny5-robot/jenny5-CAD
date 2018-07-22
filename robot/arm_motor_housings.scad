@@ -49,9 +49,9 @@ module shoulder_left_right_motor_housing_with_belt_tensioner()
 }
 //---------------------------------------------------------------------------
 
-module forearm_motor_housing()
+module fore_arm_motor_housing()
 {
-    nema_motor_housing_with_base_holes(motor_offset_x = forearm_motor_offset, motor_offset_y = 0, nema_width = nema_11_width, motor_housing_interior_width = belt_hole_forearm_pulley_length, nema_height = nema_11_height, base_height = 20, nema_center_hole_radius = 5.5, nema_holes_position = gearbox_nema_11_holes_position, base_thick = 3, dist_to_base_holes_center_z = 14, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 45, sunken_base_holes = 0, motor_play_x = 0);
+    nema_motor_housing_with_base_holes(motor_offset_x = fore_arm_motor_offset, motor_offset_y = 0, nema_width = nema_11_width, motor_housing_interior_width = belt_hole_fore_arm_pulley_length, nema_height = nema_11_height, base_height = 20, nema_center_hole_radius = 5.5, nema_holes_position = gearbox_nema_11_holes_position, base_thick = 3, dist_to_base_holes_center_z = 14, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 45, sunken_base_holes = 0, motor_play_x = 0);
 }
 //---------------------------------------------------------------------------
 module upper_arm_motor_housing()
@@ -112,7 +112,7 @@ module upper_arm_motor_corner()
 //---------------------------------------------------------------------------
 
 //upper_arm_motor_corner();
-//forearm_motor_housing();
+//fore_arm_motor_housing();
 //shoulder_motor_housing();
 //body_stepper_motor_housing_with_belt_tensioner();
 
