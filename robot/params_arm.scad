@@ -37,7 +37,7 @@ upper_arm_motor_housing_shift = -10;
 upper_arm_shaft_support_length = 200;
 
 upper_arm_shaft_radius = 15;
-forearm_shaft_radius = 12.5;
+forearm_shaft_radius = 15;
 
 upper_arm_gear_thick = 13;
 
@@ -91,3 +91,5 @@ body_stepper_motor_housing_belt_tensioner_offset = 20;
 
 
 elbow_rotation_motor_offset = 11;
+
+fore_arm_bone_top_shift = 11;

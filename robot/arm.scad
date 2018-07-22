@@ -52,6 +52,8 @@ include <../basic_scad/params_potentiometers.scad>
 
 use <../basic_scad/as5147.scad>
 
+use <../basic_scad/rings.scad>
+
 
 //---------------------------------------------------------------------------
 module rbearing_608_housing_thicker(extra_thick = 0)
@@ -81,7 +83,7 @@ module upper_arm_motor_with_components()
     
 // belt
     rotate ([0, 0, -90])
-    translate ([0, 0, nema_17_with_19_1_gearbox_height + 7]) belt_on_2_pulleys(11.6, 11.6, distance_upper_arm_motor_shaft, 6);
+    translate ([0, 0, nema_17_with_19_1_gearbox_height + 7]) belt_on_2_pulleys(15, 15, distance_upper_arm_motor_shaft, 10);
 // belt length    
     //echo (length_belt_on_2_pulleys(r1 = 14, r2 = 14, distance_between_pulleys = distance_upper_arm_motor_shaft));
 
@@ -104,12 +106,6 @@ module elbow_pulley_with_components()
 {
     // pulley 
     elbow_pulley();
-    
-    // belt tensioner bearings
-   // translate ([distance_to_fore_arm_gear - 3, -belt_hole_forearm_pulley / 2 - 2, 3]) rotate ([0, 90, 0]) {
-    //    translate ([12, belt_hole_forearm_pulley / 2 + wall_thick_lateral_motor_housing - 15, -5]) belt_tensioner_slider();
-    //    translate ([12, belt_hole_forearm_pulley / 2 + wall_thick_lateral_motor_housing + 15, -5]) belt_tensioner_slider();
-   // }
     
     // M6 screw
     translate([0, 0, 11 / 2.0 + upper_arm_shaft_radius + 3]) mirror([0, 0, 1]) M6_hexa_screw(35);
@@ -153,6 +149,7 @@ module forearm_bearing_support()
 //---------------------------------------------------------------------------
 module fore_arm()
 {
+    /*
 // shaft
     forearm_bone();
     // pulley
@@ -173,8 +170,41 @@ module fore_arm()
     //                        gripper()
     ;
     
+    */
+    
+        // bone
+   forearm_bone();
+    // support for elbow pulley bearings
+//    translate ([0, - upper_arm_bone_length + upper_arm_bone_top_shift + 2 * rb_626_external_radius , 0]) rotate ([90, 0, 0]) tube_interior_cover(2 * rb_626_external_radius);
+         
+    // pulley for left-right rotation
+    rotate ([0, 0, 90]) translate ([0, 0, 13]) mirror([0, 0, 1]) upper_arm_pulley(); 
+    
+    // stepper motor 
+    translate ([0, -nema_17_with_19_1_gearbox_height / 2, -(rbearing_608_housing_size[0] + elbow_rotation_motor_offset + nema_17_width / 2)]) 
+    rotate([-90, 0, 0])
+    //translate ([0, 0, -distance_upper_arm_motor_shaft])
+    upper_arm_motor_with_components()
+    ;
+    
+    // 6905 bearing
+    translate ([0, 0, forearm_pulley_thick + 2 + 2 + 5]) 6906rs();    
+    
+    translate ([0, 0, forearm_pulley_thick + 2 + 40 + 2 + 5]) 6906rs();
+    // gripper
+    translate([0, 0, fore_arm_length - gripper_motor_support_size[2]])
+        rotate([0, 90, 0])
+            translate ([-gripper_lateral_sheet_size[0], -gripper_lateral_sheet_size[1] / 2, -gripper_motor_support_size[0] / 2 - gripper_lateral_sheet_size[2]]) 
+    //                        gripper()
+    ;
+    
 // camera support
-    translate ([-forearm_shaft_radius, c920_depth / 2 + c920_dist_between_holder_holes / 2, fore_arm_length - 24]) rotate([0, 0, -90])  gripper_c920_support_with_camera();
+    translate ([-forearm_shaft_radius, c920_depth / 2 + c920_dist_between_holder_holes / 2, fore_arm_length + 10]) rotate([0, 0, -90])  gripper_c920_support_with_camera();
+    
+    translate ([0, 6.5, fore_arm_length - fore_arm_bone_top_shift - rb_626_external_radius]) rotate ([90, 0, 0]) elbow_pulley();
+    
+    // belt
+    translate ([0, upper_arm_motor_housing_shift + elbow_pulley_thick / 2 + 12, -(rbearing_608_housing_size[0] / 2 + upper_arm_bone_top_shift)]) rotate([0, -90, 90]) belt_on_2_pulleys(10, 30, fore_arm_length + rbearing_608_housing_size[0] / 2 - rb_626_external_radius, 9);
 }
 //---------------------------------------------------------------------------
 module fore_arm_with_elbow_pulley()
@@ -460,9 +490,9 @@ module arm()
     body_articulation();
 }
 //---------------------------------------------------------------------------
-//arm();
+arm();
 
-body_articulation();
+//body_articulation();
 
 //shoulder();
 //upper_arm();
@@ -543,3 +573,5 @@ body_articulation();
 //upper_arm_screw_rotation_pulley();
 
 //upper_arm_motor_pulley();
+
+//ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 4);
