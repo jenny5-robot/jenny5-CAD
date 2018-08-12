@@ -1,5 +1,5 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// Jenny5 details: jenny5.org, https://jenny5-robot.github.io/
 // Source: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
@@ -16,6 +16,8 @@ use <../basic_scad/belt_tensioner.scad>
 include <params_arm.scad>
 include <../basic_scad/as5147_params.scad>
 use <../basic_scad/as5147.scad>
+
+include <../basic_scad/tolerance.scad>
 
 //---------------------------------------------------------------------------
 module shoulder_left_right_motor_housing()
@@ -66,7 +68,7 @@ module body_stepper_motor_housing()
 //---------------------------------------------------------------------------
 module shoulder_sensor_support()
 {
-        belt_tensioner_spacer_with_sensor_support(belt_tensioner_distance_between_holes, body_stepper_motor_housing_belt_tensioner_offset + rb_6905_external_radius + plate_body_size[2] + 6 + as5147_space_between_holes_length / 2 + 2, 3);
+        belt_tensioner_spacer_with_sensor_support(distance_between_screws = belt_tensioner_distance_between_holes, width = body_stepper_motor_housing_belt_tensioner_offset + rb_6905_external_radius + plate_body_size[2] + 6 + as5147_space_between_holes_length / 2 + as5147_distance_hole_from_margin + 1);
 }
 //---------------------------------------------------------------------------
 module belt_tensioner_spacer_with_sensor_support_and_sensor()
@@ -106,12 +108,22 @@ module body_stepper_motor_housing_with_belt_tensioner()
 }
 //---------------------------------------------------------------------------
 module upper_arm_motor_corner()
-{
-    nema_motor_housing_with_base_holes(motor_offset_x = elbow_rotation_motor_offset, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], motor_housing_interior_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 22, nema_center_hole_radius = 10, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
+{   
+    difference(){
+        nema_motor_housing_with_base_holes(motor_offset_x = elbow_rotation_motor_offset, motor_offset_y = 0, nema_width = rbearing_608_housing_size[0], motor_housing_interior_width = rbearing_608_housing_size[0], nema_height = 20, base_height = 18, nema_center_hole_radius = 10, nema_holes_position = rbearing_608_housing_holes_position, base_thick = 3, dist_to_base_holes_center_z = 18, nema_housing_base_holes_H_distance = undef, nema_housing_base_holes_V_distance = undef, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0, motor_play_x = 0);    
+        hull(){
+            translate ([3 + 10, 4, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = 2, $fn = 15);
+            translate ([3 + 10, 7, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = 2, $fn = 15);
+        }
+        hull(){
+            translate ([3 + 10, rbearing_608_housing_size[0] -0, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = 2, $fn = 15);
+            translate ([3 + 10, rbearing_608_housing_size[0] - 3, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = 2, $fn = 15);
+        }
+    }
 }
 //---------------------------------------------------------------------------
 
-//upper_arm_motor_corner();
+upper_arm_motor_corner();
 //fore_arm_motor_housing();
 //shoulder_motor_housing();
 //body_stepper_motor_housing_with_belt_tensioner();
@@ -120,4 +132,4 @@ module upper_arm_motor_corner()
 
 //shoulder_sensor_support();
 
-shoulder_left_right_motor_housing_with_belt_tensioner();
+//shoulder_left_right_motor_housing_with_belt_tensioner();
