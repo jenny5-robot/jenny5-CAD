@@ -216,7 +216,7 @@ module elbow_pulley()
 {
   difference(){
       union(){
-         color (plastic_color) pulley(profile = "T5mm_pulley", num_teeth = 50, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+         color (plastic_color) pulley(profile = "T5mm_pulley", num_teeth = elbow_pulley_num_teeth, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
           // motor housing
       //  translate ([distance_to_fore_arm_gear - 3, -belt_hole_forearm_pulley_length / 2 - 2, 3]) rotate ([0, 90, 0]) 
         //  forearm_motor_housing();
@@ -270,6 +270,48 @@ module elbow_pulley()
   }
 }
 //---------------------------------------------------------------------------
+module wrist_pulley()
+{
+  difference(){
+      union(){
+         color (plastic_color) pulley(profile = "T5mm_pulley", num_teeth = wrist_pulley_num_teeth, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+      }
+     
+        // shaft hole
+      translate ( -display_tolerance_z) cylinder( h = elbow_pulley_thick + 2 * display_tolerance, r = rb_626_external_radius - 2, $fn = 50);
+
+        // bearing hole  bottom  
+      translate ( -display_tolerance_z) cylinder( h = elbow_pulley_thick / 2 - 3 + display_tolerance, r = rb_626_external_radius, $fn = 50);
+
+        // bearing hole  top
+      translate ([0, 0, elbow_pulley_thick / 2 + 3]) cylinder( h = elbow_pulley_thick / 2 - 3 + display_tolerance, r = rb_626_external_radius, $fn = 50);
+      
+      // holes for forearm radial bearing housing support
+      for (i = [0: 1])
+        translate ([fore_arm_x_offset, 0, 0] + rotate_z(90, rbearing_6905_enclosed_housing_holes_position[i] - display_tolerance_z)) cylinder (h = elbow_pulley_thick + display_tolerance, r = 2);
+      
+      // hole for the first belt tensioner shaft
+      
+      translate ([distance_to_fore_arm_gear - 5, -belt_hole_fore_arm_pulley_length / 2 + rb_624_external_radius, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 25, r = 2, $fn = 10);
+      // hole for the 2nd belt tensioner shaft
+      
+      hull(){
+        translate ([distance_to_fore_arm_gear - 7.5, belt_hole_fore_arm_pulley_length / 2 - rb_624_external_radius, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 30, r = 2, $fn = 10);
+        translate ([distance_to_fore_arm_gear - 7.5, belt_hole_fore_arm_pulley_length / 2 - rb_624_external_radius - 10, elbow_pulley_thick / 2]) rotate ([0, 90, 0]) cylinder (h = 30, r = 2, $fn = 10);
+      }
+      
+      // screw hole for belt tensioner pusher 1st
+      translate ([distance_to_fore_arm_gear - 4, 5, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) cylinder (h = 55, r = 2, $fn = 20);
+      // nut hole
+      translate ([distance_to_fore_arm_gear - 4, belt_hole_fore_arm_pulley_length / 2 + 2, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) rotate ([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+      
+      // screw hole for belt tensioner pusher 2nd
+      translate ([distance_to_fore_arm_gear + belt_hole_fore_arm_pulley_width + 4, 5, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) cylinder (h = 55, r = 2, $fn = 20);
+      translate ([distance_to_fore_arm_gear + belt_hole_fore_arm_pulley_width + 4, belt_hole_fore_arm_pulley_length / 2 + 2, elbow_pulley_thick / 2]) rotate ([-90, 0, 0]) rotate ([0, 0, 30]) cylinder (h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
+
+  }
+}
+//---------------------------------------------------------------------------
 module elbow_pulley_top_half()
 {
     difference(){
@@ -308,12 +350,13 @@ module upper_arm_screw_rotation_pulley()
 //upper_arm_motor_pulley();
 //upper_arm_pulley();
 
-upper_arm_rotation_pulley_with_belt_tensioner();
+//upper_arm_rotation_pulley_with_belt_tensioner();
 
 //elbow_pulley_bottom_half();
 
 
 //elbow_pulley();
+wrist_pulley();
 
 //shoulder_traction_pulley();
 
