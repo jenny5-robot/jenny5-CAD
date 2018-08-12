@@ -23,28 +23,36 @@ use <../basic_scad/radial_bearing_housing.scad>
 use <arm_motor_housings.scad>
 use <arm_potentiometer_support.scad>
 
+use <../basic_scad/radial_bearings.scad>
+use <../basic_scad/screws_nuts_washers.scad>
+
+include <../basic_scad/params_screws_nuts_washers.scad>
+
 //---------------------------------------------------------------------------
-module upper_arm_pulley()
+module upper_arm_rotation_pulley()
 {
     difference(){
         rotate ([0, 0, 0])         
            color (plastic_color) {
-               pulley(profile = "HTD_5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 10);
-                translate ([nema_17_with_19_1_gearbox_height / 2, -rbearing_608_housing_size[0] / 2 - 2, 8]) 
+               pulley(profile = "HTD_5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = upper_arm_gear_thick - 3);
+               translate ([nema_17_with_19_1_gearbox_height / 2, -rbearing_608_housing_size[0] / 2 - 2, 8]) 
                 rotate([0, -90, 0]){
       // bottom corner
                 translate ([0, 0, rbearing_608_housing_size[2] + 6]) upper_arm_motor_corner();
     // top corner
-                translate ([0, 0, -(rbearing_608_housing_size[2] + 6 - nema_17_with_19_1_gearbox_height)]) mirror ([0, 0, 1]) upper_arm_motor_corner();
-  }
+               translate ([0, 0, -(rbearing_608_housing_size[2] + 6 - nema_17_with_19_1_gearbox_height)]) mirror ([0, 0, 1]) upper_arm_motor_corner();
+                }
             }
         
         // middle hole
-        translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = upper_arm_shaft_radius, $fn = 30);
-        
+        //translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = upper_arm_shaft_radius, $fn = 30);
+        hull(){
+            cylinder(h = 1, r = upper_arm_shaft_radius, $fn = 50);
+            translate ([0, 0, upper_arm_gear_thick - 5]) cylinder(h = 5, r = upper_arm_shaft_radius + 0.5, $fn = 6);
+        }        
         // holes for connecting 2 half pulleys
         // 1st screw hole
-        dist_to_1st_screw = 19;
+        dist_to_1st_screw = 19.5;
         
         dist_to_nut = 14;
         translate ([-25, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 45, r = m4_screw_radius, $fn = 20);
@@ -70,23 +78,47 @@ module upper_arm_pulley()
                 // cut window
         cube([2, 40, 20]);
   }
-    
-  //-16 - 8 - 5
+}
+//---------------------------------------------------------------------------
+module upper_arm_rotation_pulley_with_belt_tensioner()
+{
+    belt_tensioner_shaft_length = 60;
+    upper_arm_rotation_pulley();
+    translate ([-belt_tensioner_shaft_length / 2, 12, upper_arm_gear_thick + 7]) rotate ([0, 90, 0]) {
+        color ("grey") cylinder (h = belt_tensioner_shaft_length, r = 2, $fn = 20); // screw
+        // bearings
+        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) 624rs();
+        translate ([0, 0, belt_tensioner_shaft_length / 2 - bearing_4_height / 2]) 624rs();
+        translate ([0, 0, belt_tensioner_shaft_length / 2 + bearing_4_height / 2]) 624rs();
+        // nut
+        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) mirror([0, 0, 1]) M4_autolock_nut();
+    }
+    translate ([-belt_tensioner_shaft_length / 2, -12, upper_arm_gear_thick + 7]) rotate ([0, 90, 0]) {
+        color ("grey") cylinder (h = belt_tensioner_shaft_length, r = 2, $fn = 20); // screw
+        // bearings
+        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) 624rs();
+        translate ([0, 0, belt_tensioner_shaft_length / 2 - bearing_4_height / 2]) 624rs();
+        translate ([0, 0, belt_tensioner_shaft_length / 2 + bearing_4_height / 2]) 624rs();
+    }
 }
 //---------------------------------------------------------------------------
 
 module shoulder_traction_pulley()
 {
-    spacer_length = 4;
+    spacer_length = 3.5;
     difference(){
                
         color (plastic_color) {
-            pulley(profile = "HTD_5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = 10);
+            pulley(profile = "HTD_5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = upper_arm_gear_thick - 3);
             translate ([0, 0, upper_arm_gear_thick]) cylinder (h = spacer_length, r = shoulder_shaft_radius + 3);
         }
         
-        
-        translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + spacer_length + 2 * display_tolerance, r = shoulder_shaft_radius, $fn = 30);
+        // shaft hole
+        //translate() 
+        hull(){
+            cylinder(h = 10, r = shoulder_shaft_radius + 0.5, $fn = 6);
+            translate ([0, 0, upper_arm_gear_thick + spacer_length + display_tolerance - 1]) cylinder(h = 1, r = shoulder_shaft_radius, $fn = 50);
+        }
 
         // 1st screw hole
         dist_to_1st_screw = 17;
@@ -184,7 +216,7 @@ module elbow_pulley()
 {
   difference(){
       union(){
-         color (plastic_color) pulley(profile = "HTD_5mm_pulley", num_teeth = 40, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+         color (plastic_color) pulley(profile = "T5mm_pulley", num_teeth = 50, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
           // motor housing
       //  translate ([distance_to_fore_arm_gear - 3, -belt_hole_forearm_pulley_length / 2 - 2, 3]) rotate ([0, 90, 0]) 
         //  forearm_motor_housing();
@@ -262,19 +294,21 @@ module elbow_gear()
 //---------------------------------------------------------------------------
 module upper_arm_motor_pulley()
 {
-    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 20, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = 0, nut_height = 0);
+    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = 0, nut_height = 0);
     translate([-4, 3, 0]) cube([8, 2, 11]);
 }
 //---------------------------------------------------------------------------
 module upper_arm_screw_rotation_pulley()
 {
-    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 20, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = m8_nut_radius, nut_height = m8_nut_thick);
+    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = m8_nut_radius, nut_height = m8_nut_thick);
 }
 //---------------------------------------------------------------------------
 
 //upper_arm_screw_rotation_pulley();
 //upper_arm_motor_pulley();
 //upper_arm_pulley();
+
+upper_arm_rotation_pulley_with_belt_tensioner();
 
 //elbow_pulley_bottom_half();
 
@@ -283,4 +317,4 @@ module upper_arm_screw_rotation_pulley()
 
 //shoulder_traction_pulley();
 
-//fore_arm_pulley();
+////fore_arm_pulley();
