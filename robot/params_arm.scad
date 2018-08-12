@@ -8,10 +8,10 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sheets.scad>
 include <../basic_scad/params_stepper_motors.scad>
 
-angle_shoulder = 0; // -180 (up)... 0(down) // default = 0
-angle_upper_arm = -30; // -180 ... 0 // default = -90
-angle_elbow = -90; // -270 (closed), -180 (front) -90 (full extend) // default = 0
-angle_fore_arm = 45; // default = 90
+angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
+angle_upper_arm = 90; // -90 ... 90 // default = -90
+angle_elbow = -180; // -270 (closed), -180 (front) -90 (full extend) // default = 0
+angle_fore_arm = -90; // default = 90
 
 upper_arm_bone_length = 400;
 fore_arm_length = 300;
@@ -39,13 +39,13 @@ upper_arm_shaft_support_length = 200;
 upper_arm_shaft_radius = 15;
 fore_arm_shaft_radius = 15;
 
-upper_arm_gear_thick = 13;
+upper_arm_gear_thick = 14;
 
 shoulder_bracket_length = 10;
 
 first_bearing_shoulder_offset = 0;
 
-distance_upper_arm_motor_shaft = 21 + 15;
+distance_upper_arm_motor_shaft = 21 + 15 + 4;
 
 sheet_upper_arm_motor_base_size = [40,  21 + distance_upper_arm_motor_shaft + rbearing_608_housing_size[0] / 2, 3];
 
@@ -75,6 +75,7 @@ body_motor_housing_interior_width = 41;
 
 belt_tensioner_distance_between_holes = (body_motor_housing_interior_width + 4) / 2;
 
+
 elbow_connector_belt_tensioner_offset = 19;
 
 gripper_motor_sheet_size = [50, 50, 3];
@@ -90,6 +91,8 @@ shoulder_left_right_belt_tensioner_offset = 20;
 body_stepper_motor_housing_belt_tensioner_offset = 20;
 
 
-elbow_rotation_motor_offset = 11;
+elbow_rotation_motor_offset = 13;
 
 fore_arm_bone_top_shift = 11;
+
+fore_arm_offset = 48;
