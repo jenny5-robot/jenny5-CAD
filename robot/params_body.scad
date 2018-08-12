@@ -9,7 +9,7 @@ include <../basic_scad/params_radial_bearings.scad>
 include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_tube_bracket.scad>
 
-angle_body_arm = 0;// 180 (closed - front)...-90 (open-back); // default = -90
+angle_body_arm = 90;// 180 (closed - front)...-90 (open-back); // default = -90
 
 body_rotation_linear_motor_position = 0;
 
