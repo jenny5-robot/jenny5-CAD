@@ -10,10 +10,10 @@ include <../basic_scad/params_stepper_motors.scad>
 
 angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
 angle_upper_arm = 90; // -90 ... 90 // default = -90
-angle_elbow = -180; // -270 (closed), -180 (front) -90 (full extend) // default = 0
-angle_fore_arm = -90; // default = 90
+angle_elbow = -90; // -270 (closed), -180 (front) -90 (full extend) // default = 0
+angle_fore_arm = -100; // default = 90
 
-upper_arm_bone_length = 400;
+upper_arm_bone_length = 350;
 fore_arm_length = 300;
 
 shoulder_shaft_radius = 12.5;
@@ -51,8 +51,8 @@ sheet_upper_arm_motor_base_size = [40,  21 + distance_upper_arm_motor_shaft + rb
 
 sheet_upper_arm_motor_top_size = [40,  21 + distance_upper_arm_motor_shaft + rbearing_608_housing_size[0] / 2, 3];
 
-elbow_sheet_size = [47, 130, 3];
-elbow_sheet_grip_length = 40;
+elbow_sheet_size = [47, 73, 3];
+elbow_sheet_grip_length = 60;
 
 arm_bracket_thick = 10;
 
@@ -76,7 +76,7 @@ body_motor_housing_interior_width = 41;
 belt_tensioner_distance_between_holes = (body_motor_housing_interior_width + 4) / 2;
 
 
-elbow_connector_belt_tensioner_offset = 19;
+elbow_connector_belt_tensioner_offset = 8;
 
 gripper_motor_sheet_size = [50, 50, 3];
 
@@ -96,3 +96,11 @@ elbow_rotation_motor_offset = 13;
 fore_arm_bone_top_shift = 11;
 
 fore_arm_offset = 48;
+
+elbow_pulley_num_teeth = 50;
+
+elbow_pulley_radius = 35;
+
+wrist_pulley_num_teeth = 40;
+
+wrist_pulley_radius = 31;
