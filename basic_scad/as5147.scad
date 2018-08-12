@@ -51,6 +51,21 @@ module magnet_holder2(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5,
     }
 }
 //--------------------------------------------------------------
+module magnet_holder_hexa(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11, tower_height = 10, tower_external_radius = 6)
+{
+    difference(){
+        color (plastic_color) {
+            cylinder (h = holder_height, r = tube_internal_radius, $fn = 6);
+            translate ([0, 0, holder_height - 0.01]) cylinder (h = 1.5, r1 = tube_internal_radius, r2 = tube_internal_radius + 1.5, $fn = 6);
+            translate ([0, 0, holder_height - 0.02 + 1]) cylinder (h = tower_height, r = tower_external_radius, $fn = 30);
+        }
+        // magnet hole
+        translate ([0, 0, holder_height - magnet_thick + tower_height]) cylinder (h = magnet_thick + display_tolerance, r = magnet_radius, $fn = 30);
+        // hole
+        cylinder (h = holder_height + tower_height, r = 2.5, $fn = 30);
+    }
+}
+//--------------------------------------------------------------
 module magnet(magnet_radius = 4, magnet_thick = 2.5)
 {
     color ("DarkGray") cylinder (h = magnet_thick, r = magnet_radius);
@@ -74,6 +89,8 @@ module magnet_holder2_with_magnet(holder_height = 10, magnet_radius = 4, magnet_
 //as5147();
 
 //magnet_holder(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11);
-magnet_holder2(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11, tower_height = 2, tower_external_radius = 6);
+//magnet_holder2(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11, tower_height = 2, tower_external_radius = 6);
+
+magnet_holder_hexa(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11.5, tower_height = 2, tower_external_radius = 6);
 
 //magnet_holder2_with_magnet(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11,  tower_height = 10, tower_external_radius = 6);
