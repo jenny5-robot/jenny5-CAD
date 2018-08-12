@@ -15,7 +15,7 @@ nema_17_shaft_length = 24;
 nema_14_width = 39.3;
 nema_14_motor_hole_radius  = 11;
 nema_14_dist_between_screw_holes = 31;
-nema_14_height = 47;
+//nema_14_height = 47;
 nema_14_shaft_length = 20;
 
 nema_11_width = 28;
@@ -52,6 +52,7 @@ nema_17_with_5_1_gearbox_height = nema_17_height + nema_17_gearbox_base_height +
 nema_17_with_13_1_gearbox_height = nema_17_height + nema_17_gearbox_base_height + nema_17_13_1_gearbox_height;
 nema_17_with_19_1_gearbox_height = nema_17_height + nema_17_gearbox_base_height + nema_17_19_1_gearbox_height;
 nema_17_with_50_1_gearbox_height = nema_17_height + nema_17_gearbox_base_height + nema_17_50_1_gearbox_height;
+//echo(nema_17_with_50_1_gearbox_height=nema_17_with_50_1_gearbox_height);
 
 nema_17_42BYGHW804_width = 42.3;
 nema_17_42BYGHW804_height = 47;
@@ -74,6 +75,24 @@ nema_14_39BYGL215A_dist_between_screw_holes = 31;
 nema_14_39BYGL215A_shaft_length = 50;
 nema_14_39BYGL215A_shaft_radius = 2.5;
 nema_14_39BYGL215A_top_cylinder_height = 2;
+
+nema_14_33_width = 35;
+nema_14_33_height = 34;
+nema_14_33_top_radius = 11;
+nema_14_33_dist_between_screw_holes = 31;
+nema_14_33_shaft_length = 50;
+nema_14_33_shaft_radius = 2.5;
+nema_14_33_top_cylinder_height = 2;
+
+nema_14_gearbox_base_height = 5;
+nema_14_gearbox_dist_between_screw_holes = 10;
+nema_14_motor_gearbox_radius = 13;
+nema_14_gearbox_shaft_length = 16;
+nema_14_gearbox_shaft_radius = 3;
+nema_14_gearbox_motor_hole_radius = 11;
+nema_14_27_1_gearbox_height = 30.8;
+
+nema_14_33_with_27_1_gearbox_height = nema_14_33_height + nema_14_gearbox_base_height + nema_14_27_1_gearbox_height;
 
 
 nema_11_sizes = [nema_11_width, nema_11_width, nema_11_height];
@@ -117,6 +136,14 @@ gearbox_nema_17_holes_position = [
 [-nema_17_gearbox_dist_between_screw_holes / 2, nema_17_gearbox_dist_between_screw_holes / 2, 0], 
 [nema_17_gearbox_dist_between_screw_holes / 2, -nema_17_gearbox_dist_between_screw_holes / 2, 0], 
 [nema_17_gearbox_dist_between_screw_holes / 2, nema_17_gearbox_dist_between_screw_holes / 2, 0]
+];
+
+gearbox_nema_14_holes_position = [
+[0, 0, 0], 
+[-nema_14_gearbox_dist_between_screw_holes / 2, -nema_14_gearbox_dist_between_screw_holes / 2, 0], 
+[-nema_14_gearbox_dist_between_screw_holes / 2, nema_14_gearbox_dist_between_screw_holes / 2, 0], 
+[nema_14_gearbox_dist_between_screw_holes / 2, -nema_14_gearbox_dist_between_screw_holes / 2, 0], 
+[nema_14_gearbox_dist_between_screw_holes / 2, nema_14_gearbox_dist_between_screw_holes / 2, 0]
 ];
 
 gearbox_nema_17_holes_radius = [nema_17_gearbox_motor_hole_radius, 1.5, 1.5, 1.5, 1.5];
