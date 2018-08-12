@@ -20,15 +20,16 @@ module ring(external_radius, internal_radius, height)
 //-------------------------------------------------------------
 module ring_with_clamp(external_radius, internal_radius, height)
 {
+    margin = 3;
     difference(){
         union(){
-            translate ([-external_radius, - external_radius, 0]) cube([external_radius + 8 + internal_radius, 2 * external_radius, 8]);
+            translate ([-external_radius - margin, - external_radius - margin, 0]) cube([external_radius + 8 + margin + internal_radius, 2 * external_radius + 2 * margin, 8]);
             translate ([0, 0, 8]) cylinder(h = height, r = external_radius, $fn = 50);
         }
         // midle hole
         translate (-display_tolerance_z) cylinder(h = height + 8 + 2 * display_tolerance, r = internal_radius, $fn = 50);
         // screw hole
-        translate ([internal_radius + 4, - external_radius, 4] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = external_radius + 2 * external_radius + 2 * display_tolerance, r = 2, $fn = 20);
+        translate ([internal_radius + 4, - external_radius - margin, 4] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = external_radius + 2 * external_radius + 2 * display_tolerance, r = 2, $fn = 20);
         // window
         cube([external_radius + 8 - (external_radius - internal_radius), 2, height + 8]);
     } 
@@ -87,4 +88,4 @@ module potentiometer_button()
 
 //potentiometer_button();
 
-ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 5);
+ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 4);
