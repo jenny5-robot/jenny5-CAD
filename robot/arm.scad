@@ -53,12 +53,6 @@ use <../basic_scad/as5147.scad>
 
 use <../basic_scad/rings.scad>
 
-
-//---------------------------------------------------------------------------
-module rbearing_608_housing_thicker(extra_thick = 0)
-{
-radial_bearing_housing(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, rb_608_thick, rbearing_608_housing_size[2] + extra_thick, m4_screw_radius);
-}
 //---------------------------------------------------------------------------
 module elbow_rotation_motor_with_components()
 {
@@ -209,7 +203,7 @@ module fore_arm()
         // bone
    fore_arm_bone();
     
-    translate ([0, 0, fore_arm_bone_length - elbow_sheet_grip_length]) elbow_upper_arm_connector();    
+    translate ([0, 0, fore_arm_length - elbow_sheet_grip_length]) elbow_upper_arm_connector();    
     // support for elbow pulley bearings
 //    translate ([0, - upper_arm_bone_length + upper_arm_bone_top_shift + 2 * rb_626_external_radius , 0]) rotate ([90, 0, 0]) tube_interior_cover(2 * rb_626_external_radius);
          
@@ -571,7 +565,7 @@ module arm()
 
 //upper_arm_bone();
 
-fore_arm();
+//fore_arm();
 
 //potentiometer_support_shoulder_vertical();
 
@@ -645,6 +639,6 @@ fore_arm();
 
 //ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 4);
 
-//rbearing_608_housing_thicker(10); // 4x
+rbearing_608_housing_thicker(10); // 4x
 
 //elbow_upper_arm_connector();

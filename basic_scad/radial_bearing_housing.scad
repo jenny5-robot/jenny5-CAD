@@ -23,13 +23,12 @@ module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_posi
         difference(){
             translate ([-rbearing_housing_size[0] / 2, -rbearing_housing_size[1] / 2, 0]) my_cube_rounded2([rbearing_housing_size[0], rbearing_housing_size[1], housing_height]);
             // bearing
-            translate ([0, 0, housing_height - rb_thick]) cylinder (h = rb_thick + display_tolerance, r = rb_external_radius, $fn = 70);
+            translate ([0, 0, housing_height - rb_thick]) cylinder (h = rb_thick, r = rb_external_radius, $fn = 70);
             // bearing support hole
-          translate (rbearing_housing_holes_position[0]-display_tolerance_z) cylinder (h = rb_thick + radial_bearing_housing_base_wall_thickness + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
+            translate (rbearing_housing_holes_position[0] - display_tolerance_z) cylinder (h = housing_height + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
             // screws holes
-    for (i = [1 : 4])
-        translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = housing_height + 2 * display_tolerance, r = screw_radius, $fn = 20);  
-    
+            for (i = [1 : 4])
+                translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = housing_height + 2 * display_tolerance, r = screw_radius, $fn = 20);
         }
 }
 //---------------------------------------------------------------------------
@@ -459,6 +458,14 @@ translate([0, rbearing_6001_enclosed_housing_slim_size[1], 0])
    radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime, radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime);
 }
 //---------------------------------------------------------------------------
+module rbearing_608_housing_thicker(extra_thick = 0)
+{
+    
+    
+    radial_bearing_housing(rbearing_housing_size = rbearing_608_housing_size, rbearing_housing_holes_position = rbearing_608_housing_holes_position, rb_external_radius = rb_608_external_radius, rb_thick = rb_608_thick, housing_height= rbearing_608_housing_size[2] + extra_thick, screw_radius = m4_screw_radius, extension = 0);
+}
+//---------------------------------------------------------------------------
+
 
 // bearing_housing_with_flaps(18, rb_608_external_radius, rb_608_thick);
 
@@ -515,4 +522,6 @@ translate([0, rbearing_6001_enclosed_housing_slim_size[1], 0])
 //radial_bearing_6905_double_vertical_housing();
 
 //radial_bearing_6906_vertical_housing();
-radial_bearing_6905_vertical_housing();
+//radial_bearing_6905_vertical_housing();
+
+rbearing_608_housing_thicker(10);
