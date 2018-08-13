@@ -336,19 +336,20 @@ module elbow_gear()
 //---------------------------------------------------------------------------
 module upper_arm_motor_pulley()
 {
-    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = 0, nut_height = 0);
-    translate([-4, 3, 0]) cube([8, 2, 11]);
+    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 11, shaft_radius = m8_screw_radius, nut_radius = 0, nut_height = 0);
+    translate([-4, 3, 0]) cube([8, 2, 14]);
 }
 //---------------------------------------------------------------------------
 module upper_arm_screw_rotation_pulley()
 {
-    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 10, shaft_radius = m8_screw_radius, nut_radius = m8_nut_radius, nut_height = m8_nut_thick);
+    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 11, shaft_radius = m8_screw_radius, nut_radius = m8_nut_radius, nut_height = m8_nut_thick);
 }
 //---------------------------------------------------------------------------
 
 //upper_arm_screw_rotation_pulley();
 //upper_arm_motor_pulley();
-//upper_arm_pulley();
+
+upper_arm_rotation_pulley();
 
 //upper_arm_rotation_pulley_with_belt_tensioner();
 
@@ -356,7 +357,7 @@ module upper_arm_screw_rotation_pulley()
 
 
 //elbow_pulley();
-wrist_pulley();
+//wrist_pulley();
 
 //shoulder_traction_pulley();
 
