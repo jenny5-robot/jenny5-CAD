@@ -66,8 +66,8 @@ fore_arm_x_offset = 41; // distance from elbow gear center to forearm support
 
 distance_between_elbow_gear_grip_sheets = 17;
 
-fore_arm_pulley_thick = 13;
-elbow_pulley_thick = 13;
+fore_arm_pulley_thick = 14;
+elbow_pulley_thick = 14;
 
 fore_arm_motor_offset = 15;
 
