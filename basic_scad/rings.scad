@@ -88,4 +88,6 @@ module potentiometer_button()
 
 //potentiometer_button();
 
-ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 4);
+//ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 4);
+//ring_with_clamp(external_radius = 17.5, internal_radius = 15, height = 4);
+ring(external_radius = 17.5, internal_radius = 15, height = 4);
