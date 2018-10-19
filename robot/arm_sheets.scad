@@ -14,6 +14,10 @@ include <../basic_scad/tolerance.scad>
 include <params_body.scad>
 
 include <../basic_scad/params_tube_bracket.scad>
+include <../basic_scad/params_screws_nuts_washers.scad>
+use <../basic_scad/screws_nuts_washers.scad>
+use <../basic_scad/radial_bearings.scad>
+
 
 //---------------------------------------------------------------
 module shoulder_sheet()
@@ -25,8 +29,8 @@ module shoulder_sheet()
         color (aluminium_color) cube(shoulder_plate_size);
         echo("motor housing holes:");
       for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
-            echo([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 35 / 2, 0]));
-            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 35 / 2, 0])  cylinder ( h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            echo([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - nema_17_motor_gearbox_radius - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 35 / 2, 0]));
+            translate ([shoulder_plate_size[0] / 2, shoulder_plate_size[1] - nema_17_motor_gearbox_radius - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 35 / 2, 0])  cylinder ( h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
         echo("bearing housing holes:");
         for (i = [0 : 1]){
@@ -113,6 +117,85 @@ module upper_arm_motor_top_sheet()
     }
 }
 //---------------------------------------------------------------------------
+module arm_up_down_motor_top_sheet()
+{
+    difference(){
+        color(aluminium_color) cube(arm_up_down_motor_sheet_size);
+        echo(arm_up_down_motor_sheet_size = arm_up_down_motor_sheet_size);
+        echo("motor gearbox holes");
+        for (i = [1 : 4]){
+            translate([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            translate([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i] + [0, 0, 1.5]) cylinder (h = 1.5, r1 = 1.5, r2 = 3, $fn = 20);
+            echo([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i], "radius = 1.5");
+        }
+// motor gearbox middle hole
+            translate([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 11, $fn = 30);
+            echo([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0], "radius = 11");
+        // rb6905 bearing housing holes
+        echo("rb6905 bearing housing holes");
+        for (i = [1 : 4]){
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+
+            echo([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i], "radius = 2");
+        }
+// middle hole
+        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 16, $fn = 30);
+        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 16");
+        
+        // belt tensioner holes
+        echo("belt tensioner holes");
+        echo([arm_up_down_motor_sheet_size[0] / 2 - arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0]);
+       translate ([arm_up_down_motor_sheet_size[0] / 2 - arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0] -display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
+        echo([arm_up_down_motor_sheet_size[0] / 2 + arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]);
+       translate ([arm_up_down_motor_sheet_size[0] / 2 + arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]-display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
+    }
+}
+//---------------------------------------------------------------------------
+module arm_up_down_motor_top_sheet_with_belt_tensioner()
+{
+    arm_up_down_motor_top_sheet();
+    // first tower of bearings
+    translate ([arm_up_down_motor_sheet_size[0] / 2 - arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0]) {
+        M4_sunken(30);
+        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2]) 624rs();
+        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 5]) 624rs();
+        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 10]) 624rs();
+    }
+
+    translate ([arm_up_down_motor_sheet_size[0] / 2 + arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0]) {
+        M4_sunken(30);
+        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2]) 624rs();
+        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 5]) 624rs();
+        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 10]) 624rs();
+    }
+}
+//---------------------------------------------------------------------------
+module arm_up_down_motor_bottom_sheet()
+{
+    difference(){
+        color(aluminium_color) cube(arm_up_down_motor_sheet_size);
+        echo(arm_up_down_motor_sheet_size = arm_up_down_motor_sheet_size);
+        
+        echo("motor holes");
+        for (i = [1 : 4]){
+            translate([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] + nema_17_holes[i] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            echo([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] + nema_17_holes[i], "radius = 1.5");
+        }
+        // rb6905 bearing housing holes
+        echo("rb6905 bearing housing holes");
+        for (i = [1 : 4]){
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+
+            echo([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i], "radius = 2");
+        }
+// middle hole
+        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 16, $fn = 30);
+        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 16");
+            }
+}
+//---------------------------------------------------------------------------
 module elbow_sheet(braket_thick = 12, tube_radius = 15)
 {
     echo(elbow_sheet_size = elbow_sheet_size);
@@ -149,11 +232,11 @@ module body_articulation_sheet()
             translate ([plate_body_size[0] / 2, f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_enclosed_housing_holes_position[i])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
         // motor housing base screw holes
-      echo("motor holes position:");
-      for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
-            echo([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 33 / 2, 0]));
-            translate ([plate_body_size[0] / 2, plate_body_size[1] - 18 - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 33 / 2, 0])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = 1.5, $fn = 20);
-      }
+//      echo("motor holes position:");
+//      for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
+//            echo([plate_body_size[0] / 2, plate_body_size[1] - nema_17_motor_gearbox_radius - 3, 0] + rotate_z(90, [i[0] * 28 / 2, i[1] * 33 / 2, 0]));
+//            translate ([plate_body_size[0] / 2, plate_body_size[1] - nema_17_motor_gearbox_radius - 3, 0] - display_tolerance_z) rotate ([0, 0, 90]) translate([i[0] * 28 / 2, i[1] * 33 / 2, 0])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = 1.5, $fn = 20);
+//      }
         // holes for the other bearing housing
       echo("second bearing housing support holes:");     
       for (i = [0 : 1]){
@@ -178,11 +261,114 @@ module gripper_motor_sheet()
     color (aluminium_color) cube(gripper_motor_sheet_size);
 }
 //---------------------------------------------------------------------------
+module fore_arm_rotation_motor_support_sheet_top()
+{
+    difference(){
+        color(aluminium_color)cube(fore_arm_rotation_motor_support_sheet_size);
+       
+        echo(fore_arm_rotation_motor_support_sheet_size = fore_arm_rotation_motor_support_sheet_size);
+        echo("motor gearbox holes");
+        for (i = [1 : 4]){
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i] + [0, 0, 1.5]) cylinder (h = 1.5, r1 = 1.5, r2 = 3, $fn = 20);
+            echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i], "radius = 1.5");
+        }
+// motor gearbox middle hole
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 11, $fn = 30);
+            echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0], "radius = 11");
+        // rb6905 bearing housing holes
+        echo("rb6905 bearing housing holes");
+        for (i = [1 : 4]){
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
 
-//plate_body_articulation();
+            echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i], "radius = 2");
+        }
+// middle hole
+        translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
+        echo("bearing housing middle hole", [fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 20");
+        
+        // belt tensioner holes
+        echo("belt tensioner holes");
+        echo([fore_arm_rotation_motor_support_sheet_size[0] / 2 - fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0]);
+       translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 - fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0] -display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
+        echo([fore_arm_rotation_motor_support_sheet_size[0] / 2 + fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]);
+       translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 + fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]-display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
+    }
+}
+//---------------------------------------------------------------------------
+module fore_arm_rotation_motor_support_sheet_top_with_belt_tensioner()
+{
+    fore_arm_rotation_motor_support_sheet_top();
+    // first tower of bearings
+    translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 - arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, fore_arm_rotation_motor_support_sheet_size[2] ]) {
+        translate ([0, 0, -fore_arm_rotation_motor_support_sheet_size[2]]) M4_sunken(30);
+        translate ([0, 0, + 2]) 624rs();
+        translate ([0, 0,  + 2 + 5]) 624rs();
+        translate ([0, 0,  + 2 + 10]) 624rs();
+    }
+
+    translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 + arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, fore_arm_rotation_motor_support_sheet_size[2] ]) {
+        translate ([0, 0, -fore_arm_rotation_motor_support_sheet_size[2]]) M4_sunken(30);
+        translate ([0, 0,  + 2]) 624rs();
+        translate ([0, 0,  + 2 + 5]) 624rs();
+        translate ([0, 0,  + 2 + 10]) 624rs();
+    }
+}
+//---------------------------------------------------------------------------
+module upper_arm_rotation_motor_support_sheet_top()
+{
+    difference(){
+        color(aluminium_color)cube(upper_arm_rotation_motor_support_sheet_size);
+       
+        echo(upper_arm_rotation_motor_support_sheet_size = upper_arm_rotation_motor_support_sheet_size);
+        echo("motor gearbox holes");
+        for (i = [1 : 4]){
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i] + [0, 0, 1.5]) cylinder (h = 1.5, r1 = 1.5, r2 = 3, $fn = 20);
+            echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0] + gearbox_nema_17_holes_position[i], "radius = 1.5");
+        }
+// motor gearbox middle hole
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 11, $fn = 30);
+            echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0], "radius = 11");
+        // rb6905 bearing housing holes
+        echo("rb6905 bearing housing holes");
+        for (i = [1 : 4]){
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+
+            echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i], "radius = 2");
+        }
+// middle hole
+        translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
+        echo("bearing housing middle hole", [upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 20");
+        
+        // belt tensioner holes
+        echo("belt tensioner holes");
+        echo([upper_arm_rotation_motor_support_sheet_size[0] / 2 - fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_upper_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0]);
+       translate ([upper_arm_rotation_motor_support_sheet_size[0] / 2 - fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_upper_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0] -display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
+        echo([upper_arm_rotation_motor_support_sheet_size[0] / 2 + fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_upper_arm_rotation_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]);
+       translate ([upper_arm_rotation_motor_support_sheet_size[0] / 2 + fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_upper_arm_rotation_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]-display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
+    }
+}
+//---------------------------------------------------------------------------
+
+upper_arm_rotation_motor_support_sheet_top();
+
+//fore_arm_rotation_motor_support_sheet_top_with_belt_tensioner();
+
+//fore_arm_rotation_motor_support_sheet_top();
+
+//arm_up_down_motor_top_sheet();
+
+//arm_up_down_motor_top_sheet_with_belt_tensioner();
+
+//arm_up_down_motor_bottom_sheet();
+
+//body_articulation_sheet();
 //shoulder_plate();
 
-elbow_sheet();
+//elbow_sheet();
 
 //upper_arm_motor_base_sheet();
 
