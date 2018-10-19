@@ -124,10 +124,10 @@ module tube_bracket_long_strong(bracket_length, tube_radius)
 //tube_bracket_half(40, 12.5);
 //tube_bracket_long(40, 12.5);
 
-//tube_bracket_long_strong(bracket_length = 12, tube_radius = 12.5);
+tube_bracket_long_strong(bracket_length = 24, tube_radius = 12.5);
 
 //tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 12.5, half = true);
 
-//tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 12.5, half = true, extra_height = 9, hole_y = 20, hole_z = 9);
+//tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 15, half = true, extra_height = 9, hole_y = 20, hole_z = 9);
 
-tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 15, half = true, extra_height = 9, hole_y = 20, hole_z = 9);
+//tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 12.5, half = true, extra_height = 6, hole_y = 20, hole_z = 0);
