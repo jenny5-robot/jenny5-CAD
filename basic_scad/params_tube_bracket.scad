@@ -21,10 +21,10 @@ function f_bracket_height_strong(tube_radius) = tube_bracket_base_thick_strong +
 function f_bracket_height_strong_half(tube_radius) = tube_bracket_base_thick_strong + tube_radius - 0.5;
 
 function f_tube_bracket_holes(bracket_length, tube_radius) = [
-    [5, wall_thick_3 + m4_screw_radius, 0],
-    [5, f_bracket_width(tube_radius) - (wall_thick_3 + m4_screw_radius), 0],
-    [bracket_length - 5, wall_thick_3 + m4_screw_radius, 0],
-    [bracket_length - 5, f_bracket_width(tube_radius) - (wall_thick_3 + m4_screw_radius), 0],
+    [6, wall_thick_3 + m4_screw_radius, 0],
+    [6, f_bracket_width(tube_radius) - (wall_thick_3 + m4_screw_radius), 0],
+    [bracket_length - 6, wall_thick_3 + m4_screw_radius, 0],
+    [bracket_length - 6, f_bracket_width(tube_radius) - (wall_thick_3 + m4_screw_radius), 0],
 ];
 
 function f_tube_bracket_single_hole(bracket_length, tube_radius) = [
