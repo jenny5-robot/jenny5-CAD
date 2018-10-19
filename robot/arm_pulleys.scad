@@ -47,8 +47,8 @@ module upper_arm_rotation_pulley()
         // middle hole
         //translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = upper_arm_shaft_radius, $fn = 30);
         hull(){
-            cylinder(h = 1, r = upper_arm_shaft_radius, $fn = 50);
-            translate ([0, 0, upper_arm_gear_thick - 5]) cylinder(h = 5, r = upper_arm_shaft_radius + 0.5, $fn = 6);
+            cylinder(h = 1, r = upper_arm_shaft_radius + 0.2, $fn = 50);
+            translate ([0, 0, upper_arm_gear_thick - 5]) cylinder(h = 5, r = upper_arm_shaft_radius + 0.4, $fn = 6);
         }        
         // holes for connecting 2 half pulleys
         // 1st screw hole
@@ -105,11 +105,11 @@ module upper_arm_rotation_pulley_with_belt_tensioner()
 
 module shoulder_traction_pulley()
 {
-    spacer_length = 3.5;
+    spacer_length = 5;
     difference(){
                
         color (plastic_color) {
-            pulley(profile = "HTD_5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = upper_arm_gear_thick - 3);
+            pulley(profile = "T5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = upper_arm_gear_thick - 3);
             translate ([0, 0, upper_arm_gear_thick]) cylinder (h = spacer_length, r = shoulder_shaft_radius + 3);
         }
         
@@ -236,12 +236,12 @@ module elbow_pulley()
   difference(){
       union(){
          color (plastic_color) {pulley(profile = "T5mm_pulley", num_teeth = elbow_pulley_num_teeth, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = elbow_pulley_thick - 3);
-          translate ([0, 0, elbow_pulley_thick]) cylinder (h = 3, r = rb_626_external_radius + 3);
+          
          }
       }
      
         // shaft hole
-      translate ( -display_tolerance_z) cylinder( h = elbow_pulley_thick + 2 * display_tolerance + 3, r = rb_626_external_radius - 2, $fn = 50);
+      translate ( -display_tolerance_z) cylinder( h = elbow_pulley_thick + 2 * display_tolerance, r = rb_626_external_radius - 2, $fn = 50);
 
         // bearing hole  bottom  
       translate ( -display_tolerance_z) cylinder( h = elbow_pulley_thick / 2 - 1 + display_tolerance, r = rb_626_external_radius, $fn = 50);
@@ -249,10 +249,9 @@ module elbow_pulley()
         // bearing hole  top
       translate ([0, 0, elbow_pulley_thick / 2 + 1]) cylinder( h = elbow_pulley_thick / 2 + display_tolerance, r = rb_626_external_radius, $fn = 50);
       
-      holes_dist_y = 20;
-      holes_dist_x = 6;
+
       for (i = [[-1, -1], [1, -1], [-1, 1], [1, 1], [-1, 0], [1, 0]])
-          translate ([i[0] * holes_dist_x + 6 + holes_dist_x + 10, i[1] * holes_dist_y, 0] - display_tolerance_z) cylinder (h = elbow_pulley_thick + 2 * display_tolerance, r = 2, $fn = 15);
+          translate ([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 10, i[1] * elbow_pulley_holes_dist_y, 0] - display_tolerance_z) cylinder (h = elbow_pulley_thick + 2 * display_tolerance, r = 2, $fn = 15);
   }
 }
 //---------------------------------------------------------------------------
@@ -328,11 +327,15 @@ module upper_arm_motor_pulley()
 //---------------------------------------------------------------------------
 module upper_arm_screw_rotation_pulley()
 {
-    pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 11, shaft_radius = m8_screw_radius, nut_radius = m8_nut_radius, nut_height = m8_nut_thick);
+    difference(){
+        pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 15, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 11, shaft_radius = m8_screw_radius, nut_radius = 0, nut_height = 0);
+        
+        translate ([0, 0, 11 + 3 - m8_nut_thick]) cylinder (h = m8_nut_thick, r = m8_nut_radius, $fn = 6) ;
+    }
 }
 //---------------------------------------------------------------------------
 
-//upper_arm_screw_rotation_pulley();
+upper_arm_screw_rotation_pulley();
 //upper_arm_motor_pulley();
 
 //upper_arm_rotation_pulley();
@@ -340,7 +343,7 @@ module upper_arm_screw_rotation_pulley()
 //upper_arm_rotation_pulley_with_belt_tensioner();
 
 
-elbow_pulley();
+//elbow_pulley();
 //wrist_pulley();
 
 //shoulder_traction_pulley();
