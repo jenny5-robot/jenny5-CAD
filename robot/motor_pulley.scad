@@ -18,10 +18,10 @@ module motor_pulley_8mm_shaft()
   difference(){      
       union(){
       rotate ([0, 0, 13.5]) 
-          pulley_with_shaft("HTD_5mm_pulley", 14, 0, 0, 10, 4, 0, 0);
+          pulley_with_shaft("T5mm_pulley", 14, 0, 0, 10, 4, 0, 0);
         //pulley_with_shaft(51, 13, 0, 0, 8, 4, 0, 0);
           //pulley_with_shaft(57, 12, 0, 0, 8, 4, 0, 0);
-          translate([-4, 3, 0]) cube([8, 2, 11]);
+          translate([-4, 3, 0]) cube([8, 2, 13]);
       }
      /*   
     // M3 screws
@@ -45,7 +45,7 @@ module motor_pulley_6mm_shaft()
   difference(){      
     //rotate ([0, 0, 10.8]) pulley_with_shaft(52, 14, 0, 0, 8, 4, 0, 0);
       union(){
-        pulley_with_shaft("HTD_5mm_pulley", 12, 0, 0, pulley_t_ht, 3, 0, 0);
+        pulley_with_shaft("T5mm_pulley", 14, 0, 0, pulley_t_ht, 3, 0, 0);
         translate([-4, 2, 0]) cube([8, 2, pulley_t_ht + 2 * pulley_base_height]);
       }
     // M3 screws
@@ -61,4 +61,6 @@ module motor_pulley_6mm_shaft()
 }
 //---------------------------------------------------------------------------
 
-motor_pulley_8mm_shaft();
+//motor_pulley_8mm_shaft();
+
+motor_pulley_6mm_shaft();
