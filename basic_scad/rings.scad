@@ -18,6 +18,16 @@ module ring(external_radius, internal_radius, height)
     }
 }
 //-------------------------------------------------------------
+module open_ring(external_radius, internal_radius, height)
+{
+    
+    difference(){
+        cylinder(h = height, r = external_radius, $fn = 50);
+        translate (-display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = internal_radius, $fn = 50);
+        translate ([internal_radius - 5, 0, 0] - display_tolerance_z) cube([external_radius - internal_radius + 10, 5, height + 2 * display_tolerance]);
+    }
+}
+//-------------------------------------------------------------
 module ring_with_clamp(external_radius, internal_radius, height)
 {
     margin = 3;
@@ -90,4 +100,6 @@ module potentiometer_button()
 
 //ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 4);
 //ring_with_clamp(external_radius = 17.5, internal_radius = 15, height = 4);
-ring(external_radius = 17.5, internal_radius = 15, height = 4);
+//ring(external_radius = 17.5, internal_radius = 15, height = 4);
+//open_ring(external_radius = 17.5, internal_radius = 15, height = 12 + 6 + 3);
+open_ring(external_radius = 15, internal_radius = 12.5, height = 12 + 6 + 3);
