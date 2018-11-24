@@ -250,7 +250,7 @@ module elbow_pulley()
       translate ([0, 0, elbow_pulley_thick / 2 + 1]) cylinder( h = elbow_pulley_thick / 2 + display_tolerance, r = rb_626_external_radius, $fn = 50);
       
 
-      for (i = [[-1, -1], [1, -1], [-1, 1], [1, 1], [-1, 0], [1, 0]])
+      for (i = [[-1, -1],  [-1, 1],  [-1, 0], [1, 0]])
           translate ([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 10, i[1] * elbow_pulley_holes_dist_y, 0] - display_tolerance_z) cylinder (h = elbow_pulley_thick + 2 * display_tolerance, r = 2, $fn = 15);
   }
 }
@@ -297,23 +297,6 @@ module wrist_pulley()
   }
 }
 //---------------------------------------------------------------------------
-module elbow_pulley_top_half()
-{
-    difference(){
-        elbow_pulley();
-        translate ([0, 0, elbow_pulley_thick / 2]) cylinder(h = 100, r = 60);
-    }
-}
-//---------------------------------------------------------------------------
-module elbow_pulley_bottom_half()
-{
-    difference(){
-        elbow_pulley();
-        translate ([0, 0, -60]) cylinder(h = 60 + elbow_pulley_thick / 2, r = 60);
-    }
-}
-//---------------------------------------------------------------------------
-
 module elbow_gear()
 {// partial gear
     pot_gear(13, rb_626_external_radius, 10); 
@@ -334,16 +317,43 @@ module upper_arm_screw_rotation_pulley()
     }
 }
 //---------------------------------------------------------------------------
-
-upper_arm_screw_rotation_pulley();
+module pulley_upper_arm_bone_for_sensor()
+{
+    difference(){
+        pulley(profile = "T2_5mm_pulley", num_teeth = 47, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 6);
+        cylinder (h = 9, r = upper_arm_shaft_radius+0.2);
+    }
+}
+//---------------------------------------------------------------------------
+module pulley_upper_arm_sensor_shaft()
+{
+    difference(){
+        pulley(profile = "T2_5mm_pulley", num_teeth = 33, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 6);
+        cylinder (h = 9, r = 4);
+        
+        // screw hole
+        translate ([0, 0, 4.5]) rotate([90, 0, 0]) cylinder (h = 20, r = m4_screw_radius);
+        // nut hole
+        hull(){
+            translate ([0, -5, 4.5]) rotate([90, 30, 0]) M4_nut();
+            translate ([0, -5, 9]) rotate([90, 30, 0]) M4_nut();
+        }
+    }
+}
+//---------------------------------------------------------------------------
+//upper_arm_screw_rotation_pulley();
 //upper_arm_motor_pulley();
 
 //upper_arm_rotation_pulley();
 
+//pulley_upper_arm_sensor_shaft();
+
+//pulley_upper_arm_bone_for_sensor();
+
 //upper_arm_rotation_pulley_with_belt_tensioner();
 
 
-//elbow_pulley();
+elbow_pulley();
 //wrist_pulley();
 
 //shoulder_traction_pulley();
