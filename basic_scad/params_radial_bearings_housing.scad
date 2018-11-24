@@ -34,6 +34,8 @@ rbearing_626_housing_size = f_radial_bearing_housing_size(rb_626_external_radius
 
 rbearing_608_housing_size = f_radial_bearing_housing_size(rb_608_external_radius, rb_608_thick);
 
+rbearing_688_housing_size = f_radial_bearing_housing_size(rb_688_external_radius, rb_688_thick);
+
 //echo(rbearing_608_housing_size=rbearing_608_housing_size);
 
 

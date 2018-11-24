@@ -49,10 +49,12 @@ rbearing_698_enclosed_housing_touch_size = ([2 * (rb_698_external_radius + radia
 rbearing_6002_enclosed_housing_holes_position = [[radial_bearing_housing_lateral_wall_thickness + m4_screw_radius, (radial_bearing_housing_base_wall_thickness + rb_6002_thick + radial_bearing_housing_base_wall_thickness) / 2, 0], [2 * (rb_6002_external_radius + 2 * radial_bearing_housing_lateral_wall_thickness + 2 * m4_screw_radius) - (radial_bearing_housing_lateral_wall_thickness + m4_screw_radius), (radial_bearing_housing_base_wall_thickness + rb_6002_thick + radial_bearing_housing_base_wall_thickness) / 2, 0]];
 
 rbearing_608_enclosed_housing_holes_position = [
-[radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + m4_screw_radius, 
-(radial_bearing_housing_base_wall_thickness + rb_608_thick + radial_bearing_housing_base_wall_thickness) / 2, 
+[- (rb_608_external_radius + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + m4_screw_radius), 
+0, 
 0], 
-[2 * (rb_608_external_radius + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius) - (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + m4_screw_radius), (radial_bearing_housing_base_wall_thickness + rb_608_thick + radial_bearing_housing_base_wall_thickness) / 2, 0]
+[(rb_608_external_radius + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + m4_screw_radius), 
+0, 
+0]
 ];
 
 rbearing_6201_enclosed_housing_holes_position = [
