@@ -56,6 +56,10 @@ nema_17_with_50_1_gearbox_height = nema_17_height + nema_17_gearbox_base_height 
 nema_17_with_27_1_gearbox_height = nema_17_height + nema_17_gearbox_base_height + nema_17_27_1_gearbox_height;
 //echo(nema_17_with_50_1_gearbox_height=nema_17_with_50_1_gearbox_height);
 
+nema_17_L33_height = 33;
+
+nema_17_L33_with_27_1_gearbox_height = nema_17_L33_height + nema_17_gearbox_base_height + nema_17_27_1_gearbox_height;
+
 nema_17_42BYGHW804_width = 42.3;
 nema_17_42BYGHW804_height = 47;
 nema_17_42BYGHW804_top_radius = 11;
@@ -63,6 +67,8 @@ nema_17_42BYGHW804_top_cylinder_height = 2;
 nema_17_42BYGHW804_dist_between_screw_holes = 31;
 nema_17_42BYGHW804_shaft_length = 22;
 nema_17_42BYGHW804_shaft_radius = 2.5;
+
+
 
 nema_23_57BYGH603_width = 56.4;
 nema_23_57BYGH603_height = 78;
