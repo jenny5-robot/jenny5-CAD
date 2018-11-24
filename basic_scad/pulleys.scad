@@ -89,8 +89,8 @@ module pulley(profile, num_teeth, pulley_b_ht = 7, pulley_b_dia = 17, pulley_t_h
 {
     // T 2_5mm
     search_matches = search("T2_5mm_pulley", profile);
-    //echo(len(T2_5mm_matches));
-    if (search_matches ==  [0, 1, 2, 3, 4, 4, 2, 7, 8, 9, 9, 11, 1]) {
+   // echo(search_matches);
+    if (search_matches ==  [0, 1, 2, 3, 4, 4, 2, 7, 8, 9, 9, 11, 12]) {
         _pulley ( "T2_5" , tooth_spaceing_curvefit (0.7467, 0.796, 1.026, num_teeth), 0.7, 1.678, profile, num_teeth, pulley_b_ht, pulley_b_dia, pulley_t_ht); 
     }
     else{
@@ -196,7 +196,7 @@ idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
 
 
                 search_matches = search("T2_5mm_pulley", profile);
-                if (search_matches ==  [0, 1, 2, 3, 4, 4, 2, 7, 8, 9, 9, 11, 1]) {
+                if (search_matches ==  [0, 1, 2, 3, 4, 4, 2, 7, 8, 9, 9, 11, 12]) {
                     T2_5(pulley_t_ht);
                 }
                 else{
@@ -314,7 +314,7 @@ module GT2_5mm(pulley_t_ht)
 // examples
     
 //    pulley(profile = "HTD_3mm_pulley_dia_12", num_teeth = 14, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
-//        pulley(profile = "T2_5mm_pulley", num_teeth = 16, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
+        pulley(profile = "T2_5mm_pulley", num_teeth = 16, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
 //        pulley(profile = "T5mm_pulley", num_teeth = 16, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
      //   pulley(profile = "HTD_3mm_pulley", num_teeth = 20, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
     //pulley(profile = "HTD_5mm_pulley", num_teeth = 12, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 8);
