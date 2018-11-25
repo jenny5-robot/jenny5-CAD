@@ -47,6 +47,7 @@ module magnet_support_elbow()
 //--------------------------------------------------------------
 module sensor_support_elbow()
 {
+    echo(as5147_elbow_support_size = as5147_elbow_support_size);
     radius_support = 10;
     total_height = as5147_elbow_support_size[2] + 13 + 5 + 9;
     
