@@ -48,7 +48,7 @@ module magnet_support_elbow()
 module sensor_support_elbow()
 {
     radius_support = 10;
-    total_height = as5147_elbow_support_size[2] + 13 + 5 + 10;
+    total_height = as5147_elbow_support_size[2] + 13 + 5 + 9;
     
     offset_x = 1;
     difference(){
@@ -65,8 +65,8 @@ module sensor_support_elbow()
         // cube 
        translate ([as5147_board_size[0] + offset_x, (as5147_elbow_support_size[1] - 20) / 2, as5147_elbow_support_size[2] + 13 + 5]) cube([20, 20, 30]);
         // screws for fixing the sensor on arm
-        translate ([as5147_board_size[0] + radius_support, 0, 0]) cylinder (h = total_height+ 2 * display_tolerance, r = 2, $fn = 10);
-        translate ([as5147_board_size[0] + radius_support, as5147_elbow_support_size[1], 0]) cylinder (h = total_height + 2 * display_tolerance, r = 2, $fn = 10);
+        translate ([as5147_board_size[0] + radius_support + offset_x, 0, 0]) cylinder (h = total_height+ 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
+        translate ([as5147_board_size[0] + radius_support + offset_x, as5147_elbow_support_size[1], 0]) cylinder (h = total_height + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
     
         // remove material for wires way
         translate ([as5147_elbow_support_size[0] + 2, as5147_elbow_support_size[1] / 2, as5147_elbow_support_size[2]] + display_tolerance_x) rotate([0, -90, 0]) half_cylinder (_h = 20 + 2 * display_tolerance, _r = as5147_board_size[1] / 2, $fn = 30); 

@@ -46,9 +46,6 @@ radial_bearing_10_internal_radius = 5;
 radial_bearing_10_external_radius = 13;
 radial_bearing_10_height = 8;
 
-rb_6002_internal_radius = 7.5;
-rb_6002_external_radius = 16;
-rb_6002_thick = 9;
 
 rb_624_internal_radius = 2;
 rb_624_external_radius = 6.5;
@@ -114,3 +111,8 @@ rb_6905_thick = 9;
 rb_6906_internal_radius = 15;
 rb_6906_external_radius = 23.5;
 rb_6906_thick = 9;
+
+rb_6907_internal_radius = 17.5;
+rb_6907_external_radius = 27.5;
+rb_6907_thick = 10;
+
