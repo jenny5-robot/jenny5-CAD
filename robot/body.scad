@@ -421,7 +421,7 @@ module body_with_arms()
         translate ([0, -body_arm_offset, 0]) 
         translate ([body_shaft_radius, 0, 0]) 
         rotate ([0, 90, 0]) 
-        arm(body_arm_shaft_length)
+        arm(-1)
         ;
 
 // body brackets
@@ -448,7 +448,7 @@ module body_with_arms()
     translate ([-body_shaft_radius, 0, 0]) 
     mirror([1, 0, 0])
     rotate ([0, 90, 0]) 
-    arm(body_arm_shaft_length)
+    arm(1)
     ;
     
     // brackets
