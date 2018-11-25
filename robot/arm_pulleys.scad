@@ -28,6 +28,8 @@ use <../basic_scad/screws_nuts_washers.scad>
 
 include <../basic_scad/params_screws_nuts_washers.scad>
 
+use <arm_sensor_support.scad>
+
 //---------------------------------------------------------------------------
 module upper_arm_rotation_pulley()
 {
@@ -250,9 +252,17 @@ module elbow_pulley()
       translate ([0, 0, elbow_pulley_thick / 2 + 1]) cylinder( h = elbow_pulley_thick / 2 + display_tolerance, r = rb_626_external_radius, $fn = 50);
       
 
-      for (i = [[-1, -1],  [-1, 1],  [-1, 0], [1, 0]])
+      for (i = [[-1, -1],  [-1, 1],  [-1, 0], [1, 0]]){
+          echo([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 10, i[1] * elbow_pulley_holes_dist_y, 0]);
           translate ([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 10, i[1] * elbow_pulley_holes_dist_y, 0] - display_tolerance_z) cylinder (h = elbow_pulley_thick + 2 * display_tolerance, r = 2, $fn = 15);
+          }
   }
+}
+//---------------------------------------------------------------------------
+module elbow_pulley_with_magnet_support()
+{
+    elbow_pulley();
+    translate ([elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 10, 0, 30 + 14]) mirror ([0, 0, 1]) rotate ([0, 0, 90]) magnet_support_elbow();
 }
 //---------------------------------------------------------------------------
 module wrist_pulley()
@@ -353,7 +363,9 @@ module pulley_upper_arm_sensor_shaft()
 //upper_arm_rotation_pulley_with_belt_tensioner();
 
 
-elbow_pulley();
+//elbow_pulley();
+
+elbow_pulley_with_magnet_support();
 //wrist_pulley();
 
 //shoulder_traction_pulley();
