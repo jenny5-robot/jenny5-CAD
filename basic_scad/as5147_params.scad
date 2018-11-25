@@ -4,7 +4,7 @@
 // MIT License
 //--------------------------------------------------------------
 
-as5147_board_size = [28, 22, 2];
+as5147_board_size = [28.5, 22, 2];
 
 as5147_space_between_holes_length = 11;
 as5147_space_between_holes_width = 18;
