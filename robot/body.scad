@@ -71,18 +71,9 @@ use <body_pulleys.scad>
 include <../basic_scad/as5147_params.scad>
 use <../basic_scad/as5147.scad>
 
+use <arm_sensor_support.scad>
 
 //---------------------------------------------------------------------------
-module radial_bearing_housing_with_potentiometer_body()
-{
-  radial_bearing_housing_with_potentiometer_support(rbearing_6905_housing_size, rbearing_6905_housing_holes_position, rb_6905_external_radius, rb_6905_thick, rbearing_6905_housing_size[2], m4_screw_radius, 25);
-    
-    translate ([rbearing_6905_housing_size[0] / 2 + pot_92R1A_J22_L15L_base_length / 2, 0, pot_92R1A_J22_L15L_base_height + 2]) mirror([0, 0, 1]) potentiometer_92R1A_J22_L15L();
-    
-    translate ([rbearing_6905_housing_size[0] / 2 + pot_92R1A_J22_L15L_base_length / 2, 0, -pot_92R1A_J22_L15L_base_height - 3]) pot_gear(num_teeth = 15, internal_radius = 3.3, height = 8, screw_rotation_angle = 15);
-}
-//---------------------------------------------------------------------------
-
 module body_arm_bone(bone_length)
 {
     echo("body arm bone length = ", bone_length);
@@ -181,18 +172,6 @@ module body_sheet_with_bearing_and_belt_tensioner()
             
 }
 //---------------------------------------------------------------------------
-module body_sheet_with_bearing_and_potentiometer()
-{
-        // sheet
-    body_sheet_for_bearing_support();
-    // bearing
-    translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, body_sheet_size[2]])
-    6905rs();
-    // bearing housing
-    translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate ([0, 0, rbearing_6905_housing_size[2] + body_sheet_size[2]]) mirror([0, 0, 1]) 
-    radial_bearing_housing_with_potentiometer_body();
-}
-//---------------------------------------------------------------------------
 module body_sheet_with_motor()
 {
     body_sheet_for_motor_support();
@@ -207,11 +186,7 @@ module body_potentiometer_shaft_gear()
     bone_gear(num_teeth = 17, screw_rotation_angle = 11, internal_radius = 12.5, height = 10);
 }
 //---------------------------------------------------------------------------
-module body_sensor_support()
-{
-    belt_tensioner_spacer_with_sensor_support(belt_tensioner_distance_between_holes, body_sheet_size[1] / 2 - 6 + as5147_space_between_holes_length / 2 + 2, 3);
-}
-//---------------------------------------------------------------------------
+
 module body_bearing_support_top()
 {
     // bottom sheet
@@ -220,7 +195,9 @@ module body_bearing_support_top()
     translate ([-body_sheet_size[0] / 2, -body_sheet_size[1] / 2, body_shaft_radius + tube_bracket_base_thick_strong + body_sheet_size[2]]) mirror([0, 0, 1]) body_sheet_with_bearing();
     
     // sensor
-    translate ([0, -body_sheet_size[1] / 2 + 6 + 5, body_shaft_radius + tube_bracket_base_thick_strong + body_sheet_size[2] + 5]) mirror ([0, 0, 1]) body_sensor_support();
+    //translate ([0, -body_sheet_size[1] / 2 + 6, body_shaft_radius + tube_bracket_base_thick_strong + body_sheet_size[2] + 5]) mirror ([0, 0, 1]) body_sensor_support();
+    
+    translate ([-(body_sheet_size[0] / 2 - 6), 0, body_shaft_radius + tube_bracket_base_thick_strong + body_sheet_size[2] + 5]) mirror ([0, 0, 1]) rotate ([0, 0, -90]) body_sensor_support();
     
     // brackets
     translate ([-body_sheet_size[0] / 2 + bracket_thick / 2, -body_sheet_size[1] / 2 + f_bracket_width(body_shaft_radius) / 2, 0])
@@ -486,11 +463,11 @@ module body_with_arms()
 //---------------------------------------------------------------------------
 
 
-body_with_arms();
+//body_with_arms();
 
 //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
-//body();
+body();
 
 //body_arm_traction_pulley();
 
@@ -530,8 +507,6 @@ body_with_arms();
 //corner_half_T(body_shaft_radius); // 4x
 
 //bearing_housing_top_body();
-
-//radial_bearing_housing_with_potentiometer_body();
 
 //tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, false); // 2x
 
