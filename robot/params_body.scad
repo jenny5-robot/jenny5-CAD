@@ -44,12 +44,22 @@ body_intermodule_sheet_size = [40, distance_between_body_modules + 2 * body_shaf
 
 body_arm_shaft_length = body_height + 2 * tube_bracket_base_thick_strong + 2 * body_sheet_size[2] + 4 * body_shaft_radius + rbearing_6905_housing_size[2];
 
-body_shaft_pulley_height = 13;
+body_shaft_pulley_height = 14;
 
 body_arm_offset = 33;
 
-body_arm_bracket_thick = 12;
+body_arm_bracket_thick = 24;
 
 offset_body_motor_sheet = 130;
 
 body_intermodule_offset = 90;
+
+body_base_sheet_size = [80, 117, 3];
+
+body_base_holes_to_leg = 
+[
+[-69/2, -95 / 2, 0],
+[-69/2, 95 / 2, 0],
+[69/2, -95 / 2, 0],
+[69/2, 95 / 2, 0]
+];
