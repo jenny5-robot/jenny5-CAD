@@ -22,15 +22,20 @@ include <params_body.scad>
 //---------------------------------------------------------------------------
 module body_arm_traction_pulley()
 {
-    spacer_length = 5;
+    spacer_length = 4;
     
     difference(){
         color(plastic_color){
-            pulley(profile = "HTD_5mm_pulley", num_teeth = 43, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = body_shaft_pulley_height - 3);
+            pulley(profile = "T5mm_pulley", num_teeth = 42, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = body_shaft_pulley_height - 3);
             translate ([0, 0, body_shaft_pulley_height]) cylinder (h = spacer_length, r = body_shaft_radius + 3);
         }
         
-        translate(- display_tolerance_z) cylinder(h = body_shaft_pulley_height + spacer_length + 2 * display_tolerance, r = body_shaft_radius, $fn = 30);
+              hull(){
+            cylinder(h = 10, r = body_shaft_radius + 0.5, $fn = 6);
+            translate ([0, 0, body_shaft_pulley_height + spacer_length + display_tolerance - 1]) cylinder(h = 1, r = body_shaft_radius, $fn = 50);
+        }
+      
+     //   translate(- display_tolerance_z) cylinder(h = body_shaft_pulley_height + spacer_length + 2 * display_tolerance, r = body_shaft_radius, $fn = 30);
 
         // 1st screw hole
         dist_to_1st_screw = 17;
@@ -44,18 +49,7 @@ module body_arm_traction_pulley()
             translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
             translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, body_shaft_pulley_height]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
         }
-/*
-        // 2nd screw hole
-        
-        translate ([-25, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 51, r = m4_screw_radius, $fn = 20);
-        // screw head hole
-        translate ([-40, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = 20, r = 3.5, $fn = 20);
-        // nut hole
-        hull(){
-            translate ([dist_to_nut, -dist_to_1st_screw, body_shaft_pulley_height / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-            translate ([dist_to_nut, -dist_to_1st_screw, body_shaft_pulley_height]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-        }
-  */      
+      
         // cut window
         cube([1.5, 40, 20]);        
     }
