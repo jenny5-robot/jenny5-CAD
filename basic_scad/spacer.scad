@@ -9,12 +9,27 @@ include <config.scad>
 include <tolerance.scad>
 
 //---------------------------------------------------------------
-module spacer_with_2_holes(length, width, height, distance_between_holes)
+module spacer_with_2_holes(length, width, height, distance_between_holes , hole_radius = 2)
 {
     difference(){
         cube([length, width, height]);
-        translate ([0, (width - distance_between_holes) / 2, height / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = length + 2 * display_tolerance, r = 2, $fn = 30);
-        translate ([0, width - (width - distance_between_holes) / 2, height / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = length + 2 * display_tolerance, r = 2, $fn = 30);
+        //holes
+        translate ([0, (width - distance_between_holes) / 2, height / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = length + 2 * display_tolerance, r = hole_radius, $fn = 20);
+        translate ([0, width - (width - distance_between_holes) / 2, height / 2] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = length + 2 * display_tolerance, r = hole_radius, $fn = 20);
+    }
+}
+//---------------------------------------------------------------
+module round_spacer_with_2_holes(width, height, distance_between_holes, hole_radius = 2)
+{
+    length = 2 * width + distance_between_holes;
+    difference(){
+        hull(){
+            translate ([0, width / 2, 0]) cylinder ( h = height, r = width / 2, $fn = 30);
+            translate ([0, width / 2 + distance_between_holes, 0]) cylinder ( h = height, r = width / 2, $fn = 30);
+        }
+        //holes
+        translate ([0, width / 2, 0] - display_tolerance_z) cylinder (h = length + 2 * display_tolerance, r = hole_radius, $fn = 20);
+        translate ([0, width / 2 + distance_between_holes, 0] - display_tolerance_z) cylinder (h = length + 2 * display_tolerance, r = hole_radius, $fn = 20);
     }
 }
 //---------------------------------------------------------------
@@ -75,7 +90,20 @@ module spacer_with_1_hole_empty(length, width, height, wall_thick)
 }
 //---------------------------------------------------------------
 
-//spacer_with_2_holes(17, 40, 11, 31);
+//round_spacer_with_2_holes(width = 12, height = 3, distance_between_holes = 32, hole_radius = 2);
+
+//round_spacer_with_2_holes(width = 12, height = 3, distance_between_holes = 20, hole_radius = 2);
+
+//round_spacer_with_2_holes(width = 12, height = 3, distance_between_holes = 55, hole_radius = 2);
+
+//round_spacer_with_2_holes(width = 12, height = 3, distance_between_holes = 49, hole_radius = 2);
+
+//round_spacer_with_2_holes(width = 10, height = 3, distance_between_holes = 26, hole_radius = 1.5);
+
+//round_spacer_with_2_holes(width = 12, height = 3, distance_between_holes = 43, hole_radius = 2);
+
+round_spacer_with_2_holes(width = 10, height = 3, distance_between_holes = 37, hole_radius = 2);
+
 
 //spacer_with_2_holes(35, 40, 11, 31);
 
@@ -90,4 +118,4 @@ module spacer_with_1_hole_empty(length, width, height, wall_thick)
 //spacer_with_1_hole_empty(37, 13, 73, 3);
 //spacer_with_1_hole_empty(37, 13, 90, 3);
 
-spacer_with_1_hole(30, 37, 11);
+//spacer_with_1_hole(30, 37, 11);
