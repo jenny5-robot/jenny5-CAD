@@ -23,8 +23,10 @@ module open_ring(external_radius, internal_radius, height)
     
     difference(){
         cylinder(h = height, r = external_radius, $fn = 50);
+        // middle hole
         translate (-display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = internal_radius, $fn = 50);
-        translate ([internal_radius - 5, 0, 0] - display_tolerance_z) cube([external_radius - internal_radius + 10, 5, height + 2 * display_tolerance]);
+        // cut
+        translate ([internal_radius - 5, -2.5, 0] - display_tolerance_z) cube([external_radius - internal_radius + 10, 5, height + 2 * display_tolerance]);
     }
 }
 //-------------------------------------------------------------
@@ -77,6 +79,25 @@ module ring_with_flanges_and_rectangular_hole(external_radius, internal_edge_len
   }
 }
 //-------------------------------------------------------------
+module open_ring_with_flanges_and_rectangular_hole(external_radius, internal_edge_length, height)
+{
+  flange_size = 2;
+  difference(){
+    union(){
+      cylinder(h = height, r = external_radius, $fn = 50);
+          // flanges - bottom
+      cylinder(h = flange_size, r2 = external_radius, r1= external_radius + flange_size , $fn = 50);
+        // top
+      translate ([0, 0, height - flange_size])cylinder(h = flange_size, r1 = external_radius, r2= external_radius + flange_size , $fn = 50);
+    }
+    // rectangular hole
+    translate ([-internal_edge_length / 2, -internal_edge_length / 2, 0]-display_tolerance_z) cube([internal_edge_length, internal_edge_length, height] + 2 * display_tolerance_z);
+    
+    // cut
+        translate ([internal_edge_length / 2 - 5, -2.5, 0] - display_tolerance_z) cube([external_radius - internal_edge_length / 2 + 10, 5, height + 2 * display_tolerance]);
+  }
+}
+//-------------------------------------------------------------
 module potentiometer_button()
 {
   difference(){
@@ -96,10 +117,12 @@ module potentiometer_button()
 
 //ring_with_flanges_and_rectangular_hole(10, 10.5, 9);
 
+open_ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length = 25, height = 16);
+
 //potentiometer_button();
 
 //ring_with_clamp(external_radius = 14.5, internal_radius = 12.5, height = 4);
 //ring_with_clamp(external_radius = 17.5, internal_radius = 15, height = 4);
 //ring(external_radius = 17.5, internal_radius = 15, height = 4);
 //open_ring(external_radius = 17.5, internal_radius = 15, height = 12 + 6 + 3);
-open_ring(external_radius = 15, internal_radius = 12.5, height = 12 + 6 + 3);
+//open_ring(external_radius = 15, internal_radius = 12.5, height = 12 + 6 + 3);
