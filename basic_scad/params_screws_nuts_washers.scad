@@ -81,7 +81,6 @@ washer_4_9_thick = 1;
 
 washer_6_thick = 1.7;
 washer_8_thick = 1.5;
-washer_5_thick = 1;
 
 washer_10_height = 2;
 washer_10_thick = 2;
