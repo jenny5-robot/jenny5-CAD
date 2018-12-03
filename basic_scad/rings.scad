@@ -79,9 +79,8 @@ module ring_with_flanges_and_rectangular_hole(external_radius, internal_edge_len
   }
 }
 //-------------------------------------------------------------
-module open_ring_with_flanges_and_rectangular_hole(external_radius, internal_edge_length, height)
+module open_ring_with_flanges_and_rectangular_hole(external_radius, internal_edge_length, height, flange_size = 2)
 {
-  flange_size = 2;
   difference(){
     union(){
       cylinder(h = height, r = external_radius, $fn = 50);
@@ -117,7 +116,7 @@ module potentiometer_button()
 
 //ring_with_flanges_and_rectangular_hole(10, 10.5, 9);
 
-open_ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length = 25, height = 16);
+open_ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length = 25, height = 16, flange_size = 2);
 
 //potentiometer_button();
 
