@@ -5,8 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_basic_components.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-use <../basic_scad/utils.scad>
+use <utils.scad>
 
 include <config.scad>
 include <tolerance.scad>
@@ -93,8 +92,10 @@ module my_cube_rounded2_strengthen(cube_sizes, strength_h = 2, strength_w = 2)
 //--------------------------------------------------------------
 module my_cube_rounded3_x(cube_sizes)
 {
- translate ([cube_sizes[1] / 2, 0, 0]) cube([cube_sizes[0] - cube_sizes[1], cube_sizes[1], cube_sizes[2]]);
+    translate ([cube_sizes[1] / 2, 0, 0]) cube([cube_sizes[0] - cube_sizes[1], cube_sizes[1], cube_sizes[2]]);
+    
     translate ([cube_sizes[1] / 2, cube_sizes[1] / 2, 0]) cylinder (h = cube_sizes[2] , r = cube_sizes[1] / 2, $fn = 50);
+    
     translate ([cube_sizes[0] - cube_sizes[1] / 2, cube_sizes[1] / 2, 0]) cylinder (h = cube_sizes[2] , r = cube_sizes[1] / 2, $fn = 50);
 }
 //--------------------------------------------------------------
@@ -146,24 +147,6 @@ module rectangular_tube_with_rounded_hole(length, width, hole_radius, height)
 		cube([length, width, height]);
 		translate ([length / 2, width / 2, 0] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = hole_radius) ;
 	}
-}
-//--------------------------------------------------------------
-module rectangular_tube_with_rounded_hole_and_screw_fixers(length, width, hole_radius, height)
-{
-    screw_support_size = 10;
-    difference(){
-        union(){
-            rectangular_tube_with_rounded_hole(length, width, hole_radius, height);
-          //  translate([0, -screw_support_size, 0]) cube([length, screw_support_size, screw_support_size]);
-            translate([0, -screw_support_size, height - screw_support_size]) cube([length, screw_support_size,  screw_support_size]);
-        }
-        translate([length / 2, width / 2, height - screw_support_size / 2])  rotate([90, 0, 0]) cylinder(h = width / 2 + screw_support_size + display_tolerance, r = 2, $fn = 10);
-// nut hole
-        hull(){
-        translate([length / 2, -2, height - screw_support_size / 2])  rotate([90, 30, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-        translate([length / 2, -2, height])  rotate([90, 30, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-        }
-    }
 }
 //--------------------------------------------------------------
 module cube_empty(inside_edge, outside_edge, height)
@@ -250,23 +233,9 @@ module arc_thick_rounded(radius_exterior = 100, radius_interior = 90, thick = 10
 
 //arc_thick_rounded(angle = 45);
 
-rectangular_tube_with_rounded_hole_and_screw_fixers(length = 20, width = 15, hole_radius = 6, height = 30);
-
 //corner(40, 20, 30, 3);
 
 //cube_rounded_x_holed_z([60, 40, 10], 10);
 
 //half_box(100, 50, 30, 2, 3, 3);
-//U(400, 40, 40, 3);
 
-//L(100);
-
-//hexa_screw(m6_screw_radius, 60, m6_nut_radius, m6_nut_thick);
-
-//sunken_screw(m6_screw_radius, 60, m6_nut_radius, m6_nut_thick);
-
-//inbus_screw(m8_screw_radius, 40, m8_nut_radius, m8_nut_thick);
-
-//screw(m8_screw_radius, 40, m8_nut_radius, m8_nut_thick);
-
-//nut_fluture(m4_screw_radius, m4_nut_radius, m4_nut_height);
