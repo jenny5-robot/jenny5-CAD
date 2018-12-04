@@ -165,19 +165,12 @@ module cylinder_empty(_h, external_radius, internal_radius, fn = 30)
 	}
 }
 //--------------------------------------------------------------
-module heat_sink(external_radius, internal_radius, number_of_wings)
+module my_cube_rounded4(cube_size, height, external_radius, fn = 30)
 {
-	heatsink_wing_height = 1;
-	difference(){
-		union(){
-			cylinder ( h = heatsink_wing_height, r = external_radius, $fn = 50);
-			for (i = [1:number_of_wings - 1]){
-				translate ([0, 0, (2 * i - 1) * heatsink_wing_height]) cylinder ( h = heatsink_wing_height, r = internal_radius + 1, $fn = 50);
-				translate ([0, 0, 2 * i * heatsink_wing_height]) cylinder ( h = heatsink_wing_height, r = external_radius, $fn = 50);
-			}
-		}
-		translate ([0, 0, -tolerance]) cylinder ( h = (2 * number_of_wings  - 1) * heatsink_wing_height + 2 * tolerance, r = internal_radius, $fn = 50);
-	}
+    difference(){
+        translate ([-cube_size / 2, -cube_size / 2, 0]) cube([cube_size, cube_size, height]);
+       translate (-display_tolerance_z) cylinder_empty(_h = height + 2 * display_tolerance, external_radius = cube_size * 0.71, internal_radius = external_radius, fn = fn);
+    }
 }
 //--------------------------------------------------------------
 module half_cylinder(_h, _r, _fn)
@@ -239,3 +232,4 @@ module arc_thick_rounded(radius_exterior = 100, radius_interior = 90, thick = 10
 
 //half_box(100, 50, 30, 2, 3, 3);
 
+my_cube_rounded4(cube_size = 20, height = 20, external_radius = 12.5, fn = 100);
