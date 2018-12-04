@@ -8,6 +8,8 @@ include <../basic_scad/params_basic_components.scad>
 include <../basic_scad/params_pulleys.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 
+use <../basic_scad/basic_components.scad>
+
 include <../basic_scad/config.scad>
 include <../basic_scad/params_motor_housing.scad>
 
@@ -115,40 +117,25 @@ module shoulder_traction_pulley()
             translate ([0, 0, upper_arm_gear_thick]) cylinder (h = spacer_length, r = shoulder_shaft_radius + 3);
         }
         
-        // shaft hole
-        //translate() 
-        hull(){
-            cylinder(h = 10, r = shoulder_shaft_radius + 0.5, $fn = 6);
-            translate ([0, 0, upper_arm_gear_thick + spacer_length + display_tolerance - 1]) cylinder(h = 1, r = shoulder_shaft_radius, $fn = 50);
-        }
+        // shaft hole 
+        translate (-display_tolerance_z) my_cube_rounded4(cube_size = 20, height = upper_arm_gear_thick + spacer_length + 2 * display_tolerance, external_radius = shoulder_shaft_radius, fn = 100);
+
+        dist_to_nut = 16;
 
         // 1st screw hole
-        dist_to_1st_screw = 17;
-        
-        dist_to_nut = 14;
-        translate ([-25, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
-        // 1 st screw head hole
-        translate ([15, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 30, r = 3.5, $fn = 20);
-        // nut hole
-        hull(){
-            translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-            translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, upper_arm_gear_thick]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-        }
-
-        // 2nd screw hole
-       /* 
-        translate ([-29, -dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 55, r = m4_screw_radius, $fn = 20);
-        // screw head hole
-        translate ([-40, -dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 17, r = 3.5, $fn = 20);
-        // nut hole
-        hull(){
-            translate ([dist_to_nut, -dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-            translate ([dist_to_nut, -dist_to_1st_screw, upper_arm_gear_thick]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
-        }
-        */
-    
-        // cut window
-        cube([2, 40, 20]);
+        for (i = [-1 : 2 : 1]){
+            dist_to_1st_screw = i * 5.5;
+            
+            for (angle = [0: 90: 270])
+            rotate([0, 0, angle]){
+                translate ([-35, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = 30, r = m4_screw_radius, $fn = 20);
+            // nut hole
+                hull(){
+                    translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, upper_arm_gear_thick / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
+                    translate ([-dist_to_nut - m4_nut_thick, dist_to_1st_screw, upper_arm_gear_thick]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick + 0.3, r = m4_nut_radius, $fn = 6);
+                }
+            }
+        }        
   }
 }
 //---------------------------------------------------------------------------
@@ -338,7 +325,7 @@ module pulley_upper_arm_bone_for_sensor()
 module pulley_upper_arm_sensor_shaft()
 {
     difference(){
-        pulley(profile = "T2_5mm_pulley", num_teeth = 33, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 6);
+        pulley(profile = "T2_5mm_pulley", num_teeth = 31, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 6);
         cylinder (h = 9, r = 4);
         
         // screw hole
@@ -356,7 +343,7 @@ module pulley_upper_arm_sensor_shaft()
 
 //upper_arm_rotation_pulley();
 
-//pulley_upper_arm_sensor_shaft();
+pulley_upper_arm_sensor_shaft();
 
 //pulley_upper_arm_bone_for_sensor();
 
@@ -365,7 +352,7 @@ module pulley_upper_arm_sensor_shaft()
 
 //elbow_pulley();
 
-elbow_pulley_with_magnet_support();
+//elbow_pulley_with_magnet_support();
 //wrist_pulley();
 
 //shoulder_traction_pulley();
