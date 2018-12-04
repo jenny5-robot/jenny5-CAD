@@ -141,4 +141,4 @@ module potentiometer_button()
 //open_ring(external_radius = 17.5, internal_radius = 15, height = 12 + 6 + 3);
 //open_ring(external_radius = 15, internal_radius = 12.5, height = 12 + 6 + 3);
 
-open_ring_with_rectangular_hole(external_radius = 16, internal_edge_length = 20, external_rectangle_radius = 12.5, height = 12 + 6 + 3);
+open_ring_with_rectangular_hole(external_radius = 15, internal_edge_length = 20, external_rectangle_radius = 12.5, height = 12 + 6 + 3);
