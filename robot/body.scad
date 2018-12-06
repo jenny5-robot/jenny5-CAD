@@ -9,7 +9,7 @@ use <../basic_scad/basic_components.scad>
 
 include <../basic_scad/config.scad>
 
-include <params_body.scad>
+include <body_params.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 include <../basic_scad/params_radial_bearings.scad>
@@ -26,10 +26,10 @@ use <../basic_scad/point_transformations_3d.scad>
 
 include <../basic_scad/params_alu_profiles.scad>
 
-include <params_arm_breadboard.scad>
+include <arm_breadboard_params.scad>
 use <arm_breadboard.scad>
 
-include <params_arm.scad>
+include <arm_params.scad>
 use <arm.scad>
 
 use <../basic_scad/alu_profiles.scad>

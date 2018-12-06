@@ -13,7 +13,7 @@ use <../basic_scad/basic_components.scad>
 include <../basic_scad/config.scad>
 include <../basic_scad/params_motor_housing.scad>
 
-include <params_arm.scad>
+include <arm_params.scad>
 
 use <../basic_scad/pulleys.scad>
 include <../basic_scad/tolerance.scad>
@@ -27,8 +27,6 @@ use <arm_potentiometer_support.scad>
 
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/screws_nuts_washers.scad>
-
-include <../basic_scad/params_screws_nuts_washers.scad>
 
 use <arm_sensor_support.scad>
 
@@ -109,18 +107,18 @@ module upper_arm_rotation_pulley_with_belt_tensioner()
 
 module shoulder_traction_pulley()
 {
-    spacer_length = 5;
+    spacer_length = 6;
     difference(){
                
         color (plastic_color) {
             pulley(profile = "T5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = upper_arm_gear_thick - 3);
-            translate ([0, 0, upper_arm_gear_thick]) cylinder (h = spacer_length, r = shoulder_shaft_radius + 3);
+            translate ([0, 0, upper_arm_gear_thick]) cylinder (h = spacer_length, r = shoulder_shaft_radius + 1);
         }
         
         // shaft hole 
         translate (-display_tolerance_z) my_cube_rounded4(cube_size = 20, height = upper_arm_gear_thick + spacer_length + 2 * display_tolerance, external_radius = shoulder_shaft_radius, fn = 100);
 
-        dist_to_nut = 16;
+        dist_to_nut = 14;
 
         // 1st screw hole
         for (i = [-1 : 2 : 1]){
@@ -325,7 +323,7 @@ module pulley_upper_arm_bone_for_sensor()
 module pulley_upper_arm_sensor_shaft()
 {
     difference(){
-        pulley(profile = "T2_5mm_pulley", num_teeth = 31, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 6);
+        pulley(profile = "T2_5mm_pulley", num_teeth = 31, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 5.5);
         cylinder (h = 9, r = 4);
         
         // screw hole
@@ -343,7 +341,7 @@ module pulley_upper_arm_sensor_shaft()
 
 //upper_arm_rotation_pulley();
 
-pulley_upper_arm_sensor_shaft();
+//pulley_upper_arm_sensor_shaft();
 
 //pulley_upper_arm_bone_for_sensor();
 
@@ -355,7 +353,7 @@ pulley_upper_arm_sensor_shaft();
 //elbow_pulley_with_magnet_support();
 //wrist_pulley();
 
-//shoulder_traction_pulley();
+shoulder_traction_pulley();
 
 //fore_arm_rotation_pulley();
 

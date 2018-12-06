@@ -12,14 +12,14 @@ include <../basic_scad/params_alu_profiles.scad>
 
 leg_motor_position = 0; // 0 ... 50
 
-leg_motor_max_stroke = 50;
+leg_motor_max_stroke = 150;
 
 leg_base_length = 150;
 leg_base_height = 40;
 
 leg_bone_length = 350;
 leg_bone_distance_between_bearing_centers = leg_bone_length + 2 * rb_6000_external_radius;
-leg_bone_external_radius = 12.5;
+leg_bone_external_radius = 15;
 
 dist_to_wrist_in_bone = rb_6000_external_radius + 2;
 dist_to_wrist_in_base = leg_base_height - 8;
@@ -28,16 +28,15 @@ shaft_radius = 4;
 
 max_torque_leg_angle = 70;
 
-distance_to_push_position = 115;//leg_bone_distance_between_bearing_centers;
+distance_to_push_position = 100;//leg_bone_distance_between_bearing_centers;
 
-crotch_width = 46 + 2 * rectangular_tube_30x30x3_size[1] + 2 * 5 + 2 * rb_6000_thick;
-echo(crotch_width=crotch_width);
+crotch_width_front = 220;
+crotch_width_back = 120;
 
 dist_to_first_bone = 0;
 dist_to_second_bone = 80;
-dist_to_push_motor_hole_in_base = 130;
+dist_to_push_motor_hole_in_base = 200;
 dist_to_push_motor_hole_in_base_vertical = 11;
-
 
 knee_side_simple_sizes = [110, alu_sheet_10_thick, 70];
 
@@ -47,4 +46,4 @@ dist_to_foot_spacer_hole = 30;
 
 leg_angle_offset = 0; //13;
 
-leg_spacer = 102;
+leg_spacer = 60;

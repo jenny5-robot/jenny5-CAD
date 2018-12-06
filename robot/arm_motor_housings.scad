@@ -6,14 +6,13 @@
 
 use <../basic_scad/stepper_motors_housing.scad>
 include <../basic_scad/params_motor_housing.scad>
-include <params_arm.scad>
+include <arm_params.scad>
 include <../basic_scad/params_stepper_motor_gearbox.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 include <../basic_scad/params_basic_components.scad>
 use <../basic_scad/radial_bearings.scad>
 use <../basic_scad/belt_tensioner.scad>
-include <params_arm.scad>
 include <../basic_scad/as5147_params.scad>
 use <../basic_scad/as5147.scad>
 

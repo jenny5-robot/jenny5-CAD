@@ -5,7 +5,7 @@
 //--------------------------------------------------------------
 
 
-include <params_arm.scad>
+include <arm_params.scad>
 
 include <../basic_scad/params_basic_components.scad>
 use <../basic_scad/basic_components.scad>
@@ -21,7 +21,7 @@ include <../basic_scad/params_pulleys.scad>
 use <../basic_scad/pulleys.scad>
 use <../basic_scad/radial_bearings.scad>
 
-include <params_gripper.scad>
+include <gripper_params.scad>
 use <gripper.scad>
 use <../basic_scad/belt.scad>
 
@@ -37,7 +37,7 @@ use <arm_motor_housings.scad>
 include <../basic_scad/params_stepper_motor_gearbox.scad>
 
 include <../basic_scad/tolerance.scad>
-include <params_body.scad>
+include <body_params.scad>
 
 use <arm_sheets.scad>
 

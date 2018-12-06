@@ -17,15 +17,15 @@ use <../basic_scad/spacer.scad>
 use <../basic_scad/func_3d.scad>
 include <../basic_scad/params_alu_profiles.scad>
 
-include <params_leg.scad>
+include <leg_params.scad>
 use <leg.scad>
 
-include <params_base_platform.scad>
+include <base_platform_params.scad>
 use <base_platform.scad>
 
 use <head.scad>
 
-include <params_body.scad>
+include <body_params.scad>
 use <body.scad>
 
 include <../basic_scad/tolerance.scad>

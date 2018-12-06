@@ -37,7 +37,7 @@ use <../basic_scad/breadboards.scad>
 use <potentiometer_gears.scad>
 use <../basic_scad/potentiometers.scad>
 
-include <params_head.scad>
+include <head_params.scad>
 include <../basic_scad/params_alu_profiles.scad>
 include <../basic_scad/tolerance.scad>
 

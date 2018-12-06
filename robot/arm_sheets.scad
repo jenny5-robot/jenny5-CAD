@@ -5,13 +5,13 @@
 //--------------------------------------------------------------
 
 
-include <params_arm.scad>
+include <arm_params.scad>
 
 include <../basic_scad/params_motor_housing.scad>
 use <../basic_scad/point_transformations_3d.scad>
 
 include <../basic_scad/tolerance.scad>
-include <params_body.scad>
+include <body_params.scad>
 
 include <../basic_scad/params_tube_bracket.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>

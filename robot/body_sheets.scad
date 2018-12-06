@@ -9,7 +9,7 @@ include <../basic_scad/params_basic_components.scad>
 
 include <../basic_scad/config.scad>
 
-include <params_body.scad>
+include <body_params.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 
 include <../basic_scad/params_stepper_motors.scad>

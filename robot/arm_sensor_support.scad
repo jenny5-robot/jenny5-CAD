@@ -13,8 +13,8 @@ include <../basic_scad/config.scad>
 
 include <../basic_scad/tolerance.scad>
 
-include <params_arm.scad>
-include <params_body.scad>
+include <arm_params.scad>
+include <body_params.scad>
 include <../basic_scad/as5147_params.scad>
 include <arm_sensor_support_params.scad>
 

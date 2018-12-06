@@ -7,7 +7,7 @@
 include <../basic_scad/params_breadboards.scad>
 use <../basic_scad/breadboards.scad>
 
-include <params_arm_breadboard.scad>
+include <arm_breadboard_params.scad>
 
 include <../basic_scad/params_electronic_components.scad>
 

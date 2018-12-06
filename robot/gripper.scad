@@ -7,7 +7,7 @@
 
 include <../basic_scad/tolerance.scad>
 use <../basic_scad/basic_components.scad>
-include <params_gripper.scad>
+include <gripper_params.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
 include <../basic_scad/params_basic_components.scad>
