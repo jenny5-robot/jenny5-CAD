@@ -66,6 +66,22 @@ module magnet_holder_hexa(holder_height = 10, magnet_radius = 4, magnet_thick = 
     }
 }
 //--------------------------------------------------------------
+module magnet_holder_square(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_size = 16, tower_height = 10, tower_external_radius = 6)
+{
+    border_size = 1.5;
+    difference(){
+        color (plastic_color) {
+            translate ([-tube_internal_size / 2, -tube_internal_size / 2, 0]) cube([tube_internal_size, tube_internal_size, holder_height]);
+            translate ([0, 0, holder_height - 0.01]) rotate ([0, 0, 45]) cylinder (h = border_size, r1 = tube_internal_size * 0.7, r2 = tube_internal_size * 0.7 + border_size, $fn = 4);
+            translate ([0, 0, holder_height - 0.02 + border_size]) cylinder (h = tower_height, r = tower_external_radius, $fn = 30);
+        }
+        // magnet hole
+      translate ([0, 0, holder_height + tower_height + border_size - magnet_thick]) cylinder (h = magnet_thick + display_tolerance, r = magnet_radius, $fn = 30);
+        // hole
+        cylinder (h = holder_height + tower_height, r = magnet_radius - 1, $fn = 30);
+    }
+}
+//--------------------------------------------------------------
 module magnet(magnet_radius = 4, magnet_thick = 2.5)
 {
     color ("DarkGray") cylinder (h = magnet_thick, r = magnet_radius);
@@ -91,6 +107,8 @@ module magnet_holder2_with_magnet(holder_height = 10, magnet_radius = 4, magnet_
 //magnet_holder(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11);
 //magnet_holder2(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11, tower_height = 2, tower_external_radius = 6);
 
-magnet_holder_hexa(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11.5, tower_height = 2, tower_external_radius = 6);
+//magnet_holder_hexa(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11.5, tower_height = 2, tower_external_radius = 6);
+
+magnet_holder_square(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_size = 16, tower_height = 2, tower_external_radius = 6);
 
 //magnet_holder2_with_magnet(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11,  tower_height = 10, tower_external_radius = 6);
