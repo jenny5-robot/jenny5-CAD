@@ -108,7 +108,10 @@ module open_ring_with_flanges_and_rectangular_hole(external_radius, internal_edg
     translate ([-internal_edge_length / 2, -internal_edge_length / 2, 0]-display_tolerance_z) cube([internal_edge_length, internal_edge_length, height] + 2 * display_tolerance_z);
     
     // cut
-        translate ([internal_edge_length / 2 - 5, -2.5, 0] - display_tolerance_z) cube([external_radius - internal_edge_length / 2 + 10, 5, height + 2 * display_tolerance]);
+        translate ([internal_edge_length / 2, -2.5, 0] - display_tolerance_xz) cube([external_radius - internal_edge_length / 2 + flange_size + display_tolerance, 5, height + 2 * display_tolerance]);
+    
+    // cut
+        translate ([-external_radius - flange_size, -2.5, 0] - display_tolerance_z) cube([external_radius - internal_edge_length / 2 + 10, 5, height + 2 * display_tolerance]);    
   }
 }
 //-------------------------------------------------------------
@@ -131,7 +134,7 @@ module potentiometer_button()
 
 //ring_with_flanges_and_rectangular_hole(10, 10.5, 9);
 
-//open_ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length = 25, height = 16, flange_size = 2.1);
+open_ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length = 25, height = 16, flange_size = 2.2);
 
 //potentiometer_button();
 
@@ -141,4 +144,4 @@ module potentiometer_button()
 //open_ring(external_radius = 17.5, internal_radius = 15, height = 12 + 6 + 3);
 //open_ring(external_radius = 15, internal_radius = 12.5, height = 12 + 6 + 3);
 
-open_ring_with_rectangular_hole(external_radius = 15, internal_edge_length = 20, external_rectangle_radius = 12.5, height = 12 + 6 + 3);
+//open_ring_with_rectangular_hole(external_radius = 15, internal_edge_length = 20, external_rectangle_radius = 12.5, height = 12 + 6 + 3);
