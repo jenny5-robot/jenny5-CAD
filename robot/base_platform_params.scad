@@ -6,7 +6,7 @@
 
 include <tracks_params.scad>
 
-base_platform_size = [600, 300, 18];
+base_platform_size = [600, 300, 16];
 
 first_tracks_offset = 30;
 distance_between_wheels = 230;
@@ -23,12 +23,12 @@ num_tracks_per_circle = 14; // 16
 tracks_wheel_radius = 53.34; // 58.8
 
 motor_gear_height = 11;
-wheel_gear_height = 17;
+wheel_gear_height = 20;
 wheel_gear_nut_depth = wheel_gear_height - 2;
 
-base_motor_offset = 56;
+base_motor_offset = 101;
 
-tracks_offset = 15;
+tracks_offset = 25;
 
 dist_to_tracks_tensioner_support = 150;
 dist_to_tracks_support1 = 130;
@@ -39,3 +39,9 @@ tracks_tensioner_support_size = [20, base_platform_size[1] + 2 * track_size[0] +
 tracks_support_size = [10, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset, 10];
 
 tracks_tensioner_size = [tracks_tensioner_support_size[0], 12, 60];
+
+base_motor_support_sheet_size = [45, 34 + 20 + 23, 3];
+
+wheel_radius = 54.66 * 0.955;
+wheel_tooth_height = 10;
+wheel_steps = 20;

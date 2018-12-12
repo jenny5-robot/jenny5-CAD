@@ -68,19 +68,6 @@ module prism(h)
         polygon( points = [[-3, 0], [3, 0], [0, 9]]);
 }
 //--------------------------------------------------------------------
-module tooth(h)
-{
-    w = 7;
-    translate ([0, -w/2, 0]) 
-        hull() {
-            cube([h, w, 5]);
-            translate ([h / 2, 2, 4])
-            rotate([-90, 0, 0])
-            cylinder(h = w - 4, r = h /2, $fn = 30)
-            ;
-        }
-}
-//--------------------------------------------------------------------
 module tooth2(height, length, thick)
 {
     render(){
@@ -117,16 +104,12 @@ module wheel_extension_with_teeth(radius = 48.5, height = 8, steps = 18)
             // screw holes
             for (i = [0 : 7])
                 translate([(radius - diametral_thickness / 2) * sin(i * 45), (radius - diametral_thickness / 2) * cos(i * 45), 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-
-            
         }
     }
 }
 //--------------------------------------------------------------------
 module wheel_wall(radius = 48.5, height = 4)
 {
-    
-    
     color (plastic_color) 
     render(){
         diametral_thickness = 10;
@@ -140,8 +123,6 @@ module wheel_wall(radius = 48.5, height = 4)
             // screw holes
             for (i = [0 : 7])
                 translate([(radius - diametral_thickness / 2) * sin(i * 45), (radius - diametral_thickness / 2) * cos(i * 45), 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-
-            
         }
     }
 }
@@ -248,7 +229,7 @@ module wheel_middle_internal(external_radius = 84)
     }
 }
 //--------------------------------------------------------------------
-module wheel_middle_with_bearing_external(external_radius = 84)
+module wheel_middle_with_bearing_hole(external_radius = 84)
 {
     screw_case_height = rb_6907_thick;
     color (plastic_color) 
@@ -287,7 +268,7 @@ module wheel_middle_with_bearing_external(external_radius = 84)
             }
         }
 
-// 4 holes for fixing the part to the next ones
+// 8 holes for fixing the part to the next ones
                diametral_thickness = 10; 
             for (i = [0 : 7])
                 rotate([0, 0, 23])
@@ -297,239 +278,42 @@ module wheel_middle_with_bearing_external(external_radius = 84)
             for (i = [0 : 7])
                  rotate([0, 0, 68])
                 translate([(rb_6907_external_radius + 3) * sin(i * 45), (rb_6907_external_radius + 3) * cos(i * 45), 0] - display_tolerance_z) cylinder(h = screw_case_height + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-        // centre hole
-       // cylinder (r = rb_6907_external_radius - 2, h = height + 1, $fn = 50);
+            
         // bearing hole
         translate (-display_tolerance_z) cylinder (r = rb_6907_external_radius, h = rb_6907_thick + 2 * display_tolerance, $fn = 50, center = false);
 	}
     }
 }
 //--------------------------------------------------------------------
-module wheel_middle_with_bearing_internal(external_radius = 84)
+module wheel_middle_with_bearing(external_radius = 84)
 {
-    color (plastic_color) 
-    //render()
-    {
-    height = 4;
-    screw_length = external_radius - 24;
+    wheel_middle_with_bearing_hole(external_radius = external_radius);
+    6907rs();
     
-    diametral_thickness = 10;
-    
-	difference(){
-      // traction teeth
-      union(){
-            cylinder (r = external_radius + 9, h = 3, $fn = 100);
-            translate([0, 0, 3]) cylinder (r2 = external_radius, r1 = external_radius + 9, h = height - 3, $fn = 100);
-            }
+    // screws
+    for (i = [0 : 7])
+        rotate([0, 0, 68])
+            translate([(rb_6907_external_radius + 3) * sin(i * 45), (rb_6907_external_radius + 3) * cos(i * 45), rb_6907_thick + 2]) mirror([0, 0, 1]) M4_hexa(20);
 
-      num_spokes = 8;
-      spoke_angle = 360 / num_spokes;
-      // holes for saving material
-	  for ( i = [0 : 1 : num_spokes] )	
-		rotate([i * spoke_angle, 90, 0]){
-          translate ([0, 0, external_radius - screw_length + 4]){
-          hull(){
-            translate ([height / 2, 0, 0])         
-                    cylinder(h = screw_length - 8, r1 = 4, r2 = 14, $fn = 6, center = false);
-            translate ([-height / 2, 0, 0])         
-                    cylinder(h = screw_length - 8, r1 = 4, r2 = 14, $fn = 6, center = false);
-                }
-            }
-        }
-
-// 4 holes for fixing the part to the next ones	
-        diametral_thickness = 10; 
-            for (i = [0 : 3])
-                rotate([0, 0, 23])
-                translate([(external_radius - diametral_thickness / 2) * sin(i * 90), (external_radius - diametral_thickness / 2) * cos(i * 90), 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-
-// midle screw holes
-            for (i = [0 : 3])
-                 rotate([0, 0, 70])
-                translate([(rb_6905_external_radius + 3.5) * sin(i * 90), (rb_6905_external_radius + 3.5) * cos(i * 90), 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = m3_screw_radius, $fn = 30);
-        
-        // centre hole
-        cylinder (r = rb_6905_external_radius - 2, h = height + 1, $fn = 50);
-	}
-    }
 }
 //--------------------------------------------------------------------
-
-
-module wheel_middle_external_with_teeth(radius, height, steps)
+module wheel()
 {
-    wheel_extension_with_teeth(radius, height + 5, steps);
-    wheel_middle_external(radius);
-    translate ([0, 0, height + 4 + 3]) mirror ([0, 0, 1]) wheel_wall(radius, 3);
+    wheel_middle_with_bearing(wheel_radius);
+    translate ([0, 0, 4]) wheel_extension_with_teeth(wheel_radius, wheel_tooth_height, wheel_steps);
+    translate ([0, 0, wheel_tooth_height + 4 + 4]) mirror ([0, 0, 1]) wheel_wall(wheel_radius, 4);
+    translate ([0, 0, wheel_tooth_height + 4 + 4]) wheel_wall(wheel_radius, 4);
+    translate ([0, 0, wheel_tooth_height + 4 + 4 + 4]) wheel_extension_with_teeth(wheel_radius, wheel_tooth_height, wheel_steps);
+    translate ([0, 0, wheel_tooth_height + 4 + 4 + 4 + wheel_tooth_height + 4]) mirror([0, 0, 1]) wheel_middle_with_bearing(wheel_radius);
+    
+    // screws
 }
 //--------------------------------------------------------------------
-module wheel_with_teeths(external_radius = 84, steps = 24)// radius = 42, steps = 12
+module first_wheel()
 {
-    color (plastic_color) 
-    render()
-    {
-    height = 10;
-    screw_length = external_radius - 24;
-    angle_step = 360/steps;
-    diametral_thickness = 10;
-    
-	difference(){
-      // traction teeth
-      union(){
-		cylinder (r = external_radius, h = height, $fn = 100, center = true);
-		for ( i = [0 : 1 : steps] )	
-    		rotate([0, 0, i * angle_step]){
-                translate ([external_radius -0.3, 0, height / 2])
-                    color("red") rotate([0, 90, 0]) tooth(height);
-                
-           //     translate ([0, 0, external_radius + 4 - 0.3])
-           //         color("red") cylinder(h = 4, r2 = 1.5, r1 = 6, $fn = 30, center = false);
-            }
-
-      }
-      
-      num_spokes = 8;
-      spoke_angle = 360 / num_spokes;
-      // holes for saving material
-	  for ( i = [0 : 1 : num_spokes] )	
-		rotate([i * spoke_angle, 90, 0]){
-          translate ([0, 0, external_radius - screw_length - 8]){
-          hull(){
-            translate ([height / 2, 0, 0])         
-                    cylinder(h = screw_length - 2, r1 = 4, r2 = 14, $fn = 6, center = false);
-            translate ([-height / 2, 0, 0])         
-                    cylinder(h = screw_length - 2, r1 = 4, r2 = 14, $fn = 6, center = false);
-                }
-            }
-        }
-
-// 4 holes for fixing the part to the next ones	
-		for ( i = [0 : 1 : 4] ){
-			rotate ([0, 0, spoke_angle / 2]) translate([(external_radius - diametral_thickness / 2) * sin(i * 90), (external_radius - diametral_thickness / 2) * cos(i * 90), 0]) cylinder(h = height + 2 * display_tolerance, r = 2, $fn = 30, center = true);
-			//translate([(20) * sin(i*90+16), (20) * cos(i*90+16), 0]) cylinder(h=thick, r = 2, $fn = 20, center = true);
-		}
-        
-        // centre hole
-        cylinder (r = 6, h = height + 1, $fn = 100, center = true);
-        translate ([0, 0, height / 2 - 7]) cylinder (r = M12_nut_radius, h = M12_nut_thick + display_tolerance, $fn = 6, center = false);
-	}
-    }
+    wheel();
+    translate ([0, 0, wheel_tooth_height + 4 + 4 + 4 + wheel_tooth_height + 4]) wheel_gear();
 }
-//--------------------------------------------------------------------
-module wheel_extension(radius = 42.5, _h = 8, num_faces_nut_holes = 6)
-{
-    color (plastic_color) 
-    render()
-    {
-        diametral_thickness = 12;
-        difference(){
-            union(){
-                cylinder (r = radius, h = _h, $fn = 100);
-                cylinder (r = radius + 5, h = 3, $fn = 100);
-
-            }
-            translate (-display_tolerance_z) cylinder (r = radius - diametral_thickness, h = _h + 2 * display_tolerance, $fn = 100);
-            // screw holes
-            for (i = [0 : 3])
-                translate([(radius - diametral_thickness / 2) * sin(i * 90), (radius - diametral_thickness / 2) * cos(i * 90), 0] - display_tolerance_z) cylinder(h = _h + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-            // nuts holes
-            for (i = [0 : 3])
-                translate([(radius - diametral_thickness / 2) * sin(i * 90), (radius - diametral_thickness / 2) * cos(i * 90), 0] - display_tolerance_z) rotate ([0, 0, 30 * (i % 2)]) cylinder(h = m4_nut_thick + display_tolerance, r = m4_nut_radius, $fn = num_faces_nut_holes);
-            
-        }
-    }
-}
-//--------------------------------------------------------------------
-module tracks_on_half_wheel(num_tracks_per_circle, wheel_radius, start_angle = 0)
-{
-    step = 360 / num_tracks_per_circle;
-    
-    tracks_on_circle(num_tracks_per_circle, wheel_radius, start_angle, num_tracks_per_circle / 2 + 1);
-}
-//--------------------------------------------------------------------
-module second_wheel_with_shaft(num_tracks_per_circle, wheel_radius)
-{
-    space_between_wheels = 18;
-    // screw axis
-    translate ([0, 0, -6]) 
-      M12_hexa(150);
-    // traction wheel
-    wheel_with_teeths(wheel_radius, num_tracks_per_circle);
-    // bottom extension wheel
-    translate ([0, 0, -6 -8 -space_between_wheels])
-    wheel_extension(tracks_wheel_radius, 12, 18, 6);
-    // top extension wheel
-    translate ([0, 0, 6 + 8 + space_between_wheels])
-    mirror([0, 0, 1])
-    wheel_extension(tracks_wheel_radius, 12, 18, 6);
-    
-    // screws for glueing plastic parts
-    
-    for (i = [0 : 3]){
-      translate([(wheel_radius - 5) * sin(i * 90), (wheel_radius - 5) * cos(i * 90), -6 - 8 - space_between_wheels - m4_nut_thick]) M4_hexa(70);
-      translate([(wheel_radius - 5) * sin(i * 90), (wheel_radius - 5) * cos(i * 90), 6 + 8 + space_between_wheels]) M4_autolock_nut();
-    }
-    
-    // spacer
-    translate ([0, 0, 6])
-    M12_washer();
-    // nut
-    translate ([0, 0, 6 + washer_12_thick]) M12_nut();
-    // long nut
-   translate ([0, 0, 6 + washer_12_thick]) M12_long_nut();
-    // long nut
-   translate ([0, 0, 6 + washer_12_thick + M12_long_nut_thick]) M12_long_nut();
-}
-//--------------------------------------------------------------------
-module tracks_on_2_wheels(num_tracks_per_half_circle, wheel_radius, distance_between_wheels)
-{
-    rotate ([90, 0, 0]) tracks_on_half_wheel(num_tracks_per_half_circle, wheel_radius);
-    translate ([-distance_between_wheels, 0, 0]) mirror([1, 0, 0]) rotate ([90, 0, 0]) tracks_on_half_wheel(num_tracks_per_half_circle, wheel_radius);
-    
-    translate ([-distance_between_wheels - 12, -track_size[0] / 2, -wheel_radius - track_size[2]]) string_of_tracks(9);
-    translate ([-distance_between_wheels - 12, -track_size[0] / 2, wheel_radius + track_size[2]]) mirror([0, 0, 1]) string_of_tracks(9);
-}
-//--------------------------------------------------------------------
-module first_wheel_with_shaft(num_tracks_per_circle, wheel_radius)
-{
-    space_between_wheels = 18;
-    // screw axis
-    translate ([0, 0, -6]) 
-      M12_hexa(150);
-    // traction wheel
-    wheel_with_teeths(wheel_radius, num_tracks_per_circle);
-    // bottom extension wheel
-    translate ([0, 0, -6 -8 -space_between_wheels])
-    wheel_extension(tracks_wheel_radius, 12, 18, 6);
-    // top extension wheel
-    translate ([0, 0, 6 + 8 + space_between_wheels])
-    mirror([0, 0, 1])
-    wheel_extension(tracks_wheel_radius, 12, 18, 6);
-    
-    // screws for glueing plastic parts
-    
-    for (i = [0 : 3]){
-      translate([(wheel_radius - 5) * sin(i * 90), (wheel_radius - 5) * cos(i * 90), -6 - 8 - space_between_wheels - m4_nut_thick]) M4_hexa(70);
-      translate([(wheel_radius - 5) * sin(i * 90), (wheel_radius - 5) * cos(i * 90), 6 + 8 + space_between_wheels]) M4_autolock_nut();
-    }
-    
-    // spacer
-    translate ([0, 0, 6]) M12_washer();
-    // long nut
-   translate ([0, 0, 6 + washer_12_thick]) M12_long_nut();
-    // gear
-    translate ([0, 0, 6 + washer_12_thick + M12_long_nut_thick + wheel_gear_height - wheel_gear_nut_depth]) mirror([0, 0, 1]) wheel_gear();
-    // washer
-    translate ([0, 0, 6 + washer_12_thick + M12_long_nut_thick + wheel_gear_height - wheel_gear_nut_depth]) M12_washer();
-    // nut
-   translate ([0, 0, 6 + washer_12_thick + M12_long_nut_thick + wheel_gear_height - wheel_gear_nut_depth + washer_12_thick]) M12_nut();
-    // nut
-   translate ([0, 0, 6 + washer_12_thick + M12_long_nut_thick + wheel_gear_height - wheel_gear_nut_depth + washer_12_thick + M12_nut_thick]) M12_nut();
-    // nut
-   translate ([0, 0, 6 + washer_12_thick + M12_long_nut_thick + wheel_gear_height - wheel_gear_nut_depth + washer_12_thick + 2 * M12_nut_thick]) M12_nut();
-
-}
-
 //--------------------------------------------------------------------
 module motor_gear()
 {
@@ -570,29 +354,37 @@ module motor_gear()
 module wheel_gear()
 {    
     difference(){
-        rotate ([0, 0, 12]) gear (number_of_teeth=14,
-					circular_pitch=500,
-					bore_diameter=0,
-					hub_diameter=0,
-					rim_width=4,
-					hub_thickness=4,
-					rim_thickness=wheel_gear_height,
-					gear_thickness=wheel_gear_height,
-					pressure_angle=31);
-        // M12 screw hole
-        translate (-display_tolerance_z) cylinder(h = wheel_gear_height + 2 * display_tolerance, r = 6, $fn = 40);
-        // M12 nut hole
-        translate ([0, 0, wheel_gear_height - wheel_gear_nut_depth]) cylinder(h = wheel_gear_nut_depth + display_tolerance, r = M12_nut_radius, $fn = 6);
+        rotate ([0, 0, 12]) gear (number_of_teeth = 27,
+					circular_pitch = 500,
+					bore_diameter = 0,
+					hub_diameter = 0,
+					rim_width = 4,
+					hub_thickness = 4,
+					rim_thickness = wheel_gear_height,
+					gear_thickness = wheel_gear_height,
+					pressure_angle = 31);
+        // // middle hole
+        translate (-display_tolerance_z) cylinder(h = wheel_gear_height + 2 * display_tolerance, r = rb_6907_external_radius, $fn = 40);
+        // screw holes
+        for (i = [0 : 7])
+            rotate([0, 0, 68])
+                translate([(rb_6907_external_radius + 3) * sin(i * 45), (rb_6907_external_radius + 3) * cos(i * 45), 0] - display_tolerance_z) cylinder(h = wheel_gear_height + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
     }
 }
 //--------------------------------------------------------------------
-module base_motor_with_housing()
+module base_motor_support_sheet()
 {
-    motor_gr_ep_45_housing_with_base_holes();
-   
-    translate ([motor_gr_ep_45_radius + base_wall_dc_motor_housing_thick + 2, motor_gr_ep_45_radius + side_wall_dc_motor_housing_thick, motor_gr_ep_45_188_1_length + 3]) mirror([0, 0, 1]) motor_gr_ep_45_188_1();
+    cube(base_motor_support_sheet_size);
+}
+//--------------------------------------------------------------------
+module base_motor_with_housing()
+{ 
+    translate ([-motor_gr_ep_45_radius, -motor_gr_ep_45_radius, motor_gr_ep_45_188_1_length]) base_motor_support_sheet();
     
-    translate ([motor_gr_ep_45_radius + base_wall_dc_motor_housing_thick + 2, motor_gr_ep_45_radius + side_wall_dc_motor_housing_thick, -20]) motor_gear();
+    motor_gr_ep_45_188_1();
+    
+    translate ([0, 0, motor_gr_ep_45_188_1_length + motor_gr_ep_45_shaft_length]) mirror ([0, 0, 1])
+    motor_gear();
 }
 //--------------------------------------------------------------------
 module platform_sheet()
@@ -725,12 +517,6 @@ module base_motor_pulley()
   }
 }
 //--------------------------------------------------------------------
-module radial_bearing_housing_with_bearing()
-{
-    radial_bearing_6201_vertical_housing(0);
-    translate ([rbearing_6201_enclosed_housing_size[0] / 2, radial_bearing_vertical_housing_grosime_perete_lateral_latime, rb_6201_external_radius + radial_bearing_vertical_housing_base_wall_thick ]) rotate ([-90, 0, 0]) 6201rs();
-}
-//--------------------------------------------------------------------
 module tracks_tensioner()
 {
     color (plastic_color) 
@@ -750,7 +536,6 @@ module tracks_tensioner()
             translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1] / 2, 25] - display_tolerance_z) rotate([0, 0, 30]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
             translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1], 25] - display_tolerance_z) rotate([0, 0, 30]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
             }
-
     }
 }
 //--------------------------------------------------------------------
@@ -787,135 +572,101 @@ module tracks_support()
     }
 }
 //--------------------------------------------------------------------
-module tracks_tensioner_support_with_pieces()
-{
-    tracks_tensioner_support();
-    
-    translate ([-tracks_tensioner_size[0] / 2 + tracks_tensioner_support_size[0] / 2, 0, tracks_tensioner_support_size[2]]) tracks_tensioner();
-    translate ([-tracks_tensioner_size[0] / 2 + tracks_tensioner_support_size[0] / 2, 60, tracks_tensioner_support_size[2]]) tracks_tensioner();
-
-    translate ([-tracks_tensioner_size[0] / 2 + tracks_tensioner_support_size[0] / 2, tracks_tensioner_support_size[1] - tracks_tensioner_size[1], tracks_tensioner_support_size[2]]) tracks_tensioner();
-    translate ([-tracks_tensioner_size[0] / 2 + tracks_tensioner_support_size[0] / 2, tracks_tensioner_support_size[1] - 70, tracks_tensioner_support_size[2]]) tracks_tensioner();
-}
-//--------------------------------------------------------------------
 module platform()
 {
   platform_sheet();
     
     // reinforcement aluminium L profiles
     // left side
-    translate ([0, -3, 3 + base_platform_size[2]]) rotate ([180, 0, 0]) rotate ([0, 0, -90]) L_profile(base_platform_size[0], edge_1_width = 25, edge_2_width = 25, wall_thick = 3);
-    // right side
-    translate ([0, base_platform_size[1] + 3, 3 + base_platform_size[2]]) rotate ([90, 0, 0]) rotate ([0, 0, -90]) L_profile(base_platform_size[0], edge_1_width = 25, edge_2_width = 25, wall_thick = 3);
+    translate ([0, -2, 2 + base_platform_size[2]]) 
+    rotate ([-90, 0, 0]) 
 
+    color(aluminium_color) U(length = base_platform_size[0], base = 20, height = 20, wall_thick = 2);
+
+    // right side
+    translate ([0, base_platform_size[1] + 2, -2]) 
+        rotate ([90, 0, 0]) 
+                color(aluminium_color) U(length = base_platform_size[0], base = 20, height = 20, wall_thick = 2);
+    
   // motor right
     
-  translate ([base_motor_offset, base_platform_size[1], 0]) 
+  translate ([base_motor_offset, motor_gr_ep_45_188_1_length, -rb_6909_external_radius]) 
     rotate([90, 0, 0])
-      rotate([0, 0, -90]) 
-        base_motor_with_housing();
+        base_motor_with_housing()
+    ;
     
     // motor left
-  translate ([motor_gr_ep_45_housing_size[1] + base_motor_offset, 0, 0])
-    //rotate([0, 0, 180])
+  translate ([base_motor_offset, base_platform_size[1] - motor_gr_ep_45_188_1_length, -rb_6909_external_radius])
       rotate([-90, 0, 0])
-        rotate([0, 0, 90]) 
-          base_motor_with_housing();
+        rotate([0, 0, 180]) 
+          base_motor_with_housing()
+          ;
     
-// first wheel    
-    // first radial bearing housing
-    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_housing_with_bearing();
-   
-    // second radial bearing housing
-    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_housing_with_bearing();
-
-// second shaft
-    // first radial bearing housing
-    translate ([first_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_housing_with_bearing();
-   
-    // second radial bearing housing
-    translate ([first_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_housing_with_bearing();
 
 // wheels
     
     translate ([0, -track_size[0] / 2 - tracks_offset, 0]) {
             
     //first gear
-        translate ([first_tracks_offset, 0, -rb_6201_external_radius]) rotate([-90, 0, 0]) first_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset, 0, -12.5 - 2]) rotate([-90, 0, 0]) first_wheel();
     
     //second gear
-        translate ([first_tracks_offset + distance_between_wheels, 0, -rb_6201_external_radius]) rotate([-90, 0, 0]) second_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset + distance_between_wheels, 0, -12.5 - 2]) rotate([-90, 0, 0]) wheel();
 
-        //tracks
-   translate ([distance_between_wheels + first_tracks_offset, 0, -rb_6201_external_radius]) 
-        tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
+        // rubber tracks
+   translate ([first_tracks_offset, track_size[0] / 2, -12.5 - 2])
+        rotate([90, 0, 0]) 
+         color ("black") belt_on_2_pulleys(r1 = wheel_radius, r2 = wheel_radius, distance_between_pulleys = distance_between_wheels, belt_width = 50, belt_thick = 10);
     }
 
 // other side
 
-    
-
-    translate ([0, base_platform_size[1], 0])
-        mirror([0, 1, 0]){  
-        // first radial bearing housing
-            translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
    
-    // second radial bearing housing
-            translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_6201_vertical_housing(0);
-        
-// second shaft
-    // first radial bearing housing
-            translate ([first_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_housing_with_bearing();
-   
-    // second radial bearing housing
-            translate ([first_tracks_offset + distance_between_wheels - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, -rbearing_6201_enclosed_housing_size[2]]) radial_bearing_housing_with_bearing();
-        
-        }
 
     translate([0, base_platform_size[1] + track_size[0] / 2 + tracks_offset, 0]){
     // first wheel
-        translate ([first_tracks_offset, 0, -rb_6201_external_radius]) rotate([90, 0, 0]) first_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset, 0, -12.5 - 2]) rotate([90, 0, 0]) first_wheel();
     // second wheel
-        translate ([first_tracks_offset + distance_between_wheels, 0, -rb_6201_external_radius]) mirror([0, 1, 0]) rotate([-90, 0, 0]) second_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
+        translate ([first_tracks_offset + distance_between_wheels, 0, -12.5 - 2]) mirror([0, 1, 0]) rotate([-90, 0, 0]) wheel();
 
-    // tracks
-    translate ([distance_between_wheels + first_tracks_offset, 0, -rb_6201_external_radius]) 
-        tracks_on_2_wheels(num_tracks_per_circle, tracks_wheel_radius, distance_between_wheels);
+    // rubber tracks
+    translate ([first_tracks_offset, 0, -12.5 - 2]) 
+        rotate([90, 0, 0])
+         color ("black") belt_on_2_pulleys(r1 = wheel_radius, r2 = wheel_radius, distance_between_pulleys = distance_between_wheels, belt_width = 50, belt_thick = 10);
+
 
 }
+
+// first shaft
+color(aluminium_color) translate ([first_tracks_offset - 12.5, - 75, -2]) rotate ([-90, 0, 0]) rectangular_tube(length = 25, width = 25, wall_thick = 2, height = base_platform_size[1] + 150);
+
+// second shaft
+color(aluminium_color) translate ([first_tracks_offset + distance_between_wheels - 12.5, - 75, -2]) rotate ([-90, 0, 0]) rectangular_tube(length = 25, width = 25, wall_thick = 2, height = base_platform_size[1] + 150);
+
     // back wheel
     
     translate ([base_platform_size[0] + 100, base_platform_size[1]/2, -rb_6201_external_radius - tracks_wheel_radius - track_size[2] + chair_wheel_radius]) rotate ([0, 0, 90]) chair_wheel();
     
     // laptop
-    translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 50]) rotate ([0, 0, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
+translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 50]) rotate ([0, 0, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
 
     // lidar
 
-    translate([lidar_position, base_platform_size[1] / 2, base_platform_size[2]]) rotate([0, 0, 90]) tera_ranger_one_lidar();
+   translate([lidar_position, base_platform_size[1] / 2, base_platform_size[2]]) rotate([0, 0, 90]) tera_ranger_one_lidar();
 
-// tracks tensioner support
-translate ([dist_to_tracks_tensioner_support, - 80 - tracks_offset + 10, -4 - tracks_tensioner_support_size[2] - 20]) tracks_tensioner_support_with_pieces();
+//translate ([dist_to_tracks_support1, - 80 - tracks_offset, -4 - tracks_tensioner_support_size[2]])tracks_support();
 
-translate ([dist_to_tracks_support1, - 80 - tracks_offset, -4 - tracks_tensioner_support_size[2]])
-tracks_support();
-
-translate ([dist_to_tracks_support2, - 80 - tracks_offset, -4 - tracks_tensioner_support_size[2]])
-tracks_support();
+//translate ([dist_to_tracks_support2, - 80 - tracks_offset, -4 - tracks_tensioner_support_size[2]]) tracks_support();
 
 // batteries
-    //translate([base_platform_size[0] - laptop13_size[1], -LiFePO4_20Ah_size[1] / 2 + base_platform_size[1] / 2, base_platform_size[2]]) LiFePO4_20Ah();
-    translate([base_platform_size[0] - laptop13_size[1], 0, base_platform_size[2]]) multistar_4s_16000();
+    translate([base_platform_size[0] - laptop13_size[1], -LiFePO4_20Ah_size[1] / 2 + base_platform_size[1] / 2, base_platform_size[2]]) LiFePO4_20Ah();
+   translate([base_platform_size[0] - laptop13_size[1], 0, base_platform_size[2]]) multistar_4s_16000();
     translate([base_platform_size[0] - laptop13_size[1], base_platform_size[1] - multistar_4s_16000_size[1], base_platform_size[2]]) multistar_4s_16000(); 
 }
 //--------------------------------------------------------------------
 
 
 platform();
-
-
-//tracks_tensioner();
-//track_tensioner_support_with_pieces();
 
 //platform_sheet(); 
 
@@ -924,11 +675,10 @@ platform();
 
 //second_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
 
-//first_wheel_with_shaft(num_tracks_per_circle, tracks_wheel_radius);
+//wheel();
+//first_wheel();
 
 //base_motor_pulley();
-
-//motor_housing_with_components();
 
 //base_motor_with_housing();
 
@@ -938,10 +688,6 @@ platform();
 
 //string_of_tracks (10);
 
-//wheel_traction_pulley();
-
-//wheel_with_teeths(tracks_wheel_radius, num_tracks_per_circle);
-
 //wheel_extension_with_teeth(radius = 54.66 * 0.955,  height = 10, steps = 20);
 
 //wheel_wall(radius = 54.66 * 0.955, height = 4);
@@ -950,16 +696,12 @@ platform();
 
 //wheel_middle_internal(external_radius = 54.66 * 0.955);
 
-//wheel_middle_external_with_teeth(radius = 54.66 * 0.955, height = 10, steps = 20);
+//wheel_middle_with_bearing_hole(external_radius = 54.66 * 0.955);
 
-//wheel_middle_with_bearing_external(external_radius = 54.66 * 0.955);
-//wheel_middle_with_bearing_internal(external_radius = 54.66 * 0.955);
+//wheel_middle_with_bearing(external_radius = 54.66 * 0.955);
 
-//tooth(10);
+//tooth2(height = 10, length = 9, thick = 9);
 
-//wheel_extension(tracks_wheel_radius, _h = 10, num_faces_nut_holes = 6); // 4x
-
-//wheel_extension(tracks_wheel_radius, 10, 20); // 4x
 
 //tracks_on_2_wheels(12, 42.5, 200);
 
@@ -970,5 +712,3 @@ platform();
 //tracks_tensioner(); // 2x
 
 //motor_gr_ep_45_housing_with_base_holes(); // 2x
-
-//radial_bearing_housing_with_bearing();
