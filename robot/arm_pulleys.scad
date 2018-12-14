@@ -323,7 +323,7 @@ module pulley_upper_arm_bone_for_sensor()
 module pulley_upper_arm_sensor_shaft()
 {
     difference(){
-        pulley(profile = "T2_5mm_pulley", num_teeth = 31, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 5.5);
+        pulley(profile = "T2_5mm_pulley", num_teeth = 30, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 5.5);
         cylinder (h = 9, r = 4);
         
         // screw hole
@@ -341,7 +341,7 @@ module pulley_upper_arm_sensor_shaft()
 
 //upper_arm_rotation_pulley();
 
-//pulley_upper_arm_sensor_shaft();
+pulley_upper_arm_sensor_shaft();
 
 //pulley_upper_arm_bone_for_sensor();
 
@@ -353,7 +353,7 @@ module pulley_upper_arm_sensor_shaft()
 //elbow_pulley_with_magnet_support();
 //wrist_pulley();
 
-shoulder_traction_pulley();
+//shoulder_traction_pulley();
 
 //fore_arm_rotation_pulley();
 
