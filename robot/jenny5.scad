@@ -62,7 +62,7 @@ module robot()
     gama_plus_motor_angle_to_horizontal = motor_projection_on_horizontal < dist_to_push_motor_hole_in_base - dist_to_first_bone ? asin(h / dist_leg_base_to_leg_spacer_top): 180 - asin(h / dist_leg_base_to_leg_spacer_top);
     leg_angle_to_horizontal = gama_plus_motor_angle_to_horizontal - gamma;
     
-    long_leg_height = 2 * ((leg_bone_length + 4 * (rb_6000_external_radius + 2) - 2 * dist_to_wrist_in_bone) * cos(90 - leg_angle_to_horizontal) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
+    long_leg_height = 2 * ((leg_bone_length - 2 * (rbearing_6001_housing_size_thicker[0]) - 2 * dist_to_wrist_in_bone) * cos(90 - leg_angle_to_horizontal) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
     
     echo(long_leg_height = long_leg_height);
     
