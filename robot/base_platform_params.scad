@@ -23,8 +23,7 @@ num_tracks_per_circle = 14; // 16
 tracks_wheel_radius = 53.34; // 58.8
 
 motor_gear_height = 11;
-wheel_gear_height = 20;
-wheel_gear_nut_depth = wheel_gear_height - 2;
+wheel_gear_thick = 20;
 
 base_motor_offset = 101;
 
@@ -34,11 +33,7 @@ dist_to_tracks_tensioner_support = 150;
 dist_to_tracks_support1 = 130;
 dist_to_tracks_support2 = 185;
 
-tracks_tensioner_support_size = [20, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset - 2 * 10, 10];
-
-tracks_support_size = [10, base_platform_size[1] + 2 * track_size[0] + 2 * tracks_offset, 10];
-
-tracks_tensioner_size = [tracks_tensioner_support_size[0], 12, 60];
+tracks_support_size = [10, base_platform_size[1] + 2 * track_width + 2 * tracks_offset, 10];
 
 base_motor_support_sheet_size = [45, 34 + 20 + 23, 3];
 
