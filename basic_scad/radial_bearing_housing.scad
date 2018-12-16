@@ -21,14 +21,14 @@ module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_posi
    color(plastic_color)
     render()
         difference(){
-            translate ([-rbearing_housing_size[0] / 2, -rbearing_housing_size[1] / 2, 0]) my_cube_rounded2([rbearing_housing_size[0], rbearing_housing_size[1], housing_height]);
+            translate ([-rbearing_housing_size[0] / 2, -rbearing_housing_size[1] / 2, 0]) my_cube_rounded2 ([rbearing_housing_size[0], rbearing_housing_size[1], housing_height + extension]);
             // bearing
-            translate ([0, 0, housing_height - rb_thick]) cylinder (h = rb_thick, r = rb_external_radius, $fn = 70);
+            translate ([0, 0, housing_height + extension - rb_thick]) cylinder (h = rb_thick, r = rb_external_radius, $fn = 70);
             // bearing support hole
-            translate (rbearing_housing_holes_position[0] - display_tolerance_z) cylinder (h = housing_height + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
+            translate (rbearing_housing_holes_position[0] - display_tolerance_z) cylinder (h = housing_height + extension + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
             // screws holes
             for (i = [1 : 4])
-                translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = housing_height + 2 * display_tolerance, r = screw_radius, $fn = 20);
+                translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = extension + housing_height + 2 * display_tolerance, r = screw_radius, $fn = 20);
         }
 }
 //---------------------------------------------------------------------------
@@ -158,7 +158,12 @@ module rbearing_608_housing_double()
 //---------------------------------------------------------------------------
 module rbearing_6001_double_housing()
 {
-    radial_bearing_housing(rbearing_6001_housing_size, rbearing_6001_housing_holes_position, rb_6001_external_radius, 2 * rb_6001_thick, rbearing_6001_housing_size[2] + rb_6001_thick, m4_screw_radius, 0, 1);
+    radial_bearing_housing(rbearing_housing_size = rbearing_6001_housing_size, rbearing_housing_holes_position = rbearing_6001_housing_holes_position, rb_external_radius = rb_6001_external_radius, rb_thick = 2 * rb_6001_thick, housing_height = rbearing_6001_housing_size[2] + rb_6001_thick, screw_radius = m4_screw_radius, extension = -1);
+}
+//---------------------------------------------------------------------------
+module rbearing_6001_double_housing_thicker_wall(extra_height = 0)
+{
+    radial_bearing_housing(rbearing_housing_size = rbearing_6001_housing_size_thicker, rbearing_housing_holes_position = rbearing_6001_housing_holes_position, rb_external_radius = rb_6001_external_radius, rb_thick = 2 * rb_6001_thick, housing_height = rbearing_6001_housing_size[2] + rb_6001_thick, screw_radius = m4_screw_radius, extension = extra_height);
 }
 //---------------------------------------------------------------------------
 module rbearing_6005_double_housing()
@@ -229,7 +234,7 @@ module radial_bearing_6002_enclosed_housing_with_nema_holes(height, motor_tolera
     radial_bearing_enclosed_housing_with_nema_holes(height, rb_6002_external_radius, rb_6002_thick, motor_tolerance);
 }
 //---------------------------------------------------------------------------
-module rbearing_608_housing_thicker(extra_thick = 0)
+module rbearing_608_housing_thicker(extra_thick = -1)
 {
     
     
@@ -247,11 +252,13 @@ module rbearing_608_housing_thicker(extra_thick = 0)
 // rbearing_6905_housing();
 
 // rbearing_6001_housing();
-// rbearing_608_housing_double();
-// rbearing_6001_housing_double();
+ //rbearing_608_housing_double();
+//echo(rbearing_6001_housing_size=rbearing_6001_housing_size);
+ //rbearing_6001_double_housing();
+rbearing_6001_double_housing_thicker_wall(extra_height = -1);
 // rbearing_608_housing_with_bearing();
 
 // rbearing_626_housing();
 
  //rbearing_608_housing_thicker(10);
- rbearing_608_housing_thicker(-1);
+// rbearing_608_housing_thicker(-1);

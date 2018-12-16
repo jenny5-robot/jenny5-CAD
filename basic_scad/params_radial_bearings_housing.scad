@@ -11,7 +11,7 @@ include <params_screws_nuts_washers.scad>
 
 radial_bearing_housing_base_wall_thickness = 1;
 radial_bearing_housing_lateral_wall_thickness = 3;
-
+radial_bearing_housing_lateral_wall_thickness_4 = 4;
 
 radial_bearing_vertical_housing_base_wall_thick = 4;
 radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior = 4;
@@ -23,6 +23,8 @@ radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime = 1;
 
 function f_radial_bearing_housing_size (rb_external_radius, rb_thick) = [2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness), 2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness), rb_thick + radial_bearing_housing_base_wall_thickness];
 
+function f_radial_bearing_housing_size_thicker (rb_external_radius, rb_thick) = [2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness_4), 2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness_4), rb_thick + radial_bearing_housing_base_wall_thickness];
+
 rbearing_6000_housing_size = f_radial_bearing_housing_size(rb_6000_external_radius, rb_6000_thick);
 rbearing_6001_housing_size = f_radial_bearing_housing_size(rb_6001_external_radius, rb_6001_thick);
 rbearing_6005_housing_size = f_radial_bearing_housing_size(rb_6005_external_radius, rb_6005_thick);
@@ -31,6 +33,8 @@ rbearing_6906_housing_size = f_radial_bearing_housing_size(rb_6906_external_radi
 rbearing_3205_housing_size = f_radial_bearing_housing_size(rb_3205_external_radius, rb_3205_thick);
 rbearing_6002_housing_size = f_radial_bearing_housing_size(rb_6002_external_radius, rb_6002_thick);
 rbearing_626_housing_size = f_radial_bearing_housing_size(rb_626_external_radius, rb_626_thick);
+
+rbearing_6001_housing_size_thicker = f_radial_bearing_housing_size_thicker(rb_6001_external_radius, rb_6001_thick);
 
 rbearing_608_housing_size = f_radial_bearing_housing_size(rb_608_external_radius, rb_608_thick);
 
