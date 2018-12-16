@@ -13,9 +13,6 @@ use <../basic_scad/pulleys.scad>
 include <../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
 
-include <tracks_params.scad>
-use <tracks.scad>
-
 include <../basic_scad/params_laptop.scad>
 use <../basic_scad/laptop.scad>
 
@@ -360,15 +357,15 @@ module wheel_gear()
 					hub_diameter = 0,
 					rim_width = 4,
 					hub_thickness = 4,
-					rim_thickness = wheel_gear_height,
-					gear_thickness = wheel_gear_height,
+					rim_thickness = wheel_gear_thick,
+					gear_thickness = wheel_gear_thick,
 					pressure_angle = 31);
         // // middle hole
-        translate (-display_tolerance_z) cylinder(h = wheel_gear_height + 2 * display_tolerance, r = rb_6907_external_radius, $fn = 40);
+        translate (-display_tolerance_z) cylinder(h = wheel_gear_thick + 2 * display_tolerance, r = rb_6907_external_radius, $fn = 40);
         // screw holes
         for (i = [0 : 7])
             rotate([0, 0, 68])
-                translate([(rb_6907_external_radius + 3) * sin(i * 45), (rb_6907_external_radius + 3) * cos(i * 45), 0] - display_tolerance_z) cylinder(h = wheel_gear_height + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
+                translate([(rb_6907_external_radius + 3) * sin(i * 45), (rb_6907_external_radius + 3) * cos(i * 45), 0] - display_tolerance_z) cylinder(h = wheel_gear_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
     }
 }
 //--------------------------------------------------------------------
@@ -426,11 +423,6 @@ module platform_sheet()
         translate ([motor_gr_ep_45_housing_size[1] / 2 + base_motor_offset, (motor_gr_ep_45_housing_size[2] - motor_wall_dc_motor_housing_thick) / 2 + motor_wall_dc_motor_housing_thick, 0]) rotate ([0, 0, 90]) translate (motor_gr_ep_45_housing_small_base_holes[i] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
     }
     
-    // hole for track tensioner support
-        echo("track tensioner support = ", [dist_to_tracks_tensioner_support + tracks_tensioner_support_size[0] / 2, 20, 0]);
-    
-    translate([dist_to_tracks_tensioner_support + tracks_tensioner_support_size[0] / 2, 20, 0] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-    
     // RIGHT SIDE
     echo("RIGHT SIDE");
      // first gear, first bearing
@@ -465,10 +457,6 @@ module platform_sheet()
         echo("motor housing holes = ", [base_motor_offset, base_platform_size[1], 0] + mirror_y([motor_gr_ep_45_housing_size[1] / 2, (motor_gr_ep_45_housing_size[2] - motor_wall_dc_motor_housing_thick) / 2 + motor_wall_dc_motor_housing_thick, 0] + rotate_z(90, motor_gr_ep_45_housing_small_base_holes[i])) );
         translate ([base_motor_offset, base_platform_size[1], 0]) mirror([0, 1, 0]) translate ([motor_gr_ep_45_housing_size[1] / 2, (motor_gr_ep_45_housing_size[2] - motor_wall_dc_motor_housing_thick) / 2 + motor_wall_dc_motor_housing_thick, 0]) rotate ([0, 0, 90]) translate (motor_gr_ep_45_housing_small_base_holes[i] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
     }
-    // hole for track tensioner support
-    echo("track tensioner support = ", [dist_to_tracks_tensioner_support + tracks_tensioner_support_size[0] / 2, base_platform_size[1] - 20, 0]);
-    
-    translate([dist_to_tracks_tensioner_support + tracks_tensioner_support_size[0] / 2, base_platform_size[1] - 20, 0] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
     
     // leg support holes - first spacer
     translate([leg_postion_on_platform + dist_to_first_bone, base_platform_size[1] / 2 - dist_to_foot_spacer_hole, 0] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m8_screw_radius, $fn = 10);
@@ -517,61 +505,6 @@ module base_motor_pulley()
   }
 }
 //--------------------------------------------------------------------
-module tracks_tensioner()
-{
-    color (plastic_color) 
-        difference(){
-            hull(){
-                cube(tracks_tensioner_size);
-                translate ([tracks_tensioner_size[0] / 2, 0, tracks_tensioner_size[2]]) rotate ([-90, 0, 0]) cylinder(h = tracks_tensioner_size[1], r = tracks_tensioner_size[0] / 2);
-            }
-
-// hole for M8 screw
-            translate ([tracks_tensioner_size[0] / 2, 0, tracks_tensioner_size[2] + 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = tracks_tensioner_size[1] + 2 * display_tolerance, r = 4);
-            
-            // base screw hole
-            translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1] / 2, 0] - display_tolerance_z) cylinder(h = 30, r = m4_screw_radius, $fn = 14);
-            // base nut hole
-            hull(){
-            translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1] / 2, 25] - display_tolerance_z) rotate([0, 0, 30]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            translate ([tracks_tensioner_size[0] / 2, tracks_tensioner_size[1], 25] - display_tolerance_z) rotate([0, 0, 30]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            }
-    }
-}
-//--------------------------------------------------------------------
-module tracks_tensioner_support()
-{
-    difference(){
-        color (aluminium_color) 
-        cube(tracks_tensioner_support_size);
-        // holes for screws
-// tracks tensioner screw holes
-        translate([tracks_tensioner_support_size[0] / 2, 6, 0] - display_tolerance_z) cylinder (h = tracks_tensioner_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        translate([tracks_tensioner_support_size[0] / 2, 74, 0] - display_tolerance_z) cylinder (h = tracks_tensioner_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-// tracks tensioner screw holes - other side
-        translate([tracks_tensioner_support_size[0] / 2, tracks_tensioner_support_size[1] - 6, 0] - display_tolerance_z) cylinder (h = tracks_tensioner_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        translate([tracks_tensioner_support_size[0] / 2, tracks_tensioner_support_size[1] - 74, 0] - display_tolerance_z) cylinder (h = tracks_tensioner_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        
-        // base plarform screw
-        translate([tracks_tensioner_support_size[0] / 2, track_size[0] + tracks_offset + 20, 0] - display_tolerance_z) cylinder (h = tracks_tensioner_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-
-        translate([tracks_tensioner_support_size[0] / 2, tracks_tensioner_support_size[1] - (track_size[0] + tracks_offset + 20), 0] - display_tolerance_z) cylinder (h = tracks_tensioner_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        
-    }
-}
-//--------------------------------------------------------------------
-module tracks_support()
-{
-    difference(){
-        color (aluminium_color) 
-        cube(tracks_support_size);
-        // base plarform screw
-        translate([tracks_support_size[0] / 2, track_size[0] + tracks_offset + 20, 0] - display_tolerance_z) cylinder (h = tracks_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-
-        translate([tracks_support_size[0] / 2, tracks_support_size[1] - (track_size[0] + tracks_offset + 20), 0] - display_tolerance_z) cylinder (h = tracks_support_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-    }
-}
-//--------------------------------------------------------------------
 module platform()
 {
   platform_sheet();
@@ -605,7 +538,7 @@ module platform()
 
 // wheels
     
-    translate ([0, -track_size[0] / 2 - tracks_offset, 0]) {
+    translate ([0, -track_wheel_thick / 2 - tracks_offset - wheel_gear_thick, 0]) {
             
     //first gear
         translate ([first_tracks_offset, 0, -12.5 - 2]) rotate([-90, 0, 0]) first_wheel();
@@ -614,7 +547,7 @@ module platform()
         translate ([first_tracks_offset + distance_between_wheels, 0, -12.5 - 2]) rotate([-90, 0, 0]) wheel();
 
         // rubber tracks
-   translate ([first_tracks_offset, track_size[0] / 2, -12.5 - 2])
+   translate ([first_tracks_offset, track_width / 2 + wheel_gear_thick, -12.5 - 2])
         rotate([90, 0, 0]) 
          color ("black") belt_on_2_pulleys(r1 = wheel_radius, r2 = wheel_radius, distance_between_pulleys = distance_between_wheels, belt_width = 50, belt_thick = 10);
     }
@@ -623,7 +556,7 @@ module platform()
 
    
 
-    translate([0, base_platform_size[1] + track_size[0] / 2 + tracks_offset, 0]){
+    translate([0, base_platform_size[1] + track_width / 2 + tracks_offset + wheel_gear_thick, 0]){
     // first wheel
         translate ([first_tracks_offset, 0, -12.5 - 2]) rotate([90, 0, 0]) first_wheel();
     // second wheel
@@ -645,7 +578,7 @@ color(aluminium_color) translate ([first_tracks_offset + distance_between_wheels
 
     // back wheel
     
-    translate ([base_platform_size[0] + 100, base_platform_size[1]/2, -rb_6201_external_radius - tracks_wheel_radius - track_size[2] + chair_wheel_radius]) rotate ([0, 0, 90]) chair_wheel();
+    translate ([base_platform_size[0] + 100, base_platform_size[1]/2, -rb_6201_external_radius - tracks_wheel_radius - track_height + chair_wheel_radius]) rotate ([0, 0, 90]) chair_wheel();
     
     // laptop
 translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + base_platform_size[1] / 2, 50]) rotate ([0, 0, 0]) rotate ([0, 0, -90]) translate ([0, 0, base_platform_size[2]]) laptop13();
@@ -653,10 +586,6 @@ translate ([base_platform_size[0] - laptop13_size[1], laptop13_size[0] / 2 + bas
     // lidar
 
    translate([lidar_position, base_platform_size[1] / 2, base_platform_size[2]]) rotate([0, 0, 90]) tera_ranger_one_lidar();
-
-//translate ([dist_to_tracks_support1, - 80 - tracks_offset, -4 - tracks_tensioner_support_size[2]])tracks_support();
-
-//translate ([dist_to_tracks_support2, - 80 - tracks_offset, -4 - tracks_tensioner_support_size[2]]) tracks_support();
 
 // batteries
     translate([base_platform_size[0] - laptop13_size[1], -LiFePO4_20Ah_size[1] / 2 + base_platform_size[1] / 2, base_platform_size[2]]) LiFePO4_20Ah();
@@ -702,13 +631,10 @@ platform();
 
 //tooth2(height = 10, length = 9, thick = 9);
 
-
 //tracks_on_2_wheels(12, 42.5, 200);
 
 //laptop_fixer_corner_left();
 
 //laptop_fixer_corner_right();
-
-//tracks_tensioner(); // 2x
 
 //motor_gr_ep_45_housing_with_base_holes(); // 2x
