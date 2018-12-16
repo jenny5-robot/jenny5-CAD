@@ -23,7 +23,7 @@ num_tracks_per_circle = 14; // 16
 tracks_wheel_radius = 53.34; // 58.8
 
 motor_gear_height = 11;
-wheel_gear_thick = 20;
+wheel_gear_thick = 17;
 
 base_motor_offset = 101;
 
