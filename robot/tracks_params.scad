@@ -4,4 +4,7 @@
 // MIT License
 //--------------------------------------------------------------
 
-track_size = [80, 25, 8];
+track_width = 50;
+track_height = 10;
+
+track_wheel_thick = 36;
