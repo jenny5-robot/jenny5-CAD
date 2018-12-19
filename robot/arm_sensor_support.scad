@@ -238,7 +238,7 @@ module sensor_bearing_housing_top_fore_arm()
         
     }
     // plate for fixing to the next part
-    translate([0, rbearing_688_housing_size[0] / 2 + 3, rbearing_6906_enclosed_housing_size[1] / 2]) 
+    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6906_enclosed_housing_size[1] / 2]) 
     rotate([90, 0, 0])
     difference(){
                 hull(){

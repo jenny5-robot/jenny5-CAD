@@ -35,9 +35,6 @@ use <../basic_scad/point_transformations_3d.scad>
 
 use <../basic_scad/alu_profiles.scad>
 
-include <../basic_scad/params_leg_connector.scad>
-use <../basic_scad/leg_connector.scad>
-
 include <../basic_scad/tolerance.scad>
 
 //-------------------------------------------------------
@@ -131,13 +128,16 @@ module leg_bone()
             translate ([-leg_bone_thick[0] / 2, -leg_bone_thick[1] / 2, 0])
             color(aluminium_color) rectangular_tube (leg_bone_thick[0], leg_bone_thick[1], 2, leg_bone_length);
             // shaft hole
-            echo(rbearing_6001_housing_holes_position);
+            echo("middle hole", rbearing_6001_housing_holes_position[0] + [ rbearing_6001_housing_size_thicker[0] / 2, leg_bone_thick[0] / 2, 0], "radius = 12.5");
             translate ([0, leg_bone_thick[1] / 2, rbearing_6001_housing_size_thicker[0] / 2])
                 rotate([90, 0, 0]) {
                     translate (rbearing_6001_housing_holes_position[0] - display_tolerance_z) cylinder (h = leg_bone_thick[1] + 2 * display_tolerance, r = 12.5, $fn = 70);
         // screws holes
-                    for (i = [1 : 4])
+                    echo("screw hole");
+                    for (i = [1 : 4]){
                         translate (rbearing_6001_housing_holes_position[i] - display_tolerance_z) cylinder (h = leg_bone_thick[1] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+                    echo(rbearing_6001_housing_holes_position[i] + [ rbearing_6001_housing_size_thicker[0] / 2, leg_bone_thick[0] / 2, 0], "radius = 2");
+                    }
                 }
             // holes in the other side
             translate ([0, leg_bone_thick[1] / 2, leg_bone_length - rbearing_6001_housing_size_thicker[0] / 2])
@@ -298,12 +298,10 @@ module long_leg(motor_position = 0)
 }
 //----------------------------------------------------------------------
 
-long_leg(leg_motor_position); // between 0 and 50
-
- //leg_bone_with_spacer();
+//long_leg(leg_motor_position); // between 0 and 50
 
 //translate ([0, 0, 30]) rotate ([0, 90, 0]) 
-//leg_bone();
+leg_bone();
 
 //linear_motor_with_top_shaft(100, 50);
 
