@@ -34,6 +34,6 @@ leg_connector_sheet_size = [leg_connector_length + leg_connector_bearing_housing
 
 //---------------------------------------------------------------------
 
-echo(leg_connector_sheet_size = leg_connector_sheet_size);
+//echo(leg_connector_sheet_size = leg_connector_sheet_size);
 
 //echo(leg_connector_holes = leg_connector_holes);
