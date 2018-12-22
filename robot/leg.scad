@@ -268,7 +268,7 @@ module half_leg(motor_position = 0, base_height = 40)
     M12_hexa(crotch_width_back + 2 * alu_sheet_10_thick + 10);
 }
 //----------------------------------------------------------------------
-module long_leg(motor_position = 0)
+module complete_leg(motor_position = 0)
 {
     motor_length = 42 + motor_position + leg_motor_max_stroke;
     dist_leg_base_to_leg_spacer_top = sqrt(leg_spacer * leg_spacer + distance_to_push_position * distance_to_push_position);
@@ -298,10 +298,10 @@ module long_leg(motor_position = 0)
 }
 //----------------------------------------------------------------------
 
-//long_leg(leg_motor_position); // between 0 and 50
+complete_leg(leg_motor_position); // between 0 and 50
 
 //translate ([0, 0, 30]) rotate ([0, 90, 0]) 
-leg_bone();
+//leg_bone();
 
 //linear_motor_with_top_shaft(100, 50);
 
