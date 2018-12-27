@@ -45,28 +45,20 @@ module platform_foot()
     // mobile platform
     translate ([0, -base_platform_size[1] / 2, 0]) platform();
     // leg
-    translate ([leg_postion_on_platform, 0, base_platform_size[2]]) complete_leg(leg_motor_position);
+    translate ([leg_postion_on_platform, 0, base_platform_size[2]]) complete_leg(leg_angle);
 }
 //---------------------------------------------------------------------------
 module robot()
 {
     platform_foot();
 
-    motor_length = 42 + leg_motor_position + leg_motor_max_stroke;
-    dist_leg_base_to_leg_spacer_top = sqrt(leg_spacer * leg_spacer + distance_to_push_position * distance_to_push_position);
-    area = area_heron(motor_length, dist_to_push_motor_hole_in_base - dist_to_first_bone, dist_leg_base_to_leg_spacer_top);
-    h = 2 * area / (dist_to_push_motor_hole_in_base - dist_to_first_bone);
-    motor_angle_to_horizontal = asin(h / motor_length);
-    motor_projection_on_horizontal = motor_length * cos(motor_angle_to_horizontal);
-    gamma = atan(leg_spacer / distance_to_push_position);
-    gama_plus_motor_angle_to_horizontal = motor_projection_on_horizontal < dist_to_push_motor_hole_in_base - dist_to_first_bone ? asin(h / dist_leg_base_to_leg_spacer_top): 180 - asin(h / dist_leg_base_to_leg_spacer_top);
-    leg_angle_to_horizontal = gama_plus_motor_angle_to_horizontal - gamma;
+
     
-    complete_leg_height = 2 * ((leg_bone_length - 2 * (rbearing_6001_housing_size_thicker[0]) - 2 * dist_to_wrist_in_bone) * cos(90 - leg_angle_to_horizontal) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 8));
+    complete_leg_height = 2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 10));
     
     echo(complete_leg_height = complete_leg_height);
     
-    translate ([leg_postion_on_platform + dist_to_first_bone, 0, complete_leg_height + base_platform_size[2] + 10 + 30]) rotate ([0, 0, 90]) body_with_head();
+    translate ([leg_postion_on_platform + dist_to_first_bone, 0, complete_leg_height + base_platform_size[2] + 10]) rotate ([0, 0, 90]) body_with_head();
 }
 //---------------------------------------------------------------------------
 module robot_with_kitchen_table()

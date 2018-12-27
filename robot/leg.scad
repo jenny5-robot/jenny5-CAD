@@ -172,35 +172,9 @@ module linear_motor_with_top_shaft(stroke, current_position)
         translate ([0, -crotch_width_back / 2, current_position + 10]) rotate([-90, 0, 0]) cylinder(h = crotch_width_back, r = 4);
 }
 //----------------------------------------------------------------------
-module half_leg(motor_position = 0, base_height = 40)
+module half_leg(leg_angle_to_horizontal = 45)
 {
-    motor_length = 42 + motor_position + leg_motor_max_stroke;
-    
-    dist_leg_base_to_leg_spacer_top = sqrt(leg_spacer * leg_spacer + distance_to_push_position * distance_to_push_position);
-    echo(dist_leg_base_to_leg_spacer_top = dist_leg_base_to_leg_spacer_top);
-    
-    area = area_heron(motor_length, dist_to_push_motor_hole_in_base - dist_to_first_bone, dist_leg_base_to_leg_spacer_top);
-    echo(area = area);
-    h = 2 * area / (dist_to_push_motor_hole_in_base - dist_to_first_bone);
-    
-    echo(h = h);
-    
-    motor_angle_to_horizontal = asin( h / motor_length);
-    echo(motor_angle_to_horizontal = motor_angle_to_horizontal);
-    
-    motor_projection_on_horizontal = motor_length * cos(motor_angle_to_horizontal);
-    echo(motor_projection_on_horizontal = motor_projection_on_horizontal);
-    
-    gamma = atan(leg_spacer / distance_to_push_position);
-    echo(gamma = gamma);
-    
-//    gama_plus_motor_angle_to_horizontal = asin(h / dist_leg_base_to_leg_spacer_top);
-    gama_plus_motor_angle_to_horizontal = motor_projection_on_horizontal < dist_to_push_motor_hole_in_base - dist_to_first_bone ? asin(h / dist_leg_base_to_leg_spacer_top): 180 - asin(h / dist_leg_base_to_leg_spacer_top);
-
-    
-    echo(gama_plus_motor_angle_to_horizontal = gama_plus_motor_angle_to_horizontal);
-    leg_angle_to_horizontal = gama_plus_motor_angle_to_horizontal - gamma;
-    echo(leg_angle_to_horizontal = leg_angle_to_horizontal);
+    base_height = 40;
     
     // bottom sheet
     base(base_height);
@@ -247,8 +221,8 @@ module half_leg(motor_position = 0, base_height = 40)
     
     
     translate([dist_to_push_motor_hole_in_base, 0, base_height - 8]) 
-      rotate ([0, -(90 - motor_angle_to_horizontal), 0])
-        linear_motor_with_top_shaft(leg_motor_max_stroke, motor_position);
+      //rotate ([0, -(90 - motor_angle_to_horizontal), 0])
+        linear_motor_with_top_shaft(150, 10);
         
 // knee shaft - first bone    
 
@@ -268,44 +242,34 @@ module half_leg(motor_position = 0, base_height = 40)
     M12_hexa(crotch_width_back + 2 * alu_sheet_10_thick + 10);
 }
 //----------------------------------------------------------------------
-module complete_leg(motor_position = 0)
-{
-    motor_length = 42 + motor_position + leg_motor_max_stroke;
-    dist_leg_base_to_leg_spacer_top = sqrt(leg_spacer * leg_spacer + distance_to_push_position * distance_to_push_position);
-    area = area_heron(motor_length, dist_to_push_motor_hole_in_base - dist_to_first_bone, dist_leg_base_to_leg_spacer_top);
-    h = 2 * area / (dist_to_push_motor_hole_in_base - dist_to_first_bone);
-    motor_angle_to_horizontal = asin(h / motor_length);
-    motor_projection_on_horizontal = motor_length * cos(motor_angle_to_horizontal);
-    gamma = atan(leg_spacer / distance_to_push_position);
-    gama_plus_motor_angle_to_horizontal = motor_projection_on_horizontal < dist_to_push_motor_hole_in_base - dist_to_first_bone ? asin(h / dist_leg_base_to_leg_spacer_top): 180 - asin(h / dist_leg_base_to_leg_spacer_top);
-    leg_angle_to_horizontal = gama_plus_motor_angle_to_horizontal - gamma;
-    
+module complete_leg(leg_angle)
+{   
     // bottom half leg
-    half_leg(motor_position, 40);
+    half_leg(leg_angle);
 
     // top half leg
     translate ([0, 0, 
-    2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle_to_horizontal) + dist_to_wrist_in_base + 25)]) 
-    mirror ([0, 0, 1]) half_leg(motor_position, 40);
+    2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + dist_to_wrist_in_base + 25)]) 
+    mirror ([0, 0, 1]) half_leg(leg_angle);
         
     // knee
-    translate ([(leg_bone_length - rbearing_6001_housing_size_thicker[0]) * sin(90 - leg_angle_to_horizontal) + dist_to_first_bone - 25 / 2, 
+    translate ([(leg_bone_length - rbearing_6001_housing_size_thicker[0]) * sin(90 - leg_angle) + dist_to_first_bone - 25 / 2, 
     - crotch_width_back / 2, 
-    (leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle_to_horizontal) 
+    (leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) 
     + dist_to_wrist_in_base - 10])
     knee()
     ;
 }
 //----------------------------------------------------------------------
 
-complete_leg(leg_motor_position); // between 0 and 50
+complete_leg(leg_angle = leg_angle); // between 0 and 50
 
 //translate ([0, 0, 30]) rotate ([0, 90, 0]) 
 //leg_bone();
 
 //linear_motor_with_top_shaft(100, 50);
 
-//half_leg(motor_position = leg_motor_position);
+//half_leg();
 
 //leg_bone_with_bearings();
 

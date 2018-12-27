@@ -10,9 +10,7 @@ include <../basic_scad/params_radial_bearings_housing.scad>
 include <../basic_scad/params_sheets.scad>
 include <../basic_scad/params_alu_profiles.scad>
 
-leg_motor_position = -80; // 0 ... 50
-
-leg_motor_max_stroke = 150;
+leg_angle = 20;
 
 leg_base_length = 150;
 leg_base_height = 40;
@@ -23,7 +21,7 @@ leg_bone_thick = [40, 20];
 
 
 dist_to_wrist_in_bone = rb_6001_external_radius + 4;
-dist_to_wrist_in_base = leg_base_height - 8;
+dist_to_wrist_in_base = 30;
 
 shaft_radius = 4;
 
@@ -39,7 +37,7 @@ dist_to_second_bone = 80;
 dist_to_push_motor_hole_in_base = 200;
 dist_to_push_motor_hole_in_base_vertical = 11;
 
-knee_side_simple_sizes = [110, alu_sheet_10_thick, 70];
+knee_side_simple_sizes = [110, alu_sheet_10_thick, 74];
 
 lateral_base_size = [leg_base_length, alu_sheet_10_thick, 40];
 
