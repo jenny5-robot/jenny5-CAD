@@ -393,7 +393,7 @@ module body_with_arms()
     body_with_rotation();
     
     // left arm
-    translate ([(body_width / 2 - dist_edge_to_body_shaft), 0, body_shaft_radius + body_height / 2 + plate_body_size[0] / 2])
+    translate ([(body_width / 2 - dist_edge_to_body_shaft), 0, body_shaft_radius + body_height / 2])
         rotate ([0, 0, angle_body_arm])  
         translate ([0, -body_arm_offset, 0]) 
         translate ([body_shaft_radius, 0, 0]) 
@@ -418,7 +418,7 @@ module body_with_arms()
     ;
 /////////////////////////////////////////////////////////////////////////
     // right arm
-    translate ([-body_width / 2 + dist_edge_to_body_shaft, 0, body_shaft_radius + body_height / 2 + plate_body_size[0] / 2]) 
+    translate ([-body_width / 2 + dist_edge_to_body_shaft, 0, body_shaft_radius + body_height / 2]) 
         rotate ([0, 0, -angle_body_arm]) 
            translate ([0, -body_arm_offset, 0]) 
     
@@ -463,11 +463,11 @@ module body_with_arms()
 //---------------------------------------------------------------------------
 
 
-//body_with_arms();
+body_with_arms();
 
 //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
-body();
+//body();
 
 //body_arm_traction_pulley();
 
