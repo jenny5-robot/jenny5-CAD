@@ -30,6 +30,7 @@ rbearing_6001_housing_size = f_radial_bearing_housing_size(rb_6001_external_radi
 rbearing_6005_housing_size = f_radial_bearing_housing_size(rb_6005_external_radius, rb_6005_thick);
 rbearing_6905_housing_size = f_radial_bearing_housing_size(rb_6905_external_radius, rb_6905_thick);
 rbearing_6906_housing_size = f_radial_bearing_housing_size(rb_6906_external_radius, rb_6906_thick);
+rbearing_6907_housing_size = f_radial_bearing_housing_size(rb_6907_external_radius, rb_6907_thick);
 rbearing_3205_housing_size = f_radial_bearing_housing_size(rb_3205_external_radius, rb_3205_thick);
 rbearing_6002_housing_size = f_radial_bearing_housing_size(rb_6002_external_radius, rb_6002_thick);
 rbearing_626_housing_size = f_radial_bearing_housing_size(rb_626_external_radius, rb_626_thick);
@@ -100,7 +101,12 @@ rbearing_6906_housing_holes_position = [[0, 0, 0],
 [(rb_6906_external_radius - 4), (rb_6906_external_radius - 4), 0]
 ];
 
-
+rbearing_6907_housing_holes_position = [[0, 0, 0], 
+[-(rb_6907_external_radius - 4), -(rb_6907_external_radius - 4), 0], 
+[(rb_6907_external_radius - 4), -(rb_6907_external_radius - 4), 0],
+[-(rb_6907_external_radius - 4), (rb_6907_external_radius - 4), 0],
+[(rb_6907_external_radius - 4), (rb_6907_external_radius - 4), 0]
+];
 //echo(rbearing_6005_housing_holes_position);
 
 

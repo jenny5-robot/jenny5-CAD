@@ -260,7 +260,12 @@ module rbearing_6906_vertical_housing_bounded_half_with_horizontal_holes()
     radial_bearing_vertical_housing_bounded_with_horizontal_holes(housing_size = f_rbearing_6906_vertical_housing_size_bounded_half_small(0), radial_bearing_external_radius = rb_6906_external_radius, radial_bearing_thick = rb_6906_thick, vertical_holes_position = rbearing_6906_enclosed_housing_holes_position, horizontal_holes_position = rbearing_6906_housing_holes_position);
 }
 //---------------------------------------------------------------------------
+module rbearing_6907_vertical_housing_bounded_half_with_horizontal_holes()
+{
 
+    radial_bearing_vertical_housing_bounded_with_horizontal_holes(housing_size = f_rbearing_6907_vertical_housing_size_bounded_half_small(0), radial_bearing_external_radius = rb_6907_external_radius, radial_bearing_thick = rb_6907_thick, vertical_holes_position = rbearing_6907_enclosed_housing_holes_position, horizontal_holes_position = rbearing_6907_housing_holes_position);
+}
+//---------------------------------------------------------------------------
 module radial_bearing_608_dome_housing()
 {
     radial_bearing_dome_housing(rb_608_external_radius, rb_608_thick, 4);

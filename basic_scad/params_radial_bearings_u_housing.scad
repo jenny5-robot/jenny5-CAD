@@ -36,6 +36,8 @@ rbearing_6006_enclosed_housing_size = ([2 * (rb_6006_external_radius +  radial_b
 
 rbearing_6906_enclosed_housing_size = ([2 * (rb_6906_external_radius +  radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), 2 * radial_bearing_vertical_housing_grosime_perete_lateral_latime + rb_6906_thick, 2 *rb_6906_external_radius + radial_bearing_vertical_housing_base_wall_thick]);
 
+rbearing_6907_enclosed_housing_size = ([2 * (rb_6907_external_radius +  radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), 2 * radial_bearing_vertical_housing_grosime_perete_lateral_latime + rb_6907_thick, 2 *rb_6907_external_radius + radial_bearing_vertical_housing_base_wall_thick]);
+
 rbearing_6905_enclosed_housing_size = ([2 * (rb_6905_external_radius +  radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), 2 * radial_bearing_vertical_housing_grosime_perete_lateral_latime + rb_6905_thick, 2 *rb_6905_external_radius + radial_bearing_vertical_housing_base_wall_thick]);
 
 rbearing_6905_enclosed_double_housing_size = ([2 * (rb_6905_external_radius +  radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), 2 * radial_bearing_vertical_housing_grosime_perete_lateral_latime + 2 * rb_6905_thick, 2 *rb_6905_external_radius + radial_bearing_vertical_housing_base_wall_thick]);
@@ -88,6 +90,12 @@ rbearing_6905_enclosed_housing_holes_position = [
 [-f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[0] / 2 + f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0, 0]
 ];
 
+rbearing_6907_enclosed_housing_holes_position = [
+[f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[0] / 2 - f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[1] / 2,
+0,
+0], 
+[-f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[0] / 2 + f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[1] / 2, 0, 0]
+];
 
 //echo(rbearing_6905_enclosed_housing_holes_position);
 
@@ -154,5 +162,7 @@ rbearing_6002_vertical_housing_size_bounded_half_small_top = [2 * rb_6002_extern
 function f_rbearing_6905_vertical_housing_size_bounded_half_small(extra_height) = [2 * rb_6905_external_radius + 2 * (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), rb_6905_thick + 4, rb_6905_external_radius + 4 + extra_height];
 
 function f_rbearing_6906_vertical_housing_size_bounded_half_small(extra_height) = [2 * rb_6906_external_radius + 2 * (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), rb_6906_thick + 4, rb_6906_external_radius + 4 + extra_height];
+
+function f_rbearing_6907_vertical_housing_size_bounded_half_small(extra_height) = [2 * rb_6907_external_radius + 2 * (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), rb_6907_thick + 4, rb_6907_external_radius + 4 + extra_height];
 
 function f_rbearing_6905_vertical_double_housing_size_bounded_half_small(extra_height) = [2 * rb_6905_external_radius + 2 * (radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior + radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior + 2 * m4_screw_radius), 2 * rb_6905_thick + 4, rb_6905_external_radius + 4 + extra_height];
