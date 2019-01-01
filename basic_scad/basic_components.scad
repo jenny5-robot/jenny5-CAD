@@ -135,9 +135,11 @@ module cube_rounded_x_holed_z(cube_size, hole_radius)
 //----------------------------------------------------------------
 module rectangular_tube(length, width, wall_thick, height)
 {
+		translate ([-length / 2, -width / 2, 0]){
     difference(){
-		cube([length, width, height]);
-		translate ([wall_thick, wall_thick, 0]- display_tolerance_z) cube([length - 2 * wall_thick, width - 2 * wall_thick, height + 2 * display_tolerance]);
+            cube([length, width, height]);
+            translate ([wall_thick, wall_thick, 0]- display_tolerance_z) cube([length - 2 * wall_thick, width - 2 * wall_thick, height + 2 * display_tolerance]);
+        }
 	}
 }
 //--------------------------------------------------------------
