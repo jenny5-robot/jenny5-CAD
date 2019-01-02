@@ -46,7 +46,7 @@ module radial_bearing_vertical_housing_bounded_with_horizontal_holes(housing_siz
      }
 }
 //--------------------------------------------------------------
-module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_housing_size, rbearing_enclosed_housing_holes_position = rbearing_608_enclosed_housing_holes_position, grosime_perete_lateral_lungime_exterior = radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior, grosime_perete_lateral_lungime_interior = radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior, grosime_perete_lateral_latime = radial_bearing_vertical_housing_grosime_perete_lateral_latime, screw_holes_tolerance = 0)
+module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_housing_size, rbearing_enclosed_housing_holes_position = rbearing_608_enclosed_housing_holes_position, grosime_perete_lateral_lungime_exterior = radial_bearing_vertical_housing_wall_thick_external_length, grosime_perete_lateral_lungime_interior = radial_bearing_vertical_housing_wall_thick_internal_length, grosime_perete_lateral_latime = radial_bearing_vertical_housing_wall_thick_width, screw_holes_tolerance = 0)
 {
     color(plastic_color)
     render(){
@@ -86,7 +86,7 @@ module radial_bearing_vertical_housing(housing_size = rbearing_608_enclosed_hous
 module radial_bearing_dome_housing(rb_external_radius, rb_thick, extra_height)
 {
     h = 12;
-    baza_sizes = [2 * (rb_external_radius + radial_bearing_vertical_housing_base_wall_thick + 4.5), extra_height, h];//rb_thick + radial_bearing_vertical_housing_grosime_perete_lateral_latime];
+    baza_sizes = [2 * (rb_external_radius + radial_bearing_vertical_housing_base_wall_thick + 4.5), extra_height, h];//rb_thick + radial_bearing_vertical_housing_wall_thick_width];
     difference(){
 rotate([90, 0, 0])
         difference(){
@@ -94,7 +94,7 @@ color(plastic_color)
         hull(){
         translate ([0, rb_external_radius + extra_height, 0]) cylinder (h = h, r = rb_external_radius + radial_bearing_vertical_housing_base_wall_thick, $fn = 100);
             translate ([-baza_sizes[0] / 2, 0, 0]) cube(baza_sizes);
-            //translate ([-(rb_external_radius + radial_bearing_vertical_housing_base_wall_thick), 0, 0]) cube([2 * (rb_external_radius + radial_bearing_vertical_housing_base_wall_thick), rb_external_radius + radial_bearing_vertical_housing_base_wall_thick, rb_thick + radial_bearing_vertical_housing_grosime_perete_lateral_latime]);
+            //translate ([-(rb_external_radius + radial_bearing_vertical_housing_base_wall_thick), 0, 0]) cube([2 * (rb_external_radius + radial_bearing_vertical_housing_base_wall_thick), rb_external_radius + radial_bearing_vertical_housing_base_wall_thick, rb_thick + radial_bearing_vertical_housing_wall_thick_width]);
         }
         translate ([0, rb_external_radius + extra_height, 0] - display_tolerance_z) cylinder (h = h + 2 * display_tolerance, r = rb_external_radius - 2, $fn = 100);
         translate ([0, rb_external_radius + extra_height, 4]) cylinder (h = rb_thick + display_tolerance, r = rb_external_radius, $fn = 100);
@@ -180,27 +180,27 @@ module radial_bearing_698_vertical_housing_touch()
 //---------------------------------------------------------------------------
 module radial_bearing_608_vertical_housing_slim()
 {
-    radial_bearing_vertical_housing(rbearing_608_enclosed_housing_slim_size, rbearing_608_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime,
-   radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime, radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime);
+    radial_bearing_vertical_housing(rbearing_608_enclosed_housing_slim_size, rbearing_608_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_wall_thick_length_slim,
+   radial_bearing_vertical_housing_wall_thick_length_slim, radial_bearing_vertical_housing_wall_thick_width_slim);
 }
 //---------------------------------------------------------------------------
 module radial_bearing_608_vertical_housing_slim_double()
 {
-    radial_bearing_vertical_housing(rbearing_608_enclosed_housing_slim_size, rbearing_608_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime,
-   radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime, radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime);
+    radial_bearing_vertical_housing(rbearing_608_enclosed_housing_slim_size, rbearing_608_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_wall_thick_length_slim,
+   radial_bearing_vertical_housing_wall_thick_length_slim, radial_bearing_vertical_housing_wall_thick_width_slim);
 translate([0, rbearing_608_enclosed_housing_slim_size[1], 0])
-    radial_bearing_vertical_housing(rbearing_608_enclosed_housing_slim_size, rbearing_608_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime,
-   radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime, radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime);
+    radial_bearing_vertical_housing(rbearing_608_enclosed_housing_slim_size, rbearing_608_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_wall_thick_length_slim,
+   radial_bearing_vertical_housing_wall_thick_length_slim, radial_bearing_vertical_housing_wall_thick_width_slim);
 }
 //---------------------------------------------------------------------------
 module radial_bearing_6001_vertical_housing_slim_double()
 {
-    radial_bearing_vertical_housing(rbearing_6001_enclosed_housing_slim_size, rbearing_6001_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime,
-   radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime, radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime);
+    radial_bearing_vertical_housing(rbearing_6001_enclosed_housing_slim_size, rbearing_6001_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_wall_thick_length_slim,
+   radial_bearing_vertical_housing_wall_thick_length_slim, radial_bearing_vertical_housing_wall_thick_width_slim);
     
 translate([0, rbearing_6001_enclosed_housing_slim_size[1], 0])
-    radial_bearing_vertical_housing(rbearing_6001_enclosed_housing_slim_size, rbearing_6001_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime,
-   radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime, radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime);
+    radial_bearing_vertical_housing(rbearing_6001_enclosed_housing_slim_size, rbearing_6001_enclosed_housing_slim_holes_position, radial_bearing_vertical_housing_wall_thick_length_slim,
+   radial_bearing_vertical_housing_wall_thick_length_slim, radial_bearing_vertical_housing_wall_thick_width_slim);
 }
 //---------------------------------------------------------------------------
 module rbearing_608_vertical_housing_bounded_half()
