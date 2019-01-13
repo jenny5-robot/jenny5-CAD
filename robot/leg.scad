@@ -249,7 +249,7 @@ module complete_leg(leg_angle)
 
     // top half leg
     translate ([0, 0, 
-    2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + dist_to_wrist_in_base + 25)]) 
+    2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + knee_side_simple_sizes[2] - 17)]) 
     mirror ([0, 0, 1]) half_leg(leg_angle);
         
     // knee
