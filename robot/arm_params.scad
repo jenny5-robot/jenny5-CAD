@@ -11,22 +11,23 @@ include <../basic_scad/params_stepper_motors.scad>
 
 angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
 angle_upper_arm = 90; // -90 ... 90 // default = -90
-angle_elbow = -180; // -270 (closed), -180 (front) -90 (full extend) // default = 0
+angle_elbow = -90; // -270 (closed), -180 (front) -90 (full extend) // default = 0
 angle_fore_arm = -100; // default = 90
 
 upper_arm_bone_length = 350;
 fore_arm_length = 300;
 
-shoulder_shaft_radius = 12.5;
+arm_shaft_size = 25;
+arm_shaft_radius = 17.5;
 
 shoulder_plate_size = [68, nema_17_with_27_1_gearbox_height, alu_sheet_5_thick];
 
 extra_height_arm_bearing = 14;
 
-rbearing_6905_vertical_housing_size_bounded_half_small_bottom = f_rbearing_6905_vertical_housing_size_bounded_half_small(extra_height_arm_bearing);
-rbearing_6905_vertical_housing_size_bounded_half_small_top = f_rbearing_6905_vertical_housing_size_bounded_half_small(0);
+rbearing_6907_vertical_housing_size_bounded_half_small_bottom = f_rbearing_6907_vertical_housing_size_bounded_half_small(extra_height_arm_bearing);
+rbearing_6907_vertical_housing_size_bounded_half_small_top = f_rbearing_6907_vertical_housing_size_bounded_half_small(0);
 
-plate_body_size = ([67, nema_17_with_50_1_gearbox_height, alu_sheet_5_thick]);
+plate_body_size = ([75, nema_17_with_50_1_gearbox_height, alu_sheet_5_thick]);
   
 distance_to_fore_arm_gear = 16;
       
@@ -36,9 +37,6 @@ elbow_gear_thick = bearing_6_height + 2 * elbow_gear_wall;
 upper_arm_motor_housing_shift = -10;
 
 upper_arm_shaft_support_length = 200;
-
-upper_arm_shaft_radius = 15;
-fore_arm_shaft_radius = 15;
 
 upper_arm_gear_thick = 14;
 
@@ -108,12 +106,12 @@ wrist_pulley_num_teeth = 40;
 
 wrist_pulley_radius = 31;
 
-fore_arm_bearing_support_size = [88, rb_6906_external_radius + 3, 13];
+fore_arm_bearing_support_size = [95, rb_6907_external_radius + 3, 14];
 
       elbow_pulley_holes_dist_y = nema_17_L33_with_27_1_gearbox_height / 2 - fore_arm_bearing_support_size[2] / 2;
       elbow_pulley_holes_dist_x = 6;
 
-arm_up_down_motor_sheet_size = [45, 107, 3];
+arm_up_down_motor_sheet_size = [60, 112, 3];
 distance_arm_up_down_motor_to_shaft = arm_up_down_motor_sheet_size[1] - nema_17_motor_gearbox_radius - 1;
 
 fore_arm_rotation_motor_support_sheet_size = [60, 109, 3];

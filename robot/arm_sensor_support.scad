@@ -136,15 +136,15 @@ module sensor_bearing_housing_bottom_upper_arm()
     } 
     
         // plate for fixing to the next part
-    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6906_enclosed_housing_size[1] / 2]) 
+    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6907_enclosed_housing_size[1] / 2]) 
     rotate([90, 0, 0])
     difference(){
                 hull(){
-                translate ([-rbearing_6906_enclosed_housing_size[0] / 2 + rbearing_6906_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
-                translate ([rbearing_6906_enclosed_housing_size[0] / 2 - rbearing_6906_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
+                translate ([-rbearing_6907_enclosed_housing_size[0] / 2 + rbearing_6907_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
+                translate ([rbearing_6907_enclosed_housing_size[0] / 2 - rbearing_6907_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
             }
-            translate ([-rbearing_6906_enclosed_housing_size[0] / 2 + rbearing_6906_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = 2);
-                translate ([rbearing_6906_enclosed_housing_size[0] / 2 - rbearing_6906_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = 2);
+            translate ([-rbearing_6907_enclosed_housing_size[0] / 2 + rbearing_6907_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = 2);
+                translate ([rbearing_6907_enclosed_housing_size[0] / 2 - rbearing_6907_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = 2);
             
         }
 }
@@ -171,16 +171,16 @@ module sensor_bearing_housing_top_upper_arm()
         
     }
     // plate for fixing to the next part
-    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6906_enclosed_housing_size[1] / 2]) 
+    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6907_enclosed_housing_size[1] / 2]) 
     rotate([90, 0, 0])
     difference(){
                 hull(){
-                translate ([-rbearing_6906_enclosed_housing_size[0] / 2 + rbearing_6906_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
-                translate ([rbearing_6906_enclosed_housing_size[0] / 2 - rbearing_6906_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
+                translate ([-rbearing_6907_enclosed_housing_size[0] / 2 + rbearing_6907_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
+                translate ([rbearing_6907_enclosed_housing_size[0] / 2 - rbearing_6907_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
             }
             // screw holes
             for (i = [0 : 1])
-                translate (rbearing_6906_enclosed_housing_holes_position[i])
+                translate (rbearing_6907_enclosed_housing_holes_position[i])
               cylinder (h = 3, r = m4_screw_radius, $fn = 10);
             
             
@@ -201,16 +201,16 @@ module sensor_bearing_housing_bottom_fore_arm()
     } 
     
         // plate for fixing to the next part
-    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6906_enclosed_housing_size[1] / 2]) 
+    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6907_enclosed_housing_size[1] / 2]) 
     rotate([90, 0, 0])
     difference(){
                 hull(){
-                    translate ([-rbearing_6906_enclosed_housing_size[0] / 2 + rbearing_6906_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
-                    translate ([fore_arm_bearing_support_size[0]-rbearing_6906_enclosed_housing_size[0] / 2 -rbearing_6906_enclosed_housing_size[1] / 2 , 0, 0]) cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
+                    translate ([-rbearing_6907_enclosed_housing_size[0] / 2 + rbearing_6907_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
+                    translate ([fore_arm_bearing_support_size[0]-rbearing_6907_enclosed_housing_size[0] / 2 -rbearing_6907_enclosed_housing_size[1] / 2 , 0, 0]) cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
                 }
                 //screw holes
-                translate ([-rbearing_6906_enclosed_housing_size[0] / 2 + rbearing_6906_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = 2);
-                translate ([fore_arm_bearing_support_size[0]-rbearing_6906_enclosed_housing_size[0] / 2 - rbearing_6906_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = 2);
+                translate ([-rbearing_6907_enclosed_housing_size[0] / 2 + rbearing_6907_enclosed_housing_size[1] / 2, 0, 0])  cylinder (h = 3, r = 2);
+                translate ([fore_arm_bearing_support_size[0]-rbearing_6907_enclosed_housing_size[0] / 2 - rbearing_6907_enclosed_housing_size[1] / 2, 0, 0]) cylinder (h = 3, r = 2);
             
         }
 
@@ -238,16 +238,16 @@ module sensor_bearing_housing_top_fore_arm()
         
     }
     // plate for fixing to the next part
-    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6906_enclosed_housing_size[1] / 2]) 
+    translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6907_enclosed_housing_size[1] / 2]) 
     rotate([90, 0, 0])
     difference(){
                 hull(){
-                    translate ([-(-rbearing_6906_enclosed_housing_size[0] / 2 + rbearing_6906_enclosed_housing_size[1] / 2), 0, 0])  cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
-                    translate ([-(fore_arm_bearing_support_size[0]-rbearing_6906_enclosed_housing_size[0] / 2 -rbearing_6906_enclosed_housing_size[1] / 2), 0, 0]) cylinder (h = 3, r = rbearing_6906_enclosed_housing_size[1] / 2);
+                    translate ([-(-rbearing_6907_enclosed_housing_size[0] / 2 + rbearing_6907_enclosed_housing_size[1] / 2), 0, 0])  cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
+                    translate ([-(fore_arm_bearing_support_size[0]-rbearing_6907_enclosed_housing_size[0] / 2 -rbearing_6907_enclosed_housing_size[1] / 2), 0, 0]) cylinder (h = 3, r = rbearing_6907_enclosed_housing_size[1] / 2);
                 }
                 // screw holes
-                translate ([-(-rbearing_6906_enclosed_housing_size[0] / 2 + rbearing_6906_enclosed_housing_size[1] / 2), 0, 0])  cylinder (h = 3, r = 2);
-                translate ([-(fore_arm_bearing_support_size[0]-rbearing_6906_enclosed_housing_size[0] / 2 - rbearing_6906_enclosed_housing_size[1] / 2), 0, 0]) cylinder (h = 3, r = 2);
+                translate ([-(-rbearing_6907_enclosed_housing_size[0] / 2 + rbearing_6907_enclosed_housing_size[1] / 2), 0, 0])  cylinder (h = 3, r = 2);
+                translate ([-(fore_arm_bearing_support_size[0]-rbearing_6907_enclosed_housing_size[0] / 2 - rbearing_6907_enclosed_housing_size[1] / 2), 0, 0]) cylinder (h = 3, r = 2);
             
         }
 

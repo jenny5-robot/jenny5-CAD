@@ -30,20 +30,20 @@ module shoulder_sheet()
 
         echo("bearing housing holes:");
         for (i = [0 : 1]){
-            echo(rbearing_6906_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6906_enclosed_housing_holes_position[0][0] + rbearing_6906_enclosed_housing_holes_position[1][0]) / 2, first_bearing_shoulder_offset + rbearing_6906_enclosed_housing_size[1] / 2, 0]);
-            translate (rbearing_6906_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6906_enclosed_housing_holes_position[0][0] + rbearing_6906_enclosed_housing_holes_position[1][0]) / 2, first_bearing_shoulder_offset+ rbearing_6906_enclosed_housing_size[1] / 2, 0] - display_tolerance_z) cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius);
+            echo(rbearing_6907_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6907_enclosed_housing_holes_position[0][0] + rbearing_6907_enclosed_housing_holes_position[1][0]) / 2, first_bearing_shoulder_offset + rbearing_6907_enclosed_housing_size[1] / 2, 0]);
+            translate (rbearing_6907_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6907_enclosed_housing_holes_position[0][0] + rbearing_6907_enclosed_housing_holes_position[1][0]) / 2, first_bearing_shoulder_offset+ rbearing_6907_enclosed_housing_size[1] / 2, 0] - display_tolerance_z) cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius);
         }
         // other side holes for bearing
         
         for (i = [0 : 1]){
-            echo(rbearing_6906_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6906_enclosed_housing_holes_position[0][0] + rbearing_6906_enclosed_housing_holes_position[1][0]) / 2, shoulder_plate_size[1] - rbearing_6906_enclosed_housing_size[1] / 2, 0]);
+            echo(rbearing_6907_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6907_enclosed_housing_holes_position[0][0] + rbearing_6907_enclosed_housing_holes_position[1][0]) / 2, shoulder_plate_size[1] - rbearing_6907_enclosed_housing_size[1] / 2, 0]);
 
-            translate (rbearing_6906_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6906_enclosed_housing_holes_position[0][0] +rbearing_6906_enclosed_housing_holes_position[1][0]) / 2, shoulder_plate_size[1] - rbearing_6906_enclosed_housing_size[1] / 2, 0] - display_tolerance_z) cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius);
+            translate (rbearing_6907_enclosed_housing_holes_position[i] + [shoulder_plate_size[0] / 2 - (rbearing_6907_enclosed_housing_holes_position[0][0] +rbearing_6907_enclosed_housing_holes_position[1][0]) / 2, shoulder_plate_size[1] - rbearing_6907_enclosed_housing_size[1] / 2, 0] - display_tolerance_z) cylinder (h = shoulder_plate_size[2] + 2 * display_tolerance, r = m4_screw_radius);
         }
         // holes for brackets
         echo("shoulder holes for brackets");
         
-        shoulder_bracket_holes_position = f_tube_bracket_holes(shoulder_bracket_length, shoulder_shaft_radius);
+        shoulder_bracket_holes_position = f_tube_bracket_holes(shoulder_bracket_length, arm_shaft_radius);
         for (i = [0 : 3]){
             echo(shoulder_bracket_holes_position[i] + [0, offset_shoulder_plate_bracket, 0]);
             translate(shoulder_bracket_holes_position[i] + [0, offset_shoulder_plate_bracket, 0] - display_tolerance_z)
@@ -132,17 +132,17 @@ module arm_up_down_motor_top_sheet()
 // motor gearbox middle hole
             translate([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 11, $fn = 30);
             echo([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0], "radius = 11");
-        // rb6905 bearing housing holes
-        echo("rb6905 bearing housing holes");
+        // rb6907 bearing housing holes
+        echo("rb6907 bearing housing holes");
         for (i = [1 : 4]){
-            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
-            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
 
-            echo([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i], "radius = 2");
+            echo([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i], "radius = 2");
         }
 // middle hole
-        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 16, $fn = 30);
-        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 16");
+        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 18, $fn = 30);
+        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 18");
         
         // belt tensioner holes
         echo("belt tensioner holes");
@@ -183,17 +183,17 @@ module arm_up_down_motor_bottom_sheet()
             translate([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] + nema_17_holes[i] - display_tolerance_z) cylinder (h = sheet_upper_arm_motor_base_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
             echo([arm_up_down_motor_sheet_size[0] / 2, distance_arm_up_down_motor_to_shaft, 0] + nema_17_holes[i], "radius = 1.5");
         }
-        // rb6905 bearing housing holes
-        echo("rb6905 bearing housing holes");
+        // rb6907 bearing housing holes
+        echo("rb6907 bearing housing holes");
         for (i = [1 : 4]){
-            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
-            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
 
-            echo([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] + rbearing_6905_housing_holes_position[i], "radius = 2");
+            echo([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i], "radius = 2");
         }
 // middle hole
-        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 16, $fn = 30);
-        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 16");
+        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 18, $fn = 30);
+        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 18");
             }
 }
 //---------------------------------------------------------------------------
@@ -240,8 +240,8 @@ module body_articulation_sheet()
         // first bearing housing support holes
       echo("first bearing housing support holes:");
       for (i = [0 : 1]){
-            echo([plate_body_size[0] / 2, f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] + rbearing_6905_enclosed_housing_holes_position[i]);
-            translate ([plate_body_size[0] / 2, f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_enclosed_housing_holes_position[i])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            echo([plate_body_size[0] / 2, f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] + rbearing_6907_enclosed_housing_holes_position[i]);
+            translate ([plate_body_size[0] / 2, f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6907_enclosed_housing_holes_position[i])  cylinder ( h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
         // motor housing base screw holes
 //      echo("motor holes position:");
@@ -252,8 +252,8 @@ module body_articulation_sheet()
         // holes for the other bearing housing
       echo("second bearing housing support holes:");     
       for (i = [0 : 1]){
-            echo([plate_body_size[0] / 2, plate_body_size[1] - f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] + rbearing_6905_enclosed_housing_holes_position[i]);
-            translate ([plate_body_size[0] / 2, plate_body_size[1] - f_rbearing_6905_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_enclosed_housing_holes_position[i]) cylinder (h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
+            echo([plate_body_size[0] / 2, plate_body_size[1] - f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] + rbearing_6907_enclosed_housing_holes_position[i]);
+            translate ([plate_body_size[0] / 2, plate_body_size[1] - f_rbearing_6907_vertical_housing_size_bounded_half_small(0)[1] / 2, 0] - display_tolerance_z) translate(rbearing_6907_enclosed_housing_holes_position[i]) cylinder (h = plate_body_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
       }
       //holes for body shaft
       echo("shaft support holes = ");
@@ -289,17 +289,17 @@ module fore_arm_rotation_motor_support_sheet_top()
 // motor gearbox middle hole
             translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 11, $fn = 30);
             echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0], "radius = 11");
-        // rb6905 bearing housing holes
-        echo("rb6905 bearing housing holes");
+        // rb6907 bearing housing holes
+        echo("rb6907 bearing housing holes");
         for (i = [1 : 4]){
-            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
-            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
 
-            echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i], "radius = 2");
+            echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i], "radius = 2");
         }
 // middle hole
-        translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
-        echo("bearing housing middle hole", [fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0], "radius = 20");
+        translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
+        echo("bearing housing middle hole", [fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 20");
         
         // belt tensioner holes
         echo("belt tensioner holes");
@@ -344,17 +344,17 @@ module upper_arm_rotation_motor_support_sheet_top()
 // motor gearbox middle hole
             translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 11, $fn = 30);
             echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0], "radius = 11");
-        // rb6905 bearing housing holes
-        echo("rb6905 bearing housing holes");
+        // rb6907 bearing housing holes
+        echo("rb6907 bearing housing holes");
         for (i = [1 : 4]){
-            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
-            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
 
-            echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i], "radius = 2");
+            echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i], "radius = 2");
         }
 // middle hole
-        translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
-        echo("bearing housing middle hole", [upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 20");
+        translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
+        echo("bearing housing middle hole", [upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 20");
         
         // belt tensioner holes
         echo("belt tensioner holes");
@@ -379,17 +379,17 @@ module upper_arm_rotation_motor_support_sheet_bottom()
             echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, distance_upper_arm_rotation_motor_to_shaft, 0] + nema_17_holes[i], "radius = 1.5");
         }
 
-        // rb6905 bearing housing holes
-        echo("rb6905 bearing housing holes");
+        // rb6907 bearing housing holes
+        echo("rb6907 bearing housing holes");
         for (i = [1 : 4]){
-            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
-            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
 
-            echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] + rbearing_6906_housing_holes_position[i], "radius = 2");
+            echo([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i], "radius = 2");
         }
 // middle hole
-        translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6906_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
-        echo("bearing housing middle hole", [upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6905_housing_size[0] / 2, 0], "radius = 20");
+        translate([upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
+        echo("bearing housing middle hole", [upper_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 20");
         
 
     }
