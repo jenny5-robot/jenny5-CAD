@@ -47,11 +47,8 @@ module upper_arm_rotation_pulley()
             }
         
         // middle hole
-        //translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = upper_arm_shaft_radius, $fn = 30);
-        hull(){
-            cylinder(h = 1, r = upper_arm_shaft_radius + 0.2, $fn = 50);
-            translate ([0, 0, upper_arm_gear_thick - 5]) cylinder(h = 5, r = upper_arm_shaft_radius + 0.4, $fn = 6);
-        }        
+ 
+        translate ([-arm_shaft_size / 2, -arm_shaft_size / 2, 0]) cube([arm_shaft_size, arm_shaft_size, upper_arm_gear_thick]);    
         // holes for connecting 2 half pulleys
         // 1st screw hole
         dist_to_1st_screw = 19.5;
@@ -112,11 +109,11 @@ module shoulder_traction_pulley()
                
         color (plastic_color) {
             pulley(profile = "T5mm_pulley", num_teeth = 45, pulley_b_ht = 0, pulley_b_dia = 17, pulley_t_ht = upper_arm_gear_thick - 3);
-            translate ([0, 0, upper_arm_gear_thick]) cylinder (h = spacer_length, r = shoulder_shaft_radius + 1);
         }
         
         // shaft hole 
-        translate (-display_tolerance_z) my_cube_rounded4(cube_size = 20, height = upper_arm_gear_thick + spacer_length + 2 * display_tolerance, external_radius = shoulder_shaft_radius, fn = 100);
+        translate ([-arm_shaft_size / 2, -arm_shaft_size / 2, 0] -display_tolerance_z) 
+        cube([arm_shaft_size, arm_shaft_size, upper_arm_gear_thick + spacer_length + 2 * display_tolerance]);
 
         dist_to_nut = 14;
 
@@ -154,11 +151,7 @@ module fore_arm_rotation_pulley()
             }
         
         // middle hole
-        //translate(- display_tolerance_z) cylinder(h = upper_arm_gear_thick + 2 * display_tolerance, r = upper_arm_shaft_radius, $fn = 30);
-        hull(){
-            cylinder(h = 1, r = upper_arm_shaft_radius, $fn = 50);
-            translate ([0, 0, upper_arm_gear_thick - 5]) cylinder(h = 5, r = upper_arm_shaft_radius + 0.5, $fn = 6);
-        }        
+        translate ([-arm_shaft_size / 2, -arm_shaft_size / 2, 0]) cube([arm_shaft_size, arm_shaft_size, upper_arm_gear_thick]);         
         // holes for connecting 2 half pulleys
         // 1st screw hole
         dist_to_1st_screw = 19.5;
@@ -316,7 +309,7 @@ module pulley_upper_arm_bone_for_sensor()
 {
     difference(){
         pulley(profile = "T2_5mm_pulley", num_teeth = 47, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 6);
-        cylinder (h = 9, r = upper_arm_shaft_radius+0.2);
+        cylinder (h = 9, r = arm_shaft_radius + 0.2);
     }
 }
 //---------------------------------------------------------------------------
@@ -341,7 +334,7 @@ module pulley_upper_arm_sensor_shaft()
 
 //upper_arm_rotation_pulley();
 
-pulley_upper_arm_sensor_shaft();
+//pulley_upper_arm_sensor_shaft();
 
 //pulley_upper_arm_bone_for_sensor();
 
@@ -353,7 +346,7 @@ pulley_upper_arm_sensor_shaft();
 //elbow_pulley_with_magnet_support();
 //wrist_pulley();
 
-//shoulder_traction_pulley();
+shoulder_traction_pulley();
 
 //fore_arm_rotation_pulley();
 
