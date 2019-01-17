@@ -10,6 +10,10 @@ OpenSCAD from http://www.openscad.org/
 
 Go to robot folder, open jenny5.scad with OpenSCAD and press F5 ... and wait for several seconds (or minutes if you have a slow computer).
 
+## Note
+
+This is work in progress. Do not start to build the robot yet as many things will change.
+
 ## Contact
 
 Mihai Oltean
