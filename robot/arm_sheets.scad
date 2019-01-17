@@ -141,8 +141,8 @@ module arm_up_down_motor_top_sheet()
             echo([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i], "radius = 2");
         }
 // middle hole
-        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 18, $fn = 30);
-        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 18");
+        translate([arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 22, $fn = 30);
+        echo("bearing housing middle hole", [arm_up_down_motor_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 20");
         
         // belt tensioner holes
         echo("belt tensioner holes");

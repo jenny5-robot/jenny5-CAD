@@ -20,14 +20,14 @@ fore_arm_length = 300;
 arm_shaft_size = 25;
 arm_shaft_radius = 17.5;
 
-shoulder_plate_size = [68, nema_17_with_27_1_gearbox_height, alu_sheet_5_thick];
+shoulder_plate_size = [75, nema_17_with_27_1_gearbox_height, alu_sheet_5_thick];
 
 extra_height_arm_bearing = 14;
 
 rbearing_6907_vertical_housing_size_bounded_half_small_bottom = f_rbearing_6907_vertical_housing_size_bounded_half_small(extra_height_arm_bearing);
 rbearing_6907_vertical_housing_size_bounded_half_small_top = f_rbearing_6907_vertical_housing_size_bounded_half_small(0);
 
-plate_body_size = ([75, nema_17_with_50_1_gearbox_height, alu_sheet_5_thick]);
+plate_body_size = ([80, nema_17_with_50_1_gearbox_height, alu_sheet_5_thick]);
   
 distance_to_fore_arm_gear = 16;
       
@@ -111,7 +111,7 @@ fore_arm_bearing_support_size = [95, rb_6907_external_radius + 3, 14];
       elbow_pulley_holes_dist_y = nema_17_L33_with_27_1_gearbox_height / 2 - fore_arm_bearing_support_size[2] / 2;
       elbow_pulley_holes_dist_x = 6;
 
-arm_up_down_motor_sheet_size = [60, 112, 3];
+arm_up_down_motor_sheet_size = [60, 115, 3];
 distance_arm_up_down_motor_to_shaft = arm_up_down_motor_sheet_size[1] - nema_17_motor_gearbox_radius - 1;
 
 fore_arm_rotation_motor_support_sheet_size = [60, 109, 3];
@@ -120,7 +120,7 @@ distance_fore_arm_rotation_motor_to_shaft = fore_arm_rotation_motor_support_shee
 
 fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners = 22;
 
-arm_up_down_motor_top_sheet_distance_between_belt_tensioners = 20;
+arm_up_down_motor_top_sheet_distance_between_belt_tensioners = 18;
 
 upper_arm_rotation_motor_support_sheet_size = [60, 109, 3];
 
