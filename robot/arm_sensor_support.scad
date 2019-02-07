@@ -51,10 +51,10 @@ module magnet_support_elbow()
 module sensor_support_elbow()
 {
     echo(as5147_elbow_support_size = as5147_elbow_support_size);
-    radius_support = 10;
+    radius_support = 8;
     total_height = as5147_elbow_support_size[2] + 13 + 5 + 9;
     
-    offset_x = 1;
+    offset_x = 8;
     difference(){
         union(){
             cube(as5147_elbow_support_size);
@@ -62,12 +62,17 @@ module sensor_support_elbow()
                 translate ([offset_x + as5147_board_size[0] + radius_support, radius_support - 5, 0]) cylinder(h = total_height, r = radius_support, $fn = 30);
                 translate ([offset_x + as5147_board_size[0] + radius_support, as5147_elbow_support_size[1] - (radius_support - 5), 0]) cylinder(h = total_height, r = radius_support, $fn = 30);
             }
+            // margins
+            cube([as5147_elbow_support_size[0], 2, 6]);
+            translate ([0, as5147_elbow_support_size[1] - 2, 0]) cube([as5147_elbow_support_size[0], 2, 6]);
         }
         // screws holes for sensor
         for (i = [0 : 3])
-            translate (as5147_holes_position[i] + [offset_x, (as5147_elbow_support_size[1] - as5147_board_size[1]) / 2, 0] - display_tolerance_z) cylinder(h = as5147_elbow_support_size[2] + 2 * display_tolerance, r = 1, $fn = 10);
+            translate (as5147_holes_position[i] + [1, (as5147_elbow_support_size[1] - as5147_board_size[1]) / 2, 0] - display_tolerance_z) cylinder(h = as5147_elbow_support_size[2] + 2 * display_tolerance, r = 1, $fn = 10);
         // cube 
        translate ([as5147_board_size[0] + offset_x, (as5147_elbow_support_size[1] - 20) / 2, as5147_elbow_support_size[2] + 13 + 5]) cube([20, 20, 30]);
+// cube 2
+       translate ([as5147_board_size[0] + offset_x, (as5147_elbow_support_size[1] - 10) / 2, as5147_elbow_support_size[2]]) cube([20, 10, 40]);
         // screws for fixing the sensor on arm
         translate ([as5147_board_size[0] + radius_support + offset_x, 0, 0]) cylinder (h = total_height+ 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
         translate ([as5147_board_size[0] + radius_support + offset_x, as5147_elbow_support_size[1], 0]) cylinder (h = total_height + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
@@ -125,7 +130,7 @@ module body_sensor_support()
 //---------------------------------------------------------------------------
 module sensor_bearing_housing_bottom_upper_arm()
 {
-     h = 8;
+    h = 8;
     difference(){
     
         translate ([-rbearing_688_housing_size[0] / 2, -rbearing_688_housing_size[1] / 2, 0]) cube([rbearing_688_housing_size[0], rbearing_688_housing_size[1], h]);
@@ -181,16 +186,13 @@ module sensor_bearing_housing_top_upper_arm()
             // screw holes
             for (i = [0 : 1])
                 translate (rbearing_6907_enclosed_housing_holes_position[i])
-              cylinder (h = 3, r = m4_screw_radius, $fn = 10);
-            
-            
+              cylinder (h = 3, r = m4_screw_radius, $fn = 10);   
         }
-
 }
 //---------------------------------------------------------------------------
 module sensor_bearing_housing_bottom_fore_arm()
 {
-     h = 8;
+    h = 8;
     difference(){
     
         translate ([-rbearing_688_housing_size[0] / 2, -rbearing_688_housing_size[1] / 2, 0]) cube([rbearing_688_housing_size[0], rbearing_688_housing_size[1], h]);
@@ -257,7 +259,7 @@ module sensor_bearing_housing_top_fore_arm()
 //belt_tensioner_spacer_with_sensor_support(distance_between_screws = 28, width = 60);
 //magnet_support_elbow();
 
-//sensor_support_elbow();
+sensor_support_elbow();
 
 //body_sensor_support();
 
@@ -266,5 +268,5 @@ module sensor_bearing_housing_top_fore_arm()
 //sensor_bearing_housing_top_upper_arm();
 //sensor_bearing_housing_bottom_upper_arm();
 
-sensor_bearing_housing_top_fore_arm();
+//sensor_bearing_housing_top_fore_arm();
 //sensor_bearing_housing_bottom_fore_arm();
