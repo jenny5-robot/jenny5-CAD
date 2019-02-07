@@ -59,6 +59,13 @@ rbearing_608_housing_holes_position = [[0, 0, 0],
 [(rb_608_external_radius - 1), (rb_608_external_radius - 1), 0]
 ];
 
+rbearing_608_housing_holes_position_m3 = [[0, 0, 0], 
+[-7.75, -11, 0], 
+[7.75, -11, 0],
+[-7.75, 11, 0],
+[7.75, 11, 0]
+];
+
 rbearing_6000_housing_holes_position = [[0, 0, 0], 
 [-(rb_6000_external_radius - 2), -(rb_6000_external_radius - 2), 0], 
 [(rb_6000_external_radius - 2), -(rb_6000_external_radius - 2), 0],
