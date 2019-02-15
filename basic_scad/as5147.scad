@@ -109,6 +109,6 @@ module magnet_holder2_with_magnet(holder_height = 10, magnet_radius = 4, magnet_
 
 //magnet_holder_hexa(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11.5, tower_height = 2, tower_external_radius = 6);
 
-magnet_holder_square(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_size = 16, tower_height = 2, tower_external_radius = 6);
+magnet_holder_square(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_size = 21, tower_height = 2, tower_external_radius = 6);
 
 //magnet_holder2_with_magnet(holder_height = 10, magnet_radius = 4, magnet_thick = 2.5, tube_internal_radius = 11,  tower_height = 10, tower_external_radius = 6);
