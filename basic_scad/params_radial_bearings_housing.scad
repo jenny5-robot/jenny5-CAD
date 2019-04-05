@@ -23,6 +23,8 @@ radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime = 1;
 
 function f_radial_bearing_housing_size (rb_external_radius, rb_thick) = [2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness), 2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness), rb_thick + radial_bearing_housing_base_wall_thickness];
 
+function f_radial_bearing_thicker_housing_size (rb_external_radius, rb_thick) = [2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness_4), 2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness_4), rb_thick + radial_bearing_housing_base_wall_thickness];
+
 function f_radial_bearing_housing_size_thicker (rb_external_radius, rb_thick) = [2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness_4), 2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness_4), rb_thick + radial_bearing_housing_base_wall_thickness];
 
 rbearing_6000_housing_size = f_radial_bearing_housing_size(rb_6000_external_radius, rb_6000_thick);
@@ -38,6 +40,8 @@ rbearing_626_housing_size = f_radial_bearing_housing_size(rb_626_external_radius
 rbearing_6001_housing_size_thicker = f_radial_bearing_housing_size_thicker(rb_6001_external_radius, rb_6001_thick);
 
 rbearing_608_housing_size = f_radial_bearing_housing_size(rb_608_external_radius, rb_608_thick);
+
+rbearing_608_thicker_housing_size = f_radial_bearing_thicker_housing_size(rb_608_external_radius, rb_608_thick);
 
 rbearing_688_housing_size = f_radial_bearing_housing_size(rb_688_external_radius, rb_688_thick);
 
