@@ -55,9 +55,9 @@ module linear_nema_motor(motor_width, motor_height, shaft_length, shaft_radius =
     translate ([0, 0, shaft_position]) cylinder (h = shaft_length, r = shaft_radius, $fn = 30); 
 }
 //--------------------------------------------------------------
-module nema_motor_with_gearbox(motor_width, motor_height, gearbox_length, gearbox_radius, gearbox_base_height, gearbox_screw_holes_position, gearbox_shaft_length, gearbox_shaft_radius)
+module nema_motor_with_gearbox(motor_width, motor_height, motor_top_radius, motor_top_cylinder_height, motor_screw_holes, gearbox_length, gearbox_radius, gearbox_base_height, gearbox_screw_holes_position, gearbox_shaft_length, gearbox_shaft_radius)
 {
-	nema_motor(motor_width, motor_height);
+	nema_motor(motor_width, motor_height, top_cylinder_radius = motor_top_radius, top_cylinder_height = motor_top_cylinder_height, nema_holes = motor_screw_holes);
     // gearbox base
     if (gearbox_base_height > 0)
         color ("gray") translate ([-motor_width / 2, -motor_width / 2, motor_height]) cube([motor_width, motor_width, gearbox_base_height]);
@@ -69,6 +69,7 @@ module nema_motor_with_gearbox(motor_width, motor_height, gearbox_length, gearbo
     translate ([0, 0, motor_height + gearbox_length + gearbox_base_height - 3] + gearbox_screw_holes_position[i]) cylinder (h = 4, r = m3_screw_radius, $fn = 20);
 	}
 // gearbox shaft
+    echo(gearbox_length=gearbox_length);
 	color("black") translate ([0, 0, motor_height + gearbox_length + gearbox_base_height]) cylinder ( h =  gearbox_shaft_length, r = gearbox_shaft_radius, $fn = 30);
 
 }
@@ -105,37 +106,45 @@ module nema_11()
 //--------------------------------------------------------------
 module nema_11_with_27_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_11_width, nema_11_height, nema_11_27_1_gearbox_length, nema_11_motor_gearbox_radius, nema_11_gearbox_base_height, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
+	nema_motor_with_gearbox(nema_11_width, nema_11_height, motor_top_radius, motor_top_cylinder_height, motor_screw_holes, 
+    nema_11_27_1_gearbox_length, nema_11_motor_gearbox_radius, nema_11_gearbox_base_height, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
 }
 //--------------------------------------------------------------
 module nema_11_with_13_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_11_width, nema_11_height, nema_11_13_1_gearbox_length, nema_11_motor_gearbox_radius, nema_11_gearbox_base_height, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
+	nema_motor_with_gearbox(nema_11_width, nema_11_height, 
+    motor_top_radius, motor_top_cylinder_height, motor_screw_holes,
+    nema_11_13_1_gearbox_length, nema_11_motor_gearbox_radius, nema_11_gearbox_base_height, gearbox_nema_11_holes_position, nema_11_gearbox_shaft_length, 3);
 }
 //--------------------------------------------------------------
 module nema_17_with_5_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_17_width, nema_17_height, nema_17_5_1_gearbox_height, nema_17_motor_gearbox_radius, nema_17_gearbox_base_height, gearbox_nema_17_holes_position, nema_17_shaft_length, nema_17_gearbox_shaft_radius);
+	nema_motor_with_gearbox(motor_width = nema_17_width, motor_height = nema_17_height, motor_top_radius = nema_17_42BYGHW804_top_radius, motor_top_cylinder_height = nema_17_42BYGHW804_top_cylinder_height, motor_screw_holes = nema_17_holes, gearbox_length = nema_17_5_1_gearbox_height, gearbox_radius = nema_17_motor_gearbox_radius, gearbox_base_height = nema_17_gearbox_base_height, gearbox_screw_holes_position = gearbox_nema_17_holes_position, gearbox_shaft_length = nema_17_shaft_length, gearbox_shaft_radius = nema_17_gearbox_shaft_radius);
 }
 //--------------------------------------------------------------
 module nema_17_with_13_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_17_width, nema_17_height, nema_17_13_1_gearbox_height, nema_17_motor_gearbox_radius, nema_17_gearbox_base_height, gearbox_nema_17_holes_position, nema_17_shaft_length, nema_17_gearbox_shaft_radius);
+	nema_motor_with_gearbox(motor_width = nema_17_width, motor_height = nema_17_height, motor_top_radius = nema_17_42BYGHW804_top_radius, motor_top_cylinder_height = nema_17_42BYGHW804_top_cylinder_height, motor_screw_holes = nema_17_holes, gearbox_length = nema_17_13_1_gearbox_height, gearbox_radius = nema_17_motor_gearbox_radius, gearbox_base_height = nema_17_gearbox_base_height, gearbox_screw_holes_position = gearbox_nema_17_holes_position, gearbox_shaft_length = nema_17_shaft_length, gearbox_shaft_radius = nema_17_gearbox_shaft_radius);
 }
 //--------------------------------------------------------------
 module nema_17_with_19_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_17_width, nema_17_height, nema_17_19_1_gearbox_height, nema_17_motor_gearbox_radius, nema_17_gearbox_base_height, gearbox_nema_17_holes_position, nema_17_shaft_length, nema_17_gearbox_shaft_radius);
+	nema_motor_with_gearbox(motor_width = nema_17_width, motor_height = nema_17_height, motor_top_radius = nema_17_42BYGHW804_top_radius, motor_top_cylinder_height = nema_17_42BYGHW804_top_cylinder_height, motor_screw_holes = nema_17_holes, gearbox_length = nema_17_19_1_gearbox_height, gearbox_radius = nema_17_motor_gearbox_radius, gearbox_base_height = nema_17_gearbox_base_height, gearbox_screw_holes_position = gearbox_nema_17_holes_position, gearbox_shaft_length = nema_17_shaft_length, gearbox_shaft_radius = nema_17_gearbox_shaft_radius);
 }
 //--------------------------------------------------------------
 module nema_17_with_50_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_17_width, nema_17_height, nema_17_50_1_gearbox_height, nema_17_motor_gearbox_radius, nema_17_gearbox_base_height, gearbox_nema_17_holes_position, nema_17_shaft_length, nema_17_gearbox_shaft_radius);
+	nema_motor_with_gearbox(motor_width = nema_17_width, motor_height = nema_17_height, motor_top_radius = nema_17_42BYGHW804_top_radius, motor_top_cylinder_height = nema_17_42BYGHW804_top_cylinder_height, motor_screw_holes = nema_17_holes, gearbox_length = nema_17_50_1_gearbox_height, gearbox_radius = nema_17_motor_gearbox_radius, gearbox_base_height = nema_17_gearbox_base_height, gearbox_screw_holes_position = gearbox_nema_17_holes_position, gearbox_shaft_length = nema_17_shaft_length, gearbox_shaft_radius = nema_17_gearbox_shaft_radius);
 }
 //--------------------------------------------------------------
-module nema_14_with_27_1_gearbox()
+module nema_17_48_with_27_1_gearbox()
 {
-	nema_motor_with_gearbox(nema_14_33_width, nema_14_33_height, nema_14_27_1_gearbox_height, nema_14_motor_gearbox_radius, nema_14_gearbox_base_height, gearbox_nema_14_holes_position, nema_14_shaft_length, nema_14_gearbox_shaft_radius);
+	nema_motor_with_gearbox(motor_width = nema_17_width, motor_height = 48, motor_top_radius = nema_17_42BYGHW804_top_radius, motor_top_cylinder_height = nema_17_42BYGHW804_top_cylinder_height, motor_screw_holes = nema_17_holes, gearbox_length = nema_17_27_1_gearbox_height, gearbox_radius = nema_17_motor_gearbox_radius, gearbox_base_height = nema_17_gearbox_base_height, gearbox_screw_holes_position = gearbox_nema_17_holes_position, gearbox_shaft_length = nema_17_shaft_length, gearbox_shaft_radius = nema_17_gearbox_shaft_radius);
+}
+//--------------------------------------------------------------
+module nema_17_33_with_27_1_gearbox()
+{
+	nema_motor_with_gearbox(motor_width = nema_17_width, motor_height = 33, motor_top_radius = nema_17_42BYGHW804_top_radius, motor_top_cylinder_height = nema_17_42BYGHW804_top_cylinder_height, motor_screw_holes = nema_17_holes, gearbox_length = nema_17_27_1_gearbox_height, gearbox_radius = nema_17_motor_gearbox_radius, gearbox_base_height = nema_17_gearbox_base_height, gearbox_screw_holes_position = gearbox_nema_17_holes_position, gearbox_shaft_length = nema_17_shaft_length, gearbox_shaft_radius = nema_17_gearbox_shaft_radius);
 }
 //--------------------------------------------------------------
 module nema_17_with_13_1_gearbox_and_screw(gearbox_shaft_length = 100)
@@ -149,7 +158,7 @@ module nema_17_with_13_1_gearbox_and_screw(gearbox_shaft_length = 100)
 //--------------------------------------------------------------
 //nema_17();
 
-nema_14_with_27_1_gearbox();
+//nema_14_with_27_1_gearbox();
 
 //nema_14_39BYGL215A(100, -50);
 
@@ -157,6 +166,6 @@ nema_14_with_27_1_gearbox();
 
 //nema_11_with_27_1_gearbox();
 
-//nema_17_with_5_1_gearbox();
+nema_17_with_5_1_gearbox();
 
 //nema_17_with_13_1_gearbox_and_screw();
