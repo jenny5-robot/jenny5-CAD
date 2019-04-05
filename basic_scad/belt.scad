@@ -68,6 +68,6 @@ module belt_on_4_pulleys(r1, r2, r3, distance_to_tensioner_pulleys_x, distance_t
 
 //belt_on_2_pulleys(50, 20, 100, 5);
 
-//echo (length_belt_on_2_pulleys(r1 = 50, r2 = 20, distance_between_pulleys = 100));
+echo (length_belt_on_2_pulleys(r1 = 20, r2 = 15, distance_between_pulleys = 40));
 
-belt_on_4_pulleys(r1 = 6, r2 = 10, r3 = 70, distance_to_tensioner_pulleys_x = 100, distance_to_tensioner_pulleys_y = 30, distance_between_traction_pulleys = 200, belt_width = 6, belt_thick = 2);
+//belt_on_4_pulleys(r1 = 6, r2 = 10, r3 = 70, distance_to_tensioner_pulleys_x = 100, distance_to_tensioner_pulleys_y = 30, distance_between_traction_pulleys = 200, belt_width = 6, belt_thick = 2);

@@ -42,7 +42,7 @@ module slip_ring_support()
     difference(){
         color (plastic_color) half_box(nema_17_width + 2 * wall_thick_2, 2 * SRC022A_6_flange_radius + wall_thick_2 + 10, 12, wall_thick_2, wall_thick_2, wall_thick_2);
         //screw holes
-        for (i=[1:3])
+        for (i = [1 : 3])
             hull(){
                 translate([nema_17_width / 2 + wall_thick_2, SRC022A_6_flange_radius + wall_thick_2 + 5, 0] - display_tolerance_z)
                     rotate([0, 0, 30]) translate(SRC022A_6_flange_holes_position[i])

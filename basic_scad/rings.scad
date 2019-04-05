@@ -38,7 +38,9 @@ module open_ring_with_rectangular_hole(external_radius, internal_edge_length, he
             cylinder(h = height, r = external_radius, $fn = 50);
         }
         // rectangular hole
-        translate (-display_tolerance_z) my_cube_rounded4(cube_size = internal_edge_length, height = height + 2 * display_tolerance, external_radius = external_rectangle_radius, fn = 100);  
+        translate (-display_tolerance_z) my_cube_rounded4(cube_size = internal_edge_length, height = height + 2 * display_tolerance, external_radius = 100, fn = 100); 
+       // cut
+        translate ([internal_edge_length / 2 - 5, -2.5, 0] - display_tolerance_z) cube([external_radius - internal_edge_length / 2 + 10, 5, height + 2 * display_tolerance]); 
   }
 }
 //-------------------------------------------------------------
@@ -101,7 +103,9 @@ module ring_with_flanges_and_rectangular_hole(external_radius, internal_edge_len
       // m3 screw hole
     translate ([0, 0, height / 2]) rotate([0, 90, 0]) cylinder (h = external_radius, r = 1.4, $fn = 30);  
     // m3 nut hole
-    translate ([internal_edge_length / 2, 0, height / 2]) rotate([0, 90, 0]) cylinder (h = 2.5, r = m3_nut_radius, $fn = 6);  
+    translate ([internal_edge_length / 2, 0, height / 2]) rotate([0, 90, 0]) cylinder (h = 3, r = m3_nut_radius, $fn = 6); 
+           // wire holes
+        translate (-display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = 14, $fn = 70); 
   }
 }
 //-------------------------------------------------------------
@@ -143,7 +147,7 @@ module potentiometer_button()
 
 //ring_with_flanges(7, 4, 8, 0);
 
-ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length= 25.2, height = 14);
+//ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length= 25.2, height = 13);
 
 //open_ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_length = 25, height = 16, flange_size = 2.2);
 
@@ -155,4 +159,4 @@ ring_with_flanges_and_rectangular_hole(external_radius = 20, internal_edge_lengt
 //open_ring(external_radius = 17.5, internal_radius = 15, height = 12 + 6 + 3);
 //open_ring(external_radius = 15, internal_radius = 12.5, height = 12 + 6 + 3);
 
-//open_ring_with_rectangular_hole(external_radius = 20, internal_edge_length = 25, external_rectangle_radius = 100, height = 12 + 6 + 3);
+open_ring_with_rectangular_hole(external_radius = 20, internal_edge_length = 25.2, height = 12 + 6 + 3);
