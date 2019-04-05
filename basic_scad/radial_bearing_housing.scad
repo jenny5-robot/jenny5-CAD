@@ -302,6 +302,9 @@ module rbearing_608_spacer_thicker_m3(extra_height = -1)
 // rbearing_626_housing();
 
  //rbearing_608_housing_thicker(10);
- rbearing_608_housing_thicker_m3(0);
- //rbearing_608_spacer_thicker_m3((90.5-25) / 2 - 3 * 8);
+ rbearing_608_housing_thicker_m3((68.5 - 25) / 2 - 8);
+ //rbearing_608_spacer_thicker_m3((90.5 - 25) / 2 - 3 * 8);
+ 
+ //rbearing_608_spacer_thicker_m3((68.5 - 25) / 2 - 3 * 8);
+ 
 //rbearing_608_housing_thicker(-1);

@@ -99,7 +99,7 @@ color(plastic_color)
         translate ([0, rb_external_radius + extra_height, 0] - display_tolerance_z) cylinder (h = h + 2 * display_tolerance, r = rb_external_radius - 2, $fn = 100);
         translate ([0, rb_external_radius + extra_height, 4]) cylinder (h = rb_thick + display_tolerance, r = rb_external_radius, $fn = 100);
     }
-    // gauri baza  surub
+    // base screw holes
         translate ([-baza_sizes[0] / 2 + 4, - baza_sizes[2] / 2, 0] - display_tolerance_z) cylinder (h = 11, r = m4_screw_radius, $fn = 30);
     // gaura baza piulitza
     hull(){
@@ -271,9 +271,15 @@ module radial_bearing_608_dome_housing()
     radial_bearing_dome_housing(rb_608_external_radius, rb_608_thick, 4);
 }
 //---------------------------------------------------------------------------
+module rbearing_6909_vertical_housing_half()
+{
+    radial_bearing_vertical_housing_bounded(housing_size = rbearing_6909_vertical_housing_size_half, radial_bearing_external_radius = rb_6909_external_radius, radial_bearing_thick = rb_6909_thick, vertical_holes_position = rbearing_6909_enclosed_housing_holes_position);
+}
+//---------------------------------------------------------------------------
 
+rbearing_6909_vertical_housing_half();
 
-radial_bearing_608_vertical_housing();
+//radial_bearing_608_vertical_housing();
 
  //radial_bearing_608_dome_housing();
 

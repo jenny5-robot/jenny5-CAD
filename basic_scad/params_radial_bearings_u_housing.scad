@@ -122,6 +122,15 @@ rbearing_6906_enclosed_housing_holes_position = [
 0]
 ];
 
+rbearing_6909_enclosed_housing_holes_position = [
+[- (rb_6909_external_radius + radial_bearing_vertical_housing_wall_thick_internal_length + m4_screw_radius), 
+0, 
+0], 
+[(rb_6909_external_radius + radial_bearing_vertical_housing_wall_thick_internal_length + m4_screw_radius), 
+0, 
+0]
+];
+
 rbearing_608_enclosed_housing_slim_holes_position = [
 [radial_bearing_vertical_housing_wall_thick_length_slim + m4_screw_radius, 
 rbearing_608_enclosed_housing_slim_size[1] / 2, 
@@ -157,6 +166,8 @@ rbearing_6001_vertical_housing_size_bounded_half_small =[30 + 10, rb_6001_thick 
 rbearing_6002_vertical_housing_size_bounded_half_small = [2 * rb_6002_external_radius + 20, rb_6002_thick + 4, 30]; 
 
 rbearing_6002_vertical_housing_size_bounded_half_small_top = [2 * rb_6002_external_radius + 20, rb_6002_thick + 4, rb_6002_external_radius + 4];
+
+rbearing_6909_vertical_housing_size_half = [2 * (rb_6909_external_radius + 10), rb_6909_thick + 4, rb_6909_external_radius + 4];
 
 
 function f_rbearing_6905_vertical_housing_size_bounded_half_small(extra_height) = [2 * rb_6905_external_radius + 2 * (radial_bearing_vertical_housing_wall_thick_external_length + radial_bearing_vertical_housing_wall_thick_internal_length + 2 * m4_screw_radius), rb_6905_thick + 4, rb_6905_external_radius + 4 + extra_height];
