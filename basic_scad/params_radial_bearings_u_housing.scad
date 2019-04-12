@@ -1,7 +1,6 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// Robot website (main): jenny5.org
-// Robot website (mirror): https://jenny5-robot.github.io
-// Source: github.com/jenny5-robot
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
 

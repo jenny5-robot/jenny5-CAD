@@ -1,6 +1,6 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
 
@@ -66,7 +66,7 @@ module belt_on_4_pulleys(r1, r2, r3, distance_to_tensioner_pulleys_x, distance_t
 }
 //------------------------------------------------------------------------
 
-//belt_on_2_pulleys(50, 20, 100, 5);
+belt_on_2_pulleys(50, 20, 100, 5, 40);
 
 echo (length_belt_on_2_pulleys(r1 = 20, r2 = 15, distance_between_pulleys = 40));
 

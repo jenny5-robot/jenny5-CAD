@@ -1,9 +1,8 @@
-// Author: Mihai Oltean, 
-// https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
 // MIT License
-//-------------------------------------------------------------- 
+//--------------------------------------------------------------
 
 nema_17_gearbox_sheet_size = [42, 42, 5];
 
