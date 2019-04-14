@@ -8,7 +8,7 @@ OpenSCAD from http://www.openscad.org/. Make sure that you have the latest devel
 
 ## How to compile
 
-Go to [robot]:robot folder, open _jenny5.scad_ file with OpenSCAD and press F5 ... and wait for several seconds (or minutes if you have a slow computer).
+Go to [robot](robot) folder, open _jenny5.scad_ file with OpenSCAD and press F5 (Preview) ... and wait for several seconds (or minutes if you have a slow computer).
 
 ## Warning
 
