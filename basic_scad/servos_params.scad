@@ -23,3 +23,7 @@ HS_7985MG_screw_holes_position = [
     [-24.5, 5, 0],
     [-24.5, -5, 0]
 ];
+
+1501MG_shaft_position = [1501MG_size[1] / 2, 1501MG_size[1] / 2, 1501MG_size[2]];
+1501MG_shaft_length = 7;
+1501MG_shaft_radius = 2.5;
