@@ -1,6 +1,6 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
 
@@ -33,9 +33,6 @@ use <../basic_scad/basic_components.scad>
 include <../basic_scad/params_breadboards.scad>
 use <../basic_scad/breadboards.scad>
 
-
-use <potentiometer_gears.scad>
-use <../basic_scad/potentiometers.scad>
 
 include <head_params.scad>
 include <../basic_scad/params_alu_profiles.scad>

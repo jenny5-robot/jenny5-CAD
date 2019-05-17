@@ -1,6 +1,6 @@
-// Author: Mihai Oltean, mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: jenny5.org, jenny5-robot.github.io
-// Source: github.com/jenny5-robot
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
 
@@ -57,10 +57,6 @@ use <../basic_scad/corners.scad>
 
 use <../basic_scad/tube_bracket.scad>
 include <../basic_scad/params_tube_bracket.scad>
-
-use <../basic_scad/parametric_involute_gear_v5.0.scad>
-
-use <potentiometer_gears.scad>
 
 include <../basic_scad/params_corners.scad>
 
