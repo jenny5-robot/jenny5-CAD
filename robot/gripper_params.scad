@@ -1,33 +1,21 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
 
-gripper_pusher_position = 42; // 10...42
+gripper_mobile_finger_position = 29; // 10...42
 
-spacer_between_fingers = 2;
+fixed_finger_size = [95, 10, 10];
+mobile_finger_size = [25, 10, 14];
 
-finger_thick = 6;
-finger_first_segment_length = 44;
-finger_second_second_length = 75;
-finger_width = 10;
+gripper_servo_rotation = 30;
+mobile_finger_angular_position = 43;
+mobile_finger_position_radius = 30;
 
-U_finger_thick = 3;
-U_pusher_base_size = [4 * spacer_between_fingers + 3 * finger_thick + 2 * U_finger_thick, 20, 8.2];
-U_pusher_height = 25;
+fixed_finger_offset = [mobile_finger_position_radius * cos(mobile_finger_angular_position), mobile_finger_position_radius * sin(mobile_finger_angular_position), 0];
 
-gripper_motor_support_size = [37, 42, 8];
+//fixed_finger_offset = [25, 17, 0];
 
-echo(gripper_motor_support_size);
-
-gripper_lateral_sheet_size = [76, 38, 4];
-
-finger_angle = 50;
-finger_with_button_angle = finger_angle - 15;
-
-gripper_distance_to_base_screw = 5;
-
-gripper_distance_to_camera_support = 30;
-
-gripper_open_button_hole_position = [0, 12, 0];
+gripper_gear_height = 6;
+gripper_mobile_finger_gear_height = 9;
