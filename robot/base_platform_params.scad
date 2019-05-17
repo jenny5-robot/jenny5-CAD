@@ -1,15 +1,19 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
 
 include <tracks_params.scad>
 
-base_platform_size = [600, 300, 16];
+small_tracks_angle = 30;
 
-first_tracks_offset = 30;
-distance_between_wheels = 230;
+platform_shaft_edge = 25;
+
+base_platform_size = [325, 300, 16];
+
+first_tracks_offset = 25;
+distance_between_wheels = 280;
     
 wheels_bearing_housing_1_offset_y = 22;// must be larger than the reinforcement profile
    
@@ -17,7 +21,7 @@ wheels_bearing_housing_2_offset_y = 85;
 
 lidar_position = 80;
 
-leg_postion_on_platform = lidar_position + 30; // nema_17_width / 2 + 10
+leg_postion_on_platform = 70;
 
 num_tracks_per_circle = 14; // 16
 tracks_wheel_radius = 53.34; // 58.8
@@ -27,7 +31,7 @@ wheel_gear_thick = 17;
 
 base_motor_offset = 101;
 
-tracks_offset = 25;
+tracks_offset = 35;
 
 dist_to_tracks_tensioner_support = 150;
 dist_to_tracks_support1 = 130;
@@ -40,3 +44,9 @@ base_motor_support_sheet_size = [45, 34 + 20 + 23, 3];
 wheel_radius = 54.66 * 0.955;
 wheel_tooth_height = 10;
 wheel_steps = 20;
+
+small_tracks_sheet_size = [200, 60, 3];
+small_tracks_wheel_radius = 64;
+small_tracks_wheel_radius_thickness = 20;
+small_tracks_wheel_distance_to_wheel = 180;
+small_tracks_wheel_distance_to_shaft = 40;
