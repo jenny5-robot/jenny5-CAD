@@ -26,17 +26,30 @@ module HS_7985MG()
 //-----------------------------------------------------------
 module power_hd_1501MG()
 {
-    translate ([-1501MG_size[0] / 2, -1501MG_size[1] / 2, 0]) cube(1501MG_size);
+    // body
+    translate ([-1501MG_size[0] / 2, -1501MG_size[1] / 2, 0]) {
+        color("black") cube(1501MG_size);
+        //shaft
+        color("Yellow") translate (1501MG_shaft_position) cylinder(h = 1501MG_shaft_length, r = 1501MG_shaft_radius);
+        // round plate
+        translate (1501MG_shaft_position + [0, 0, 1501MG_shaft_length - 2]) cylinder(h = 2, r = 1501MG_size[1] / 2);
+        
+    }
+    // ears
     translate ([0, 0, 1501MG_screw_support_height]){
         difference(){
-            translate([-1501MG_screw_support_size[0] / 2, - 1501MG_screw_support_size[1] / 2, 0])
+            color("black") translate([-1501MG_screw_support_size[0] / 2, - 1501MG_screw_support_size[1] / 2, 0])
     cube(1501MG_screw_support_size);
-            for (i = [0: 3]){
+            // screw holes
+            for (i = [0 : 3]){
                 translate (1501MG_screw_holes_position[i] - display_tolerance_z)
                 cylinder(h = 1501MG_screw_support_size[2] + 2 * display_tolerance, r = 2);
             } 
         }
     }
+    
+    
+    
 }
 //-----------------------------------------------------------
 
