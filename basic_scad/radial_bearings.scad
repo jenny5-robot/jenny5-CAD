@@ -19,22 +19,22 @@ module radial_bearing(internal_radius, external_radius, height)
 ////////////////////////////////////////////////////////////////
 module 624rs()
 {
-	radial_bearing(2, bearing_4_external_radius, bearing_4_height);
+	radial_bearing(rb_624_internal_radius, rb_624_external_radius, rb_624_thick);
 }
 ////////////////////////////////////////////////////////////////
 module 628rs()
 {
-	radial_bearing(4, bearing_8_external_radius, bearing_8_height);
+	radial_bearing(rb_608_internal_radius, rb_608_external_radius, rb_608_thick);
 }
 ////////////////////////////////////////////////////////////////
 module 625rs()
 {
-	radial_bearing(2.5, bearing_5_external_radius, bearing_5_height);
+	radial_bearing(rb_625_internal_radius, rb_625_external_radius, rb_625_thick);
 }
 ////////////////////////////////////////////////////////////////
 module 626rs()
 {
-	radial_bearing(3, bearing_6_external_radius, bearing_6_height);
+	radial_bearing(rb_626_internal_radius, rb_626_external_radius, rb_626_thick);
 }
 ////////////////////////////////////////////////////////////////
 module 6001rs()
