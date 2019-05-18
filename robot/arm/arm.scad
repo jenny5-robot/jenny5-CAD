@@ -7,7 +7,6 @@
 
 include <arm_params.scad>
 
-include <../../basic_scad/params_basic_components.scad>
 use <../../basic_scad/basic_components.scad>
 use <../../basic_scad/stepper_motors.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
@@ -15,7 +14,6 @@ use <../../basic_scad/screws_nuts_washers.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
 use <../../basic_scad/radial_bearing_u_housing.scad>
 include <../../basic_scad/config.scad>
-use <../../basic_scad/point_transformations_3d.scad>
 
 include <../../basic_scad/params_pulleys.scad>
 use <../../basic_scad/pulleys.scad>
@@ -37,14 +35,7 @@ include <../../basic_scad/params_stepper_motor_gearbox.scad>
 
 include <../../basic_scad/tolerance.scad>
 
-
 use <arm_sheets.scad>
-
-
-include <../../basic_scad/params_motor_housing.scad>
-
-use <../../basic_scad/potentiometers.scad>
-include <../../basic_scad/params_potentiometers.scad>
 
 use <../../basic_scad/as5147.scad>
 include <../../basic_scad/as5147_params.scad>
@@ -55,7 +46,7 @@ include <arm_sensor_support_params.scad>
 
 use <../../basic_scad/webcam.scad>
 
-
+use <arm_bones.scad>
 //---------------------------------------------------------------------------
 module elbow_rotation_motor_with_components()
 {
@@ -191,18 +182,6 @@ module elbow_pulley_with_components()
     }
 }
 //---------------------------------------------------------------------------
-module fore_arm_bone()
-{
-    color (aluminium_color) 
-    difference(){
-        rectangular_tube(length = arm_shaft_size, width = arm_shaft_size, wall_thick = 2, height = fore_arm_length);
-        // top gear shaft hole
-        translate([0, - arm_shaft_size / 2, fore_arm_length - 8] - display_tolerance_y) rotate([90, 0, 0]) cylinder(h = arm_shaft_size + 2 * display_tolerance, r = 4);
-        // top pulley hole 
-        translate ([- arm_shaft_size / 2, -8.5, fore_arm_length - 80] - display_tolerance_x) cube([arm_shaft_size, 17, 80] + 2 * display_tolerance_xz);
-    }
-}
-//---------------------------------------------------------------------------
 module fore_arm_bearing_support()
 {
     difference(){
@@ -323,34 +302,12 @@ module fore_arm_with_elbow_pulley()
     elbow_pulley_with_components();
 }
 //---------------------------------------------------------------------------
-module upper_arm_bone()
-{
-    color (aluminium_color) 
-    difference(){
-        rectangular_tube(length = arm_shaft_size, width = arm_shaft_size, wall_thick = 2, height = upper_arm_bone_length);
-        // top gear shaft hole
-        translate([0, - arm_shaft_size / 2, upper_arm_bone_length - 8] - display_tolerance_y) rotate([90, 0, 0]) cylinder(h = arm_shaft_size + 2 * display_tolerance, r = 4);
-        // top pulley hole 
-        translate ([- arm_shaft_size / 2, -8.5, upper_arm_bone_length - 80] - display_tolerance_x) cube([arm_shaft_size, 17, 80] + 2 * display_tolerance_xz);
-        // screw hole for wrist pulley
-        translate([0, arm_shaft_size / 2, upper_arm_bone_length - 8] + display_tolerance_y) rotate([90, 0, 0]) cylinder(h = arm_shaft_size + 2 * display_tolerance, r = 4);
-        // screws for sensor support
-        echo(as5147_space_between_holes_length / 2 + as5147_distance_hole_from_margin + 1 -8 -(as5147_board_size[0] + 8 + 8) - 4.5);
-        echo(as5147_space_between_holes_length / 2 + as5147_distance_hole_from_margin + 1 -8 -(as5147_board_size[0] + 8 + 8) + 4.5);
-        translate([0, arm_shaft_size / 2, upper_arm_bone_length + as5147_space_between_holes_length / 2 + as5147_distance_hole_from_margin + 1 -8 -(as5147_board_size[0] + 8 + 8) - 4.5] + display_tolerance_y) rotate([90, 0, 0]) cylinder(h = arm_shaft_size + 2 * display_tolerance, r = 1.5);
-        
-        translate([0, arm_shaft_size / 2, upper_arm_bone_length + as5147_space_between_holes_length / 2 + as5147_distance_hole_from_margin + 1 -8 -(as5147_board_size[0] + 8 + 8) + 4.5] + display_tolerance_y) rotate([90, 0, 0]) cylinder(h = arm_shaft_size + 2 * display_tolerance, r = 1.5);        
-        
-        
-    }
-    // sensor support
-    translate ([as5147_elbow_support_size[1] / 2, -10, upper_arm_bone_length + as5147_space_between_holes_length / 2 + as5147_distance_hole_from_margin + 1 -8 ]) rotate ([0, 90, 90]) sensor_support_elbow();
-}
-//---------------------------------------------------------------------------
 module upper_arm_bone_with_components()
 {
     // bone
     upper_arm_bone();
+        // sensor support
+    translate ([as5147_elbow_support_size[1] / 2, -10, upper_arm_bone_length + as5147_space_between_holes_length / 2 + as5147_distance_hole_from_margin + 1 -8 ]) rotate ([0, 90, 90]) sensor_support_elbow();
 }
 //---------------------------------------------------------------------------
 
@@ -486,13 +443,6 @@ module rbearing_6907_vertical_housing_bounded_half_small_bottom()
     }
 }
 //---------------------------------------------------------------------------
-module shoulder_up_down_bone()
-{
-     color (aluminium_color) 
-            rectangular_tube(length = arm_shaft_size, width = arm_shaft_size, wall_thick = 2, height = upper_arm_shaft_support_length);
-}
-//---------------------------------------------------------------------------
-
 module body_articulation(side)
 {
         // plate

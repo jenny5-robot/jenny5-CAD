@@ -4,7 +4,6 @@
 // MIT License
 //--------------------------------------------------------------
 
-
 include <../../basic_scad/params_sheets.scad>
 include <../../basic_scad/params_basic_components.scad>
 use <../../basic_scad/basic_components.scad>
@@ -14,21 +13,14 @@ include <../../basic_scad/config.scad>
 include <body_params.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
+
 include <../../basic_scad/params_radial_bearings.scad>
+use <../../basic_scad/radial_bearings.scad>
 
 use <../../basic_scad/stepper_motors.scad>
-
 include <../../basic_scad/params_stepper_motors.scad>
 
 use <../../basic_scad/radial_bearing_housing.scad>
-
-include <../../basic_scad/params_potentiometers.scad>
-use <../../basic_scad/potentiometers.scad>
-use <../../basic_scad/point_transformations_3d.scad>
-
-include <../../basic_scad/params_alu_profiles.scad>
-
-use <../../basic_scad/alu_profiles.scad>
 
 use <../../basic_scad/belt.scad>
 use <../../basic_scad/belt_tensioner.scad>
@@ -43,11 +35,6 @@ use <../../basic_scad/thrust_bearings.scad>
 
 use <../../basic_scad/linear_motors.scad>
 include <../../basic_scad/tolerance.scad>
-
-
-use <../../basic_scad/radial_bearing_housing_pot_support.scad>
-
-use <../../basic_scad/radial_bearings.scad>
 
 use <../../basic_scad/corners.scad>
 
@@ -68,13 +55,8 @@ include <../arm/arm_params.scad>
 
 use <body_sensor_support.scad>
 
-//---------------------------------------------------------------------------
-module body_arm_bone(bone_length)
-{
-    echo("body arm bone length = ", bone_length);
-    
-    cylinder_empty(bone_length, body_shaft_radius, body_shaft_radius - 2);
-}
+use <body_bones.scad>
+
 //---------------------------------------------------------------------------
 module body_module_corner()
 {
@@ -176,12 +158,6 @@ module body_sheet_with_motor()
     translate ([body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2, body_motor_sheet_size[2] + 5]) motor_pulley_8mm_shaft();
 }
 //---------------------------------------------------------------------------
-module body_potentiometer_shaft_gear()
-{
-    bone_gear(num_teeth = 17, screw_rotation_angle = 11, internal_radius = 12.5, height = 10);
-}
-//---------------------------------------------------------------------------
-
 module body_bearing_support_top()
 {
     // bottom sheet
@@ -219,8 +195,6 @@ module body_bearing_support_top()
     translate ([body_sheet_size[0] / 2 - bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
         mirror([0, 0, 1])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
-
-
 }
 //---------------------------------------------------------------------------
 module body_bearing_support_bottom()
@@ -253,8 +227,6 @@ module body_bearing_support_bottom()
         translate ([body_sheet_size[0] / 2 - bracket_thick / 2, (body_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius) / 2), 0])
         mirror([0, 0, 1])
             tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
-
-
 }
 //---------------------------------------------------------------------------
 module body_motor_module()
@@ -290,7 +262,6 @@ module body_motor_module()
         for (i = [0 : 3]){
             translate([-body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius), 25] - display_tolerance_z) translate(bracket_holes[i])mirror([0, 0, 1]) M4_hexa(50);
         }
-
 }
 //---------------------------------------------------------------------------
 module body_intramodule()
