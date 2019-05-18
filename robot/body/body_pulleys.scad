@@ -5,16 +5,16 @@
 //--------------------------------------------------------------
 
 
-include <../basic_scad/params_basic_components.scad>
-use <../basic_scad/basic_components.scad>
+include <../../basic_scad/params_basic_components.scad>
+use <../../basic_scad/basic_components.scad>
 
-include <../basic_scad/config.scad>
+include <../../basic_scad/config.scad>
 
-include <../basic_scad/params_pulleys.scad>
-use <../basic_scad/pulleys.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
+include <../../basic_scad/params_pulleys.scad>
+use <../../basic_scad/pulleys.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
 
-include <../basic_scad/tolerance.scad>
+include <../../basic_scad/tolerance.scad>
 
 include <body_params.scad>
 

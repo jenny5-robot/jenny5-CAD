@@ -4,6 +4,6 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/as5147_params.scad>
+include <../../basic_scad/as5147_params.scad>
 
 as5147_elbow_support_size = [as5147_board_size[0] + 25 - 2, as5147_board_size[1] + 4, 3];

@@ -4,19 +4,19 @@
 // MIT License
 //---------------------------------------------------------------
 
-include <../basic_scad/tolerance.scad>
-use <../basic_scad/basic_components.scad>
+include <../../basic_scad/tolerance.scad>
+use <../../basic_scad/basic_components.scad>
 include <gripper_params.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-use <../basic_scad/screws_nuts_washers.scad>
-include <../basic_scad/params_basic_components.scad>
-include <../basic_scad/params_radial_bearings.scad>
-include <../basic_scad/params_webcam.scad>
-include <../basic_scad/config.scad>
-use <../basic_scad/buttons.scad>
-include <../basic_scad/servos_params.scad>
-use <../basic_scad/servos.scad>
-use <../basic_scad/involute_gears.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
+include <../../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_radial_bearings.scad>
+include <../../basic_scad/params_webcam.scad>
+include <../../basic_scad/config.scad>
+use <../../basic_scad/buttons.scad>
+include <../../basic_scad/servos_params.scad>
+use <../../basic_scad/servos.scad>
+use <../../basic_scad/involute_gears.scad>
 
 use <arm_pulleys.scad>
 include <arm_params.scad>

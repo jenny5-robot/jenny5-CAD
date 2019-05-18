@@ -4,11 +4,11 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_radial_bearings_housing.scad>
-include <../basic_scad/params_radial_bearings_u_housing.scad>
-include <../basic_scad/params_sheets.scad>
-include <../basic_scad/params_stepper_motors.scad>
-include <../basic_scad/servos_params.scad>
+include <../../basic_scad/params_radial_bearings_housing.scad>
+include <../../basic_scad/params_radial_bearings_u_housing.scad>
+include <../../basic_scad/params_sheets.scad>
+include <../../basic_scad/params_stepper_motors.scad>
+include <../../basic_scad/servos_params.scad>
 
 angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
 angle_upper_arm = 90; // -90 ... 90 // default = -90
@@ -30,8 +30,6 @@ extra_height_arm_bearing = 14;
 
 rbearing_6907_vertical_housing_size_bounded_half_small_bottom = f_rbearing_6907_vertical_housing_size_bounded_half_small(extra_height_arm_bearing);
 rbearing_6907_vertical_housing_size_bounded_half_small_top = f_rbearing_6907_vertical_housing_size_bounded_half_small(0);
-
-plate_body_size = ([75, nema_17_with_50_1_gearbox_height, alu_sheet_5_thick]);
   
 distance_to_fore_arm_gear = 16;
       
@@ -133,3 +131,11 @@ distance_to_gripper_motor = arm_shaft_size / 2 + 1501MG_size[1] / 2 + 1;
 
 magnet_support_elbow_total_height = 18;
 magnet_support_wrist_total_height = 6;
+
+plate_body_size = ([75, nema_17_with_50_1_gearbox_height, alu_sheet_5_thick]);
+
+body_arm_offset = 33;
+
+body_arm_shaft_radius = 12.5;
+
+body_arm_bracket_thick = 24;

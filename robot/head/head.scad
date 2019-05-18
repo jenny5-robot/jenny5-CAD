@@ -6,37 +6,37 @@
 
 
 
-use <../basic_scad/basic_components.scad>
-include <../basic_scad/config.scad>
-include <../basic_scad/params_stepper_motors.scad>
-include <../basic_scad/params_radial_bearings.scad>
-include <../basic_scad/params_basic_components.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-include <../basic_scad/params_radial_bearings_housing.scad>
-include <../basic_scad/params_sensor_array.scad>
-include <../basic_scad/params_webcam.scad>
-include <../basic_scad/params_potentiometers.scad>
+use <../../basic_scad/basic_components.scad>
+include <../../basic_scad/config.scad>
+include <../../basic_scad/params_stepper_motors.scad>
+include <../../basic_scad/params_radial_bearings.scad>
+include <../../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
+include <../../basic_scad/params_radial_bearings_housing.scad>
+include <../../basic_scad/params_sensor_array.scad>
+include <../../basic_scad/params_webcam.scad>
+include <../../basic_scad/params_potentiometers.scad>
 
-use <../basic_scad/pulleys.scad>
-use <../basic_scad/radial_bearing_housing.scad>
-use <../basic_scad/spacer.scad>
-use <../basic_scad/potentiometer_support.scad>
-use <../basic_scad/screws_nuts_washers.scad>
-use <../basic_scad/radial_bearing_housing.scad>
-use <../basic_scad/radial_bearings.scad>
-use <../basic_scad/stepper_motors.scad>
-use <../basic_scad/webcam.scad>
-use <../basic_scad/ultrasonic_support.scad>
-use <../basic_scad/ultrasonic.scad>
-use <../basic_scad/basic_components.scad>
+use <../../basic_scad/pulleys.scad>
+use <../../basic_scad/radial_bearing_housing.scad>
+use <../../basic_scad/spacer.scad>
+use <../../basic_scad/potentiometer_support.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
+use <../../basic_scad/radial_bearing_housing.scad>
+use <../../basic_scad/radial_bearings.scad>
+use <../../basic_scad/stepper_motors.scad>
+use <../../basic_scad/webcam.scad>
+use <../../basic_scad/ultrasonic_support.scad>
+use <../../basic_scad/ultrasonic.scad>
+use <../../basic_scad/basic_components.scad>
 
-include <../basic_scad/params_breadboards.scad>
-use <../basic_scad/breadboards.scad>
+include <../../basic_scad/params_breadboards.scad>
+use <../../basic_scad/breadboards.scad>
 
 
 include <head_params.scad>
-include <../basic_scad/params_alu_profiles.scad>
-include <../basic_scad/tolerance.scad>
+include <../../basic_scad/params_alu_profiles.scad>
+include <../../basic_scad/tolerance.scad>
 
 //----------------------------------------------------------
 module head_motor_support()

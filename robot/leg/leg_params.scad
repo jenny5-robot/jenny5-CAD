@@ -4,10 +4,10 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_basic_components.scad>
-include <../basic_scad/params_radial_bearings_housing.scad>
-include <../basic_scad/params_sheets.scad>
-include <../basic_scad/params_alu_profiles.scad>
+include <../../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_radial_bearings_housing.scad>
+include <../../basic_scad/params_sheets.scad>
+include <../../basic_scad/params_alu_profiles.scad>
 
 leg_angle = 70;
 

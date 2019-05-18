@@ -4,14 +4,14 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_breadboards.scad>
-use <../basic_scad/breadboards.scad>
+include <../../basic_scad/params_breadboards.scad>
+use <../../basic_scad/breadboards.scad>
 
 include <arm_breadboard_params.scad>
 
-include <../basic_scad/params_electronic_components.scad>
+include <../../basic_scad/params_electronic_components.scad>
 
-use <../basic_scad/electronic_components.scad>
+use <../../basic_scad/electronic_components.scad>
 
 //--------------------------------------------------
 module WBU_202_breadboard_with_components()

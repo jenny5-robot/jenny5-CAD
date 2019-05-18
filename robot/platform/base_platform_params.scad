@@ -10,10 +10,10 @@ small_tracks_angle = 30;
 
 platform_shaft_edge = 25;
 
-base_platform_size = [325, 300, 16];
+base_platform_size = [380, 310, 16];
 
 first_tracks_offset = 25;
-distance_between_wheels = 280;
+distance_between_wheels = 320;
     
 wheels_bearing_housing_1_offset_y = 22;// must be larger than the reinforcement profile
    

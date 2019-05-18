@@ -7,53 +7,53 @@
 
 include <arm_params.scad>
 
-include <../basic_scad/params_basic_components.scad>
-use <../basic_scad/basic_components.scad>
-use <../basic_scad/stepper_motors.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-use <../basic_scad/screws_nuts_washers.scad>
-use <../basic_scad/radial_bearing_housing.scad>
-use <../basic_scad/radial_bearing_u_housing.scad>
-include <../basic_scad/config.scad>
-use <../basic_scad/point_transformations_3d.scad>
+include <../../basic_scad/params_basic_components.scad>
+use <../../basic_scad/basic_components.scad>
+use <../../basic_scad/stepper_motors.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
+use <../../basic_scad/radial_bearing_housing.scad>
+use <../../basic_scad/radial_bearing_u_housing.scad>
+include <../../basic_scad/config.scad>
+use <../../basic_scad/point_transformations_3d.scad>
 
-include <../basic_scad/params_pulleys.scad>
-use <../basic_scad/pulleys.scad>
-use <../basic_scad/radial_bearings.scad>
+include <../../basic_scad/params_pulleys.scad>
+use <../../basic_scad/pulleys.scad>
+use <../../basic_scad/radial_bearings.scad>
 
 include <gripper_params.scad>
 use <gripper.scad>
-use <../basic_scad/belt.scad>
+use <../../basic_scad/belt.scad>
 
-include <../basic_scad/params_webcam.scad>
+include <../../basic_scad/params_webcam.scad>
 
-use <../basic_scad/tube_bracket.scad>
-include <../basic_scad/params_tube_bracket.scad>
+use <../../basic_scad/tube_bracket.scad>
+include <../../basic_scad/params_tube_bracket.scad>
 
-use <motor_pulley.scad>
+use <../../basic_scad/motor_pulley.scad>
 use <arm_pulleys.scad>
 
-include <../basic_scad/params_stepper_motor_gearbox.scad>
+include <../../basic_scad/params_stepper_motor_gearbox.scad>
 
-include <../basic_scad/tolerance.scad>
-include <body_params.scad>
+include <../../basic_scad/tolerance.scad>
+
 
 use <arm_sheets.scad>
 
 
-include <../basic_scad/params_motor_housing.scad>
+include <../../basic_scad/params_motor_housing.scad>
 
-use <../basic_scad/potentiometers.scad>
-include <../basic_scad/params_potentiometers.scad>
+use <../../basic_scad/potentiometers.scad>
+include <../../basic_scad/params_potentiometers.scad>
 
-use <../basic_scad/as5147.scad>
-include <../basic_scad/as5147_params.scad>
-use <../basic_scad/rings.scad>
+use <../../basic_scad/as5147.scad>
+include <../../basic_scad/as5147_params.scad>
+use <../../basic_scad/rings.scad>
 
 use <arm_sensor_support.scad>
 include <arm_sensor_support_params.scad>
 
-use <../basic_scad/webcam.scad>
+use <../../basic_scad/webcam.scad>
 
 
 //---------------------------------------------------------------------------
@@ -372,9 +372,9 @@ module upper_arm()
     // belt
     translate ([0, rbearing_608_housing_size[0] / 2 + upper_arm_bone_top_shift, upper_arm_motor_housing_shift + elbow_pulley_thick / 2 + 3]) rotate([0, 0, -90]) belt_on_2_pulleys(10, 30, upper_arm_bone_length -rbearing_608_housing_size[0] / 2 - 8, 6);
         // fore_arm
-    translate ([0, - upper_arm_bone_length, -elbow_pulley_thick / 2])  
+    translate ([0, - upper_arm_bone_length + (upper_arm_bone_top_shift + rbearing_608_housing_size[0] + 8), -elbow_pulley_thick / 2])  
         rotate([0, 0, angle_elbow]) 
-             //  fore_arm_with_elbow_pulley()
+               fore_arm_with_elbow_pulley()
     ;
 }
 //---------------------------------------------------------------------------
@@ -495,9 +495,10 @@ module shoulder_up_down_bone()
 
 module body_articulation(side)
 {
-    // plate
+        // plate
     
     translate([-plate_body_size[0] / 2, 0, 0]) body_articulation_sheet();
+
     // motor    
     translate ([rbearing_6907_housing_size[0] / 2 - distance_arm_up_down_motor_to_shaft, -nema_17_with_50_1_gearbox_height + plate_body_size[1], rb_6907_external_radius + plate_body_size[2] + 4])
     rotate ([-90, 0, 0]) nema_17_with_50_1_gearbox();
@@ -511,17 +512,7 @@ module body_articulation(side)
     // motor gear
     translate ([- distance_arm_up_down_motor_to_shaft + rbearing_6907_housing_size[0] / 2, plate_body_size[1] + 20, rb_6907_external_radius + plate_body_size[2] + 4])
 rotate ([90, 0, 0])  motor_pulley_8mm_shaft();
-    
-    
-    // screws for fixing motor housing to alu sheet
-    
-      for (i = [[-1, -1], [-1, 1], [1, -1], [1, 1]]){
-            translate ([0, plate_body_size[1] - nema_17_motor_gearbox_radius - 3, -wall_thick_base_motor_housing]) translate([i[0] * 33 / 2, i[1] * 28 / 2, 0])  M4_sunken(8);
-            translate ([0, plate_body_size[1] - nema_17_motor_gearbox_radius - 3, plate_body_size[2]]) translate([i[0] * 33 / 2, i[1] * 28 / 2, 0])  rotate ([0, 0, 30]) M4_autolock_nut();
-          
-      }
-    
-    
+        
     //support upper arm
     // first bearing housing
     
@@ -590,7 +581,7 @@ module arm(side)
     body_articulation(side);
 }
 //---------------------------------------------------------------------------
-//arm(1);
+arm(1);
 
 //body_articulation(1);
 
@@ -604,7 +595,7 @@ module arm(side)
 
 //fore_arm_with_elbow_pulley();
 
-fore_arm();
+//fore_arm();
 
 //upper_arm_bone();
 

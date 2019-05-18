@@ -4,20 +4,19 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_basic_components.scad>
-use <../basic_scad/basic_components.scad>
+include <../../basic_scad/params_basic_components.scad>
+use <../../basic_scad/basic_components.scad>
 
-include <../basic_scad/params_screws_nuts_washers.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
 
-include <../basic_scad/config.scad>
+include <../../basic_scad/config.scad>
 
-include <../basic_scad/tolerance.scad>
+include <../../basic_scad/tolerance.scad>
 
 include <arm_params.scad>
-include <body_params.scad>
-include <../basic_scad/as5147_params.scad>
+include <../../basic_scad/as5147_params.scad>
 include <arm_sensor_support_params.scad>
-
+use <../../basic_scad/sensor_support.scad>
 
 
 //--------------------------------------------------------------
@@ -81,50 +80,10 @@ module sensor_support_elbow()
     }    
 }
 //--------------------------------------------------------------
-module belt_tensioner_spacer_with_sensor_support(distance_between_screws, width = 60)
-{
-    
-    echo(distance_between_screws = distance_between_screws);
-    length = distance_between_screws + 2 * m4_nut_radius + 2 * wall_thick_2;
-    height = 4;
-    screw_holder_size = 12;
-    
-    difference(){
-        color(plastic_color)
-        union(){
-            translate ([- length / 2, -screw_holder_size / 2, 0]) cube([length, width + 2, height]);
-        }
-// first screw for connecting to the next part
-        translate ([-distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = 2, $fn = 10);
-//        translate ([-distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = m4_nut_thick + display_tolerance, r = m4_nut_radius, $fn = 6);
-// second screw hole
-        translate ([distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = height + 2 * display_tolerance, r = 2, $fn = 10);
-//        translate ([distance_between_screws / 2, 0, 0] - display_tolerance_z) cylinder(h = m4_nut_thick + display_tolerance, r = m4_nut_radius, $fn = 6);
-        
-        // sensor screw holes
-        for (i = [0: 3])
-             translate ([0, width - screw_holder_size / 2 - as5147_space_between_holes_length / 2 - as5147_distance_hole_from_margin, 0]) rotate ([0, 0, 90]) translate ([-as5147_distance_hole_from_margin - as5147_space_between_holes_length / 2, -as5147_distance_hole_from_margin - as5147_space_between_holes_width / 2, 0] + as5147_holes_position[i] - display_tolerance_z) cylinder (h = height + 2 * display_tolerance, r = 1.2);
-        
-        // sensor connector holes
-        translate ([-as5147_board_size[1] / 2, width - screw_holder_size / 2 - as5147_board_size[0] - 6, 0] - display_tolerance_z)  cube ([as5147_board_size[1], as5147_pin_area_length + 7, height] + 2 * display_tolerance_z);
-        
-        // slope
-        translate ([-as5147_board_size[1] / 2, width - screw_holder_size / 2 - as5147_board_size[0] - 6 - 6, 0] - display_tolerance_z)  rotate ([-45, 0, 0]) cube ([as5147_board_size[1], height + 2, height + 2] + 2 * display_tolerance_z);
 
-    // sensor voltage select pins hole
-        translate ([-as5147_voltage_selector_pins_length / 2, width - screw_holder_size / 2 - as5147_voltage_selector_pins_position - 2.54 - 1 - 1, 0] - display_tolerance_z) cube ([as5147_voltage_selector_pins_length, 2.54 + 2, height] + 2 * display_tolerance_z);
-        
-    }
-}
-//---------------------------------------------------------------------------
 module arm_up_down_sensor_support()
 {
-    belt_tensioner_spacer_with_sensor_support(distance_between_screws =  arm_up_down_motor_top_sheet_distance_between_belt_tensioners, width = distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2 - rbearing_6907_housing_size[0] / 2 + 6 + as5147_space_between_holes_length / 2 + 2);
-}
-//---------------------------------------------------------------------------
-module body_sensor_support()
-{
-    belt_tensioner_spacer_with_sensor_support(distance_between_screws = 43, width = body_sheet_size[0] / 2 + as5147_space_between_holes_length / 2 + 2 + 1);
+    as5147_sensor_support(distance_between_screws =  arm_up_down_motor_top_sheet_distance_between_belt_tensioners, width = distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2 - rbearing_6907_housing_size[0] / 2 + 6 + as5147_space_between_holes_length / 2 + 2);
 }
 //---------------------------------------------------------------------------
 module sensor_bearing_housing_bottom_upper_arm()
@@ -253,15 +212,13 @@ module sensor_bearing_housing_top_fore_arm(side )
 }
 //---------------------------------------------------------------------------
 
-//belt_tensioner_spacer_with_sensor_support(distance_between_screws = 28, width = 60);
+//as5147_sensor_support(distance_between_screws = 28, width = 60);
 //magnet_support_elbow(magnet_support_wrist_total_height);
-magnet_support_elbow(magnet_support_elbow_total_height);
+//magnet_support_elbow(magnet_support_elbow_total_height);
 
 //sensor_support_elbow();
 
-//body_sensor_support();
-
-//arm_up_down_sensor_support();
+arm_up_down_sensor_support();
 
 //sensor_bearing_housing_top_upper_arm();
 //sensor_bearing_housing_bottom_upper_arm();

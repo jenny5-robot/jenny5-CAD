@@ -5,20 +5,22 @@
 //--------------------------------------------------------------
 
 
-include <../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_basic_components.scad>
 
-include <../basic_scad/config.scad>
+include <../../basic_scad/config.scad>
 
 include <body_params.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
 
-include <../basic_scad/params_stepper_motors.scad>
+include <../../basic_scad/params_stepper_motors.scad>
 
-use <../basic_scad/thrust_bearing_housing.scad>
-include <../basic_scad/params_thrust_bearing_housing.scad>
+use <../../basic_scad/thrust_bearing_housing.scad>
+include <../../basic_scad/params_thrust_bearing_housing.scad>
 
-include <../basic_scad/tolerance.scad>
-include <../basic_scad/point_transformations_3d.scad>
+include <../../basic_scad/tolerance.scad>
+include <../../basic_scad/point_transformations_3d.scad>
+
+include <../../basic_scad/params_radial_bearings_u_housing.scad>
 
 //---------------------------------------------------------------------------
 module body_rotation_sheet()
@@ -216,6 +218,8 @@ module body_sheet_for_intramodule()
     }    
 }
 //---------------------------------------------------------------------------
+
+
 body_base_sheet();
 
 //body_rotation_sheet();

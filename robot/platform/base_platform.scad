@@ -4,52 +4,50 @@
 // MIT License  
 //--------------------------------------------------------------
 
-include <../basic_scad/params_radial_bearings.scad>
-use <../basic_scad/radial_bearings.scad>
+include <../../basic_scad/params_radial_bearings.scad>
+use <../../basic_scad/radial_bearings.scad>
 
-include <../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_basic_components.scad>
 
-use <../basic_scad/pulleys.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
+use <../../basic_scad/pulleys.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
 
-include <../basic_scad/params_laptop.scad>
-use <../basic_scad/laptop.scad>
+include <../../basic_scad/params_laptop.scad>
+use <../../basic_scad/laptop.scad>
 
-include <../basic_scad/config.scad>
+include <../../basic_scad/config.scad>
 
-use <../basic_scad/lidar.scad>
+use <../../basic_scad/lidar.scad>
 
-use <../basic_scad/screws_nuts_washers.scad>
-use <../basic_scad/belt.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
+use <../../basic_scad/belt.scad>
 
-use <../basic_scad/belt_tensioner.scad>
+use <../../basic_scad/belt_tensioner.scad>
 
-use <../basic_scad/batteries.scad>
-include <../basic_scad/params_batteries.scad>
+use <../../basic_scad/batteries.scad>
+include <../../basic_scad/params_batteries.scad>
 
-include <../basic_scad/params_radial_bearings_housing.scad>
-use <../basic_scad/radial_bearing_housing.scad>
+include <../../basic_scad/params_radial_bearings_housing.scad>
+use <../../basic_scad/radial_bearing_housing.scad>
 
-include <../basic_scad/params_radial_bearings_u_housing.scad>
-use <../basic_scad/radial_bearing_u_housing.scad>
+include <../../basic_scad/params_radial_bearings_u_housing.scad>
+use <../../basic_scad/radial_bearing_u_housing.scad>
 
-use <../basic_scad/basic_components.scad>
+use <../../basic_scad/basic_components.scad>
 
-include <leg_params.scad>
+use <../../basic_scad/dc_motors.scad>
+use <../../basic_scad/dc_motors_housing.scad>
 
-use <../basic_scad/dc_motors.scad>
-use <../basic_scad/dc_motors_housing.scad>
+include <../../basic_scad/params_dc_motors.scad>
+include <../../basic_scad/params_dc_motor_housing.scad>
 
-include <../basic_scad/params_dc_motors.scad>
-include <../basic_scad/params_dc_motor_housing.scad>
+use <../../basic_scad/point_transformations_3d.scad>
 
-use <../basic_scad/point_transformations_3d.scad>
+use <../../basic_scad/involute_gears.scad>
+use <../../basic_scad/alu_profiles.scad>
 
-use <../basic_scad/involute_gears.scad>
-use <../basic_scad/alu_profiles.scad>
-
-include <../basic_scad/tolerance.scad>
+include <../../basic_scad/tolerance.scad>
 
 use <tracks.scad>
 use <tracks_small.scad>
@@ -259,6 +257,7 @@ module platform()
          color ("black") belt_on_2_pulleys(r1 = wheel_radius +9 , r2 = wheel_radius + 9, distance_between_pulleys = distance_between_wheels, belt_width = 50, belt_thick = 18)
         ;
     }
+    /*
     // wheel extension front
     translate ([first_tracks_offset, -70, -12.5 - 2]) rotate ([0, -(180 - small_tracks_angle), 0]) 
     translate ([-small_tracks_wheel_distance_to_shaft, 0, -small_tracks_sheet_size[1] / 2]) 
@@ -268,7 +267,7 @@ module platform()
     translate ([first_tracks_offset + distance_between_wheels, -10, -12.5 - 2]) rotate ([0, -small_tracks_angle, 0]) 
     translate ([-small_tracks_wheel_distance_to_shaft, 0, -small_tracks_sheet_size[1] / 2]) 
     rotate([90, 0, 0]) small_track();
-
+*/
 // other side
 
    
@@ -284,6 +283,7 @@ module platform()
             rotate([90, 0, 0])
             color ("black") belt_on_2_pulleys(r1 = wheel_radius + 9, r2 = wheel_radius + 9, distance_between_pulleys = distance_between_wheels, belt_width = 50, belt_thick = 10);
     }
+    /*
     // wheel extension front
     translate ([first_tracks_offset, base_platform_size[1] + track_width + tracks_offset + wheel_gear_thick, -12.5 - 2]) rotate ([0, -(180 - small_tracks_angle), 0]) 
         translate ([-small_tracks_wheel_distance_to_shaft, 0, -small_tracks_sheet_size[1] / 2]) 
@@ -293,7 +293,7 @@ module platform()
     translate ([first_tracks_offset + distance_between_wheels, base_platform_size[1] + 20, -12.5 - 2]) rotate ([0, -small_tracks_angle, 0]) 
         translate ([-small_tracks_wheel_distance_to_shaft, 0, -small_tracks_sheet_size[1] / 2]) 
             rotate([90, 0, 0]) small_track();
-
+*/
 // first shaft
 color(aluminium_color) translate ([first_tracks_offset, - 75, -2 - 12.5]) rotate ([-90, 0, 0]) rectangular_tube(length = platform_shaft_edge, width = platform_shaft_edge, wall_thick = 2, height = base_platform_size[1] + 150);
 

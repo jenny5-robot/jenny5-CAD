@@ -4,38 +4,38 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_stepper_motors.scad>
+include <../../basic_scad/params_stepper_motors.scad>
 
-include <../basic_scad/params_basic_components.scad>
-use <../basic_scad/basic_components.scad>
-use <../basic_scad/stepper_motors.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-use <../basic_scad/screws_nuts_washers.scad>
-include <../basic_scad/params_radial_bearings.scad>
-use <../basic_scad/radial_bearings.scad>
-use <../basic_scad/stepper_motors_housing.scad>
-include <../basic_scad/params_motor_housing.scad>
-use <../basic_scad/radial_bearing_housing.scad>
-include <../basic_scad/config.scad>
-include <../basic_scad/params_radial_bearings_housing.scad>
+include <../../basic_scad/params_basic_components.scad>
+use <../../basic_scad/basic_components.scad>
+use <../../basic_scad/stepper_motors.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
+include <../../basic_scad/params_radial_bearings.scad>
+use <../../basic_scad/radial_bearings.scad>
+use <../../basic_scad/stepper_motors_housing.scad>
+include <../../basic_scad/params_motor_housing.scad>
+use <../../basic_scad/radial_bearing_housing.scad>
+include <../../basic_scad/config.scad>
+include <../../basic_scad/params_radial_bearings_housing.scad>
 
-include <../basic_scad/params_nuts_housing.scad>
+include <../../basic_scad/params_nuts_housing.scad>
 
 
 include <leg_params.scad>
 
-use <../basic_scad/linear_motors.scad>
+use <../../basic_scad/linear_motors.scad>
 
-include <../basic_scad/params_motor_housing.scad>
-include <../basic_scad/params_alu_profiles.scad>
+include <../../basic_scad/params_motor_housing.scad>
+include <../../basic_scad/params_alu_profiles.scad>
 
-use <../basic_scad/func_3d.scad>
+use <../../basic_scad/func_3d.scad>
 
-use <../basic_scad/point_transformations_3d.scad>
+use <../../basic_scad/point_transformations_3d.scad>
 
-use <../basic_scad/alu_profiles.scad>
+use <../../basic_scad/alu_profiles.scad>
 
-include <../basic_scad/tolerance.scad>
+include <../../basic_scad/tolerance.scad>
 
 //-------------------------------------------------------
 module base_side_bottom(base_height = 40)
@@ -356,7 +356,7 @@ module complete_leg(leg_angle)
 }
 //----------------------------------------------------------------------
 
-//complete_leg(leg_angle = leg_angle);
+complete_leg(leg_angle = leg_angle);
 
 //leg_pusher_bearing_sheet();
 

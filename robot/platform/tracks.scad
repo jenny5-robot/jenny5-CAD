@@ -1,21 +1,21 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// More details: jenny5.org, https://jenny5-robot.github.io/
 // Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------------
 
-include <../basic_scad/params_radial_bearings.scad>
-use <../basic_scad/radial_bearings.scad>
+include <../../basic_scad/params_radial_bearings.scad>
+use <../../basic_scad/radial_bearings.scad>
 
-include <../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_basic_components.scad>
 
-include <../basic_scad/config.scad>
-use <../basic_scad/screws_nuts_washers.scad>
-use <../basic_scad/basic_components.scad>
-include <../basic_scad/tolerance.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
+include <../../basic_scad/config.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
+use <../../basic_scad/basic_components.scad>
+include <../../basic_scad/tolerance.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
-use <../basic_scad/involute_gears.scad>
+use <../../basic_scad/involute_gears.scad>
 //--------------------------------------------------------------------
 module platform_wheel_gear()
 {    

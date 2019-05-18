@@ -4,10 +4,13 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_basic_components.scad>
-include <../basic_scad/params_radial_bearings.scad>
-include <../basic_scad/params_radial_bearings_housing.scad>
-include <../basic_scad/params_tube_bracket.scad>
+include <../../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_radial_bearings.scad>
+include <../../basic_scad/params_radial_bearings_housing.scad>
+include <../../basic_scad/params_tube_bracket.scad>
+include <../../basic_scad/params_sheets.scad>
+include <../../basic_scad/params_stepper_motors.scad>
+
 
 angle_body_arm = 90;// 180 (closed - front)...-90 (open-back); // default = -90
 
@@ -45,10 +48,6 @@ body_intermodule_sheet_size = [40, distance_between_body_modules + 2 * body_shaf
 body_arm_shaft_length = body_height + 2 * tube_bracket_base_thick_strong + 2 * body_sheet_size[2] + 4 * body_shaft_radius + rbearing_6905_housing_size[2];
 
 body_shaft_pulley_height = 14;
-
-body_arm_offset = 33;
-
-body_arm_bracket_thick = 24;
 
 offset_body_motor_sheet = 130;
 

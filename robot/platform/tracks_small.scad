@@ -5,18 +5,18 @@
 //--------------------------------------------------------------
 
 
-include <../basic_scad/params_radial_bearings.scad>
-use <../basic_scad/radial_bearings.scad>
+include <../../basic_scad/params_radial_bearings.scad>
+use <../../basic_scad/radial_bearings.scad>
 
-include <../basic_scad/params_basic_components.scad>
+include <../../basic_scad/params_basic_components.scad>
 
-include <../basic_scad/config.scad>
-use <../basic_scad/screws_nuts_washers.scad>
-use <../basic_scad/basic_components.scad>
-include <../basic_scad/tolerance.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
+include <../../basic_scad/config.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
+use <../../basic_scad/basic_components.scad>
+include <../../basic_scad/tolerance.scad>
+include <../../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
-use <../basic_scad/involute_gears.scad>
+use <../../basic_scad/involute_gears.scad>
 
 //----------------------------------------------
 module small_tracks_sheet()

@@ -5,10 +5,10 @@
 //--------------------------------------------------------------
 
 
-include <../basic_scad/params_pulleys.scad>
-use <../basic_scad/pulleys.scad>
-include <../basic_scad/params_screws_nuts_washers.scad>
-include <../basic_scad/tolerance.scad>
+include <params_pulleys.scad>
+use <pulleys.scad>
+include <params_screws_nuts_washers.scad>
+include <tolerance.scad>
 
 //---------------------------------------------------------------------------
 module motor_pulley_8mm_shaft()
