@@ -4,32 +4,18 @@
 // MIT License  
 //--------------------------------------------------------------
 
-include <../../basic_scad/params_radial_bearings.scad>
-use <../../basic_scad/radial_bearings.scad>
-
-include <../../basic_scad/params_basic_components.scad>
-
 use <../../basic_scad/pulleys.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
 
-include <../../basic_scad/params_laptop.scad>
-use <../../basic_scad/laptop.scad>
-
 include <../../basic_scad/config.scad>
-
-use <../../basic_scad/lidar.scad>
 
 use <../../basic_scad/screws_nuts_washers.scad>
 use <../../basic_scad/belt.scad>
 
-use <../../basic_scad/belt_tensioner.scad>
 
 use <../../basic_scad/batteries.scad>
 include <../../basic_scad/params_batteries.scad>
-
-include <../../basic_scad/params_radial_bearings_housing.scad>
-use <../../basic_scad/radial_bearing_housing.scad>
 
 include <../../basic_scad/params_radial_bearings_u_housing.scad>
 use <../../basic_scad/radial_bearing_u_housing.scad>
@@ -37,10 +23,8 @@ use <../../basic_scad/radial_bearing_u_housing.scad>
 use <../../basic_scad/basic_components.scad>
 
 use <../../basic_scad/dc_motors.scad>
-use <../../basic_scad/dc_motors_housing.scad>
 
 include <../../basic_scad/params_dc_motors.scad>
-include <../../basic_scad/params_dc_motor_housing.scad>
 
 use <../../basic_scad/point_transformations_3d.scad>
 
@@ -136,12 +120,6 @@ module platform_sheet()
         echo("second shaft second bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
     }
     
-    // holes for motor housing
-    for (i = [0 : 3]){
-        echo("motor housing holes = ", [motor_gr_ep_45_housing_size[1] / 2 + base_motor_offset, (motor_gr_ep_45_housing_size[2] - motor_wall_dc_motor_housing_thick)/ 2 + motor_wall_dc_motor_housing_thick, 0] + rotate_z(90, motor_gr_ep_45_housing_small_base_holes[i]));
-        translate ([motor_gr_ep_45_housing_size[1] / 2 + base_motor_offset, (motor_gr_ep_45_housing_size[2] - motor_wall_dc_motor_housing_thick) / 2 + motor_wall_dc_motor_housing_thick, 0]) rotate ([0, 0, 90]) translate (motor_gr_ep_45_housing_small_base_holes[i] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-    }
-    
     // RIGHT SIDE
     echo("RIGHT SIDE");
      // first gear, first bearing
@@ -171,11 +149,7 @@ module platform_sheet()
         echo("second shaft second bearing",  [0, base_platform_size[1], 0] + mirror_y([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]));
     }
     
-    // holes for motor housing
-    for (i = [0 : 3]){
-        echo("motor housing holes = ", [base_motor_offset, base_platform_size[1], 0] + mirror_y([motor_gr_ep_45_housing_size[1] / 2, (motor_gr_ep_45_housing_size[2] - motor_wall_dc_motor_housing_thick) / 2 + motor_wall_dc_motor_housing_thick, 0] + rotate_z(90, motor_gr_ep_45_housing_small_base_holes[i])) );
-        translate ([base_motor_offset, base_platform_size[1], 0]) mirror([0, 1, 0]) translate ([motor_gr_ep_45_housing_size[1] / 2, (motor_gr_ep_45_housing_size[2] - motor_wall_dc_motor_housing_thick) / 2 + motor_wall_dc_motor_housing_thick, 0]) rotate ([0, 0, 90]) translate (motor_gr_ep_45_housing_small_base_holes[i] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-    }
+
     /*
     // leg support holes - first spacer
     translate([leg_postion_on_platform + dist_to_first_bone, base_platform_size[1] / 2 - dist_to_foot_spacer_hole, 0] - display_tolerance_z) cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m8_screw_radius, $fn = 10);
