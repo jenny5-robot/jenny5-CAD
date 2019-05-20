@@ -20,12 +20,12 @@ leg_bone_thick = [40, 20];
 
 
 dist_to_wrist_in_bone = rbearing_6001_housing_size_thicker[0] / 2;//rb_6001_external_radius + 4;
-dist_to_wrist_in_base = 30;
 
 leg_shaft_radius = 6;
 leg_motor_shaft_radius = 4;
 
-leg_shaft_distance_to_edge = 10;
+leg_shaft_distance_to_edge = 12;
+dist_to_wrist_in_base = leg_base_height - leg_shaft_distance_to_edge;
 
 max_torque_leg_angle = 70;
 
