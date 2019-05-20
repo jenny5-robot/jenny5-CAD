@@ -370,8 +370,6 @@ body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
 //body_sheet_with_bearing();
 
-//rbearing_6905_double_housing_with_potentiometer_support(); // 2x
-
 //corner_sheet(body_shaft_radius);
 
 //rbearing_6905_housing(); // 8x

@@ -11,19 +11,13 @@ include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/basic_components.scad>
 
 include <../../basic_scad/config.scad>
-//include <../basic_scad/params_motor_housing.scad>
 
 include <arm_params.scad>
 
 use <../../basic_scad/pulleys.scad>
 include <../../basic_scad/tolerance.scad>
-//use <../basic_scad/stepper_motors_housing.scad>
 use <../../basic_scad/point_transformations_3d.scad>
-//use <../basic_scad/potentiometer_support.scad>
-//use <../basic_scad/radial_bearing_housing.scad>
 
-//use <arm_motor_housings.scad>
-//use <arm_potentiometer_support.scad>
 
 use <../../basic_scad/radial_bearings.scad>
 use <../../basic_scad/screws_nuts_washers.scad>

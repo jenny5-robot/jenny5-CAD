@@ -12,7 +12,6 @@ include <params_radial_bearings_housing.scad>
 include <params_stepper_motors.scad>
 use <radial_bearings.scad>
 use <basic_components.scad>
-use <potentiometer_support.scad>
 include <tolerance.scad>
           
 //---------------------------------------------------------------------------

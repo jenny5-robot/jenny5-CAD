@@ -10,8 +10,6 @@ include <params_motor_housing.scad>
 include <params_screws_nuts_washers.scad>
 use <screws_nuts_washers.scad>
 
-use <potentiometer_support.scad>
-
 include <config.scad>
 include <tolerance.scad>
 
@@ -159,16 +157,6 @@ module nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, mot
     }
 }
 //--------------------------------------------------------------------
-module nema_motor_housing_with_potentiometer_support(toleranta_x, toleranta_y, motor_deviation_x = 0, nema_width = nema_17_width, nema_height = nema_17_height, base_height = 43, nema_center_hole_radius = nema_17_motor_hole_radius_camiel, gauri_nema = nema_17_holes, nema_housing_base_holes = nema_17_housing_base_holes, dist_to_gauri_baza = 22, base_thick = 3, left = false, motor_screw_holes_rotation_angle = 0, sunken_base_holes = 0)
-{   
-    nema_motor_housing_with_base_holes(toleranta_x, toleranta_y, motor_deviation_x, nema_width, nema_height, base_height, nema_center_hole_radius, gauri_nema, nema_housing_base_holes, dist_to_gauri_baza, base_thick, motor_screw_holes_rotation_angle, sunken_base_holes );
-// potentiometer support
-    if (left)
-        translate ([0, 2, 10]) rotate ([0, 0, -90]) potentiometer_support(30, 30, 6, 0); 
-        else
-   translate ([30, housing_width - 2, 10]) rotate ([0, 0, 90]) potentiometer_support(30, 30, 6, 0); 
-}
-//--------------------------------------------------------------------
 module nema_14_motor_housing(toleranta_x, toleranta_y, motor_deviation_x, base_thick = 3)
 {
     nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, motor_deviation_x, nema_14_width, nema_14_height, 35, nema_14_motor_hole_radius, nema_17_holes, nema_11_housing_base_holes, 16, base_thick);
@@ -194,11 +182,6 @@ module nema_11_geared_motor_housing(toleranta_x, toleranta_y, motor_deviation_x,
     nema_motor_housing_with_base_holes_for_nuts(toleranta_x, toleranta_y, motor_deviation_x, nema_11_width, nema_11_height, 38, nema_11_motor_gearbox_radius, gearbox_nema_11_holes_position, nema_11_housing_base_holes, 20, base_thick);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module nema_17_motor_housing_with_potentiometer_support(toleranta_x, toleranta_y, motor_deviation_x, base_thick = 3, left = false)
-{
-    nema_motor_housing_with_potentiometer_support(toleranta_x, toleranta_y, motor_deviation_x, nema_17_width, nema_17_height, 43, nema_17_motor_hole_radius_camiel, nema_17_holes, nema_17_housing_base_holes, 22, base_thick, left);
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module nema_11_motor_housing(toleranta_x = 0, toleranta_y = 0)
 {
     nema_motor_housing_with_base_holes(toleranta_x, toleranta_y, 0, nema_11_width, nema_11_height, 38, nema_11_motor_hole_radius, nema_11_holes, nema_11_housing_base_holes, 20);
@@ -209,38 +192,6 @@ module nema_11_motor_housing_with_holled_base(toleranta_x = 0, toleranta_y = 0)
     nema_motor_housing_with_holled_base(toleranta_x, toleranta_y, 0, nema_11_width, nema_11_height, 20, nema_11_motor_hole_radius, nema_11_holes, 11, 10);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module stepper_motor_support_on_rectangular_axis(length, width, support_height, box_height, dist_to_pot = 0)
-{
-    hole_depth = 11.5;
-    hole_width = 10.5;
-    union(){
-      translate ([0, 0, dist_to_pot]){ 
-          difference(){
-          potentiometer_support(length, width, support_height, 28, 0, 3);
-         // gauri motor nema11
-        translate ([28, width / 2, 0] + gearbox_nema_11_holes_position[0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = nema_11_motor_gearbox_hole_radius, $fn = 50);
-        for (i=[1:4])
-         translate ([28, width / 2, 0] - display_tolerance_z) rotate ([0, 0, 45]) translate (gearbox_nema_11_holes_position[i]) cylinder (h = 3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 20);
-        
-        
-        // belt tensioner screw
-        translate ([9, 9, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 50);
-    }
-
-    } 
-        translate ([-(hole_depth + 6), 0, 0]) 
-            difference(){
-              cube([hole_depth + 8, width, box_height]);
-              translate([6, 0, 2] - display_tolerance_y) cube([hole_depth, width + 2 * display_tolerance, hole_width]); 
-             translate([6, 5, 2]) cube([hole_depth, width -10, 20]); 
-                
-             // gaura surub   
-              translate([0, width / 2, 9] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = 10, r = m4_screw_radius, $fn = 20);
-                translate([6 - m4_nut_thick, width / 2, 9] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = 5, r = m4_nut_radius, $fn = 6);
-            }
-        }
-}
-//---------------------------------------------------------------------------
 module stepper_motor_fixer(motor_height, motor_width, distance_between_motor_holes, width, wing_length = 2 * washer_4_12_radius)
 {
     thick = 3;
@@ -301,8 +252,6 @@ nema_motor_housing_x(10, nema_23_57BYGH603_width, nema_23_57BYGH603_height, 70, 
 //nema_23_motor_housing(10, 0, 0, 5);
 
 //nema_17_fixer();
-
-//nema_17_motor_housing_with_potentiometer_support(10, 0, 7, 3, false);
 
 //nema_14_motor_housing(10, 0, 0); // motor #5
 
