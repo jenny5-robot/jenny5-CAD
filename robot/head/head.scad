@@ -15,12 +15,10 @@ include <../../basic_scad/params_screws_nuts_washers.scad>
 include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sensor_array.scad>
 include <../../basic_scad/params_webcam.scad>
-include <../../basic_scad/params_potentiometers.scad>
 
 use <../../basic_scad/pulleys.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
 use <../../basic_scad/spacer.scad>
-use <../../basic_scad/potentiometer_support.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
 use <../../basic_scad/radial_bearings.scad>
