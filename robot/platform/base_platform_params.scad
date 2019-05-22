@@ -8,16 +8,12 @@ include <tracks_params.scad>
 
 small_tracks_angle = 30;
 
-platform_shaft_edge = 25;
+platform_shaft_edge_size = 25;
 
 base_platform_size = [380, 310, 16];
 
 first_tracks_offset = 25;
-distance_between_wheels = 320;
-    
-wheels_bearing_housing_1_offset_y = 22;// must be larger than the reinforcement profile
-   
-wheels_bearing_housing_2_offset_y = 85;
+distance_between_wheels = 320;   
 
 lidar_position = 80;
 
@@ -29,7 +25,8 @@ tracks_wheel_radius = 53.34; // 58.8
 motor_gear_height = 11;
 wheel_gear_thick = 17;
 
-base_motor_offset = 101;
+platform_motor_bearing_offset_y = 50;
+platform_motor_bearing_offset_x = 2;
 
 tracks_offset = 35;
 
@@ -50,3 +47,4 @@ small_tracks_wheel_radius = 64;
 small_tracks_wheel_radius_thickness = 20;
 small_tracks_wheel_distance_to_wheel = 180;
 small_tracks_wheel_distance_to_shaft = 40;
+

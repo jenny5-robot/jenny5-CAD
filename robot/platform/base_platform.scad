@@ -19,6 +19,7 @@ include <../../basic_scad/params_batteries.scad>
 
 include <../../basic_scad/params_radial_bearings_u_housing.scad>
 use <../../basic_scad/radial_bearing_u_housing.scad>
+use <../../basic_scad/radial_bearings.scad>
 
 use <../../basic_scad/basic_components.scad>
 
@@ -97,57 +98,15 @@ module platform_sheet()
       echo("LEFT SIDE");
     // first wheel, first bearing
     for (i = [0 : 1]){
-        translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
+
+        translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i] - display_tolerance_z)
     cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("first shaft first bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
-    }
-    // first wheel, second bearing
-       for (i = [0 : 1]){
-    translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
-    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("first shaft second bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
-    }
-    // second wheel, first bearing
-    for (i = [0 : 1]){
-        translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
-    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("second shaft first bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
-    }
-    // second gear, second bearing
-    for (i = [0 : 1]){
-        translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
-    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("second shaft second bearing",  [first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]);
+        echo("first shaft first bearing",  [rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i]);
     }
     
     // RIGHT SIDE
     echo("RIGHT SIDE");
-     // first gear, first bearing
-    for (i = [0 : 1]){
-        translate ([0, base_platform_size[1], 0]) mirror([0, 1, 0]) translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
-    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("first shaft first bearing",  [0, base_platform_size[1], 0] + mirror_y([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]));
-    }
-  
-    // first gear, second bearing
-    for (i = [0 : 1]){
-        translate ([0, base_platform_size[1], 0]) mirror([0, 1, 0]) translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
-    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("first shaft second bearing",  [0, base_platform_size[1], 0] + mirror_y([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]));
-    }
-    
-    /// second gear, first bearing
-    for (i = [0 : 1]){
-        translate ([0, base_platform_size[1], 0]) mirror([0, 1, 0]) translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
-    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("second shaft first bearing",  [0, base_platform_size[1], 0] + mirror_y([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]));
-    }
-    // second gear, second bearing
-    for (i = [0 : 1]){
-        translate ([0, base_platform_size[1], 0]) mirror([0, 1, 0]) translate ([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_2_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i] - display_tolerance_z)
-    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("second shaft second bearing",  [0, base_platform_size[1], 0] + mirror_y([first_tracks_offset - rbearing_6201_enclosed_housing_size[0] / 2 + distance_between_wheels, wheels_bearing_housing_1_offset_y, 0] + rbearing_6201_enclosed_housing_holes_position[i]));
-    }
+   
     
 
     /*
@@ -162,28 +121,6 @@ module platform_sheet()
   }  
 }
 //-------------------------------------------------------
-module laptop_fixer_corner_left()
-{
-  difference(){
-    color (plastic_color) corner(40, 40, 40, 3);
-    hull(){
-        translate ([3 + 5, 10, 0] - display_tolerance_z) cylinder(h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        translate ([3 + 5, 40 - (6), 0] - display_tolerance_z) cylinder(h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-    }
-  }
-}
-//--------------------------------------------------------------------
-module laptop_fixer_corner_right()
-{
-  difference(){
-    color (plastic_color) corner(40, 40, 40, 3);
-    hull(){
-        translate ([10, 3 + 5, 0] - display_tolerance_z) cylinder(h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-        translate ([40 - 6, 3 + 5, 0] - display_tolerance_z) cylinder(h = 3 + 2 * display_tolerance, r = m4_screw_radius, $fn = 20);
-    }
-  }
-}
-//--------------------------------------------------------------------
 module platform()
 {
   platform_sheet();
@@ -202,18 +139,35 @@ module platform()
     
   // motor right
     
-  translate ([rb_6909_external_radius + 10, motor_gr_ep_45_188_1_length, +rb_6909_external_radius + base_platform_size[2] + 4]) 
-    rotate([90, 0, 0])
+  translate ([rb_6909_external_radius + 10, motor_gr_ep_45_188_1_length - 2, +rb_6909_external_radius + base_platform_size[2] + 4]) 
+    rotate([90, 180, 0])
         base_motor_with_housing()
     ;
     
     // motor left
-  translate ([rb_6909_external_radius + 10, base_platform_size[1] - motor_gr_ep_45_188_1_length, rb_6909_external_radius + base_platform_size[2] + 4])
-      rotate([-90, 0, 0])
+  translate ([rb_6909_external_radius + 10, base_platform_size[1] - motor_gr_ep_45_188_1_length + 2, rb_6909_external_radius + base_platform_size[2] + 4])
+      rotate([-90, 180, 0])
         rotate([0, 0, 180]) 
           base_motor_with_housing()
           ;
     
+    // motor bearing support left side
+    // bottom
+    translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x, platform_motor_bearing_offset_y, base_platform_size[2]]) rbearing_6909_vertical_housing_half();
+    // top
+    translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x, platform_motor_bearing_offset_y, base_platform_size[2] + 2 * rbearing_6909_vertical_housing_size_half[2]]) mirror([0, 0, 1]) rbearing_6909_vertical_housing_half();
+    // bearing
+    translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x, platform_motor_bearing_offset_y + rb_6909_thick / 2, base_platform_size[2] + rbearing_6909_vertical_housing_size_half[2]]) rotate([90, 0, 0])
+    6909rs();
+
+    // motor bearing support right side
+    // bottom
+    translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x, base_platform_size[1] - platform_motor_bearing_offset_y, base_platform_size[2]]) rbearing_6909_vertical_housing_half();
+    // top
+    translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x, base_platform_size[1] -platform_motor_bearing_offset_y, base_platform_size[2] + 2 * rbearing_6909_vertical_housing_size_half[2]]) mirror([0, 0, 1]) rbearing_6909_vertical_housing_half();
+    // bearing
+    translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x, base_platform_size[1] -platform_motor_bearing_offset_y + rb_6909_thick / 2, base_platform_size[2] + rbearing_6909_vertical_housing_size_half[2]]) rotate([90, 0, 0])
+    6909rs();
 
 // wheels
     
@@ -269,10 +223,10 @@ module platform()
             rotate([90, 0, 0]) small_track();
 */
 // first shaft
-color(aluminium_color) translate ([first_tracks_offset, - 75, -2 - 12.5]) rotate ([-90, 0, 0]) rectangular_tube(length = platform_shaft_edge, width = platform_shaft_edge, wall_thick = 2, height = base_platform_size[1] + 150);
+color(aluminium_color) translate ([first_tracks_offset, - 75, -2 - 12.5]) rotate ([-90, 0, 0]) rectangular_tube(length = platform_shaft_edge_size, width = platform_shaft_edge_size, wall_thick = 2, height = base_platform_size[1] + 150);
 
 // second shaft
-color(aluminium_color) translate ([first_tracks_offset + distance_between_wheels, - 75, -2 - 12.5]) rotate ([-90, 0, 0]) rectangular_tube(length = platform_shaft_edge, width = platform_shaft_edge, wall_thick = 2, height = base_platform_size[1] + 150);
+color(aluminium_color) translate ([first_tracks_offset + distance_between_wheels, - 75, -2 - 12.5]) rotate ([-90, 0, 0]) rectangular_tube(length = platform_shaft_edge_size, width = platform_shaft_edge_size, wall_thick = 2, height = base_platform_size[1] + 150);
 
     // back wheel
     
