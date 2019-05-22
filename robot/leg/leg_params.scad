@@ -9,7 +9,7 @@ include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sheets.scad>
 include <../../basic_scad/params_alu_profiles.scad>
 
-leg_angle = 70;
+leg_angle = 10;
 
 leg_top_base_length = 250;
 
@@ -29,12 +29,10 @@ dist_to_wrist_in_base = leg_base_height - leg_shaft_distance_to_edge;
 
 max_torque_leg_angle = 70;
 
-distance_to_push_position = 100;//leg_bone_distance_between_bearing_centers;
-
 crotch_width_front = 80;
-crotch_width_back = crotch_width_front + 2 * leg_bone_thick[1] + 2 * (2 + 3);
+crotch_width_back = crotch_width_front + 2 * leg_bone_thick[1] + 2 * (2 + 3) + 2 * alu_sheet_10_thick;
 
-base_spacer_length = crotch_width_back + 2 * leg_bone_thick[1] + 2 * 2;
+base_spacer_length = crotch_width_front + 2 * leg_bone_thick[1] + 2 * 5.5;
 
 echo(base_spacer_length=base_spacer_length);
 
@@ -49,12 +47,11 @@ knee_side_simple_sizes = [dist_to_second_bone - dist_to_first_bone + 20, alu_she
 
 lateral_top_base_size = [leg_top_base_length, alu_sheet_10_thick, 40];
 
-leg_angle_offset = 0;
 
-leg_spacer = 0;
-
-leg_distance_to_pusher = 120;
+leg_distance_to_pusher = 130;
 
 leg_pusher_tube_length = crotch_width_front - 5;
 
 leg_pusher_bearing_sheet_size = [60, 60, 3];
+
+leg_dist_to_motor_shaft_in_base = 13;
