@@ -13,33 +13,7 @@ include <../../basic_scad/tolerance.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
 use <../../basic_scad/involute_gears.scad>
-//--------------------------------------------------------------------
-module platform_wheel_gear()
-{    
-    difference(){
-        rotate ([0, 0, 12]) gear (number_of_teeth = 28,
-					circular_pitch = 500,
-					bore_diameter = 0,
-					hub_diameter = 0,
-					rim_width = 4,
-					hub_thickness = 4,
-					rim_thickness = wheel_gear_thick,
-					gear_thickness = wheel_gear_thick,
-					pressure_angle = 31);
-        // // middle hole
-        translate (-display_tolerance_z) cylinder(h = wheel_gear_thick + 2 * display_tolerance, r = rb_6907_external_radius - 2, $fn = 40);
-        // bearing hole
-        translate ([0, 0, wheel_gear_thick - rb_6907_thick]) cylinder(h = wheel_gear_thick + display_tolerance, r = rb_6907_external_radius, $fn = 40);
-        // screw holes
-        for (i = [0 : 7])
-            rotate([0, 0, 68])
-                translate([(rb_6907_external_radius + 3) * sin(i * 45), (rb_6907_external_radius + 3) * cos(i * 45), 0] - display_tolerance_z) cylinder(h = wheel_gear_thick + 2 * display_tolerance, r = m4_screw_radius, $fn = 30);
-        // nut holes
-        for (i = [0 : 3])
-            rotate([0, 0, 68])
-                translate([(rb_6907_external_radius + 3) * sin(i * 90), (rb_6907_external_radius + 3) * cos(i * 90), 0] - display_tolerance_z) cylinder(h = 5 + 2 * display_tolerance, r = m4_nut_radius, $fn = 30);
-    }
-}
+use <platform_gears.scad>
 
 //--------------------------------------------------------------------
 module prism(h)

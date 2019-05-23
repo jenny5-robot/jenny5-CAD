@@ -34,45 +34,10 @@ use <../../basic_scad/alu_profiles.scad>
 
 include <../../basic_scad/tolerance.scad>
 
+use <platform_gears.scad>
 use <tracks.scad>
 use <tracks_small.scad>
 //------------------------------------------------------
-module motor_gear()
-{
-    extra_length =  10;
-    
-    difference(){
-        rotate ([0, 0, 7.5])
-        color(plastic_color)
-            gear (number_of_teeth = 25,
-					circular_pitch = 500,
-					bore_diameter = 10,
-					hub_diameter = 30,
-					rim_width = 4,
-					hub_thickness = motor_gear_height + extra_length,
-					rim_thickness = motor_gear_height,
-					gear_thickness = motor_gear_height,
-					pressure_angle = 31);
-        // motor shaft hole
-        //translate (-display_tolerance_z) cylinder (h = motor_gear_height + extra_length + 2 * display_tolerance, r = 5, $fn = 30);
-        
-        // 1st screw hole
-        translate ([0, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
-        // 1st nut hole
-        hull(){
-            translate ([7, 0, motor_gear_height / 2]) rotate ([0, 90, 0]) cylinder(h = 2 * m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            translate ([7, 0, 0]) rotate ([0, 90, 0]) cylinder(h = 2 * m4_nut_thick, r = m4_nut_radius, $fn = 6);
-        }
-        // 2nd screw hole
-        translate ([0, 0, motor_gear_height + extra_length / 2]) rotate ([0, 90, 0]) cylinder(h = 50, r = m4_screw_radius, $fn = 20);
-        // 2nd nut hole
-        hull(){
-            translate ([7, 0, motor_gear_height + extra_length / 2]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-            translate ([7, 0, motor_gear_height + extra_length]) rotate ([0, 90, 0]) cylinder(h = m4_nut_thick, r = m4_nut_radius, $fn = 6);
-        }
-    }
-}
-//--------------------------------------------------------------------
 module base_motor_support_sheet()
 {
     cube(base_motor_support_sheet_size);
