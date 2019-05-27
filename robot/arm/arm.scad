@@ -242,14 +242,14 @@ module fore_arm()
     translate ([0, 0, fore_arm_pulley_thick + 6]) 6907rs();    
     
     translate ([0, 0, fore_arm_pulley_thick + 2 * elbow_pulley_holes_dist_y + 6]) 6907rs();
+    
     // gripper
-
     
 // camera support
     translate ([-c920_length / 2, c920_depth / 2 + c920_dist_between_holder_holes / 2, fore_arm_length -(elbow_rotation_motor_offset + rbearing_608_housing_size[0])])   
     c920();
     
-    translate ([0, fore_arm_pulley_thick / 2, fore_arm_length -8-(elbow_rotation_motor_offset + rbearing_608_housing_size[0])]) rotate ([90, 0, 0]) wrist_pulley_with_gripper();
+    translate ([0, fore_arm_pulley_thick / 2, fore_arm_length -8-(elbow_rotation_motor_offset + rbearing_608_housing_size[0])]) rotate ([90, angle_wrist, 0]) wrist_pulley_with_gripper();
     
     // belt
     translate ([0, 5, -(rbearing_608_housing_size[0] / 2 + pulley_spacer_length + 3)]) rotate([0, -90, 90]) belt_on_2_pulleys(10, 35, fore_arm_length, 9);

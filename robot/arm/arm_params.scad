@@ -14,6 +14,7 @@ angle_shoulder = -0; // -180 (up)... 0(down) // default = 0
 angle_upper_arm = 90; // -90 ... 90 // default = -90
 angle_elbow = -90; // -270 (closed), -180 (front) -90 (full extend) // default = 0
 angle_fore_arm = -100; // default = 90
+angle_wrist = -60; // -60...30 default = -60 
 
 printed_pulley_thick = 14;
 pulley_spacer_length = 5.8;
