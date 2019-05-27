@@ -89,6 +89,14 @@ module spacer_with_1_hole_empty(length, width, height, wall_thick)
     }
 }
 //---------------------------------------------------------------
+module spacer_round(length, external_radius, internal_radius)
+{
+    difference(){
+        cylinder(h = length, r = external_radius, $fn = 50);
+        translate (-display_tolerance_z) cylinder(h = length + 2 * display_tolerance, r = internal_radius, $fn = 50);
+    }
+}
+//---------------------------------------------------------------
 
 //round_spacer_with_2_holes(width = 12, height = 3, distance_between_holes = 32, hole_radius = 2);
 
