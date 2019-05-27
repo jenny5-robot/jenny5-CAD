@@ -20,8 +20,8 @@ include <../basic_scad/params_alu_profiles.scad>
 include <leg/leg_params.scad>
 use <leg/leg.scad>
 
-include <platform/base_platform_params.scad>
-use <platform/base_platform.scad>
+include <base_platform/base_platform_params.scad>
+use <base_platform/base_platform.scad>
 
 use <head/head.scad>
 

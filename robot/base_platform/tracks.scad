@@ -13,6 +13,8 @@ include <../../basic_scad/tolerance.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
 use <../../basic_scad/involute_gears.scad>
+use <../../basic_scad/spacer.scad>
+
 use <platform_gears.scad>
 
 //--------------------------------------------------------------------
@@ -270,4 +272,6 @@ module first_wheel()
 }
 //--------------------------------------------------------------------
 
-first_wheel();
+//first_wheel();
+
+spacer_round(length = 10, external_radius = 5, internal_radius = 2);
