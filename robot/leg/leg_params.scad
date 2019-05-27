@@ -9,7 +9,7 @@ include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sheets.scad>
 include <../../basic_scad/params_alu_profiles.scad>
 
-leg_angle = 10;
+leg_angle = 70;
 
 leg_top_base_length = 250;
 
