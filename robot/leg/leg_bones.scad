@@ -4,7 +4,6 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../../basic_scad/params_basic_components.scad>
 use <../../basic_scad/basic_components.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
@@ -23,7 +22,6 @@ module leg_bone()
 {
     //render(){
     
-  //  translate ([0, 0, -rbearing_6001_housing_size_thicker[0] / 2]) 
         difference(){
           //  translate ([-leg_bone_thick[0] / 2, -leg_bone_thick[1] / 2, 0])
             color(aluminium_color) rectangular_tube (leg_bone_thick[0], leg_bone_thick[1], 2, leg_bone_length);
@@ -73,28 +71,27 @@ module leg_bone_with_bearings()
     }
 }
 //----------------------------------------------------------------------
-
 module front_bone_with_pusher_components(left_side = 0)
 {
     leg_bone_with_bearings();
     if (left_side == 0){
-        translate([0, leg_bone_thick[1] / 2, leg_distance_to_pusher]) rotate([90, 0, 0]){
+        translate([leg_bone_thick[0] / 2 + rb_6907_external_radius, 0, leg_distance_to_pusher]) rotate([90, 0, 0]){
             // bearing housing
             translate ([0, 0, -rb_6907_thick - 1]) rbearing_6907_housing_thicker(0);
             // bearing 
             translate ([0, 0, -rb_6907_thick]) 6907rs();
             // sheet on bearing side
-            translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, -leg_pusher_bearing_sheet_size[2] - rb_6907_thick - 1]) leg_pusher_bearing_sheet();
+            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, -leg_pusher_bearing_sheet_size[2] - rb_6907_thick - 1]) leg_pusher_bearing_sheet();
             // sheet on the oposite position
-            translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, leg_bone_thick[1] + leg_pusher_bearing_sheet_size[2]]) mirror([0, 0, 1]) leg_pusher_no_bearing_sheet();
+            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, leg_bone_thick[1] + leg_pusher_bearing_sheet_size[2]]) mirror([0, 0, 1]) leg_pusher_no_bearing_sheet();
         }
     }
     else{
-        translate([0, -leg_bone_thick[1] / 2, leg_distance_to_pusher]) rotate([90, 0, 0]){
+        translate([leg_bone_thick[0] / 2 + rb_6907_external_radius, 0, leg_distance_to_pusher]) rotate([90, 0, 0]){
             translate ([0, 0, rb_6907_thick + 1]) mirror([0, 0, 1]) rbearing_6907_housing_thicker(0);
             translate ([0, 0, 0]) 6907rs();
-            translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, rb_6907_thick + 1]) leg_pusher_bearing_sheet();
-            translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, - leg_bone_thick[1]]) mirror([0, 0, 1]) leg_pusher_no_bearing_sheet();
+            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, rb_6907_thick + 1]) leg_pusher_bearing_sheet();
+            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, - leg_bone_thick[1]]) mirror([0, 0, 1]) leg_pusher_no_bearing_sheet();
         }
     }
 }
