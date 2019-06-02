@@ -4,29 +4,18 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../../basic_scad/params_stepper_motors.scad>
-
-include <../../basic_scad/params_basic_components.scad>
-use <../../basic_scad/basic_components.scad>
-use <../../basic_scad/stepper_motors.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
 include <../../basic_scad/params_radial_bearings.scad>
 use <../../basic_scad/radial_bearings.scad>
-use <../../basic_scad/stepper_motors_housing.scad>
-include <../../basic_scad/params_motor_housing.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
-include <../../basic_scad/config.scad>
 include <../../basic_scad/params_radial_bearings_housing.scad>
 
-include <../../basic_scad/params_nuts_housing.scad>
+include <../../basic_scad/config.scad>
 
 include <leg_params.scad>
 
 use <../../basic_scad/linear_motors.scad>
-
-include <../../basic_scad/params_motor_housing.scad>
-include <../../basic_scad/params_alu_profiles.scad>
 
 use <../../basic_scad/alu_profiles.scad>
 
@@ -80,13 +69,13 @@ module front_bones_with_components(motor_angle_to_horizontal)
         front_bone_with_pusher_components(0);
     
     // pusher tube
-  translate ([0, -0, leg_distance_to_pusher])
+  translate ([leg_bone_thick[0] / 2 + rb_6907_external_radius, -0, leg_distance_to_pusher])
     rotate ([-90, 90-motor_angle_to_horizontal - 15, 0]) leg_pusher_tube();
 }
 //----------------------------------------------------------------------
-module half_leg(leg_angle_to_horizontal = 45)
+module half_leg(leg_angle_to_horizontal = 45, motor_side = 1)
 {
-    motor_angle_to_horizontal = 48;
+    motor_angle_to_horizontal = 65;
 
     leg_base(leg_base_height);
         
@@ -125,9 +114,9 @@ module half_leg(leg_angle_to_horizontal = 45)
 
     // linear motor
     
-    translate([dist_to_push_motor_hole_in_base, 0, leg_dist_to_motor_shaft_in_base]) 
+    translate([dist_to_push_motor_hole_in_base, motor_side * 15, leg_dist_to_motor_shaft_in_base]) 
       rotate ([0, -(90 - motor_angle_to_horizontal), 0])
-        linear_motor_with_top_shaft(180, 10);
+        linear_motor_with_top_shaft(200, 10);
         
 // knee shaft - first bone    
 
@@ -150,12 +139,12 @@ module half_leg(leg_angle_to_horizontal = 45)
 module complete_leg(leg_angle)
 {   
     // bottom half leg
-    half_leg(leg_angle);
+    half_leg(leg_angle, -1);
 
     // top half leg
     translate ([0, 0, 
     2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + knee_side_simple_sizes[2] - 2 * leg_shaft_distance_to_edge)]) 
-    mirror ([0, 0, 1]) half_leg(leg_angle);
+    mirror ([0, 0, 1]) half_leg(leg_angle, 1);
         
     // knee
     translate ([(leg_bone_length - rbearing_6001_housing_size_thicker[0]) * sin(90 - leg_angle) + dist_to_first_bone - leg_shaft_distance_to_edge, 
