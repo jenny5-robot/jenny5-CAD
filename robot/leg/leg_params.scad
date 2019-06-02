@@ -4,12 +4,10 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../../basic_scad/params_basic_components.scad>
 include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sheets.scad>
-include <../../basic_scad/params_alu_profiles.scad>
 
-leg_angle = 70;
+leg_angle = 15;
 
 leg_top_base_length = 250;
 
@@ -48,9 +46,9 @@ knee_side_simple_sizes = [dist_to_second_bone - dist_to_first_bone + 20, alu_she
 lateral_top_base_size = [leg_top_base_length, alu_sheet_10_thick, 40];
 
 
-leg_distance_to_pusher = 130;
+leg_distance_to_pusher = 110;
 
-leg_pusher_tube_length = crotch_width_front - 5;
+leg_pusher_tube_length = crotch_width_front + 2 * leg_bone_thick[1];
 
 leg_pusher_bearing_sheet_size = [60, 60, 3];
 
