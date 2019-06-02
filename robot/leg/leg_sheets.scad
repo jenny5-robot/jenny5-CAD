@@ -37,7 +37,7 @@ module base_side_top(base_height = 40)
         translate ([dist_to_second_bone, 0, base_height - leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M12_screw_radius, $fn = 30);
                 
      // hole motor shaft
-        echo("motor support hole position = ", dist_to_push_motor_hole_in_base, base_height - 8);
+        echo("motor support hole position = ", dist_to_push_motor_hole_in_base, leg_dist_to_motor_shaft_in_base);
         translate ([dist_to_push_motor_hole_in_base, 0, base_height - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = m8_screw_radius, $fn = 30);
     }
 }
