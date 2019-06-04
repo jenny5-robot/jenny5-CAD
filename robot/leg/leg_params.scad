@@ -7,13 +7,13 @@
 include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sheets.scad>
 
-leg_angle = 15;
+leg_angle = 10;
 
 leg_top_base_length = 250;
 
 leg_base_height = 40;
 
-leg_bone_length = 350;
+leg_bone_length = 450;
 leg_bone_thick = [40, 20];
 
 

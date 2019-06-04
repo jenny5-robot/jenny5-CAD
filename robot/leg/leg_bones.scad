@@ -10,6 +10,7 @@ use <../../basic_scad/screws_nuts_washers.scad>
 include <../../basic_scad/params_radial_bearings.scad>
 use <../../basic_scad/radial_bearings.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
+use <../../basic_scad/radial_bearing_u_housing.scad>
 include <../../basic_scad/config.scad>
 
 include <leg_params.scad>
@@ -75,11 +76,12 @@ module front_bone_with_pusher_components(left_side = 0)
 {
     leg_bone_with_bearings();
     if (left_side == 0){
-        translate([leg_bone_thick[0] / 2 + rb_6907_external_radius, 0, leg_distance_to_pusher]) rotate([90, 0, 0]){
+        translate([leg_bone_thick[0] / 2 + rb_6905_external_radius, 0, leg_distance_to_pusher]) 
+        {
             // bearing housing
-            translate ([0, 0, -rb_6907_thick - 1]) rbearing_6907_housing_thicker(0);
+            translate ([rb_6905_external_radius + radial_bearing_vertical_housing_base_wall_thick, 0, 0]) rotate ([0, -90, 0]) radial_bearing_6905_vertical_housing();
             // bearing 
-            translate ([0, 0, -rb_6907_thick]) 6907rs();
+            rotate([90, 0, 0]) translate ([0, 0, -rb_6905_thick]) 6905rs();
             // sheet on bearing side
             //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, -leg_pusher_bearing_sheet_size[2] - rb_6907_thick - 1]) leg_pusher_bearing_sheet();
             // sheet on the oposite position
@@ -87,13 +89,13 @@ module front_bone_with_pusher_components(left_side = 0)
         }
     }
     else{
-        translate([leg_bone_thick[0] / 2 + rb_6907_external_radius, 0, leg_distance_to_pusher]) rotate([90, 0, 0]){
-            translate ([0, 0, rb_6907_thick + 1]) mirror([0, 0, 1]) rbearing_6907_housing_thicker(0);
-            translate ([0, 0, 0]) 6907rs();
+        translate([leg_bone_thick[0] / 2 + rb_6905_external_radius, 0, leg_distance_to_pusher]) {
+            translate ([rb_6905_external_radius + radial_bearing_vertical_housing_base_wall_thick, 0, 0]) rotate ([0, -90, 0])  radial_bearing_6905_vertical_housing();
+            rotate([90, 0, 0]) translate ([0, 0, 0]) 6905rs();
             //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, rb_6907_thick + 1]) leg_pusher_bearing_sheet();
             //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, - leg_bone_thick[1]]) mirror([0, 0, 1]) leg_pusher_no_bearing_sheet();
         }
     }
 }
 //----------------------------------------------------------------------
-front_bone_with_pusher_components(left_side = 0);
+front_bone_with_pusher_components(left_side = 1);

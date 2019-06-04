@@ -4,6 +4,7 @@
 // MIT License
 //--------------------------------------------------------------
 
+use <../../basic_scad/basic_components.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
 include <../../basic_scad/params_radial_bearings.scad>
@@ -57,7 +58,7 @@ module linear_motor_with_top_shaft(stroke, current_position)
 //----------------------------------------------------------------------
 module leg_pusher_tube()
 {
-    cube([25, 25, leg_pusher_tube_length], center = true);
+    cube_empty(16, 20, leg_pusher_tube_length);
 }
 //----------------------------------------------------------------------
 module front_bones_with_components(motor_angle_to_horizontal)
@@ -69,7 +70,7 @@ module front_bones_with_components(motor_angle_to_horizontal)
         front_bone_with_pusher_components(0);
     
     // pusher tube
-  translate ([leg_bone_thick[0] / 2 + rb_6907_external_radius, -0, leg_distance_to_pusher])
+  translate ([leg_bone_thick[0] / 2 + rb_6905_external_radius, -crotch_width_front / 2 - leg_bone_thick[1], leg_distance_to_pusher])
     rotate ([-90, 90-motor_angle_to_horizontal - 15, 0]) leg_pusher_tube();
 }
 //----------------------------------------------------------------------
