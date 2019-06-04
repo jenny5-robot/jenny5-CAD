@@ -15,16 +15,21 @@ use <basic_components.scad>
 include <tolerance.scad>
           
 //---------------------------------------------------------------------------
-module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, housing_height, screw_radius = m4_screw_radius, height_extension = 0, extra_thick = 0)
+module radial_bearing_housing(rbearing_housing_size, rbearing_housing_holes_position, rb_external_radius, rb_thick, housing_height, screw_radius = m4_screw_radius, height_extension = 0, extra_lateral_thick = 0, bearing_support_hole_radius = -1)
 {
    color(plastic_color)
     render()
         difference(){
-            translate ([-rbearing_housing_size[0] / 2 - extra_thick, -rbearing_housing_size[1] / 2 - extra_thick, 0]) my_cube_rounded2 ([rbearing_housing_size[0] + 2 * extra_thick, rbearing_housing_size[1] + 2 * extra_thick, housing_height + height_extension]);
+            translate ([-rbearing_housing_size[0] / 2 - extra_lateral_thick, -rbearing_housing_size[1] / 2 - extra_lateral_thick, 0]) my_cube_rounded2 ([rbearing_housing_size[0] + 2 * extra_lateral_thick, rbearing_housing_size[1] + 2 * extra_lateral_thick, housing_height + height_extension]);
             // bearing hole
             translate ([0, 0, housing_height + height_extension - rb_thick]) cylinder (h = rb_thick, r = rb_external_radius + 0.1, $fn = 70);
             // bearing support hole
-            translate (rbearing_housing_holes_position[0] - display_tolerance_z) cylinder (h = housing_height + height_extension + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
+            if (bearing_support_hole_radius == -1){
+                translate (rbearing_housing_holes_position[0] - display_tolerance_z) cylinder (h = housing_height + height_extension + 2 * display_tolerance, r = rb_external_radius - 1, $fn = 70);
+                }
+            else{
+                                translate (rbearing_housing_holes_position[0] - display_tolerance_z) cylinder (h = housing_height + height_extension + 2 * display_tolerance, r = bearing_support_hole_radius, $fn = 70);
+            }
             // screws holes
             for (i = [1 : 4])
                 translate (rbearing_housing_holes_position[i]-display_tolerance_z) cylinder (h = height_extension + housing_height + 2 * display_tolerance, r = screw_radius, $fn = 20);
@@ -165,6 +170,21 @@ module rbearing_626_housing()
 module rbearing_608_housing()
 {
     radial_bearing_housing(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, rb_608_thick, rbearing_608_housing_size[2], m4_screw_radius);
+}
+//---------------------------------------------------------------------------
+module rbearing_608_slim_asymetric_housing()
+{
+    radial_bearing_housing(rbearing_housing_size = rbearing_608_slim_asymetric_housing_size, rbearing_housing_holes_position = rbearing_608_housing_holes_position, rb_external_radius = rb_608_external_radius, rb_thick = rb_608_thick, housing_height = rbearing_608_housing_size[2], screw_radius = m4_screw_radius, height_extension = 0, extra_lateral_thick = 0);
+}
+//---------------------------------------------------------------------------
+module rbearing_608_slim_asymetric_double_side_housing()
+{
+    echo(rbearing_608_slim_asymetric_housing_size);
+    radial_bearing_housing(rbearing_housing_size = rbearing_608_slim_asymetric_housing_size, rbearing_housing_holes_position = rbearing_608_housing_holes_position, rb_external_radius = rb_608_external_radius, rb_thick = rb_608_thick, housing_height = rbearing_608_housing_size[2], screw_radius = m4_screw_radius, height_extension = 5, extra_lateral_thick = 0, bearing_support_hole_radius = 8.75);
+    
+    mirror([0, 0, 1])
+        radial_bearing_housing(rbearing_housing_size = rbearing_608_slim_asymetric_housing_size, rbearing_housing_holes_position = rbearing_608_housing_holes_position, rb_external_radius = rb_608_external_radius, rb_thick = rb_608_thick, housing_height = rbearing_608_housing_size[2], screw_radius = m4_screw_radius, height_extension = 5, extra_lateral_thick = 0, bearing_support_hole_radius = 8.75);
+
 }
 //---------------------------------------------------------------------------
 module rbearing_6001_housing()
@@ -313,4 +333,8 @@ module rbearing_608_spacer_thicker_m3(extra_height = -1)
  
 //rbearing_608_housing_thicker(-1);
 
-rbearing_6907_housing_thicker(0);
+//rbearing_6907_housing_thicker(0);
+
+//rbearing_608_slim_asymetric_housing();
+
+rbearing_608_slim_asymetric_double_side_housing();
