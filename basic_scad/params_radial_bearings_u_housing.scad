@@ -7,6 +7,7 @@
 include <params_radial_bearings.scad>
 include <params_screws_nuts_washers.scad>
 
+//--------------------------------------------------------------
 radial_bearing_housing_base_wall_thickness = 1;
 radial_bearing_housing_lateral_wall_thickness = 3;
 

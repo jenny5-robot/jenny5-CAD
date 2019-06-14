@@ -8,17 +8,13 @@ include <params_radial_bearings.scad>
 include <params_screws_nuts_washers.scad>
 
 
+//--------------------------------------------------------------
 radial_bearing_housing_base_wall_thickness = 1;
 radial_bearing_housing_lateral_wall_thickness = 3;
 radial_bearing_housing_lateral_wall_thickness_4 = 4;
 
 radial_bearing_vertical_housing_base_wall_thick = 4;
-radial_bearing_vertical_housing_grosime_perete_lateral_lungime_exterior = 4;
-radial_bearing_vertical_housing_grosime_perete_lateral_lungime_interior = 2;
-radial_bearing_vertical_housing_grosime_perete_lateral_latime = 2;
 
-radial_bearing_vertical_housing_grosime_perete_lateral_slim_lungime = 1.5;
-radial_bearing_vertical_housing_grosime_perete_lateral_slim_latime = 1;
 
 function f_radial_bearing_housing_size (rb_external_radius, rb_thick) = [2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness), 2 * (rb_external_radius + radial_bearing_housing_lateral_wall_thickness), rb_thick + radial_bearing_housing_base_wall_thickness];
 
