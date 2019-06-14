@@ -72,30 +72,17 @@ module leg_bone_with_bearings()
     }
 }
 //----------------------------------------------------------------------
-module front_bone_with_pusher_components(left_side = 0)
+module front_bone_with_pusher_components()
 {
     leg_bone_with_bearings();
-    if (left_side == 0){
-        translate([leg_bone_thick[0] / 2 + rb_6905_external_radius, 0, leg_distance_to_pusher]) 
-        {
+    translate([leg_bone_thick[0] / 2 + rb_6905_external_radius, 0, leg_distance_to_pusher]){
             // bearing housing
             translate ([rb_6905_external_radius + radial_bearing_vertical_housing_base_wall_thick, 0, 0]) rotate ([0, -90, 0]) radial_bearing_6905_vertical_housing();
             // bearing 
-            rotate([90, 0, 0]) translate ([0, 0, -rb_6905_thick]) 6905rs();
-            // sheet on bearing side
-            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, -leg_pusher_bearing_sheet_size[2] - rb_6907_thick - 1]) leg_pusher_bearing_sheet();
-            // sheet on the oposite position
-            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, leg_bone_thick[1] + leg_pusher_bearing_sheet_size[2]]) mirror([0, 0, 1]) leg_pusher_no_bearing_sheet();
-        }
-    }
-    else{
-        translate([leg_bone_thick[0] / 2 + rb_6905_external_radius, 0, leg_distance_to_pusher]) {
-            translate ([rb_6905_external_radius + radial_bearing_vertical_housing_base_wall_thick, 0, 0]) rotate ([0, -90, 0])  radial_bearing_6905_vertical_housing();
-            rotate([90, 0, 0]) translate ([0, 0, 0]) 6905rs();
-            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, rb_6907_thick + 1]) leg_pusher_bearing_sheet();
-            //translate ([-leg_pusher_bearing_sheet_size[0] / 2, -leg_pusher_bearing_sheet_size[1] / 2, - leg_bone_thick[1]]) mirror([0, 0, 1]) leg_pusher_no_bearing_sheet();
-        }
+            rotate([90, 0, 0]) translate ([0, 0, -rb_6905_thick / 2]) 6905rs();
     }
 }
 //----------------------------------------------------------------------
-front_bone_with_pusher_components(left_side = 1);
+front_bone_with_pusher_components();
+
+//radial_bearing_6905_vertical_housing();
