@@ -24,6 +24,8 @@ include <../../basic_scad/tolerance.scad>
 
 use <leg_bones.scad>
 use <leg_sheets.scad>
+use <../../basic_scad/shaft_support.scad>
+include <../../basic_scad/shaft_support_params.scad>
 
 //-------------------------------------------------------
 module leg_base_spacer()
@@ -33,9 +35,9 @@ module leg_base_spacer()
 //----------------------------------------------------------------------
 module leg_base(base_height = 40)
 {
-    translate ([0, - (alu_sheet_10_thick + base_spacer_length / 2), 0]) base_side_top(base_height);
+    translate ([0, - (alu_sheet_10_thick + base_spacer_length / 2), 0]) base_side(base_height);
 
-    translate ([0, (base_spacer_length / 2), 0]) base_side_top(base_height);
+    translate ([0, (base_spacer_length / 2), 0]) base_side(base_height);
     
     translate ([dist_to_first_spacer, - base_spacer_length / 2, 15]) leg_base_spacer();
     translate ([dist_to_second_spacer, - base_spacer_length / 2, 15]) leg_base_spacer();
@@ -58,20 +60,24 @@ module linear_motor_with_top_shaft(stroke, current_position)
 //----------------------------------------------------------------------
 module leg_pusher_tube()
 {
-    cube_empty(16, 20, leg_pusher_tube_length);
+    color(aluminium_color) cube_empty(16, 20, leg_pusher_tube_length);
 }
 //----------------------------------------------------------------------
 module front_bones_with_components(motor_angle_to_horizontal)
 {
-  translate ([0, (crotch_width_front / 2 + leg_bone_thick[1] / 2), 0])
-        front_bone_with_pusher_components(1);
+    translate ([0, (crotch_width_front / 2 + leg_bone_thick[1] / 2), 0])
+        front_bone_with_pusher_components();
     
-  translate ([0, - (crotch_width_front / 2 + leg_bone_thick[1] / 2), 0])
-        front_bone_with_pusher_components(0);
+    translate ([0, - (crotch_width_front / 2 + leg_bone_thick[1] / 2), 0])
+        front_bone_with_pusher_components();
     
     // pusher tube
-  translate ([leg_bone_thick[0] / 2 + rb_6905_external_radius, -crotch_width_front / 2 - leg_bone_thick[1], leg_distance_to_pusher])
-    rotate ([-90, 90-motor_angle_to_horizontal - 15, 0]) leg_pusher_tube();
+    translate ([leg_bone_thick[0] / 2 + rb_6905_external_radius, -crotch_width_front / 2 - leg_bone_thick[1], leg_distance_to_pusher])
+    rotate ([-90, 90 - motor_angle_to_horizontal - 15, 0]) leg_pusher_tube();
+    
+    translate ([leg_bone_thick[0] / 2 + rb_6905_external_radius, -crotch_width_front / 2 - leg_bone_thick[1] / 2 + rb_6905_thick / 2 + SHF20_shaft_suport_length / 2, leg_distance_to_pusher])
+    rotate ([0, 90 - (motor_angle_to_horizontal + 15), 0]) translate ([0, 0, -10]) rotate ([0, 0, 90]) mirror ([0, 0, 1]) shaft_support_SHF20();
+    
 }
 //----------------------------------------------------------------------
 module half_leg(leg_angle_to_horizontal = 45, motor_side = 1)
@@ -111,7 +117,7 @@ module half_leg(leg_angle_to_horizontal = 45, motor_side = 1)
     translate([dist_to_second_bone, -base_spacer_length / 2 - alu_sheet_10_thick - M12_nut_thick, dist_to_wrist_in_base]) rotate ([-90, 0, 0]) cylinder(base_spacer_length + 2 * alu_sheet_10_thick + 2 * M12_nut_thick, r = leg_shaft_radius);
 
     // motor shaft
-    translate([dist_to_push_motor_hole_in_base, -base_spacer_length / 2 - alu_sheet_10_thick - m8_nut_thick, leg_dist_to_motor_shaft_in_base]) rotate ([-90, 0, 0]) cylinder (h = base_spacer_length + 2 * alu_sheet_10_thick + 2 * m8_nut_thick, r = leg_motor_shaft_radius, $fn = 30);
+    translate([dist_to_push_motor_hole_in_base, -base_spacer_length / 2 - alu_sheet_10_thick - M8_nut_thick, leg_dist_to_motor_shaft_in_base]) rotate ([-90, 0, 0]) cylinder (h = base_spacer_length + 2 * alu_sheet_10_thick + 2 * M8_nut_thick, r = leg_motor_shaft_radius, $fn = 30);
 
     // linear motor
     
@@ -164,6 +170,8 @@ complete_leg(leg_angle = leg_angle);
 //leg_bone_with_bearings();
 
 //front_bone_with_pusher_components(1);
+
+//front_bones_with_components(0);
 
 //translate ([0, 0, 30]) rotate ([0, 90, 0]) 
 //leg_bone();
