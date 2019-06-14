@@ -7,9 +7,9 @@
 include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sheets.scad>
 
-leg_angle = 10;
+leg_angle = 80;
 
-leg_top_base_length = 250;
+leg_top_base_length = 240;
 
 leg_base_height = 40;
 
@@ -35,8 +35,8 @@ base_spacer_length = crotch_width_front + 2 * leg_bone_thick[1] + 2 * 5.5;
 echo(base_spacer_length=base_spacer_length);
 
 dist_to_first_bone = 60;
-dist_to_second_bone = 140;
-dist_to_push_motor_hole_in_base = 200;
+dist_to_second_bone = 150;
+dist_to_push_motor_hole_in_base = 180;
 dist_to_push_motor_hole_in_base_vertical = 11;
 dist_to_first_spacer = 15;
 dist_to_second_spacer = leg_top_base_length - 15;
