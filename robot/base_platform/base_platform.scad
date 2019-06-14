@@ -4,15 +4,15 @@
 // MIT License  
 //--------------------------------------------------------------
 
+include <base_platform_params.scad>
+
 use <../../basic_scad/pulleys.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
-include <base_platform_params.scad>
+use <../../basic_scad/screws_nuts_washers.scad>
 
 include <../../basic_scad/config.scad>
 
-use <../../basic_scad/screws_nuts_washers.scad>
 use <../../basic_scad/belt.scad>
-
 
 use <../../basic_scad/batteries.scad>
 include <../../basic_scad/params_batteries.scad>
@@ -36,7 +36,6 @@ include <../../basic_scad/tolerance.scad>
 
 use <platform_gears.scad>
 use <tracks.scad>
-use <tracks_small.scad>
 //------------------------------------------------------
 module base_motor_support_sheet()
 {
