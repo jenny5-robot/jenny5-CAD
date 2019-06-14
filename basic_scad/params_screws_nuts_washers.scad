@@ -33,20 +33,20 @@ m6_nut_slim_thick = 3;
 m6_autolock_nut_thick = 6;
 m6_long_nut_thick = 9;
 
-m8_screw_head_height = 5.7;
-m8_screw_radius = 3.9;
-m8_nut_small_width = 12.8;
-m8_nut_radius = 7.3;
-m8_slim_nut_small_width = 12.4;
-m8_nut_thick = 6.5;
-m8_nut_height = m8_nut_thick;
-m8_slim_nut_height = 5.5;
-m8_screw_head_radius = 6.5;
-m8_autolock_nut_thick = 8;
+M8_screw_head_height = 5.7;
+M8_screw_radius = 3.9;
+M8_nut_small_width = 12.8;
+M8_nut_radius = 7.3;
+M8_slim_nut_small_width = 12.4;
+M8_nut_thick = 6.5;
+M8_nut_height = M8_nut_thick;
+M8_slim_nut_height = 5.5;
+M8_screw_head_radius = 6.5;
+M8_autolock_nut_thick = 8;
 
-m10_screw_radius = 5;
-m10_nut_thick = 8;
-m10_nut_radius = 9.8;
+M10_screw_radius = 5;
+M10_nut_thick = 8;
+M10_nut_radius = 9.8;
 
 M12_screw_radius = 6;
 M12_nut_thick = 10;
@@ -55,14 +55,14 @@ M12_long_long_nut_thick = 36;
 M12_long_nut_thick = 36;
 M12_autolock_nut_thick = 14;
 
-m10_long_nut_radius = 9.71;
-m10_long_nut_height = 29.8;
+M10_long_nut_radius = 9.71;
+M10_long_nut_height = 29.8;
 
-m10_long_thick_nut_radius = 7.41;
-m10_long_thick_nut_height = 30.4;
+M10_long_thick_nut_radius = 7.41;
+M10_long_thick_nut_height = 30.4;
 
-m12_plastic_nut_radius = 10.45;
-m12_plastic_nut_height = 23.3;
+M12_plastic_nut_radius = 10.45;
+M12_plastic_nut_height = 23.3;
 
 tr12_3_nut_radius = 11;
 tr12_3_nut_height = 18.1;
