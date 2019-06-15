@@ -38,9 +38,13 @@ module base_side(base_height = 40)
                 
      // hole motor shaft
         echo("motor support hole position = ", dist_to_push_motor_hole_in_base, leg_dist_to_motor_shaft_in_base);
-        translate ([dist_to_push_motor_hole_in_base, 0, base_height - 8] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M8_screw_radius, $fn = 30);
-        
+        translate ([dist_to_push_motor_hole_in_base, 0, leg_dist_to_motor_shaft_in_base] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M8_screw_radius, $fn = 30);
+        // spacer hole 1
+        echo("spacer hole 1", dist_to_first_spacer);
         translate ([dist_to_first_spacer, 0, 15] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M8_screw_radius, $fn = 30);
+        // spacer hole 2
+        echo("spacer hole 2", dist_to_second_spacer);
+        translate ([dist_to_second_spacer, 0, 15] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M8_screw_radius, $fn = 30);
         
     }
 }
@@ -63,7 +67,7 @@ module knee_side()
         translate ([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M12_screw_radius, $fn = 30);
         // back hole top
         echo([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, knee_side_simple_sizes[2] - leg_shaft_distance_to_edge], "radius = 6");
-        translate ([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, knee_side_simple_sizes[2] - leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = 6, $fn = 30);
+        translate ([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, knee_side_simple_sizes[2] - leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M12_screw_radius, $fn = 30);
         // middle hole for spacer
         echo([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] / 2], "radius = 4");
         translate([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] / 2] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = knee_side_simple_sizes[1] + 2 * display_tolerance, r = M8_screw_radius);

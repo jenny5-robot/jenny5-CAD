@@ -73,11 +73,10 @@ module front_bones_with_components(motor_angle_to_horizontal)
     
     // pusher tube
     translate ([leg_bone_thick[0] / 2 + rb_6905_external_radius, -crotch_width_front / 2 - leg_bone_thick[1], leg_distance_to_pusher])
-    rotate ([-90, 90 - motor_angle_to_horizontal - 15, 0]) leg_pusher_tube();
+    rotate ([-90, 90 - (motor_angle_to_horizontal + 15), 0]) leg_pusher_tube();
     
     translate ([leg_bone_thick[0] / 2 + rb_6905_external_radius, -crotch_width_front / 2 - leg_bone_thick[1] / 2 + rb_6905_thick / 2 + SHF20_shaft_suport_length / 2, leg_distance_to_pusher])
-    rotate ([0, 90 - (motor_angle_to_horizontal + 15), 0]) translate ([0, 0, -10]) rotate ([0, 0, 90]) mirror ([0, 0, 1]) shaft_support_SHF20();
-    
+    rotate ([0, 180-(motor_angle_to_horizontal + 15), 0]) translate ([0, 0, -10]) rotate ([0, 0, 90]) mirror ([0, 0, 1]) shaft_support_SHF20();
 }
 //----------------------------------------------------------------------
 module half_leg(leg_angle_to_horizontal = 45, motor_side = 1)
