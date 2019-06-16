@@ -4,9 +4,6 @@
 // MIT License
 //--------------------------------------------------------------
 
-
-include <arm_params.scad>
-
 use <../../basic_scad/basic_components.scad>
 use <../../basic_scad/stepper_motors.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
@@ -19,8 +16,6 @@ include <../../basic_scad/params_pulleys.scad>
 use <../../basic_scad/pulleys.scad>
 use <../../basic_scad/radial_bearings.scad>
 
-include <gripper_params.scad>
-use <gripper.scad>
 use <../../basic_scad/belt.scad>
 
 include <../../basic_scad/params_webcam.scad>
@@ -29,24 +24,26 @@ use <../../basic_scad/tube_bracket.scad>
 include <../../basic_scad/params_tube_bracket.scad>
 
 use <../../basic_scad/motor_pulley.scad>
-use <arm_pulleys.scad>
-
-include <../../basic_scad/params_stepper_motor_gearbox.scad>
-
-include <../../basic_scad/tolerance.scad>
-
-use <arm_sheets.scad>
 
 use <../../basic_scad/as5147.scad>
 include <../../basic_scad/as5147_params.scad>
 use <../../basic_scad/rings.scad>
 
+include <../../basic_scad/tolerance.scad>
+use <../../basic_scad/webcam.scad>
+
+include <arm_params.scad>
+
+use <arm_sheets.scad>
+use <arm_pulleys.scad>
+
 use <arm_sensor_support.scad>
 include <arm_sensor_support_params.scad>
 
-use <../../basic_scad/webcam.scad>
-
 use <arm_bones.scad>
+include <gripper_params.scad>
+use <gripper.scad>
+
 //---------------------------------------------------------------------------
 module elbow_rotation_motor_with_components()
 {

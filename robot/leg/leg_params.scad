@@ -1,5 +1,5 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
 // Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
@@ -7,7 +7,7 @@
 include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sheets.scad>
 
-leg_angle = 9;
+leg_angle = 70;
 
 leg_top_base_length = 240;
 

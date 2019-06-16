@@ -10,6 +10,7 @@ include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_tube_bracket.scad>
 include <../../basic_scad/params_sheets.scad>
 include <../../basic_scad/params_stepper_motors.scad>
+//--------------------------------------------------------------
 
 
 angle_body_arm = 90;// 180 (closed - front)...-90 (open-back); // default = -90
@@ -18,7 +19,7 @@ body_rotation_linear_motor_position = 0;
 
 bracket_thick = 10;
 
-dist_edge_to_body_shaft = rbearing_6905_housing_size[0] / 2 + bracket_thick;
+dist_edge_to_body_shaft = rbearing_6907_housing_size[0] / 2 + bracket_thick;
 
 body_height = 340;
 body_width = 450;
@@ -32,22 +33,24 @@ motor_housing_tolerance_large = 20;
 
 body_rotation_sheet_size = [60, 200, 10];
 
+body_arm_bone_size = 25;
 body_shaft_radius = 12.5;
 
-distance_between_body_modules = rbearing_6905_housing_size[0] + 2 * body_shaft_radius + wall_thick_2;
+distance_between_body_modules = rbearing_6907_housing_size[0] + body_arm_bone_size + wall_thick_2;
 
-body_sheet_size = [rbearing_6905_housing_size[0] + 2 * bracket_thick + 2 * wall_thick_1, distance_between_body_modules + 2 * body_shaft_radius + 2 * braket_lateral_wall_thick, 3];
+body_sheet_size = [rbearing_6907_housing_size[0] + 2 * bracket_thick + 2 * wall_thick_1, distance_between_body_modules + body_arm_bone_size + 2 * braket_lateral_wall_thick, 3];
 
 body_sheet_size_bottom = body_sheet_size + [10, 0, 0];
 
-body_motor_sheet_size = [60, distance_between_body_modules + 2 * body_shaft_radius + 2 * braket_lateral_wall_thick, 3];
+body_motor_sheet_size = [60, distance_between_body_modules + body_arm_bone_size + 2 * braket_lateral_wall_thick, 3];
 
-body_intermodule_sheet_size = [40, distance_between_body_modules + 2 * body_shaft_radius + 2 * braket_lateral_wall_thick, 3];
+body_intermodule_sheet_size = [40, distance_between_body_modules + body_arm_bone_size + 2 * braket_lateral_wall_thick, 3];
 
 
-body_arm_shaft_length = body_height + 2 * tube_bracket_base_thick_strong + 2 * body_sheet_size[2] + 4 * body_shaft_radius + rbearing_6905_housing_size[2];
+body_arm_shaft_length = body_height + 2 * tube_bracket_base_thick_strong + 2 * body_sheet_size[2] + 2 * body_arm_bone_size + rbearing_6907_housing_size[2];
 
-body_shaft_pulley_height = 14;
+printed_pulley_thick = 14;
+pulley_spacer_length = 5.8;
 
 offset_body_motor_sheet = 130;
 

@@ -51,8 +51,8 @@ module body_sheet_for_bearing_support_top()
         // screw holes
         echo("bearing support holes = ");
         for (i = [1 : 4]){
-            echo([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] + rbearing_6905_housing_holes_position[i]);
-            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_housing_holes_position[i]) cylinder (h = body_sheet_size[2] + 2 * display_tolerance, r = 2);
+            echo([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] + rbearing_6907_housing_holes_position[i]);
+            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] - display_tolerance_z) translate(rbearing_6907_housing_holes_position[i]) cylinder (h = body_sheet_size[2] + 2 * display_tolerance, r = 2);
         }
         bracket_holes = f_tube_bracket_holes(body_sheet_size[0], body_shaft_radius);
         
@@ -80,8 +80,8 @@ module body_sheet_for_bearing_support_bottom()
         // screw holes
         echo("bearing support holes = ");
         for (i = [1 : 4]){
-            echo([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] + rbearing_6905_housing_holes_position[i]);
-            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] - display_tolerance_z) translate(rbearing_6905_housing_holes_position[i]) cylinder (h = body_sheet_size[2] + 2 * display_tolerance, r = 2);
+            echo([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] + rbearing_6907_housing_holes_position[i]);
+            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0] - display_tolerance_z) translate(rbearing_6907_housing_holes_position[i]) cylinder (h = body_sheet_size[2] + 2 * display_tolerance, r = 2);
         }
         bracket_holes = f_tube_bracket_holes(body_sheet_size[0], body_shaft_radius);
         

@@ -58,8 +58,9 @@ use <body_sensor_support.scad>
 use <body_bones.scad>
 
 //---------------------------------------------------------------------------
-module body_module_corner()
+module body_corner_module()
 {
+    // plastic parts
     translate ([-18, 0, 0]) rotate ([90, 0, 0]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
     translate ([18, 0, 0]) rotate ([90, 0, 0]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
     translate ([-18, 0, 0]) rotate ([-90, 0, 0]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
@@ -70,7 +71,9 @@ module body_module_corner()
     translate ([0, 0, 27]) rotate ([0, 90, -90]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
     translate ([0, 0, 64]) rotate ([0, 90, -90]) tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true);
     
+    // sheets
     translate ([-corner_sheet_size[0] / 2, -(body_shaft_radius + tube_bracket_base_thick_strong), - f_bracket_width(body_shaft_radius) / 2]) rotate ([90, 0, 0]) corner_sheet(body_shaft_radius);
+    
     translate ([-corner_sheet_size[0] / 2, (body_shaft_radius + tube_bracket_base_thick_strong) + corner_sheet_size[2], - f_bracket_width(body_shaft_radius) / 2]) rotate ([90, 0, 0]) corner_sheet(body_shaft_radius);
 }
 //---------------------------------------------------------------------------
@@ -83,10 +86,10 @@ module body_module()
     // top tube
     translate ([-body_width / 2, 0, body_height + 2 * body_shaft_radius]) rotate ([0, 90, 0]) color ("black") cylinder (h = body_width, r = body_shaft_radius);
         // bottom corner
-    body_module_corner();
+    body_corner_module();
     translate ([0, 0, body_height + 2 * body_shaft_radius])
     mirror([0, 0, 1])
-    body_module_corner();
+    body_corner_module();
    // rotate ([90, 0, 0]) tube_corner(body_shaft_radius);
         // top corner
     //translate ([0, 0, body_height + 2 * body_shaft_radius]) rotate ([-90, 0, 0]) tube_corner(body_shaft_radius);
@@ -100,19 +103,19 @@ module body_sheet_with_bearing()
     body_sheet_for_bearing_support_top();
     // bearing
     translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, body_sheet_size[2]])
-    6905rs();
+    6907rs();
     // bearing housing
-    translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate ([0, 0, rbearing_6905_housing_size[2] + body_sheet_size[2]]) mirror([0, 0, 1]) rbearing_6905_housing();
+    translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate ([0, 0, rbearing_6907_housing_size[2] + body_sheet_size[2]]) mirror([0, 0, 1]) rbearing_6907_housing();
     
     // screws
     for (i = [1 : 4])
-            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate(rbearing_6905_housing_holes_position[i]) {
+            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate(rbearing_6907_housing_holes_position[i]) {
                 // screw
                 M4x18_sunken();
                 //washer
-                translate([0, 0, body_sheet_size[2] + rbearing_6905_housing_size[2]]) M4x12_washer();
+                translate([0, 0, body_sheet_size[2] + rbearing_6907_housing_size[2]]) M4x12_washer();
                 // autolock nut
-                translate([0, 0, body_sheet_size[2] + rbearing_6905_housing_size[2] + washer_4_thick]) M4_autolock_nut();
+                translate([0, 0, body_sheet_size[2] + rbearing_6907_housing_size[2] + washer_4_thick]) M4_autolock_nut();
             }
 }
 //---------------------------------------------------------------------------
@@ -122,19 +125,19 @@ module body_sheet_with_bearing_and_belt_tensioner()
     body_sheet_for_bearing_support_bottom();
     // bearing
     translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, body_sheet_size_bottom[2]])
-    6905rs();
+    6907rs();
     // bearing housing
-    translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate ([0, 0, rbearing_6905_housing_size[2] + body_sheet_size[2]]) mirror([0, 0, 1]) rbearing_6905_housing();
+    translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate ([0, 0, rbearing_6907_housing_size[2] + body_sheet_size[2]]) mirror([0, 0, 1]) rbearing_6907_housing();
     
     // screws
     for (i = [1 : 4])
-            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate(rbearing_6905_housing_holes_position[i]) {
+            translate([body_sheet_size[0] / 2, body_sheet_size[1] / 2, 0]) translate(rbearing_6907_housing_holes_position[i]) {
                 // screw
                 M4x18_sunken();
                 //washer
-                translate([0, 0, body_sheet_size[2] + rbearing_6905_housing_size[2]]) M4x12_washer();
+                translate([0, 0, body_sheet_size[2] + rbearing_6907_housing_size[2]]) M4x12_washer();
                 // autolock nut
-                translate([0, 0, body_sheet_size[2] + rbearing_6905_housing_size[2] + washer_4_thick]) M4_autolock_nut();
+                translate([0, 0, body_sheet_size[2] + rbearing_6907_housing_size[2] + washer_4_thick]) M4_autolock_nut();
             }
 // belt tensioner            
   translate ([body_sheet_size_bottom[0] - 4, body_motor_sheet_size[1] / 2 - 15, -rb_624_thick -wall_thick_2]) 624rs();
@@ -264,7 +267,7 @@ module body_motor_module()
         }
 }
 //---------------------------------------------------------------------------
-module body_intramodule()
+module body_intramodule_connector()
 {
     // aluminium sheets
     translate ([body_shaft_radius + tube_bracket_base_thick_strong + body_intermodule_sheet_size[2], -body_intermodule_sheet_size[1] / 2, -body_intermodule_sheet_size[0] / 2]) rotate([0, -90, 0]) body_sheet_for_intramodule();
@@ -298,17 +301,17 @@ module body()
     ///////////////////////////////////////////////////////////////////////
     
     translate ([0, 0, body_height / 2 + body_shaft_radius - body_intermodule_offset]) 
-        body_intramodule();
+        body_intramodule_connector();
     // top intermodule parts
     translate ([0, 0, body_height / 2 + body_shaft_radius + body_intermodule_offset]) 
-        body_intramodule();
+        body_intramodule_connector();
     
 ///////////////////////////////////////////////////////////////////////
     // left arm
     translate ([-(body_width / 2 -dist_edge_to_body_shaft), 0, 0]) {
-    // vertical axis
-        translate([0, 0, -rbearing_6905_housing_size[2] - body_shaft_radius - body_sheet_size[2] - tube_bracket_base_thick])
-            color ("black") body_arm_bone(body_arm_shaft_length);
+    // bone first
+        translate([0, 0, -rbearing_6907_housing_size[2] - body_shaft_radius - body_sheet_size[2] - tube_bracket_base_thick])
+            body_arm_bone(body_arm_shaft_length);
         
     // traction pulley
         translate ([0, 0, -(body_shaft_radius + body_sheet_size[2] + tube_bracket_base_thick + 5) - 11]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
@@ -325,10 +328,11 @@ module body()
             body_motor_module();
     }
     
-    // right arm    
+    // right arm
+    // bone first    
     translate ([(body_width / 2 - dist_edge_to_body_shaft), 0, 0]){
         translate([0, 0, -11 - 4 - body_shaft_radius - body_sheet_size[2] - tube_bracket_base_thick])
-          color ("black") body_arm_bone(body_arm_shaft_length);
+          body_arm_bone(body_arm_shaft_length);
         
     // traction pulley
         translate ([0, 0, -(body_shaft_radius + body_sheet_size[2] + tube_bracket_base_thick + 5) - 11]) rotate([0, 0, angle_body_arm]) body_arm_traction_pulley();
@@ -372,7 +376,7 @@ body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
 //corner_sheet(body_shaft_radius);
 
-//rbearing_6905_housing(); // 8x
+//rbearing_6907_housing(); // 8x
 
 //body_sheet_with_bearing_and_belt_tensioner();
 
