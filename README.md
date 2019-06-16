@@ -8,8 +8,12 @@ OpenSCAD from http://www.openscad.org/. Make sure that you have the latest devel
 
 ## How to compile
 
-Go to [robot](robot) folder, open _jenny5.scad_ file with OpenSCAD and press F5 (Preview) ... and wait for several seconds (or minutes if you have a slow computer).
+Go to [robot](robot) folder, open _jenny5.scad_ file with OpenSCAD and press *Preview* button (or *F5*) ... and wait for several seconds (or minutes if you have a slow computer).
 
+The press *View all* button (or *Ctrl+Shift+V*) to view the entire robot and use the mouse to navigate.
+ 
+ Note that left button drag means rotate, right button drag means move and the wheel means zoom.
+ 
 ## Project structure ##
 
 The project is divided into several folders:
