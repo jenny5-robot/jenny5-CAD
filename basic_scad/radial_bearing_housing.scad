@@ -112,6 +112,10 @@ module rbearing_6905_housing()
     radial_bearing_housing(rbearing_6905_housing_size, rbearing_6905_housing_holes_position, rb_6905_external_radius, rb_6905_thick, rbearing_6905_housing_size[2], m4_screw_radius);
 }
 //---------------------------------------------------------------------------
+module rbearing_6907_housing()
+{
+    radial_bearing_housing(rbearing_6907_housing_size, rbearing_6907_housing_holes_position, rb_6907_external_radius, rb_6907_thick, rbearing_6907_housing_size[2], m4_screw_radius);
+}//---------------------------------------------------------------------------
 module rbearing_608_housing_double()
 {
     radial_bearing_housing(rbearing_608_housing_size, rbearing_608_housing_holes_position, rb_608_external_radius, 2 * rb_608_thick, rbearing_608_housing_size[2] + rb_608_thick, m4_screw_radius, 0, 1);
