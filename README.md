@@ -1,6 +1,6 @@
 # Jenny5 robot - CAD files
 
-A human size, multi purpose (almost humanoid) robot.
+A human size, multi purpose, almost humanoid, robot.
 
 ## Software needed
 
@@ -9,6 +9,13 @@ OpenSCAD from http://www.openscad.org/. Make sure that you have the latest devel
 ## How to compile
 
 Go to [robot](robot) folder, open _jenny5.scad_ file with OpenSCAD and press F5 (Preview) ... and wait for several seconds (or minutes if you have a slow computer).
+
+## Project structure ##
+
+The project is divided into several folders:
+
+- [robot](robot) folder, which contains parts specific to Jenny 5 robot.
+- [basic_scad](basic_scad) folder, which contains general parts (like motors, bearings, screws, nuts, housings, etc) which are required to build the robot or something else.
 
 ## Warning
 
