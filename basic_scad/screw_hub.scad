@@ -4,10 +4,12 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <params_basic_components.scad>
+//include <params_basic_components.scad>
 include <config.scad>
 include <tolerance.scad>
+include <screw_hub_params.scad>
 
+//--------------------------------------------------------------
 module screw_hub(internal_radius, large_external_radius, small_external_radius, large_cylinder_thick, small_cylinder_thick, screws_hole_radius, distance_between_screws_hole)
 {
     difference(){
@@ -24,5 +26,13 @@ module screw_hub(internal_radius, large_external_radius, small_external_radius, 
         cylinder(h = large_cylinder_thick + 2 * display_tolerance, r = screws_hole_radius, $fn = 15);
     }
 }
+//--------------------------------------------------------------
 
-screw_hub(internal_radius = 5, large_external_radius = 20, small_external_radius = 10, large_cylinder_thick = 6, small_cylinder_thick = 8, screws_hole_radius = 2.5, distance_between_screws_hole = 22);
+screw_hub(internal_radius = 10mm_internal_radius, 
+large_external_radius = 10mm_large_external_radius, 
+small_external_radius = 10mm_small_external_radius, 
+large_cylinder_thick = 10mm_large_cylinder_thick, 
+small_cylinder_thick = 10mm_small_cylinder_thick, 
+screws_hole_radius = 10mm_screws_hole_radius, 
+distance_between_screws_hole = 10mm_distance_between_screws_hole
+);
