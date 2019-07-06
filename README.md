@@ -21,21 +21,31 @@ The project is divided into several folders:
 - [robot](robot) folder, which contains parts specific to Jenny 5 robot.
 - [basic_scad](basic_scad) folder, which contains general parts (like motors, bearings, screws, nuts, housings, etc) which are required to build the robot or something else.
 
+
+The [robot](robot) folder contains 5 subfolders:
+
+- [arm](robot/arm). The main file is _arm.scad_.
+- [base_platform](robot/base_platform). The main file is _base_platform.scad_
+- [body](robot/body). The main file is _body.scad_. Please note that arms are connected to body only in the main file of the project ( _jenny5.scad_ ).
+- [head](robot/head). The main file is _head.scad_.
+- [leg](robot/leg). The main file is _leg.scad_.
+
+
 ## Warning
 
-This is work in progress. Do not start to build the robot yet as many things will change.
+This is work in progress.
 
 ## Contact author
 
 **Mihai Oltean**
 
-www.jenny5.org
+https://www.jenny5.org
 
 https://github.com/jenny5-robot
 
 https://groups.google.com/forum/#!forum/jenny5
 
-mihai.oltean@gmail.com
+email: mihai.oltean@gmail.com
 
 
 ## License
