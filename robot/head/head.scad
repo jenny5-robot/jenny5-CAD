@@ -28,9 +28,6 @@ use <../../basic_scad/ultrasonic_support.scad>
 use <../../basic_scad/ultrasonic.scad>
 use <../../basic_scad/basic_components.scad>
 
-include <../../basic_scad/params_breadboards.scad>
-use <../../basic_scad/breadboards.scad>
-
 
 include <head_params.scad>
 include <../../basic_scad/params_alu_profiles.scad>
