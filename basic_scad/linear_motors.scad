@@ -57,11 +57,9 @@ module linear_dc_motor(stroke, current_pos)
 module linear_dc_motor_simple(stroke)
 {
     color("grey") 
-    render()
-    {
-        motor_base_length = stroke - 20;
+    render(){
         // screw
-          translate([0, 0, 10]) cylinder (h = motor_base_length, r = 6);
+        translate([0, 0, 10 + 26]) cylinder (h = stroke, r = 6);
         // base support
         translate ([0, 0, -10]) 
           difference() {
