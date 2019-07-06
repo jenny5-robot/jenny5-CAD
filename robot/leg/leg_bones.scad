@@ -78,12 +78,12 @@ module front_bone_with_pusher_components()
 {
     difference(){
         leg_bone_with_bearings();
-        translate ([-leg_bone_thick[0] / 2, 0, leg_distance_to_pusher - rbearing_6905_enclosed_housing_size[0] / 2 - 5] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = leg_bone_thick[0] + 2 * display_tolerance, r = 2);
-        translate ([-leg_bone_thick[0] / 2, 0, leg_distance_to_pusher + rbearing_6905_enclosed_housing_size[0] / 2 + 5] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = leg_bone_thick[0] + 2 * display_tolerance, r = 2);
-        echo("front bone pusher hole 1 = ", leg_distance_to_pusher - (rbearing_6905_enclosed_housing_size[0] / 2 + 5));
-        echo("front bone pusher hole 2 = ", leg_distance_to_pusher + (rbearing_6905_enclosed_housing_size[0] / 2 + 5));
+        translate ([-leg_bone_thick[0] / 2, 0, leg_distance_to_pusher - rbearing_6905_enclosed_housing_holes_position[0][0]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = leg_bone_thick[0] + 2 * display_tolerance, r = 2);
+        translate ([-leg_bone_thick[0] / 2, 0, leg_distance_to_pusher + rbearing_6905_enclosed_housing_holes_position[0][0]] - display_tolerance_x) rotate ([0, 90, 0]) cylinder (h = leg_bone_thick[0] + 2 * display_tolerance, r = 2);
+        echo("front bone pusher support hole 1 = ", leg_distance_to_pusher - (rbearing_6905_enclosed_housing_holes_position[0][0]));
+        echo("front bone pusher support hole 2 = ", leg_distance_to_pusher + (rbearing_6905_enclosed_housing_holes_position[0][0]));
     }
-    translate([leg_bone_thick[0] / 2 + rb_6905_external_radius + 5, 0, leg_distance_to_pusher]){
+    translate([leg_bone_thick[0] / 2 + rb_6905_external_radius, 0, leg_distance_to_pusher]){
             // bearing housing
             translate ([rb_6905_external_radius + radial_bearing_vertical_housing_base_wall_thick, 0, 0]) rotate ([0, -90, 0]) radial_bearing_6905_vertical_housing();
             // bearing 
