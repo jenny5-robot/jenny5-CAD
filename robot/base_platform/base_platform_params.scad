@@ -12,8 +12,9 @@ platform_shaft_edge_size = 25;
 
 base_platform_size = [380, 310, 16];
 
-first_tracks_offset = 25;
-distance_between_wheels = 320;   
+first_wheel_offset = 25;
+second_wheel_offset = 185;
+third_wheel_offset = 345;   
 
 lidar_position = 80;
 
