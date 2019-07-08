@@ -83,28 +83,28 @@ module platform_leg()
     translate ([leg_postion_on_platform, 0, base_platform_size[2]]) complete_leg(leg_angle);
 }
 //---------------------------------------------------------------------------
-module robot()
+module jenny5()
 {
+    // platform
     platform_leg();
-
-
-    
+   
     complete_leg_height = 2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + (leg_distance_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 10));
     
     echo(complete_leg_height = complete_leg_height);
     
+    // body
     translate ([leg_postion_on_platform +100, 0, complete_leg_height + base_platform_size[2] + 25]) rotate ([0, 0, 90]) body_with_head();
 }
 //---------------------------------------------------------------------------
-module robot_with_kitchen_table()
+module jenny5_with_kitchen_table()
 {
-    robot();
+    jenny5();
     translate ([-800, 0, 0]) rounded_table(750, 400);
 }
 //---------------------------------------------------------------------------
-robot_with_kitchen_table();
+jenny5_with_kitchen_table();
 
-//robot();
+//jenny5();
 
 //platform_leg();
 
