@@ -4,7 +4,7 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <config.scad>
+include <material_colors.scad>
 include <params_screws_nuts_washers.scad>
 use <basic_components.scad>
 include <params_basic_components.scad>

@@ -20,7 +20,7 @@
  * @using 1 x m3x10 set screw or 1 x m3x8 grub screw
  */
 
-include <config.scad>
+include <material_colors.scad>
 include <params_basic_components.scad>
 
 include <params_pulleys.scad>

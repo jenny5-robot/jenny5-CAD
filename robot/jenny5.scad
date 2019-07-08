@@ -4,18 +4,8 @@
 // MIT License
 //--------------------------------------------------------------
 
-include <../basic_scad/params_basic_components.scad>
-use <../basic_scad/basic_components.scad>
 
-include <../basic_scad/params_screws_nuts_washers.scad>
 use <../basic_scad/screws_nuts_washers.scad>
-
-include <../basic_scad/config.scad>
-
-
-use <../basic_scad/spacer.scad>
-use <../basic_scad/func_3d.scad>
-include <../basic_scad/params_alu_profiles.scad>
 
 include <leg/leg_params.scad>
 use <leg/leg.scad>
@@ -32,7 +22,6 @@ include <arm/arm_params.scad>
 use <arm/arm.scad>
 
 include <../basic_scad/tolerance.scad>
-use <../basic_scad/tube_bracket.scad>
 
 use <../basic_scad/table.scad>
 

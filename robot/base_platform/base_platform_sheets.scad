@@ -4,7 +4,7 @@
 // MIT License  
 //--------------------------------------------------------------
 include <base_platform_params.scad>
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 include <../../basic_scad/tolerance.scad>
 include <../../basic_scad/params_radial_bearings_u_housing.scad>
 

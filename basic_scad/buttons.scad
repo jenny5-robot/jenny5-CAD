@@ -11,7 +11,7 @@ include <params_screws_nuts_washers.scad>
 use <basic_components.scad>
 include <tolerance.scad>
 
-include <config.scad>
+include <material_colors.scad>
 //--------------------------------------------------------
 module button()
 {

@@ -6,7 +6,7 @@
 
 include <shaft_support_params.scad>
 include <tolerance.scad>
-include <config.scad>
+include <material_colors.scad>
 
 //--------------------------------------------------------------
 module shaft_support_SHF20()

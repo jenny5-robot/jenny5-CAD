@@ -10,7 +10,7 @@ include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
 use <../../basic_scad/radial_bearing_u_housing.scad>
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 
 include <../../basic_scad/params_pulleys.scad>
 use <../../basic_scad/pulleys.scad>

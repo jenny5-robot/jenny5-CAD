@@ -14,7 +14,7 @@ include <params_dc_motors.scad>
 use <screws_nuts_washers.scad>
 include <tolerance.scad>
 
-include <config.scad>
+include <material_colors.scad>
 
 
 //--------------------------------------------------------------------

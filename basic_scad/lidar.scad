@@ -11,7 +11,7 @@ include <params_slip_rings.scad>
 include <params_infrared_sensors.scad>
 include <params_screws_nuts_washers.scad>
 include <tolerance.scad>
-include <config.scad>
+include <material_colors.scad>
 
 use <basic_components.scad>
 use <tera_ranger_one.scad>

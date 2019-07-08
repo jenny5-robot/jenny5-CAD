@@ -12,7 +12,7 @@ use <../../basic_scad/screws_nuts_washers.scad>
 include <../../basic_scad/params_basic_components.scad>
 include <../../basic_scad/params_radial_bearings.scad>
 include <../../basic_scad/params_webcam.scad>
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 use <../../basic_scad/buttons.scad>
 include <../../basic_scad/servos_params.scad>
 use <../../basic_scad/servos.scad>

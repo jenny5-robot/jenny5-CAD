@@ -7,7 +7,7 @@
 include <params_screws_nuts_washers.scad>
 include <params_radial_bearings.scad>
 include <params_belt_tensioner.scad>
-include <config.scad>
+include <material_colors.scad>
 include <tolerance.scad>
 
 

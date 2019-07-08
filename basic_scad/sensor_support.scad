@@ -1,5 +1,5 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
 // Source code: github.com/jenny5-robot
 // MIT License
 //--------------------------------------------------------------
@@ -9,7 +9,7 @@ use <basic_components.scad>
 
 include <params_screws_nuts_washers.scad>
 
-include <config.scad>
+include <material_colors.scad>
 
 include <tolerance.scad>
 

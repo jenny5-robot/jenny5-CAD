@@ -12,7 +12,7 @@ use <../../basic_scad/radial_bearings.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
 include <../../basic_scad/params_radial_bearings_housing.scad>
 
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 
 include <leg_params.scad>
 

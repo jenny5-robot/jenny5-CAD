@@ -7,7 +7,7 @@
 include <../../basic_scad/params_screws_nuts_washers.scad>
 include <base_platform_params.scad>
 
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 
 use <../../basic_scad/screws_nuts_washers.scad>
 

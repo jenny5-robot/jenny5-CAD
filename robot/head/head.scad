@@ -7,7 +7,7 @@
 
 
 use <../../basic_scad/basic_components.scad>
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 include <../../basic_scad/params_stepper_motors.scad>
 include <../../basic_scad/params_radial_bearings.scad>
 include <../../basic_scad/params_basic_components.scad>

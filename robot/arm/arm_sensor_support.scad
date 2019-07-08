@@ -9,7 +9,7 @@ use <../../basic_scad/basic_components.scad>
 
 include <../../basic_scad/params_screws_nuts_washers.scad>
 
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 
 include <../../basic_scad/tolerance.scad>
 

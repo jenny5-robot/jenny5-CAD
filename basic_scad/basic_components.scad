@@ -7,7 +7,7 @@
 include <params_basic_components.scad>
 use <utils.scad>
 
-include <config.scad>
+include <material_colors.scad>
 include <tolerance.scad>
 
 

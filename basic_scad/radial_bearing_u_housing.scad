@@ -7,7 +7,7 @@
 include <params_radial_bearings.scad>
 include <params_screws_nuts_washers.scad>
 include <params_basic_components.scad>
-include <config.scad>
+include <material_colors.scad>
 include <params_radial_bearings_u_housing.scad>
 use <radial_bearings.scad>
 use <basic_components.scad>

@@ -6,7 +6,7 @@
 
 include <base_platform_params.scad>
 use <../../basic_scad/basic_components.scad>
-include <../../basic_scad/config.scad>
+include <../../basic_scad/material_colors.scad>
 
 //--------------------------------------------------------------
 

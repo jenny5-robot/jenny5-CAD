@@ -6,7 +6,7 @@
 
 include <as5147_params.scad>
 include <tolerance.scad>
-include <config.scad>
+include <material_colors.scad>
 
 //--------------------------------------------------------------
 module as5147()

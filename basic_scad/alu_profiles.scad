@@ -5,7 +5,7 @@
 //--------------------------------------------------------------
 
 include <params_basic_components.scad>
-include <config.scad>
+include <material_colors.scad>
 include <params_alu_profiles.scad>
 include <tolerance.scad>
 

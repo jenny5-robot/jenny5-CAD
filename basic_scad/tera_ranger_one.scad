@@ -8,7 +8,7 @@ include <params_tera_ranger_one.scad>
 include <params_basic_components.scad>
 include <params_screws_nuts_washers.scad>
 
-include <config.scad>
+include <material_colors.scad>
 include <tolerance.scad>
 //---------------------------------------------------------------------
 module tera_ranger_one_support()

@@ -4,7 +4,7 @@
 // License: MIT
 //--------------------------------------------------------------
 
-include <config.scad>
+include <material_colors.scad>
 //--------------------------------------------------------------
 
 module rounded_table(height, radius)
