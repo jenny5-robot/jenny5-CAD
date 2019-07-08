@@ -14,7 +14,9 @@ module platform_sheet()
   difference(){    
       echo(base_platform_size = base_platform_size);
       
-    translate ([0, - base_platform_size[1] / 2, 0]) cube(base_platform_size);
+    translate ([0, - base_platform_size[1] / 2, 0]) 
+      color(wood_color)
+        cube(base_platform_size);
     
     // holes  
     // LEFT SIDE
