@@ -12,7 +12,9 @@ include <../../basic_scad/params_radial_bearings_u_housing.scad>
 module platform_sheet()
 {
   difference(){    
-    cube(base_platform_size);
+      echo(base_platform_size = base_platform_size);
+      
+    translate ([0, - base_platform_size[1] / 2, 0]) cube(base_platform_size);
     
     // holes  
     // LEFT SIDE
@@ -20,14 +22,18 @@ module platform_sheet()
     // first wheel, first bearing
     for (i = [0 : 1]){
 
-        translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i] - display_tolerance_z)
+        translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  base_platform_size[1] / 2 - platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i] - display_tolerance_z)
     cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
-        echo("first shaft first bearing",  [rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i]);
+        echo("first shaft first bearing",  [rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  base_platform_size[1] / 2 - platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i]);
     }
     
     // RIGHT SIDE
     echo("RIGHT SIDE");
-   
+    for (i = [0 : 1]){
+        translate ([rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  -base_platform_size[1] / 2 + platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i] - display_tolerance_z)
+    cylinder (h = base_platform_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 10);
+        echo("first shaft first bearing",  [rbearing_6909_vertical_housing_size_half[0] / 2 + platform_motor_bearing_offset_x,  -base_platform_size[1] / 2 + platform_motor_bearing_offset_y, 0] + rbearing_6909_enclosed_housing_holes_position[i]);
+    }   
     
 
     /*
@@ -48,3 +54,5 @@ module base_motor_support_sheet()
     cube(base_motor_support_sheet_size);
 }
 //------------------------------------------------------
+
+platform_sheet();

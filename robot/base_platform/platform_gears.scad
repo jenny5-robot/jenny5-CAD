@@ -25,7 +25,9 @@ include <../../basic_scad/params_radial_bearings.scad>
 module platform_wheel_gear()
 {    
     difference(){
-        rotate ([0, 0, 12]) gear (number_of_teeth = 28,
+        rotate ([0, 0, 12]) 
+        color(plastic_color)
+        gear (number_of_teeth = 28,
 					circular_pitch = 500,
 					bore_diameter = 0,
 					hub_diameter = 0,

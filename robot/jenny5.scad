@@ -78,7 +78,7 @@ module body_with_head()
 module platform_foot()
 {
     // mobile platform
-    translate ([0, -base_platform_size[1] / 2, 0]) platform();
+    platform();
     // leg
     translate ([leg_postion_on_platform, 0, base_platform_size[2]]) complete_leg(leg_angle);
 }
@@ -89,7 +89,7 @@ module robot()
 
 
     
-    complete_leg_height = 2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + (dist_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 10));
+    complete_leg_height = 2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + (leg_distance_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 10));
     
     echo(complete_leg_height = complete_leg_height);
     
