@@ -75,7 +75,7 @@ module body_with_head()
 
 }
 //---------------------------------------------------------------------------
-module platform_foot()
+module platform_leg()
 {
     // mobile platform
     platform();
@@ -85,7 +85,7 @@ module platform_foot()
 //---------------------------------------------------------------------------
 module robot()
 {
-    platform_foot();
+    platform_leg();
 
 
     
@@ -106,7 +106,7 @@ robot_with_kitchen_table();
 
 //robot();
 
-//platform_foot();
+//platform_leg();
 
 //body_with_head();
 
