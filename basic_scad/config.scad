@@ -11,3 +11,4 @@ shaft_color = "Silver";
 plastic_color = "Yellow";
 pulley_color = "DarkSlateGray";
 steel_color = "LightSlateGray";
+wood_color = "Maroon";
