@@ -1,7 +1,7 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
 // Source code: github.com/jenny5-robot
-// MIT License  
+// License: MIT  
 //--------------------------------------------------------------
 include <base_platform_params.scad>
 include <../../basic_scad/material_colors.scad>

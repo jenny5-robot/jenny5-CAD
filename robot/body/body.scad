@@ -1,16 +1,9 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
 // Source code: github.com/jenny5-robot
-// MIT License
+// License: MIT
 //--------------------------------------------------------------
 
-include <../../basic_scad/params_sheets.scad>
-include <../../basic_scad/params_basic_components.scad>
-use <../../basic_scad/basic_components.scad>
-
-include <../../basic_scad/material_colors.scad>
-
-include <body_params.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
 
@@ -26,14 +19,6 @@ use <../../basic_scad/belt.scad>
 use <../../basic_scad/belt_tensioner.scad>
 include <../../basic_scad/params_belt_tensioner.scad>
 
-use <../../basic_scad/thrust_bearing_housing.scad>
-include <../../basic_scad/params_thrust_bearing_housing.scad>
-
-include <../../basic_scad/params_thrust_bearings.scad>
-
-use <../../basic_scad/thrust_bearings.scad>
-
-use <../../basic_scad/linear_motors.scad>
 include <../../basic_scad/tolerance.scad>
 
 use <../../basic_scad/corners.scad>
@@ -43,9 +28,7 @@ include <../../basic_scad/params_tube_bracket.scad>
 
 include <../../basic_scad/params_corners.scad>
 
-use <body_sheets.scad>
 use <../../basic_scad/motor_pulley.scad>
-use <body_pulleys.scad>
 
 include <../../basic_scad/as5147_params.scad>
 use <../../basic_scad/as5147.scad>
@@ -54,8 +37,10 @@ use <../arm/arm.scad>
 include <../arm/arm_params.scad>
 
 use <body_sensor_support.scad>
-
+use <body_pulleys.scad>
+use <body_sheets.scad>
 use <body_bones.scad>
+include <body_params.scad>
 
 //---------------------------------------------------------------------------
 module body_corner_module()
