@@ -19,19 +19,19 @@ module my_cube_rounded(length, width, height)
 	if (height > radius){
 		difference(){
 			cube([length, width, height]);
-			translate ([length - radius+tolerance, width - radius+tolerance, 0] - tolerance_z) coloana_sferica(height + 2 * tolerance, 3);
-			translate ([radius - tolerance, width - radius+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) coloana_sferica(height + 2 * tolerance, 3);
-			translate ([length - radius+tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) coloana_sferica(height + 2 * tolerance, 3);
-			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(height + 2 * tolerance, 3);
+			translate ([length - radius+tolerance, width - radius+tolerance, 0] - tolerance_z) spherical_column(height + 2 * tolerance, 3);
+			translate ([radius - tolerance, width - radius+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) spherical_column(height + 2 * tolerance, 3);
+			translate ([length - radius+tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) spherical_column(height + 2 * tolerance, 3);
+			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(height + 2 * tolerance, 3);
 		}	
 	}
 	else{
 		difference(){
 			cube([length, width, height]);
-			translate ([length - height + tolerance, width - height + tolerance, 0] - tolerance_z) coloana_sferica(height + 2 * tolerance, height);
-			translate ([height - tolerance, width - height+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) coloana_sferica(height + 2 * tolerance, height);
-			translate ([length - height+tolerance, height - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) coloana_sferica(height + 2 * tolerance, height);
-			translate ([height-tolerance, height - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(height + 2 * tolerance, height);
+			translate ([length - height + tolerance, width - height + tolerance, 0] - tolerance_z) spherical_column(height + 2 * tolerance, height);
+			translate ([height - tolerance, width - height+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) spherical_column(height + 2 * tolerance, height);
+			translate ([length - height+tolerance, height - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) spherical_column(height + 2 * tolerance, height);
+			translate ([height-tolerance, height - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(height + 2 * tolerance, height);
 		}	
 	}
 }
@@ -43,19 +43,19 @@ module my_cube_rounded2(cube_sizes)
 	if (cube_sizes[2] > radius){
 		difference(){
 			cube(cube_sizes);
-			translate ([cube_sizes[0] - radius + tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) coloana_sferica(cube_sizes[2] + 2 * tolerance, 3);
-			translate ([radius - tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) coloana_sferica(cube_sizes[2] + 2 * tolerance, 3);
-			translate ([cube_sizes[0] - radius + tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) coloana_sferica(cube_sizes[2] + 2 * tolerance, 3);
-			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(cube_sizes[2] + 2 * tolerance, 3);
+			translate ([cube_sizes[0] - radius + tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) spherical_column(cube_sizes[2] + 2 * tolerance, 3);
+			translate ([radius - tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) spherical_column(cube_sizes[2] + 2 * tolerance, 3);
+			translate ([cube_sizes[0] - radius + tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) spherical_column(cube_sizes[2] + 2 * tolerance, 3);
+			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(cube_sizes[2] + 2 * tolerance, 3);
 		}	
 	}
 	else{
 		difference(){
 			cube(cube_sizes);
-			translate ([cube_sizes[0] - cube_sizes[2] + tolerance, cube_sizes[1] - cube_sizes[2] + tolerance, 0] - tolerance_z) coloana_sferica(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
-			translate ([cube_sizes[2] - tolerance, cube_sizes[1] - cube_sizes[2]+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) coloana_sferica(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
-			translate ([cube_sizes[0] - cube_sizes[2]+tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) coloana_sferica(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
-			translate ([cube_sizes[2]-tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[0] - cube_sizes[2] + tolerance, cube_sizes[1] - cube_sizes[2] + tolerance, 0] - tolerance_z) spherical_column(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[2] - tolerance, cube_sizes[1] - cube_sizes[2]+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) spherical_column(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[0] - cube_sizes[2]+tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) spherical_column(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[2]-tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(cube_sizes[2] + 2 * tolerance, cube_sizes[2]);
 		}	
 	}
 }
@@ -64,17 +64,15 @@ module my_cube_rounded2_strengthen(cube_sizes, strength_h = 2, strength_w = 2)
 {
 	radius = 3;
     
-    
-
 	if (cube_sizes[2] > radius){
 		difference(){
 			cube([cube_sizes[0], cube_sizes[1], cube_sizes[2] + strength_h]);
 			translate ([0, strength_w, cube_sizes[2]]) cube([cube_sizes[0], cube_sizes[1] - 2 * strength_w, strength_h + 1]);
             
-			translate ([cube_sizes[0] - radius + tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, 3);
-			translate ([radius - tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, 3);
-			translate ([cube_sizes[0] - radius + tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, 3);
-			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, 3);
+			translate ([cube_sizes[0] - radius + tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, 3);
+			translate ([radius - tolerance, cube_sizes[1] - radius + tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, 3);
+			translate ([cube_sizes[0] - radius + tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, 3);
+			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, 3);
 		}	
 	}
 	else{
@@ -82,10 +80,10 @@ module my_cube_rounded2_strengthen(cube_sizes, strength_h = 2, strength_w = 2)
 			cube([cube_sizes[0], cube_sizes[1], cube_sizes[2] + strength_h]);
             translate ([0, strength_w, cube_sizes[2]]) cube([cube_sizes[0], cube_sizes[1] - 2 * strength_w, strength_h + 1]);
             
-			translate ([cube_sizes[0] - cube_sizes[2] + tolerance, cube_sizes[1] - cube_sizes[2] + tolerance, 0] - tolerance_z) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
-			translate ([cube_sizes[2] - tolerance, cube_sizes[1] - cube_sizes[2]+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
-			translate ([cube_sizes[0] - cube_sizes[2]+tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
-			translate ([cube_sizes[2]-tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[0] - cube_sizes[2] + tolerance, cube_sizes[1] - cube_sizes[2] + tolerance, 0] - tolerance_z) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[2] - tolerance, cube_sizes[1] - cube_sizes[2]+tolerance, 0] - tolerance_z) rotate ([0, 0, 90]) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[0] - cube_sizes[2]+tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, -90]) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
+			translate ([cube_sizes[2]-tolerance, cube_sizes[2] - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(cube_sizes[2] + strength_h + 2 * tolerance, cube_sizes[2]);
 		}	
 	}
 }
@@ -105,19 +103,16 @@ module my_cube_rounded_opuse(length, width, height, radius)
 	if (height > radius){
 		difference(){
 			cube([length, width, height]);
-			translate ([length - radius+tolerance, width - radius+tolerance, 0] - tolerance_z) coloana_sferica(height + 2 * tolerance, radius);
-//			translate ([radius - tolerance, width - radius+tolerance, 0]) rotate ([0, 0, 90]) coloana_sferica(height, 3);
-//			translate ([length - radius+tolerance, radius - tolerance, 0]) rotate ([0, 0, -90]) coloana_sferica(height, 3);
-			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(height + 2 * tolerance, radius);
+			translate ([length - radius+tolerance, width - radius+tolerance, 0] - tolerance_z) spherical_column(height + 2 * tolerance, radius);
+			translate ([radius-tolerance, radius - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(height + 2 * tolerance, radius);
 		}	
 	}
 	else{
 		difference(){
 			cube([length, width, height]);
-			translate ([length - height + tolerance, width - height + tolerance, 0] - tolerance_z) coloana_sferica(height + 2 * tolerance, height);
-//			translate ([height - tolerance, width - height+tolerance, 0]) rotate ([0, 0, 90]) coloana_sferica(height, height);
-//			translate ([length - height+tolerance, height - tolerance, 0]) rotate ([0, 0, -90]) coloana_sferica(height, height);
-			translate ([height-tolerance, height - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) coloana_sferica(height + 2 * tolerance, height);
+			translate ([length - height + tolerance, width - height + tolerance, 0] - tolerance_z) spherical_column(height + 2 * tolerance, height);
+
+			translate ([height-tolerance, height - tolerance, 0] - tolerance_z) rotate ([0, 0, 180]) spherical_column(height + 2 * tolerance, height);
 		}	
 	}
 }
@@ -135,8 +130,8 @@ module cube_rounded_x_holed_z(cube_size, hole_radius)
 //----------------------------------------------------------------
 module rectangular_tube(length, width, wall_thick, height)
 {
-		translate ([-length / 2, -width / 2, 0]){
-    difference(){
+	translate ([-length / 2, -width / 2, 0]){
+		difference(){
             cube([length, width, height]);
             translate ([wall_thick, wall_thick, 0]- display_tolerance_z) cube([length - 2 * wall_thick, width - 2 * wall_thick, height + 2 * display_tolerance]);
         }
