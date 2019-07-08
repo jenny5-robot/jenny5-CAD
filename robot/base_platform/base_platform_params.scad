@@ -7,7 +7,6 @@
 include <tracks_params.scad>
 //--------------------------------------------------------------
 
-
 platform_shaft_edge_size = 25;
 
 base_platform_size = [380, 310, 16];
@@ -30,10 +29,6 @@ wheel_gear_thick = 17;
 
 platform_motor_bearing_offset_y = 50;
 platform_motor_bearing_offset_x = 2;
-
-dist_to_tracks_tensioner_support = 150;
-dist_to_tracks_support1 = 130;
-dist_to_tracks_support2 = 185;
 
 base_motor_support_sheet_size = [45, 34 + 20 + 23, 3];
 
