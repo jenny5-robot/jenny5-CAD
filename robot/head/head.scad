@@ -1,9 +1,8 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
-// Source code: github.com/jenny5-robot
-// MIT License
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
+// Source code: https://github.com/jenny5-robot
+// License: MIT 
 //--------------------------------------------------------------
-
 
 
 use <../../basic_scad/basic_components.scad>
@@ -28,7 +27,6 @@ use <../../basic_scad/ultrasonic_support.scad>
 use <../../basic_scad/ultrasonic.scad>
 use <../../basic_scad/basic_components.scad>
 
-
 include <head_params.scad>
 include <../../basic_scad/params_alu_profiles.scad>
 include <../../basic_scad/tolerance.scad>
@@ -42,7 +40,7 @@ module head_motor_support()
  // motor support
             translate ([35 / 2, 30 - 5.8, head_motor_support_height]) mirror ([0, 0, 1]) rotate([0, 0, 90]) 
             difference(){
-                color(plastic_color) potentiometer_support(50, 35, head_motor_support_height, 36, 0, 3, 0);
+                color (plastic_color) cube([50, 35, head_motor_support_height]);
                 // nema 11 middle hole
                 translate ([36, 35 / 2, 0] + gearbox_nema_11_holes_position[0] - display_tolerance_z) cylinder (h = head_base_sizes2[2] + 2 + 2 * display_tolerance, r = nema_11_motor_gearbox_hole_radius, $fn = 50);
                 // nema 11 screw hole
@@ -61,20 +59,14 @@ module head_motor_support()
         // holes for fixing the bearing support
         for (i = [1 : 4])
             translate (rbearing_6001_housing_holes_position[i]-display_tolerance_z) cylinder(h = head_motor_support_height + 2 * display_tolerance, r = 2, $fn = 10);
-    }       
+    }
 }
 //----------------------------------------------------------
 module bearing_housing_on_axis()
 {
     // bearing housing
     rbearing_6001_double_housing();
-    // axis support
-    translate([rbearing_6001_housing_size[0] / 2, rbearing_6001_housing_size[0] / 2 - 2, 0]) color (plastic_color)
-    rotate([0, -90, 0])
-    rectangular_tube_with_rounded_hole_and_screw_fixers(length = rbearing_6001_housing_size[2] + rb_6001_thick, width = rbearing_6001_housing_size[2] + rb_6001_thick, hole_radius = 6, height = rbearing_6001_housing_size[0] + 10);
-    // potentiometer support
-    translate ([rbearing_6001_housing_size[0] / 2 - 2, -rbearing_6001_housing_size[0] / 2, 0])
-    color (plastic_color) potentiometer_support(27, rbearing_6001_housing_size[0], 8, 10, 8, 3, 0);
+
 }
 //---------------------------------------------------------------------------
 module bearing_housing_with_breadboard_support()
@@ -96,18 +88,12 @@ module bearing_housing_with_breadboard_support()
       translate ([4 , length - (length - dist_between_screws) / 2, 0] - display_tolerance_z) cylinder (h = 3 + 2 * display_tolerance, r = m3_screw_radius, $fn = 10);
   }
   
-  // potentiometer support
-  translate ([-rbearing_6001_housing_size[0] / 2 + 2, 14, 0]) rotate ([0, 0, 180]) potentiometer_support(27, 28, 5, 10, 5, 3, 0);
 }
 //---------------------------------------------------------------------------
 module bearing_housing_with_breadboard_support_and_potentiometer()
 {
     // plastic part
     bearing_housing_with_breadboard_support();
-    // potentiometer
-    translate ([-rbearing_6001_housing_size[1] / 2 - pot_92R1A_J22_L15L_base_length / 2 - 1, 0, pot_92R1A_J22_L15L_base_height + 2]) mirror([0, 0, 1]) potentiometer_92R1A_J22_L15L();
-    // gear for potentiometer
-    translate ([-rbearing_6001_housing_size[1] / 2 - pot_92R1A_J22_L15L_base_length / 2, 0, -pot_92R1A_J22_L15L_base_height - 2]) pot_gear(num_teeth = 12, screw_angle = 10, height = 8);
 }
 //---------------------------------------------------------------------------
 module head_base()
@@ -203,11 +189,6 @@ mirror([0, 0, 1])
         }
 }
 //---------------------------------------------------------------------------
-module head_bone_gear()
-{
-    bone_gear(num_teeth = 13, screw_angle = 14);
-}
-//---------------------------------------------------------------------------
 module head()
 {
     mirror ([0, 0, 1]) head_base();
@@ -217,9 +198,6 @@ module head()
     
     translate ([0, 0, 0]) 6001rs();
     translate ([0, 0, rb_6001_thick]) 6001rs();
-    
-    color (plastic_color)
-    translate ([0, 0, rbearing_6001_housing_size[2] + rb_6001_thick + 6]) head_bone_gear();
 
     // vertical bone
     color("black") translate ([0, 0, -head_support_size[0] - head_motor_support_height]) cylinder(r = 6, h = 190, $fn = 20);
@@ -228,11 +206,8 @@ module head()
     // eye support
     translate ([6, -23, 128]) rotate ([0, 90, 0]) eye_support();
     
-    // electronics breadboard
-    translate([-WBU_502_breadboard_size[0] / 2, rbearing_6001_housing_size[0] / 2 + WBU_502_breadboard_size[2] + 2, 0]) rotate ([90, 0, 0]) WBU_502_breadboard();
-    
     // spacers for linking head with body
-    translate ([29, (-L_profile_40x20_long_size + 3) / 2, -head_motor_support_height])  neck_base();
+    translate ([29, (-L_profile_40x20_long_size + 3) / 2, -head_motor_support_height]) neck_base();
 }
 //---------------------------------------------------------------------------
 
@@ -244,25 +219,17 @@ head();
 
 //head_base();
 
-//pot_gear(num_teeth = 12, screw_angle = 14, height = 8); // 2x
-
-
 //hc_sr04_and_c920_with_support();
-
 
 //bearing_housing_with_breadboard_support_and_potentiometer();
 
 //eye_support();
-
-
 
 //mirror ([0, 0, 1]) neck_base();
 
 //bearing_housing_on_axis();
 
 //bearing_housing_with_breadboard_support();
-
-//head_bone_gear(); // 2x
 
 //hc_sr04_and_c920_support_plate(); // 1x
 //hc_sr04_arm(); // 1x

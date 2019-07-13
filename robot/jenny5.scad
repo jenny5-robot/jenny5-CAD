@@ -14,6 +14,7 @@ include <base_platform/base_platform_params.scad>
 use <base_platform/base_platform.scad>
 
 use <head/head.scad>
+include <head/head_params.scad>
 
 include <body/body_params.scad>
 use <body/body.scad>
@@ -50,8 +51,7 @@ module body_with_arms()
     mirror([1, 0, 0])
     rotate ([0, 90, 0]) 
     arm(side = 1)
-    ;
-        
+    ;       
 }
 //---------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ module body_with_head()
     //body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
     body_with_arms();
     // head
-  //  translate ([0, -0, body_height + 3 * body_shaft_radius]) mirror ([0, 1, 0]) head();
+    translate ([0, -0, body_height + 4 * body_shaft_radius + head_motor_support_height + 20]) mirror ([0, 1, 0]) head();
 
 }
 //---------------------------------------------------------------------------
@@ -91,9 +91,9 @@ module jenny5_with_kitchen_table()
     translate ([-800, 0, 0]) rounded_table(750, 400);
 }
 //---------------------------------------------------------------------------
-jenny5_with_kitchen_table();
+//jenny5_with_kitchen_table();
 
-//jenny5();
+jenny5();
 
 //platform_leg();
 
