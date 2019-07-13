@@ -32,6 +32,7 @@ nema_11_motor_gearbox_radius = 14;
 nema_11_motor_gearbox_hole_radius = 9;
 nema_11_gearbox_dist_between_screw_holes = 22 / sqrt(2);
 nema_11_gearbox_shaft_length = 18;
+nema_11_gearbox_shaft_radius = 3;
 
 nema_11_with_27_1_gearbox_height = nema_11_height + nema_11_gearbox_base_height + nema_11_27_1_gearbox_length;
 nema_11_with_13_1_gearbox_height = nema_11_height + nema_11_gearbox_base_height + nema_11_13_1_gearbox_length;
