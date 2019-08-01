@@ -39,7 +39,7 @@ These parameters are stored in the following files:
 - [robot/arm/arm_params.scad](robot/arm/arm_params.scad)
 - [robot/leg/leg_params.scad](robot/leg/leg_params.scad)
 
-One can modify these parameters
+One can modify these parameters in order to simulate a new position for leg or arms.
 
 ## Warning ##
 
