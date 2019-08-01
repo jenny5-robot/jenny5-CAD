@@ -12,7 +12,7 @@ Go to [robot](robot) folder, open _jenny5.scad_ file with OpenSCAD and press *Pr
 
 The press *View all* button (or *Ctrl+Shift+V*) to view the entire robot and use the mouse to navigate.
  
- Note that left button drag means rotate, right button drag means move and the wheel means zoom.
+Note that left button drag means rotate, right button drag means move and the wheel means zoom.
  
 ## Project structure ##
 
@@ -34,6 +34,8 @@ The [robot](robot) folder contains 5 subfolders:
 ## Warning
 
 This is work in progress.
+
+**Build it on your own risk!**
 
 ## More details
 
