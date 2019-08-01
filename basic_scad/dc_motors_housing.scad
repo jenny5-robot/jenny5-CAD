@@ -1,12 +1,10 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
-// MIT License
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
+// License: MIT
 //--------------------------------------------------------------
 
-
 use <basic_components.scad>
-
 
 include <params_dc_motor_housing.scad>
 include <params_screws_nuts_washers.scad>
@@ -15,7 +13,6 @@ use <screws_nuts_washers.scad>
 include <tolerance.scad>
 
 include <material_colors.scad>
-
 
 //--------------------------------------------------------------------
 module dc_motor_housing(motor_offset_x, motor_offset_y, motor_radius, motor_length, base_height, motor_center_hole_radius, motor_holes_position, base_thick)
@@ -88,7 +85,6 @@ module dc_motor_housing_with_belt_tensioner_bearing_based_y(motor_offset, belt_t
     }
 }
 //--------------------------------------------------------------------
-
 module motor_gr_ep_45_housing_with_belt_tensioner_bearing_based_y_and_base_holes(motor_offset, belt_tensioner_offset, left = 1)
 {
   dc_motor_housing_with_belt_tensioner_bearing_based_y(motor_offset, belt_tensioner_offset, motor_gr_ep_45_radius, base_height = motor_gr_ep_45_housing_with_belt_tensioner_size[2], motor_center_hole_radius = motor_gr_ep_45_shaft_cilinder_radius, motor_holes_position = motor_gr_ep_45_holes, base_thick = 3, motor_housing_base_holes = motor_gr_ep_45_housing_large_base_holes, _left = left);

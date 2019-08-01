@@ -8,7 +8,7 @@ include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_sheets.scad>
 //--------------------------------------------------------------
 
-leg_angle = 20;
+leg_angle = 20; // between 20 (fully compressed) and 90 (extended)
 
 leg_top_base_length = 240;
 

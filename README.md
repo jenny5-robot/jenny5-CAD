@@ -18,7 +18,7 @@ Note that left button drag means rotate, right button drag means move and the wh
 
 The project is divided into several folders:
 
-- [robot](robot) folder, which contains parts specific to Jenny 5 robot.
+- [robot](robot) folder, which contains parts specific to Jenny 5 robot. This folder contains the main file of the project: _jenny5.scad_
 - [basic_scad](basic_scad) folder, which contains general parts (like motors, bearings, screws, nuts, housings, etc) which are required to build the robot or something else.
 
 
@@ -30,8 +30,18 @@ The [robot](robot) folder contains 5 subfolders:
 - [head](robot/head). The main file is _head.scad_.
 - [leg](robot/leg). The main file is _leg.scad_.
 
+## Parameters ##
 
-## Warning
+The current position of the leg and arms is stored as numerical values (angles).
+
+These parameters are stored in the following files:
+
+- [robot/arm/arm_params.scad](robot/arm/arm_params.scad)
+- [robot/leg/leg_params.scad](robot/leg/leg_params.scad)
+
+One can modify these parameters
+
+## Warning ##
 
 This is work in progress.
 
