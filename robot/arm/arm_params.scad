@@ -1,8 +1,8 @@
-// Author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
-// More details: jenny5.org
-// Source: github.com/jenny5-robot
-// MIT License
-//--------------------------------------------------------------
+// Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
+// Source code: github.com/jenny5-robot
+// License: MIT
+//-------------------------------------------------------------- 
 
 include <../../basic_scad/params_radial_bearings_housing.scad>
 include <../../basic_scad/params_radial_bearings_u_housing.scad>

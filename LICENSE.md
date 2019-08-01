@@ -1,7 +1,7 @@
 The MIT License (MIT)
 
-Copyright (c) 2015, Mihai Oltean
-www.tcreate.org
+Copyright (c) 2015-2019, [Mihai Oltean](https://mihaioltean.github.io)
+
 mihai.oltean@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
