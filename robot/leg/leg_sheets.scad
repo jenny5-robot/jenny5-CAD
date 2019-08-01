@@ -59,18 +59,12 @@ module knee_side()
         echo("knee side holes = ");
         echo([leg_shaft_distance_to_edge, 0, leg_shaft_distance_to_edge], "radius = 6");
         translate ([leg_shaft_distance_to_edge, 0, leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M12_screw_radius, $fn = 30);
-        // front hole top
-        echo([leg_shaft_distance_to_edge, 0, knee_side_simple_sizes[2] - leg_shaft_distance_to_edge], "radius = 6");
-        translate ([leg_shaft_distance_to_edge, 0, knee_side_simple_sizes[2] - leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M12_screw_radius, $fn = 30);
         // back hole bottom
         echo([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, leg_shaft_distance_to_edge], "radius = 6");
         translate ([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M12_screw_radius, $fn = 30);
-        // back hole top
-        echo([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, knee_side_simple_sizes[2] - leg_shaft_distance_to_edge], "radius = 6");
-        translate ([knee_side_simple_sizes[0] - leg_shaft_distance_to_edge, 0, knee_side_simple_sizes[2] - leg_shaft_distance_to_edge] -display_tolerance_y) rotate ([-90, 0, 0]) cylinder(h = alu_sheet_10_thick + 2 * display_tolerance, r = M12_screw_radius, $fn = 30);
         // middle hole for spacer
-        echo([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] / 2], "radius = 4");
-        translate([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] / 2] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = knee_side_simple_sizes[1] + 2 * display_tolerance, r = M8_screw_radius);
+        echo([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] - 15], "radius = 4");
+        translate([knee_side_simple_sizes[0] / 2, 0, knee_side_simple_sizes[2] - 15] - display_tolerance_y) rotate([-90, 0, 0]) cylinder (h = knee_side_simple_sizes[1] + 2 * display_tolerance, r = M8_screw_radius);
     }
 }
 //-------------------------------------------------------

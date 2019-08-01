@@ -1,11 +1,8 @@
 // Author: Mihai Oltean, https://mihaioltean.github.io, mihai.oltean@gmail.com
-// More details: http://jenny5.org, https://jenny5-robot.github.io/
-// Source code: github.com/jenny5-robot
-// MIT License
+// More details: https://jenny5.org, https://jenny5-robot.github.io/
+// Source code: https://github.com/jenny5-robot
+// License: MIT
 //--------------------------------------------------------------
-
-
-use <../basic_scad/screws_nuts_washers.scad>
 
 include <leg/leg_params.scad>
 use <leg/leg.scad>
@@ -25,6 +22,7 @@ use <arm/arm.scad>
 include <../basic_scad/tolerance.scad>
 
 use <../basic_scad/table.scad>
+use <../basic_scad/screws_nuts_washers.scad>
 
    
 //---------------------------------------------------------------------------
@@ -77,12 +75,12 @@ module jenny5()
     // platform
     platform_leg();
    
-    complete_leg_height = 2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + (leg_distance_to_wrist_in_base + knee_side_simple_sizes[2] / 2 - 10));
+    complete_leg_height = 2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle)) + 2 * knee_side_simple_sizes[2];
     
-    echo(complete_leg_height = complete_leg_height);
+    //echo(complete_leg_height = complete_leg_height);
     
     // body
-    translate ([leg_postion_on_platform +100, 0, complete_leg_height + base_platform_size[2] + 25]) rotate ([0, 0, 90]) body_with_head();
+    translate ([leg_postion_on_platform +100, 0, complete_leg_height + base_platform_size[2] + 70]) rotate ([0, 0, 90]) body_with_head();
 }
 //---------------------------------------------------------------------------
 module jenny5_with_kitchen_table()

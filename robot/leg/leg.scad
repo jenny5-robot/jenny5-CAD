@@ -46,7 +46,7 @@ module knee()
 // other side
     translate ([0, base_spacer_length + alu_sheet_10_thick, 0]) knee_side();
     // knee spacer
-     color (aluminium_color) translate ([knee_side_simple_sizes[0] / 2, alu_sheet_10_thick, knee_side_simple_sizes[2] / 2]) rotate ([0, 45, 0]) leg_base_spacer();
+     color (aluminium_color) translate ([knee_side_simple_sizes[0] / 2, alu_sheet_10_thick, knee_side_simple_sizes[2] -15]) leg_base_spacer();
 }
 //----------------------------------------------------------------------
 module linear_motor_with_top_shaft(stroke, current_position)
@@ -82,14 +82,14 @@ module half_leg(leg_angle_to_horizontal = 45, motor_side = 1)
     leg_base(leg_base_height);
         
     // back bone 1
-    translate ([leg_distance_to_second_bone, crotch_width_back / 2 + leg_bone_thick[1] / 2, leg_distance_to_wrist_in_base])
+    translate ([leg_distance_to_second_bone, crotch_width_back / 2 + leg_bone_thick[1] / 2 + 3, leg_distance_to_wrist_in_base])
     rotate ([0, 90 - leg_angle_to_horizontal, 0])
         translate ([0, 0, -rbearing_6001_housing_size_thicker[0] / 2])
     leg_bone_with_bearings()
     ;
     
     // back bone 2
-    translate ([leg_distance_to_second_bone, - (crotch_width_back / 2 + leg_bone_thick[1] / 2), leg_distance_to_wrist_in_base])
+    translate ([leg_distance_to_second_bone, - (crotch_width_back / 2 + leg_bone_thick[1] / 2 + 3), leg_distance_to_wrist_in_base])
     rotate ([0, 90 - leg_angle_to_horizontal, 0])
         translate ([0, 0, -rbearing_6001_housing_size_thicker[0] / 2])
     leg_bone_with_bearings()
@@ -109,7 +109,9 @@ module half_leg(leg_angle_to_horizontal = 45, motor_side = 1)
     translate([leg_distance_to_first_bone, -base_spacer_length / 2 - alu_sheet_10_thick - M12_nut_thick, leg_distance_to_wrist_in_base]) rotate ([-90, 0, 0]) cylinder(base_spacer_length + 2 * alu_sheet_10_thick + 2 * M12_nut_thick, r = leg_shaft_radius);
     
     // bottom shaft middle
-    translate([leg_distance_to_second_bone, -base_spacer_length / 2 - alu_sheet_10_thick - M12_nut_thick, leg_distance_to_wrist_in_base]) rotate ([-90, 0, 0]) cylinder(base_spacer_length + 2 * alu_sheet_10_thick + 2 * M12_nut_thick, r = leg_shaft_radius);
+    translate([leg_distance_to_second_bone, -base_spacer_length / 2 , leg_distance_to_wrist_in_base]) rotate ([90, 0, 0]) M12_sunken(50);
+    //bottom shaft middle - the other side
+    translate([leg_distance_to_second_bone, base_spacer_length / 2 , leg_distance_to_wrist_in_base]) rotate ([-90, 0, 0]) M12_sunken(50);
 
     // motor shaft
     translate([leg_distance_to_push_motor_hole_in_base, -base_spacer_length / 2 - alu_sheet_10_thick - M8_nut_thick, leg_distance_to_motor_shaft_in_base]) rotate ([-90, 0, 0]) cylinder (h = base_spacer_length + 2 * alu_sheet_10_thick + 2 * M8_nut_thick, r = leg_motor_shaft_radius, $fn = 30);
@@ -131,11 +133,18 @@ module half_leg(leg_angle_to_horizontal = 45, motor_side = 1)
     
 // knee shaft - second bone    
     translate ([(leg_bone_length - rbearing_6001_housing_size_thicker[0]) * sin(90 - leg_angle_to_horizontal) + leg_distance_to_second_bone, 
-    - base_spacer_length / 2 - alu_sheet_10_thick - M12_nut_thick, 
+    - base_spacer_length / 2 - alu_sheet_10_thick - M12_nut_thick - leg_bone_thick[1] - 6, 
     (leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle_to_horizontal) 
     + leg_base_height - leg_shaft_distance_to_edge])
     rotate ([-90, 0, 0])
-    M12_hexa(base_spacer_length + 2 * alu_sheet_10_thick + 2 * M12_nut_thick);
+    cylinder(h = base_spacer_length + 2 * alu_sheet_10_thick + 2 * M12_nut_thick + 2 * leg_bone_thick[1] + 6, r = 6);
+    
+    // knee
+    translate ([(leg_bone_length - rbearing_6001_housing_size_thicker[0]) * sin(90 - leg_angle) + leg_distance_to_first_bone - leg_shaft_distance_to_edge, 
+    - base_spacer_length / 2 - alu_sheet_10_thick, 
+    (leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) 
+    + leg_distance_to_wrist_in_base - leg_shaft_distance_to_edge])
+    knee();
 }
 //----------------------------------------------------------------------
 module complete_leg(leg_angle)
@@ -145,20 +154,14 @@ module complete_leg(leg_angle)
 
     // top half leg
     translate ([0, 0, 
-    2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + knee_side_simple_sizes[2] - 2 * leg_shaft_distance_to_edge)]) 
+    2 * ((leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) + 2 * knee_side_simple_sizes[2] - 2 * leg_shaft_distance_to_edge)]) 
     mirror ([0, 0, 1]) half_leg(leg_angle, 1);
-        
-    // knee
-    translate ([(leg_bone_length - rbearing_6001_housing_size_thicker[0]) * sin(90 - leg_angle) + leg_distance_to_first_bone - leg_shaft_distance_to_edge, 
-    - base_spacer_length / 2 - alu_sheet_10_thick, 
-    (leg_bone_length - rbearing_6001_housing_size_thicker[0]) * cos(90 - leg_angle) 
-    + leg_distance_to_wrist_in_base - leg_shaft_distance_to_edge])
-    knee()
-    ;
 }
 //----------------------------------------------------------------------
 
 complete_leg(leg_angle = leg_angle);
+
+//half_leg(leg_angle);
 
 //leg_pusher_bearing_sheet();
 
@@ -173,7 +176,6 @@ complete_leg(leg_angle = leg_angle);
 
 //linear_motor_with_top_shaft(100, 50);
 
-//half_leg(leg_angle);
 
 //leg_base();
 
