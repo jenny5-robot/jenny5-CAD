@@ -1,6 +1,8 @@
 # Jenny5 robot - CAD files
 
-A human size, multi purpose, almost humanoid, robot.
+This repository contains the CAD file for the Jenny 5, which is a human size, multi-purpose robot. It has a mobile platform, a pliable leg, 2 arms and head.
+
+Jenny5 is open source with a permisible license (MIT) so that anyone can build and improve.
 
 ## Software needed
 
@@ -20,7 +22,6 @@ The project is divided into several folders:
 
 - [robot](robot) folder, which contains parts specific to Jenny 5 robot. This folder contains the main file of the project: _jenny5.scad_
 - [basic_scad](basic_scad) folder, which contains general parts (like motors, bearings, screws, nuts, housings, etc) which are required to build the robot or something else.
-
 
 The [robot](robot) folder contains 5 subfolders:
 
