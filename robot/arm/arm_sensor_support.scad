@@ -24,6 +24,7 @@ module magnet_support_elbow(total_height)
 {
     base_height = 4;
     
+    color(plastic_color)
     difference(){
         union(){
             hull(){
@@ -48,11 +49,12 @@ module magnet_support_elbow(total_height)
 //--------------------------------------------------------------
 module sensor_support_elbow()
 {
-    echo(as5147_elbow_support_size = as5147_elbow_support_size);
+    //echo(as5147_elbow_support_size = as5147_elbow_support_size);
     radius_support = 8;
     total_height = as5147_elbow_support_size[2] + 13 + 3 + 3;
     
     offset_x = 8;
+    color(plastic_color)
     difference(){
         union(){
             cube(as5147_elbow_support_size);
@@ -89,6 +91,7 @@ module arm_up_down_sensor_support()
 module sensor_bearing_housing_bottom_upper_arm()
 {
     h = 8;
+    color(plastic_color)
     difference(){
     
         translate ([-rbearing_688_housing_size[0] / 2, -rbearing_688_housing_size[1] / 2, 0]) cube([rbearing_688_housing_size[0], rbearing_688_housing_size[1], h]);
@@ -99,6 +102,7 @@ module sensor_bearing_housing_bottom_upper_arm()
     } 
     
         // plate for fixing to the next part
+    color(plastic_color)
     translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6907_enclosed_housing_size[1] / 2]) 
     rotate([90, 0, 0])
     difference(){
@@ -115,6 +119,7 @@ module sensor_bearing_housing_bottom_upper_arm()
 module sensor_bearing_housing_top_upper_arm()
 {
      h = 20;
+    color(plastic_color)
     difference(){
     echo(as5147_holes_position_relative);
         translate ([-rbearing_688_housing_size[0] / 2, -rbearing_688_housing_size[1] / 2, 0]) cube([rbearing_688_housing_size[0], rbearing_688_housing_size[1], h]);
@@ -134,6 +139,8 @@ module sensor_bearing_housing_top_upper_arm()
         
     }
     // plate for fixing to the next part
+
+    color(plastic_color)
     translate([0, -rbearing_688_housing_size[0] / 2, rbearing_6907_enclosed_housing_size[1] / 2]) 
     rotate([90, 0, 0])
     difference(){
