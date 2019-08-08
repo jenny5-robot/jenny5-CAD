@@ -17,6 +17,7 @@ use <../../basic_scad/buttons.scad>
 include <../../basic_scad/servos_params.scad>
 use <../../basic_scad/servos.scad>
 use <../../basic_scad/involute_gears.scad>
+include <../../basic_scad/material_colors.scad>
 
 use <arm_pulleys.scad>
 include <arm_params.scad>
@@ -25,6 +26,7 @@ include <arm_params.scad>
 module fixed_finger()
 {
     difference(){
+        color(plastic_color)
         hull(){
             cylinder(h = fixed_finger_size[2], r = fixed_finger_size[1] / 2);
             translate ([fixed_finger_size[0], 0, 0]) cylinder(h = fixed_finger_size[2], r = fixed_finger_size[1] / 2);
@@ -45,6 +47,7 @@ module fixed_finger()
 module mobile_finger_gear()
 {
     difference(){
+        color(plastic_color)
             gear (number_of_teeth = 18,
 					circular_pitch = 250,
 					bore_diameter = 6,
@@ -66,6 +69,7 @@ module mobile_finger_gear()
 module mobile_finger()
 {
     difference(){
+        color(plastic_color)
         union(){
             hull(){
                 cylinder(h = mobile_finger_size[2], r = mobile_finger_size[1] / 2);
@@ -88,6 +92,7 @@ module mobile_finger()
 module gripper_motor_gear()
 {
     difference(){
+        color(plastic_color)
         gear (number_of_teeth = 19,
 					circular_pitch = 250,
 					bore_diameter = 6,
