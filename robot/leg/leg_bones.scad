@@ -90,6 +90,12 @@ module front_bone_with_pusher_components()
     }
 }
 //----------------------------------------------------------------------
-front_bone_with_pusher_components();
+//leg_bone();
+
+//front_bone_with_pusher_components();
+
+//radial_bearing_6905_vertical_housing();
+
+//rbearing_6001_double_housing_thicker_wall(-1);
 
 //radial_bearing_6905_vertical_housing();
