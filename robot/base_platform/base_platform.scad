@@ -75,7 +75,14 @@ module third_shaft_with_wheels()
     translate ([0, 0, platform_shaft_length / 2]) mirror ([0, 0, 1]) wheel();
 }
 //-------------------------------------------------------
-
+module platform_reinforcement()
+{
+    echo(platform_reinforcement = base_platform_size[0]);
+    
+    color(aluminium_color) 
+        U(length = base_platform_size[0], base = 20, height = 20, wall_thick = 2);
+}
+//-------------------------------------------------------
 module platform()
 {
   platform_sheet();
@@ -84,15 +91,11 @@ module platform()
     // left side
     translate ([0, -base_platform_size[1] / 2 - 2, 2 + base_platform_size[2]]) 
         rotate ([-90, 0, 0]) 
-            color(aluminium_color) 
-                U(length = base_platform_size[0], base = 20, height = 20, wall_thick = 2);
-
+            platform_reinforcement();
     // right side
     translate ([0, base_platform_size[1] / 2 + 2, -2]) 
         rotate ([90, 0, 0]) 
-            color(aluminium_color) 
-                U(length = base_platform_size[0], base = 20, height = 20, wall_thick = 2);
-    
+            platform_reinforcement()    
   // motor right
     
   translate ([rb_6909_external_radius + 10, -base_platform_size[1] / 2 + motor_gr_ep_45_188_1_length - 2, +rb_6909_external_radius + base_platform_size[2] + 4]) 
@@ -146,8 +149,6 @@ module platform()
 
 // other side
 
-   
-
     translate([0, -platform_shaft_length / 2 + track_width / 2 + track_wheel_thick / 2, 0]){
 
     // rubber tracks
@@ -165,6 +166,8 @@ module platform()
 
 
 platform();
+
+//platform_reinforcement();
 
 //platform_sheet(); 
 
@@ -190,3 +193,5 @@ platform();
 
 
 //first_shaft_with_wheels();
+
+//rbearing_6909_vertical_housing_half();
