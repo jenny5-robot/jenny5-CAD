@@ -35,6 +35,7 @@ use <../../basic_scad/webcam.scad>
 include <arm_params.scad>
 
 use <arm_sheets.scad>
+use <arm_sheets_with_belt_tensioner.scad>
 use <arm_pulleys.scad>
 
 use <arm_sensor_support.scad>

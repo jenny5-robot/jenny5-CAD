@@ -15,7 +15,7 @@ include <../../basic_scad/tolerance.scad>
 include <../../basic_scad/params_tube_bracket.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
-use <../../basic_scad/radial_bearings.scad>
+
 
 
 //---------------------------------------------------------------
@@ -151,25 +151,7 @@ module arm_up_down_motor_top_sheet()
        translate ([arm_up_down_motor_sheet_size[0] / 2 + arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]-display_tolerance_z) cylinder (h = arm_up_down_motor_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
     }
 }
-//---------------------------------------------------------------------------
-module arm_up_down_motor_top_sheet_with_belt_tensioner()
-{
-    arm_up_down_motor_top_sheet();
-    // first tower of bearings
-    translate ([arm_up_down_motor_sheet_size[0] / 2 - arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0]) {
-        M4_sunken(30);
-        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2]) 624rs();
-        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 5]) 624rs();
-        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 10]) 624rs();
-    }
 
-    translate ([arm_up_down_motor_sheet_size[0] / 2 + arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_arm_up_down_motor_to_shaft - nema_17_motor_gearbox_radius - 2, 0]) {
-        M4_sunken(30);
-        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2]) 624rs();
-        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 5]) 624rs();
-        translate ([0, 0, sheet_upper_arm_motor_top_size[2] + 2 + 10]) 624rs();
-    }
-}
 //---------------------------------------------------------------------------
 module arm_up_down_motor_bottom_sheet()
 {
@@ -229,11 +211,6 @@ module elbow_sheet(braket_thick = 12, tube_radius = 15)
     } // end difference
 }
 //---------------------------------------------------------------------------
-module gripper_motor_sheet()
-{
-    color (aluminium_color) cube(gripper_motor_sheet_size);
-}
-//---------------------------------------------------------------------------
 module fore_arm_rotation_motor_support_sheet_top()
 {
     difference(){
@@ -269,25 +246,7 @@ module fore_arm_rotation_motor_support_sheet_top()
        translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 + fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]-display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
     }
 }
-//---------------------------------------------------------------------------
-module fore_arm_rotation_motor_support_sheet_top_with_belt_tensioner()
-{
-    fore_arm_rotation_motor_support_sheet_top();
-    // first tower of bearings
-    translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 - arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, fore_arm_rotation_motor_support_sheet_size[2] ]) {
-        translate ([0, 0, -fore_arm_rotation_motor_support_sheet_size[2]]) M4_sunken(30);
-        translate ([0, 0, + 2]) 624rs();
-        translate ([0, 0,  + 2 + 5]) 624rs();
-        translate ([0, 0,  + 2 + 10]) 624rs();
-    }
 
-    translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 + arm_up_down_motor_top_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft - nema_17_motor_gearbox_radius - 2, fore_arm_rotation_motor_support_sheet_size[2] ]) {
-        translate ([0, 0, -fore_arm_rotation_motor_support_sheet_size[2]]) M4_sunken(30);
-        translate ([0, 0,  + 2]) 624rs();
-        translate ([0, 0,  + 2 + 5]) 624rs();
-        translate ([0, 0,  + 2 + 10]) 624rs();
-    }
-}
 //---------------------------------------------------------------------------
 module upper_arm_rotation_motor_support_sheet_top()
 {
@@ -399,17 +358,13 @@ module body_articulation_sheet()
 
 //upper_arm_rotation_motor_support_sheet_bottom();
 
-//fore_arm_rotation_motor_support_sheet_top_with_belt_tensioner();
-
 //fore_arm_rotation_motor_support_sheet_top();
 
 //arm_up_down_motor_top_sheet();
 
-//arm_up_down_motor_top_sheet_with_belt_tensioner();
-
 //arm_up_down_motor_bottom_sheet();
 
-body_articulation_sheet();
+//body_articulation_sheet();
 //shoulder_sheet();
 
 //elbow_sheet();
