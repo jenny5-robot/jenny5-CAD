@@ -44,7 +44,8 @@ One can modify these parameters in order to simulate a new position for leg or a
 
 ## Warning ##
 
-This is work in progress.
+- This is work in progress.
+- Not all components (for instance screws) are shown in the project.
 
 **Build it on your own risk!**
 

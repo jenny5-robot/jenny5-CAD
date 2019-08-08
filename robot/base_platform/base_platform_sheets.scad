@@ -53,8 +53,13 @@ module platform_sheet()
 //------------------------------------------------------
 module base_motor_support_sheet()
 {
-    cube(base_motor_support_sheet_size);
+    difference(){
+        color (aluminium_color) cube(base_motor_support_sheet_size);
+        // holes needed
+    }
 }
 //------------------------------------------------------
 
 platform_sheet();
+
+//base_motor_support_sheet();

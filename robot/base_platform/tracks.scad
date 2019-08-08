@@ -272,6 +272,17 @@ module first_wheel()
 }
 //--------------------------------------------------------------------
 
-//first_wheel();
+first_wheel();
 
-spacer_round(length = 10, external_radius = 5, internal_radius = 2);
+//spacer_round(length = 10, external_radius = 5, internal_radius = 2);
+
+//wheel_middle_with_bearing(wheel_radius);
+
+//wheel_middle_with_bearing_hole(external_radius = wheel_radius);
+
+//wheel_extension_with_teeth(wheel_radius, wheel_tooth_height, wheel_steps);
+
+
+//wheel_wall();
+
+//platform_wheel_gear();
