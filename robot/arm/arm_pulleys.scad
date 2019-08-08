@@ -27,28 +27,6 @@ include <../../basic_scad/servos_params.scad>
 include <gripper_params.scad>
 
 //---------------------------------------------------------------------------
-module upper_arm_rotation_pulley_with_belt_tensioner()
-{
-    belt_tensioner_shaft_length = 60;
-    upper_arm_rotation_pulley();
-    translate ([-belt_tensioner_shaft_length / 2, 12, printed_pulley_thick + 7]) rotate ([0, 90, 0]) {
-        color ("grey") cylinder (h = belt_tensioner_shaft_length, r = 2, $fn = 20); // screw
-        // bearings
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 + bearing_4_height / 2]) 624rs();
-        // nut
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) mirror([0, 0, 1]) M4_autolock_nut();
-    }
-    translate ([-belt_tensioner_shaft_length / 2, -12, printed_pulley_thick + 7]) rotate ([0, 90, 0]) {
-        color ("grey") cylinder (h = belt_tensioner_shaft_length, r = 2, $fn = 20); // screw
-        // bearings
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 + bearing_4_height / 2]) 624rs();
-    }
-}
-//---------------------------------------------------------------------------
 module upper_arm_rotation_pulley()
 {
     shoulder_traction_pulley();
@@ -97,28 +75,6 @@ module fore_arm_rotation_pulley()
 {
     shoulder_traction_pulley();
 
-}
-//---------------------------------------------------------------------------
-module fore_arm_rotation_pulley_with_belt_tensioner()
-{
-    belt_tensioner_shaft_length = 60;
-    fore_arm_rotation_pulley();
-    translate ([-belt_tensioner_shaft_length / 2, 12, printed_pulley_thick + 7]) rotate ([0, 90, 0]) {
-        color ("grey") cylinder (h = belt_tensioner_shaft_length, r = 2, $fn = 20); // screw
-        // bearings
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 + bearing_4_height / 2]) 624rs();
-        // nut
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) mirror([0, 0, 1]) M4_autolock_nut();
-    }
-    translate ([-belt_tensioner_shaft_length / 2, -12, printed_pulley_thick + 7]) rotate ([0, 90, 0]) {
-        color ("grey") cylinder (h = belt_tensioner_shaft_length, r = 2, $fn = 20); // screw
-        // bearings
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - 3 * bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 - bearing_4_height / 2]) 624rs();
-        translate ([0, 0, belt_tensioner_shaft_length / 2 + bearing_4_height / 2]) 624rs();
-    }
 }
 //---------------------------------------------------------------------------
 module shoulder_pulley()
@@ -265,16 +221,11 @@ module pulley_upper_arm_sensor_shaft()
 
 //pulley_upper_arm_bone_for_sensor();
 
-//upper_arm_rotation_pulley_with_belt_tensioner();
-
-
 //elbow_pulley();
 
 //elbow_pulley_with_magnet_support();
-wrist_pulley();
+//wrist_pulley();
 
 //shoulder_traction_pulley();
 
 //fore_arm_rotation_pulley();
-
-//fore_arm_rotation_pulley_with_belt_tensioner();
