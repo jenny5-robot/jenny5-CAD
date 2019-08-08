@@ -4,7 +4,6 @@
 // MIT License
 //--------------------------------------------------------------
 
-
 include <arm_params.scad>
 
 use <../../basic_scad/basic_components.scad>
@@ -55,8 +54,14 @@ module upper_arm_bone()
 //---------------------------------------------------------------------------
 module shoulder_up_down_bone()
 {
-     color (aluminium_color) 
+    difference(){
+        color (aluminium_color) 
             rectangular_tube(length = arm_shaft_size, width = arm_shaft_size, wall_thick = 2, height = upper_arm_shaft_support_length);
+        // to add holes
+    }
 }
 //---------------------------------------------------------------------------
 upper_arm_bone();
+//fore_arm_bone();
+
+//shoulder_up_down_bone();
