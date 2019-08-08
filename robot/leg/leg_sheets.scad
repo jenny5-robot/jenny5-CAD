@@ -69,6 +69,12 @@ module knee_side()
 }
 //-------------------------------------------------------
 
+module leg_pusher_bearing_sheet()
+{
+    // to be designed
+}
+//-------------------------------------------------------
+
 //leg_base_side();
 
 knee_side();
