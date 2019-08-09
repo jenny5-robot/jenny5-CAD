@@ -174,39 +174,6 @@ module arm_up_down_motor_bottom_sheet()
             }
 }
 //---------------------------------------------------------------------------
-module elbow_sheet(braket_thick = 12, tube_radius = 15)
-{
-    echo(elbow_sheet_size = elbow_sheet_size);
-    
-    bracket_width = f_bracket_width(tube_radius);
-   
-    holes = f_tube_bracket_single_hole(braket_thick, tube_radius);
-    
-    difference(){
-        color (aluminium_color) cube(elbow_sheet_size);
-
-    // screw holes
-    echo("fixer screw_hole=");
-        for (i = [0 : 1]){
-            translate ([bracket_width / 2, braket_thick / 2, 0]) rotate ([0, 0, -90]) translate(holes[i] - [braket_thick / 2, bracket_width / 2, 0] - display_tolerance_z) cylinder (h = elbow_sheet_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 15);
-            echo(rotate_z(90, holes[i] - [braket_thick / 2, bracket_width / 2, 0]) + [bracket_width / 2, braket_thick / 2, 0]); //
-        // other side
-           translate ([bracket_width / 2, elbow_sheet_grip_length - arm_bracket_thick / 2, 0]) rotate ([0, 0, -90]) translate(holes[i] - [braket_thick / 2, bracket_width / 2, 0] - display_tolerance_z) cylinder (h = elbow_sheet_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 15);
-            echo(rotate_z(90, holes[i] - [braket_thick / 2, bracket_width / 2, 0]) + [bracket_width / 2, elbow_sheet_grip_length - arm_bracket_thick / 2, 0]); //
-        } // end for
-        
-        // holes for belt tensioner
-    echo("belt tensioner screw_hole = ");
-    translate ([elbow_sheet_size[0] / 2 - 12, elbow_sheet_grip_length + elbow_connector_belt_tensioner_offset, 0] - display_tolerance_z)
-        cylinder (h = elbow_sheet_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 15);
-    translate ([elbow_sheet_size[0] / 2 + 12, elbow_sheet_grip_length + elbow_connector_belt_tensioner_offset, 0] - display_tolerance_z)
-        cylinder (h = elbow_sheet_size[2] + 2 * display_tolerance, r = m4_screw_radius, $fn = 15);
-        echo([elbow_sheet_size[0] / 2 - 12, elbow_sheet_grip_length + elbow_connector_belt_tensioner_offset, 0]);
-        echo([elbow_sheet_size[0] / 2 + 12, elbow_sheet_grip_length + elbow_connector_belt_tensioner_offset, 0]);
-        
-    } // end difference
-}
-//---------------------------------------------------------------------------
 module fore_arm_rotation_motor_support_sheet_top()
 {
     difference(){
@@ -381,7 +348,7 @@ module body_articulation_sheet()
 //upper_arm_rotation_motor_support_sheet_bottom();
 
 //fore_arm_rotation_motor_support_sheet_top();
-fore_arm_rotation_motor_support_sheet_bottom();
+//fore_arm_rotation_motor_support_sheet_bottom();
 
 //arm_up_down_motor_top_sheet();
 
@@ -389,9 +356,6 @@ fore_arm_rotation_motor_support_sheet_bottom();
 
 //body_articulation_sheet();
 //shoulder_sheet();
-
-//elbow_sheet();
-
 
 //upper_arm_motor_top_sheet();
 //upper_arm_motor_base_sheet();
