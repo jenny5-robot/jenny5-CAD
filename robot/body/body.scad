@@ -16,17 +16,11 @@ include <../../basic_scad/params_stepper_motors.scad>
 use <../../basic_scad/radial_bearing_housing.scad>
 
 use <../../basic_scad/belt.scad>
-use <../../basic_scad/belt_tensioner.scad>
-include <../../basic_scad/params_belt_tensioner.scad>
 
 include <../../basic_scad/tolerance.scad>
 
-use <../../basic_scad/corners.scad>
-
 use <../../basic_scad/tube_bracket.scad>
 include <../../basic_scad/params_tube_bracket.scad>
-
-include <../../basic_scad/params_corners.scad>
 
 use <../../basic_scad/motor_pulley.scad>
 
