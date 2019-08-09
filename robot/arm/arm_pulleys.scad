@@ -139,7 +139,7 @@ module wrist_pulley()
       for (i = [[-1, 0], [1, 0]]){  
       //    echo([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 12.5, i[1] * elbow_pulley_holes_dist_y, 0]);
           // screw hole
-          translate ([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + arm_shaft_size / 2, i[1] * elbow_pulley_holes_dist_y, 0] - display_tolerance_z) cylinder (h = printed_pulley_thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 15);
+          translate ([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + arm_shaft_size / 2, i[1] * wrist_pulley_holes_dist_y, 0] - display_tolerance_z) cylinder (h = printed_pulley_thick + 2 * display_tolerance, r = m3_screw_radius, $fn = 15);
           }
           
           // servo hole
@@ -221,7 +221,7 @@ module pulley_upper_arm_sensor_shaft()
 
 //pulley_upper_arm_bone_for_sensor();
 
-//elbow_pulley();
+elbow_pulley();
 
 //elbow_pulley_with_magnet_support();
 //wrist_pulley();

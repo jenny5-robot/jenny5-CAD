@@ -101,7 +101,7 @@ fore_arm_bone_top_shift = printed_pulley_thick + pulley_spacer_length;
 
 fore_arm_offset = 48;
 
-elbow_pulley_num_teeth = 52;
+elbow_pulley_num_teeth = 54;
 wrist_pulley_num_teeth = 54;
 
 elbow_pulley_radius = 39;
@@ -110,7 +110,10 @@ wrist_pulley_radius = 40;
 
 fore_arm_bearing_support_size = [95, rb_6907_external_radius + 3, 14];
 
-elbow_pulley_holes_dist_y = nema_17_L33_with_27_1_gearbox_height / 2 - fore_arm_bearing_support_size[2] / 2;
+elbow_pulley_holes_dist_y = nema_17_L48_with_27_1_gearbox_height / 2 - fore_arm_bearing_support_size[2] / 2;
+
+wrist_pulley_holes_dist_y = nema_17_L33_with_27_1_gearbox_height / 2 - fore_arm_bearing_support_size[2] / 2;
+
 elbow_pulley_holes_dist_x = 6;
 
 arm_up_down_motor_sheet_size = [60, 119, 3];
