@@ -58,8 +58,11 @@ nema_17_with_27_1_gearbox_height = nema_17_height + nema_17_gearbox_base_height 
 //echo(nema_17_with_50_1_gearbox_height=nema_17_with_50_1_gearbox_height);
 
 nema_17_L33_height = 33;
+nema_17_L48_height = 48;
 
 nema_17_L33_with_27_1_gearbox_height = nema_17_L33_height + nema_17_gearbox_base_height + nema_17_27_1_gearbox_height;
+
+nema_17_L48_with_27_1_gearbox_height = nema_17_L48_height + nema_17_gearbox_base_height + nema_17_27_1_gearbox_height;
 
 nema_17_42BYGHW804_width = 42.3;
 nema_17_42BYGHW804_height = 47;

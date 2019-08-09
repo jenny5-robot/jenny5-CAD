@@ -4,7 +4,6 @@
 // License: MIT
 //--------------------------------------------------------------
 
-
 include <arm_params.scad>
 
 include <../../basic_scad/params_motor_housing.scad>
@@ -14,9 +13,6 @@ include <../../basic_scad/tolerance.scad>
 
 include <../../basic_scad/params_tube_bracket.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
-
-
-
 
 //---------------------------------------------------------------
 module shoulder_sheet()
@@ -246,6 +242,32 @@ module fore_arm_rotation_motor_support_sheet_top()
        translate ([fore_arm_rotation_motor_support_sheet_size[0] / 2 + fore_arm_rotation_motor_support_sheet_distance_between_belt_tensioners / 2, distance_fore_arm_rotation_motor_to_shaft -  nema_17_motor_gearbox_radius - 2, 0]-display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10); 
     }
 }
+//---------------------------------------------------------------------------
+module fore_arm_rotation_motor_support_sheet_bottom()
+{
+    difference(){
+        color(aluminium_color) cube(fore_arm_rotation_motor_support_sheet_size);
+       
+        echo(fore_arm_rotation_motor_support_sheet_size = fore_arm_rotation_motor_support_sheet_size);
+        echo("motor back holes");
+        
+        for (i = [1 : 4]){
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0] + nema_17_holes[i] - display_tolerance_z) cylinder (h = upper_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 1.5, $fn = 10);
+            echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, distance_fore_arm_rotation_motor_to_shaft, 0] + nema_17_holes[i], "radius = 1.5");
+        }
+        // rb6907 bearing housing holes
+        echo("rb6907 bearing housing holes");
+        for (i = [1 : 4]){
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 2, $fn = 10);
+            translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i] + [0, 0, 1]) cylinder (h = 2, r1 = 2, r2 = 3.8, $fn = 20);
+
+            echo([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] + rbearing_6907_housing_holes_position[i], "radius = 2");
+        }
+// middle hole
+        translate([fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0] - display_tolerance_z) cylinder (h = fore_arm_rotation_motor_support_sheet_size[2] + 2 * display_tolerance, r = 20, $fn = 30);
+        echo("bearing housing middle hole", [fore_arm_rotation_motor_support_sheet_size[0] / 2, rbearing_6907_housing_size[0] / 2, 0], "radius = 20");
+    }
+}
 
 //---------------------------------------------------------------------------
 module upper_arm_rotation_motor_support_sheet_top()
@@ -359,6 +381,7 @@ module body_articulation_sheet()
 //upper_arm_rotation_motor_support_sheet_bottom();
 
 //fore_arm_rotation_motor_support_sheet_top();
+fore_arm_rotation_motor_support_sheet_bottom();
 
 //arm_up_down_motor_top_sheet();
 

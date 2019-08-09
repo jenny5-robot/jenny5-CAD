@@ -4,7 +4,6 @@
 // MIT License
 //--------------------------------------------------------------
 
-use <../../basic_scad/basic_components.scad>
 use <../../basic_scad/stepper_motors.scad>
 include <../../basic_scad/params_screws_nuts_washers.scad>
 use <../../basic_scad/screws_nuts_washers.scad>
@@ -19,9 +18,6 @@ use <../../basic_scad/radial_bearings.scad>
 use <../../basic_scad/belt.scad>
 
 include <../../basic_scad/params_webcam.scad>
-
-use <../../basic_scad/tube_bracket.scad>
-include <../../basic_scad/params_tube_bracket.scad>
 
 use <../../basic_scad/motor_pulley.scad>
 
@@ -184,7 +180,8 @@ module fore_arm_bearing_support()
 {
     difference(){
         echo(fore_arm_bearing_support_size = fore_arm_bearing_support_size);
-        cube(fore_arm_bearing_support_size);
+        color(plastic_color)
+            cube(fore_arm_bearing_support_size);
         // screw holes
         translate([6, 0, fore_arm_bearing_support_size[2] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = fore_arm_bearing_support_size[1] + 2 * display_tolerance, r = 2);
         
@@ -255,7 +252,7 @@ module fore_arm()
 //---------------------------------------------------------------------------
 module fore_arm_with_elbow_pulley()
 {
-  translate ([-52, elbow_pulley_radius + rb_6907_external_radius + 1.5, fore_arm_pulley_thick / 2])
+  translate ([-61, elbow_pulley_radius + rb_6907_external_radius + 1.5, fore_arm_pulley_thick / 2])
    rotate([angle_fore_arm, 0, 0]) 
     rotate ([0, 90, 0]) 
         rotate([0, 0, 90]) 
@@ -269,10 +266,29 @@ module fore_arm_with_elbow_pulley()
     fore_arm_rotation_motor_support_sheet_top_with_belt_tensioner()
     ;
     
-    // support
+    // bottom sheet
+    translate ([elbow_pulley_holes_dist_y + fore_arm_bearing_support_size[2] / 2 + 3, elbow_pulley_radius + rb_6907_external_radius + 1.5 - rbearing_6907_housing_size[0] / 2, fore_arm_rotation_motor_support_sheet_size[0] / 2 + 7])
+    rotate([0, 90, 0])
+    mirror([0, 0, 1])
+    fore_arm_rotation_motor_support_sheet_bottom()
+    ;
+        
+    // plastic support for forearm
   translate ([-elbow_pulley_holes_dist_y - fore_arm_bearing_support_size[2] / 2, fore_arm_bearing_support_size[0] + 10, fore_arm_pulley_thick / 2 + fore_arm_bearing_support_size[1]])
     rotate ([0, 90, 0]) 
         rotate([0, 0, -90]) {
+            translate ([0, 0, 2 * elbow_pulley_holes_dist_y])
+          //  [-21 - (2 * m4_screw_radius + 2 * wall_thick_2), -25, -2]
+            fore_arm_bearing_support_with_bearing_holes();
+            //translate ([0, 0, fore_arm_pulley_thick + 2 + 40 + 2 + 5]) 
+            fore_arm_bearing_support_with_bearing_holes();
+        }
+// plastic support for forearm - the other side
+  translate ([-elbow_pulley_holes_dist_y - fore_arm_bearing_support_size[2] / 2, fore_arm_bearing_support_size[0] + 10, fore_arm_pulley_thick / 2 - fore_arm_bearing_support_size[1]])
+        mirror([0, 0, 1])
+    rotate ([0, 90, 0]) 
+        rotate([0, 0, -90]) 
+        {
             translate ([0, 0, 2 * elbow_pulley_holes_dist_y])
           //  [-21 - (2 * m4_screw_radius + 2 * wall_thick_2), -25, -2]
             fore_arm_bearing_support_with_bearing_holes();
@@ -529,7 +545,7 @@ module arm(side)
     body_articulation(side);
 }
 //---------------------------------------------------------------------------
-arm(1);
+//arm(1);
 
 //body_articulation(1);
 
@@ -541,7 +557,7 @@ arm(1);
 
 //fore_arm_bearing_support_with_bearing_holes();
 
-//fore_arm_with_elbow_pulley();
+fore_arm_with_elbow_pulley();
 
 //fore_arm();
 
