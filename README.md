@@ -42,6 +42,9 @@ These parameters are stored in the following files:
 
 One can modify these parameters in order to simulate a new position for leg or arms.
 
+One can change the color of the plastic parts from file [basic_scad/material_colors.scad](basic_scad/material_colors.scad).
+Check OpenSCAD manual for a list of possible colors.
+
 ## Warning ##
 
 - This is work in progress.
