@@ -51,11 +51,11 @@ module body_corner_module()
 module body_module()
 {
     // vertical tube
-    translate ([0, 0, body_shaft_radius]) color ("black")cylinder (h = body_height, r = body_shaft_radius);
+    translate ([0, 0, body_shaft_radius]) body_frame_vertical_bone();
     // bottom tube
-    translate ([-body_width / 2, 0, 0]) rotate ([0, 90, 0]) color ("black")cylinder (h = body_width, r = body_shaft_radius);
+    translate ([-body_width / 2, 0, 0]) rotate ([0, 90, 0]) body_frame_horizontal_bone();
     // top tube
-    translate ([-body_width / 2, 0, body_height + 2 * body_shaft_radius]) rotate ([0, 90, 0]) color ("black") cylinder (h = body_width, r = body_shaft_radius);
+    translate ([-body_width / 2, 0, body_height + 2 * body_shaft_radius]) rotate ([0, 90, 0]) color ("black") body_frame_horizontal_bone();
         // bottom corner
     body_corner_module();
     translate ([0, 0, body_height + 2 * body_shaft_radius])
@@ -66,8 +66,6 @@ module body_module()
     //translate ([0, 0, body_height + 2 * body_shaft_radius]) rotate ([-90, 0, 0]) tube_corner(body_shaft_radius);
     
 }
-//---------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------
 module body_bearing_support_top()
 {
@@ -170,8 +168,8 @@ module body_motor_module()
             translate([-body_motor_sheet_size[0] / 2, -body_motor_sheet_size[1] / 2, 25] - display_tolerance_z) translate(bracket_holes[i]) mirror([0, 0, 1]) M4_hexa(50);
     }
 
-        for (i = [0 : 3]){
-            translate([-body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius), 25] - display_tolerance_z) translate(bracket_holes[i])mirror([0, 0, 1]) M4_hexa(50);
+    for (i = [0 : 3]){
+            translate([-body_motor_sheet_size[0] / 2, body_motor_sheet_size[1] / 2 - f_bracket_width(body_shaft_radius), 25] - display_tolerance_z) translate(bracket_holes[i]) mirror([0, 0, 1]) M4_hexa(50);
         }
 }
 //---------------------------------------------------------------------------

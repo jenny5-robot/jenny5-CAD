@@ -18,6 +18,17 @@ module body_arm_bone(bone_length)
     rectangular_tube(body_arm_bone_size, body_arm_bone_size, 2, bone_length);
 }
 //---------------------------------------------------------------------------
-
-
+module body_frame_horizontal_bone()
+{
+    // carbon fiber
+    color ("black") cylinder (h = body_width, r = body_shaft_radius);
+}
+//---------------------------------------------------------------------------
+module body_frame_vertical_bone()
+{
+    // carbon fiber
+    color ("black")cylinder (h = body_height, r = body_shaft_radius);
+}
+//---------------------------------------------------------------------------
 body_arm_bone(body_arm_shaft_length);
+//body_frame_horizontal_bone();
