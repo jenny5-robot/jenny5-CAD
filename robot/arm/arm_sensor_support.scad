@@ -159,7 +159,7 @@ module sensor_bearing_housing_bottom_fore_arm(side = 1)
 {
     h = 8;
     difference(){
-    
+        color (plastic_color) 
         translate ([-rbearing_688_housing_size[0] / 2, -rbearing_688_housing_size[1] / 2, 0]) cube([rbearing_688_housing_size[0], rbearing_688_housing_size[1], h]);
         // shaft hole
         translate (-display_tolerance_z) cylinder (h = h + 2 * display_tolerance, r = rb_688_external_radius - 1);
@@ -183,10 +183,11 @@ module sensor_bearing_housing_bottom_fore_arm(side = 1)
 //---------------------------------------------------------------------------
 module sensor_bearing_housing_top_fore_arm(side )
 {
+    echo(as5147_holes_position_relative);
      h = 20;
     difference(){
-    echo(as5147_holes_position_relative);
-        translate ([-rbearing_688_housing_size[0] / 2, -rbearing_688_housing_size[1] / 2, 0]) cube([rbearing_688_housing_size[0], rbearing_688_housing_size[1], h]);
+        
+    color (plastic_color) translate ([-rbearing_688_housing_size[0] / 2, -rbearing_688_housing_size[1] / 2, 0]) cube([rbearing_688_housing_size[0], rbearing_688_housing_size[1], h]);
         // shaft hole
         translate (-display_tolerance_z) cylinder (h = h + 2 * display_tolerance, r = rb_688_external_radius - 1);
         // bearing hole
@@ -225,7 +226,7 @@ module sensor_bearing_housing_top_fore_arm(side )
 
 //sensor_support_elbow();
 
-arm_up_down_sensor_support();
+//arm_up_down_sensor_support();
 
 //sensor_bearing_housing_top_upper_arm();
 //sensor_bearing_housing_bottom_upper_arm();
