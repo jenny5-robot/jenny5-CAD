@@ -37,6 +37,8 @@ use <arm_pulleys.scad>
 use <arm_sensor_support.scad>
 include <arm_sensor_support_params.scad>
 
+use <fore_arm_bearing_support.scad>
+
 use <arm_bones.scad>
 include <gripper_params.scad>
 use <gripper.scad>
@@ -154,7 +156,7 @@ module wrist_rotation_motor_with_components()
 //---------------------------------------------------------------------------
 module fore_arm_rotation_motor()
 {
-    nema_17_with_19_1_gearbox();
+    nema_17_48_with_27_1_gearbox();
 }
 //---------------------------------------------------------------------------
 module elbow_pulley_with_components()
@@ -174,46 +176,6 @@ module elbow_pulley_with_components()
       translate([0, 0, 2 * rb_626_thick + i * washer_6_thick]) washer_6_12();
       translate([0, 0, -(i + 1) * washer_6_thick]) washer_6_12();
     }
-}
-//---------------------------------------------------------------------------
-module fore_arm_bearing_support()
-{
-    difference(){
-        echo(fore_arm_bearing_support_size = fore_arm_bearing_support_size);
-        color(plastic_color)
-            cube(fore_arm_bearing_support_size);
-        // screw holes
-        translate([6, 0, fore_arm_bearing_support_size[2] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = fore_arm_bearing_support_size[1] + 2 * display_tolerance, r = 2);
-        
-        translate([fore_arm_bearing_support_size[0] - elbow_pulley_holes_dist_x, 0, fore_arm_bearing_support_size[2] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = fore_arm_bearing_support_size[1] + 2 * display_tolerance, r = 2);
-        
-       translate([fore_arm_bearing_support_size[0] - 3 * elbow_pulley_holes_dist_x, 0, fore_arm_bearing_support_size[2] / 2] - display_tolerance_y) rotate ([-90, 0, 0]) cylinder (h = fore_arm_bearing_support_size[1] + 2 * display_tolerance, r = 2);
-        
-      // elbow pulley holes
-        hole_length = 34;
-      translate([fore_arm_bearing_support_size[0] - hole_length, fore_arm_bearing_support_size[1] - elbow_pulley_thick / 2, 0] - display_tolerance_z) cube([hole_length, elbow_pulley_thick / 2, fore_arm_bearing_support_size[2]] + 2 * display_tolerance_xyz); 
-       
-       // shaft hole
-        translate([fore_arm_bearing_support_size[0] - (elbow_pulley_radius + rb_6907_external_radius + 1.5 - 10), fore_arm_bearing_support_size[1], 0] - display_tolerance_z)
-        cylinder (h = fore_arm_bearing_support_size[2] + 2 * display_tolerance, r = rb_6907_external_radius - 2);
-        
-        // bearing hole
-        
-         translate([fore_arm_bearing_support_size[0] - (elbow_pulley_radius + rb_6907_external_radius + 1.5 - 10), fore_arm_bearing_support_size[1], 2])
-        cylinder (h = rb_6907_thick, r = rb_6907_external_radius, $fn = 80);
-        
-    }
-}
-//---------------------------------------------------------------------------
-module fore_arm_bearing_support_with_bearing_holes()
-{
-    difference(){
-     fore_arm_bearing_support();
-                // 6907 bearing size
-        for (i = [1 : 4])
-             translate ([fore_arm_bearing_support_size[0] - (elbow_pulley_radius + rb_6907_external_radius + 1.5 - 10), fore_arm_bearing_support_size[1], 0] - display_tolerance_z)  translate (rbearing_6907_housing_holes_position[i])  cylinder (h = 20, r = 2, $fn = 10); 
-}
-
 }
 //---------------------------------------------------------------------------
 module fore_arm()
@@ -304,7 +266,7 @@ module fore_arm_with_elbow_pulley()
     
     // motor pulley
     translate ([- elbow_pulley_holes_dist_y- fore_arm_bearing_support_size[2] / 2 - 20, elbow_pulley_radius + distance_fore_arm_rotation_motor_to_shaft - 1.5, 13 / 2]) rotate ([0, 90, 0]) 
-    motor_pulley_6mm_shaft();
+    motor_pulley_8mm_shaft();
     
     // belt
     translate ([- elbow_pulley_holes_dist_y- fore_arm_bearing_support_size[2] / 2 - 8, elbow_pulley_radius + distance_fore_arm_rotation_motor_to_shaft, 13 / 2]) 
@@ -447,14 +409,7 @@ rotate([90, 0, 0])
 //---------------------------------------------------------------------------
 module body_arm_motor_with_sheet()
 {
-    nema_17_with_19_1_gearbox();  
-}
-//---------------------------------------------------------------------------
-module rbearing_6907_vertical_housing_bounded_half_small_bottom()
-{
-    difference(){
-        rbearing_6907_vertical_housing_bounded_half_small_extra_height(extra_height_arm_bearing);
-    }
+    nema_17_48_with_27_1_gearbox();  
 }
 //---------------------------------------------------------------------------
 module body_articulation(side)
@@ -545,7 +500,7 @@ module arm(side)
     body_articulation(side);
 }
 //---------------------------------------------------------------------------
-//arm(1);
+arm(1);
 
 //body_articulation(1);
 
@@ -557,7 +512,7 @@ module arm(side)
 
 //fore_arm_bearing_support_with_bearing_holes();
 
-fore_arm_with_elbow_pulley();
+//fore_arm_with_elbow_pulley();
 
 //fore_arm();
 
@@ -570,11 +525,8 @@ fore_arm_with_elbow_pulley();
 //wrist_rotation_motor_with_components();
 
 //fore_arm_pulley();
-//motor_pulley_6mm_shaft(); // 2x
 
 //fore_arm_with_elbow_pulley();
-
-//fore_arm_motor_housing();
 
 //elbow_pulley();
 
@@ -588,8 +540,6 @@ fore_arm_with_elbow_pulley();
 
 
 //shoulder_traction_pulley(); // 1x
-
-//gripper_c920_support_with_camera();
 
 //upper_arm_screw_rotation_pulley();
 
