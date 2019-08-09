@@ -28,7 +28,7 @@ use <../basic_scad/screws_nuts_washers.scad>
 //---------------------------------------------------------------------------
 module body_with_arms()
 {
-    body_with_rotation();
+    body();
     
     // left arm
     translate ([(body_width / 2 - dist_edge_to_body_shaft), 0, body_arm_bone_size + body_height / 2])

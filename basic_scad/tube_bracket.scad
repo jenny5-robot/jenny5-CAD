@@ -57,9 +57,11 @@ module tube_bracket_long_one_hole(bracket_thick, tube_radius, half = false, extr
     translate([-bracket_thick / 2, -bracket_width / 2, -tube_radius - tube_bracket_base_thick_strong])
     if (half){
         bracket_height = f_bracket_height_strong_half(tube_radius);
+        echo(bracket_height);
     difference(){
+        color(plastic_color) 
         union(){
-            color(plastic_color) cube([bracket_thick, bracket_width, bracket_height]);
+            cube([bracket_thick, bracket_width, bracket_height]);
             translate ([0, 0, -extra_height]) 
             difference() {
                 cube([bracket_thick, bracket_width, extra_height]);
@@ -124,9 +126,9 @@ module tube_bracket_long_strong(bracket_length, tube_radius)
 //tube_bracket_half(40, 12.5);
 //tube_bracket_long(40, 12.5);
 
-tube_bracket_long_strong(bracket_length = 24, tube_radius = 12.5);
+//tube_bracket_long_strong(bracket_length = 24, tube_radius = 12.5);
 
-//tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 12.5, half = true);
+tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 12.5, half = true);
 
 //tube_bracket_long_one_hole(bracket_thick = 12, tube_radius = 15, half = true, extra_height = 9, hole_y = 20, hole_z = 9);
 

@@ -255,24 +255,12 @@ module body()
 
 }    
 //---------------------------------------------------------------------------
-module body_with_rotation(linear_motor_position)
-{
-    translate ([0, -(alu_sheet_3_thick + 37 / 2), 0]) rotate ([0, 0, 0]) translate ([0, alu_sheet_3_thick + 37 / 2, 0]) body();
-}
-//---------------------------------------------------------------------------
 
-body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
-
-//body();
+body();
 
 //body_arm_traction_pulley();
 
-//half_1_body_arm_traction_pulley();
-//half_2_body_arm_traction_pulley();
-
 //body_bearing_support_top();
-
-//body_sheet_for_bearing_support();
 
 //body_sheet_for_motor_support();
 
@@ -282,27 +270,11 @@ body_with_rotation(linear_motor_position = body_rotation_linear_motor_position);
 
 //corner_sheet(body_shaft_radius);
 
-//rbearing_6907_housing(); // 8x
-
 //body_sheet_with_bearing_and_belt_tensioner();
-
-//body_module_corner();
-
-//body_intramodule();
-//half_1_traction_gear(); // 2x
-//half_2_traction_gear(); // 2x
-
-//motor_pulley_8mm_shaft(); // 2x
 
 //body_module();
 
-//motor_gear_D(hole_radius = 4, thick = 16);
-
-//corner_half_T(body_shaft_radius); // 4x
-
-//bearing_housing_top_body();
-
-//tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, false); // 2x
+//tube_bracket_long_one_hole(bracket_thick, body_shaft_radius, true); 
 
 //body_motor_module();
 

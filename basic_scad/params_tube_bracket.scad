@@ -10,7 +10,7 @@ include <material_colors.scad>
 
 
 tube_bracket_base_thick = wall_thick_2;
-tube_bracket_base_thick_strong = wall_thick_4;
+tube_bracket_base_thick_strong = wall_thick_6;
 
 braket_lateral_wall_thick = 2 * m4_screw_radius + wall_thick_3 + 1.5;
 
