@@ -74,12 +74,11 @@ module shoulder_traction_pulley()
 module fore_arm_rotation_pulley()
 {
     shoulder_traction_pulley();
-
 }
 //---------------------------------------------------------------------------
 module shoulder_pulley()
 {
-  pulley_with_shaft("T5mm_pulley", 29, 0, 0, 8, 4, M8_nut_radius, M8_nut_thick);
+    pulley_with_shaft("T5mm_pulley", 29, 0, 0, 8, 4, M8_nut_radius, M8_nut_thick);
 }
 //---------------------------------------------------------------------------
 
@@ -87,7 +86,8 @@ module elbow_pulley()
 {
   difference(){
       union(){
-         color (plastic_color) {pulley(profile = "T5mm_pulley", num_teeth = elbow_pulley_num_teeth, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = elbow_pulley_thick - 3);
+         color (plastic_color) {
+             pulley(profile = "T5mm_pulley", num_teeth = elbow_pulley_num_teeth, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = elbow_pulley_thick - 3);
           
          }
       }
@@ -110,7 +110,7 @@ module elbow_pulley()
       for (i = [[-1, 0], [1, 0]]){  
       //    echo([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 12.5, i[1] * elbow_pulley_holes_dist_y, 0]);
           translate ([i[0] * elbow_pulley_holes_dist_x + 6 + elbow_pulley_holes_dist_x + 12.5, i[1] * elbow_pulley_holes_dist_y, 0] - display_tolerance_z) cylinder (h = printed_pulley_thick + 2 * display_tolerance, r = 1.5, $fn = 15);
-          }
+      }
   }
 }
 //---------------------------------------------------------------------------
@@ -181,6 +181,7 @@ module upper_arm_motor_pulley()
 module upper_arm_screw_rotation_pulley()
 {
     difference(){
+        color (plastic_color) 
         pulley_with_shaft(profile = "T5mm_pulley", num_teeth = 16, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 11, shaft_radius = M8_screw_radius, nut_radius = 0, nut_height = 0);
         
         translate ([0, 0, 11 + 3 - M8_nut_thick]) cylinder (h = M8_nut_thick, r = M8_nut_radius, $fn = 6) ;
@@ -190,6 +191,7 @@ module upper_arm_screw_rotation_pulley()
 module pulley_upper_arm_bone_for_sensor()
 {
     difference(){
+        color (plastic_color) 
         pulley(profile = "T2_5mm_pulley", num_teeth = 49, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 6);
         // bone hole
         translate ([-arm_shaft_size / 2 - 0.1, -arm_shaft_size / 2 - 0.1, 0] - display_tolerance_z) cube ([arm_shaft_size + 0.2, arm_shaft_size + 0.2, 9] + 2 * display_tolerance_z);
@@ -201,6 +203,7 @@ module pulley_upper_arm_bone_for_sensor()
 module pulley_upper_arm_sensor_shaft()
 {
     difference(){
+        color (plastic_color) 
         pulley(profile = "T2_5mm_pulley", num_teeth = 38, pulley_b_ht = 0, pulley_b_dia = 0, pulley_t_ht = 5.5);
         cylinder (h = 9, r = 4, $fn = 30);
         
