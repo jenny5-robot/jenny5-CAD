@@ -65,3 +65,27 @@ body_base_holes_to_leg =
 [69/2, -95 / 2, 0],
 [69/2, 95 / 2, 0]
 ];
+
+corner_length = 46;
+
+corner_base_thick = wall_thick_2;
+
+corner_lateral_wall_thick = 2 * m4_screw_radius + wall_thick_3 + 1.5;
+
+function f_corner_width(tube_radius) = 2 * (tube_radius + corner_lateral_wall_thick);
+function f_corner_height(tube_radius) = corner_base_thick + tube_radius - 0.5;
+
+corner_sheet_size = [corner_length, 90, wall_thick_3];
+
+function f_corner_holes(tube_radius) = [
+    [5, 5, 0],
+    [5, f_corner_width(12.5) - (wall_thick_3 + m4_screw_radius), 0],
+    [corner_length - 5, wall_thick_3 + m4_screw_radius, 0],
+    [corner_length - 5, f_corner_width(12.5) - (wall_thick_3 + m4_screw_radius), 0],
+    [7, corner_sheet_size[1] - 5, 0],
+    [corner_length - 7, corner_sheet_size[1] - 5, 0],
+    [7, corner_sheet_size[1] - 42, 0],
+    [corner_length - 7, corner_sheet_size[1] - 42, 0]
+];
+
+corner_holes = f_corner_holes(12.5);

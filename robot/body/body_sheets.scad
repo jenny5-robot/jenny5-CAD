@@ -218,12 +218,27 @@ module body_sheet_for_intramodule()
     }    
 }
 //---------------------------------------------------------------------------
+module corner_sheet(tube_radius)
+{
+    echo(corner_sheet_size = corner_sheet_size);
+    difference(){
+      color(aluminium_color) cube(corner_sheet_size);
+      corner_height = f_corner_height(tube_radius);
+      for (i = [0 : 7]){
+        translate(corner_holes[i] - display_tolerance_z) cylinder (h = corner_height + 2 * display_tolerance, r = m4_screw_radius, $fn = 15);
+          
+      }
+      echo(sheet_corner_holes = corner_holes);
+    }
+}
+//-------------------------------------------------------------------------
 
 
-body_base_sheet();
+//body_base_sheet();
 
 //body_rotation_sheet();
 //body_sheet_for_motor_support();
 //body_sheet_for_bearing_support_top();
 //body_sheet_for_bearing_support_bottom();
 //body_sheet_for_intramodule();
+corner_sheet(tube_radius = 12.5);
