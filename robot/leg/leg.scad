@@ -19,6 +19,7 @@ use <../../basic_scad/alu_profiles.scad>
 include <../../basic_scad/tolerance.scad>
 
 use <leg_bones.scad>
+use <leg_bones_with_components.scad>
 use <leg_sheets.scad>
 use <../../basic_scad/shaft_support.scad>
 include <../../basic_scad/shaft_support_params.scad>
