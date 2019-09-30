@@ -126,6 +126,11 @@ module rbearing_6001_double_housing()
     radial_bearing_housing(rbearing_housing_size = rbearing_6001_housing_size, rbearing_housing_holes_position = rbearing_6001_housing_holes_position, rb_external_radius = rb_6001_external_radius, rb_thick = 2 * rb_6001_thick, housing_height = rbearing_6001_housing_size[2] + rb_6001_thick, screw_radius = m4_screw_radius, height_extension = -1);
 }
 //---------------------------------------------------------------------------
+module rbearing_6001_triple_housing()
+{
+    radial_bearing_housing(rbearing_housing_size = rbearing_6001_housing_size, rbearing_housing_holes_position = rbearing_6001_housing_holes_position, rb_external_radius = rb_6001_external_radius, rb_thick = 3 * rb_6001_thick, housing_height = rbearing_6001_housing_size[2] + 2 * rb_6001_thick, screw_radius = m4_screw_radius, height_extension = -1);
+}
+//---------------------------------------------------------------------------
 module rbearing_6001_double_housing_thicker_wall(extra_height = 0)
 {
     radial_bearing_housing(rbearing_housing_size = rbearing_6001_housing_size_thicker, rbearing_housing_holes_position = rbearing_6001_housing_holes_position, rb_external_radius = rb_6001_external_radius, rb_thick = 2 * rb_6001_thick, housing_height = rbearing_6001_housing_size[2] + rb_6001_thick, screw_radius = m4_screw_radius, height_extension = extra_height);
@@ -232,7 +237,8 @@ module rbearing_608_spacer_thicker_m3(extra_height = -1)
 // rbearing_6001_housing();
 // rbearing_608_housing_double();
 //echo(rbearing_6001_housing_size=rbearing_6001_housing_size);
- //rbearing_6001_double_housing();
+//rbearing_6001_double_housing();
+rbearing_6001_triple_housing();
 //rbearing_6001_double_housing_thicker_wall(extra_height = -1);
 // rbearing_608_housing_with_bearing();
 
